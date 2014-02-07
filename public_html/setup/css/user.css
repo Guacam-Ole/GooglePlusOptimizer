@@ -1,0 +1,46 @@
+
+table.colorUsers
+{
+    width: 280px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+table.colorUsers td
+{
+    text-align: center;
+    width: 40px;    
+}
+table.colorUsers td.usrBlue 
+{
+    background-color: #76a7fa;    
+}
+table.colorUsers td.usrYellow 
+{
+    background-color: #fbcb43; 
+}
+table.colorUsers td.usrRed
+{
+    background-color: #e46f61;
+}
+table.colorUsers td.usrCyan
+{
+    background-color: #4dbfd9;
+}
+table.colorUsers td.usrGreen
+{
+    background-color: #8cc474;
+}
+table.colorUsers td.usrMagenta
+{
+    background-color: #bc5679;
+}
+.userRemark
+{
+   width:269px;
+   border-style: solid;
+    border-width: 1px;
+   padding-left:5px;
+   padding-right: 5px;
+   
+}
