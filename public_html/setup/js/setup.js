@@ -192,16 +192,22 @@ function handleTagsInput()
  * Checkboxeinstellung laden
  * @param {string} propertyName Zu ladende Property
  * @param {string} boxName id der Checkbox
+ * @param {string} defaultValue description
  */
-function LoadCheckBox(propertyName, boxName)
+function LoadCheckBox(propertyName, boxName,defaultValue)
 {
+    if (defaultValue===undefined)
+    {
+        defaultValue="false";
+    }
     var oldValue = localStorage.getItem(propertyName);
     if (oldValue === null || oldValue === "undefined")
     {
-        oldValue = "false";
+        oldValue = defaultValue;
     }
+    
+    boxName.bootstrapSwitch('setState', JSON.parse(oldValue));
 
-    boxName.prop('checked', JSON.parse(oldValue));
 }
 
 /**
@@ -347,14 +353,16 @@ function LoadSetup()
     LoadSwitch("community", "#filterCommunity", "community");
     LoadSwitch("birthday", "#filterBirthday", "kuchen");
     LoadSwitch("known", "#filterKnown", "hug");
+    
     // Erweiterte Einstellungen:		
-    LoadExtended();
+   
     LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
     LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
     LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
     LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
+    LoadCheckBox("colorUsers", $("#chkDisplayColors"),"true");
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
-
+ LoadExtended();
 
 
 
@@ -548,20 +556,28 @@ function CreateTextboxEvents()
 // Checkbox-Events erzeugen
 function CreateCheckboxEvents()
 {
-    $("#chkWhamText").change(function()
+    // Filter:
+    $("#chkWhamText").on('switch-change',function(e, data)
     {
-        SaveCheckBox("WHAMWhamText", $("#chkWhamText").prop("checked"));
+        SaveCheckBox("WHAMWhamText", data.value);
     });
-    $("#chkWhamUrl").change(function()
+    $("#chkWhamUrl").on('switch-change',function(e, data)
     {
-        SaveCheckBox("WHAMWhamUrl", $("#chkWhamUrl").prop("checked"));
+        SaveCheckBox("WHAMWhamUrl", data.value);
     });
-    $("#chkChristmasText").change(function()
+    $("#chkChristmasText").on('switch-change',function(e, data)
     {
-        SaveCheckBox("WHAMChristmasText", $("#chkChristmasText").prop("checked"));
+        SaveCheckBox("WHAMChristmasText", data.value);
     });
-    $("#chkChristmasUrl").change(function()
+    $("#chkChristmasUrl").on('switch-change',function(e, data)
     {
-        SaveCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl").prop("checked"));
+        SaveCheckBox("WHAMChristmasUrl", data.value);
     });
+    // Erweiterungen:
+    $("#chkDisplayColors").on('switch-change',function(e, data)
+    {
+        SaveCheckBox("colorUsers", data.value);
+    });
+    
 }
+
