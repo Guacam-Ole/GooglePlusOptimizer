@@ -44,6 +44,11 @@ chrome.extension.onMessage.addListener(function(request, sender) {
 chrome.runtime.onMessage.addListener(
         function(request, sender, sendResponse)
         {
+            if (request.Action === "SaveColumns")
+            {
+                localStorage.setItem("columns", request.ParameterValue);
+                sendResponse({Result: "Setting Saved."});
+            }
             if (request.Action === "SaveHashtags")
             {
                 // Hashtags speichern (Nach Live-Änderung in G+)

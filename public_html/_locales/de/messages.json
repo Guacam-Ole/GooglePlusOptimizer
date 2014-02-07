@@ -40,5 +40,21 @@
     },
     "RemarkPlaceholder": {
         "message":"Kommentar für __USER__ fehlt"
+    },
+    "WidgetHide": {
+        "message":"(nicht anzeigen)"
+    },
+    "WidgetLeft":{
+        "message":"Links"
+    },
+    "WidgetMiddle":{
+        "message":"Mitte"
+    },
+    "WidgetRight":{
+        "message":"Rechts"
+    },
+    "WidgetShow":{
+        "message":"Anzeigen"
     }
+    
 }

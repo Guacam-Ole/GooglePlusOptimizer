@@ -40,6 +40,20 @@
     },
     "RemarkPlaceholder": {
         "message":"No comments for __USER__"
+    },
+    "WidgetHide": {
+        "message":"(disabled)"
+    },
+    "WidgetLeft":{
+        "message":"left"
+    },
+    "WidgetMiddle":{
+        "message":"middle"
+    },
+    "WidgetRight":{
+        "message":"right"
+    },
+    "WidgetShow":{
+        "message":"show"
     }
-    
 }
