@@ -1,0 +1,49 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_appName__",
+    "short_name": "G+Filter",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "version": "2.2.0.1",
+    "author": "Ole Albers",
+    "permissions": ["http://ajax.googleapis.com/", "storage"],
+    "content_scripts":
+            [{
+                    "matches": ["https://plus.google.com/*"],
+                    "js": [
+                        "setup/js/jquery-1.10.2.min.js",
+                        "setup/js/fussball.js",
+                        "setup/js/weather.js",
+                        "setup/js/gplusfilter.js",
+                        "setup/js/ion.sound.js",
+                        "setup/js/clock.js",
+                        "setup/js/user.js",
+                        "date.js"]
+                }],
+    "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",
+    "options_page": "setup/redirect.html",
+    "background":
+            {
+                "scripts": ["filter.js"],
+                "persistent": false
+            },
+    "icons":
+            {
+                "16": "setup/images/googlefilter16.png",
+                "48": "setup/images/googlefilter48.png",
+                "128": "setup/images/googlefilter128.png"
+            },
+    "page_action":
+            {
+                "default_icon": "setup/images/optimizer_favicon_clear.png"
+            },
+    "web_accessible_resources": [
+        "setup/images/*",
+        "setup/images/weather/150x150/*",
+        "setup/images/weather/50x50/*",        
+        "setup/css/*",
+        "setup/js/*",
+        "http://www.dilbert.com/*"
+    ]
+}
+

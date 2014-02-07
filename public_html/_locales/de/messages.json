@@ -1,0 +1,44 @@
+{
+    "appName": {
+        "message": "Google+ - Optimizer"
+    },
+    "appDesc": {
+        "message": "Der Google+ Optimizer verbessert die Benutzererfahrung mit Google+. "
+    },
+    "lang": {
+        "message": "de"
+    },
+    "removeHashtag": {
+        "message": "Hashtag filtern"
+    },
+    "ligaVon": {
+        "message": "Die Livedaten stammen von "
+    },
+    "Pause": {
+        "message": "Pause"
+    },
+    "Fortsetzen": {
+        "message": "Fortsetzen"
+    },
+    "Stoppuhr_starten": {
+        "message": "Stoppuhr starten"
+    },
+    "Stoppuhr_stoppen": {
+        "message": "Stopuhr stoppen"
+    },
+    "Stoppuhr": {
+        "message": "Stoppuhr"
+    },
+    "Heimmannschaft": {
+        "message": "Heimmannschaft"
+    },
+    "Gaestemannschaft": {
+        "message": "Gästemannschaft"
+    },
+    "Stand": {
+        "message": "Stand"
+    },
+    "RemarkPlaceholder": {
+        "message":"Kommentar für __USER__ fehlt"
+    }
+}

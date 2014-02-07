@@ -1,0 +1,49 @@
+.divSecond
+{
+    position:relative;
+    left:44px;
+    top:61px;
+}
+.divMinute
+{
+    position:relative;
+    left:0px;
+    top:-120px;
+}
+.btn.blue 
+{
+    color: white;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+.clockbtn 
+{
+    text-align: right;
+    border-width: 0;
+    padding: 7px 14px; 	
+    font-size: 14px;  
+    outline: none !important;
+    text-shadow: none;  
+    width:192px;
+    height:75px;
+    color: white;
+    text-shadow: none;
+}
+
+.topclock
+{
+    background: url('../images/clocktop.png') no-repeat;
+    position:relative;
+    left:200px;
+    top:-340px;
+}
+
+
+.bottomclock
+{
+    background: url('../images/clockbottom.png') no-repeat;
+        position:relative;
+        left:6px;
+        top:-205px;
+}
