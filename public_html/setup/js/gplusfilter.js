@@ -29,7 +29,7 @@ $(document).ready(function()
 {
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
-        LoadSetup                ();
+        LoadSetup();
     }
     else if (document.title.indexOf("Google+") !== -1)
     {
@@ -66,13 +66,11 @@ function LoadGoogle()
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function()
     {
-     
         // Beim Nachladen der Seite neu aktiv werden
         if (timeout)
         {
             clearTimeout(timeout);
         }
-
         timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)
     }, false);
 
@@ -103,13 +101,11 @@ function LoadGoogle()
         if (1)  // Bedingung UserPaint
         {
             GetAllUserSettings();
-            
-            
+
+
         }
         console.log("colorblock loaded.");
     });
-
-
 
     if (clock !== null && clock !== undefined)
     {
@@ -128,9 +124,7 @@ function LoadGoogle()
             console.log("clock loaded.");
             //place your code here, the scripts are all loaded
         });
-
     }
-   
 }
 var allCssColors;
 
@@ -186,15 +180,22 @@ function GetCssColors()
     return colors;
 }
 
-function CountColumns() 
-{   
-    var $wrapper=$('.ona.Fdb.bsa');
-    if ($wrapper.length>0) 
+function CountColumns()
+{
+    var $wrapper = $('.ona.Fdb.bsa');
+    if ($wrapper.length > 0)
     {
-        var columns=$wrapper.find('.Ypa.jw.Yc.am').first().nextUntil(':not(.Ypa.jw.Yc.am)').addBack().length;
-        
+        var columns = $wrapper.find('.Ypa.jw.Yc.am').first().nextUntil(':not(.Ypa.jw.Yc.am)').addBack().length;
+        if (columns > 0)
+        {
+            chrome.runtime.sendMessage(
+                    {
+                        Action: "SaveColumns", ParameterValue: columns}, function(response) {
+            }
+            );
+        }
     }
-    
+
 }
 
 function AddToCssColor(name, cssclass)
@@ -321,7 +322,7 @@ function StartFilter()
     }
     PaintForUser();
     PaintColorBlock();
-    
+
 
 
 }
