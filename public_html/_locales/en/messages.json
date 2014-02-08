@@ -39,21 +39,34 @@
         "message": "results"
     },
     "RemarkPlaceholder": {
-        "message":"No comments for __USER__"
+        "message": "No comments for __USER__"
     },
     "WidgetHide": {
-        "message":"(disabled)"
+        "message": "(disabled)"
     },
-    "WidgetLeft":{
-        "message":"left"
+    "WidgetLeft": {
+        "message": "left"
     },
-    "WidgetMiddle":{
-        "message":"middle"
+    "WidgetMiddle": {
+        "message": "middle"
     },
-    "WidgetRight":{
-        "message":"right"
+    "WidgetRight": {
+        "message": "right"
     },
-    "WidgetShow":{
-        "message":"show"
+    "WidgetShow": {
+        "message": "show"
+    },
+    "DisplayImage": {
+        "message": "Show Image"
+    },
+    "DisplayVideo": {
+        "message": "Show Video"
+    },
+    "DisplayLink": {
+        "message": "Show Link"
+    },
+    "DisplayContent": {
+        "message": "Show content"
     }
+
 }

@@ -55,6 +55,17 @@
     },
     "WidgetShow":{
         "message":"Anzeigen"
+    },
+    "DisplayImage":{
+        "message":"Bild anzeigen"
+    },
+    "DisplayVideo": {
+        "message": "Video anzeigen"
+    },
+    "DisplayLink": {
+        "message": "Link anzeigen"
+    },
+    "DisplayContent": {
+        "message": "Inhalt anzeigen"
     }
-    
 }
