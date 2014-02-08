@@ -20,6 +20,18 @@ function BoolNotNull(anyvalue)
     }
 }
 
+function BoolNotNullReverse(anyvalue)
+{
+    if (anyvalue === null || anyvalue === "undefined")
+    {
+        return "true";
+    }
+    else
+    {
+        return anyvalue;
+    }
+}
+
 // String-Bool in echtes Bool wandeln
 function GetBool(originalValue)
 {
@@ -88,6 +100,13 @@ chrome.runtime.onMessage.addListener(
                 var stoppwatch = localStorage.getItem("StoppWatch");
                 var sport = localStorage.getItem("Sport");
                 var wetter = localStorage.getItem("Weather");
+                var colorUsers = localStorage.getItem("colorUsers");
+                var filterImages = localStorage.getItem("filterImages");
+                var filterVideo = localStorage.getItem("filterVideo");
+                var filterLinks = localStorage.getItem("filterLinks");
+                var filterGifOnly = localStorage.getItem("filterGifOnly");
+                var filterMp4Only = localStorage.getItem("filterMp4Only");
+
                 var interval = JSON.parse(localStorage.getItem("interval"));
                 if (interval === null || interval < 10)
                 {
@@ -106,6 +125,12 @@ chrome.runtime.onMessage.addListener(
                 whamWhamLink = BoolNotNull(whamWhamLink);
                 whamChristmasText = BoolNotNull(whamChristmasText);
                 whamChristmasLink = BoolNotNull(whamChristmasLink);
+                colorUsers = BoolNotNullReverse(colorUsers);
+                filterImages = BoolNotNull(filterImages);
+                filterVideo = BoolNotNull(filterVideo);
+                filterLinks = BoolNotNull(filterLinks);
+                filterGifOnly = BoolNotNull(filterGifOnly);
+                filterMp4Only = BoolNotNull(filterMp4Only);
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -122,6 +147,12 @@ chrome.runtime.onMessage.addListener(
                     WhamWhamLink: GetBool(whamWhamLink),
                     WhamChristmasText: GetBool(whamChristmasText),
                     WhamChristmasLink: GetBool(whamChristmasLink),
+                    ColorUsers: GetBool(colorUsers),
+                    FilterImages: GetBool(filterImages),
+                    FilterVideo: GetBool(filterVideo),
+                    FilterGifOnly: GetBool(filterGifOnly),
+                    FilterMp4Only: GetBool(filterMp4Only),
+                    FilterLinks: GetBool(filterLinks),
                     Sport: sport,
                     Wetter: wetter,
                     Interval: interval,

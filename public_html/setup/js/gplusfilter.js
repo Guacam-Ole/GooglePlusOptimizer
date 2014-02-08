@@ -23,6 +23,8 @@ var colorUsers;
 var filterImages;
 var filterVideo;
 var filterLinks;
+var filterGifOnly;
+var filterMp4Only;
 
 if (document.title.indexOf("Google+") !== -1)
 {
@@ -323,23 +325,34 @@ function StartFilter()
         }
         );
     }
-    if (filterImages && filterLinks && filterVideo)
+    if (filterImages && filterLinks && filterVideo && !filterGifOnly)
     {
         // Alles filtern
         $('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayContent") + "</a>");
     } else
     {
-        if (filterVideo) 
+        if (filterVideo)
         {
-            $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+            if (filterMp4Only) {
+                $('.sp.ej.bc.Ai img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+            } else {
+
+                $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+            }
         }
-        if (filterLinks) 
+        if (filterLinks)
         {
             $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
         }
         if (filterImages)
         {
-            $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+            if (filterGifOnly)
+            {
+                $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+            } else {
+                $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+            }
         }
     }
 
@@ -398,6 +411,12 @@ function GetSettingsFromBackground()
         soccer = response.Sport;
         clock = response.Stoppwatch;
         colorUsers = response.ColorUsers;
+        filterImages = response.FilterImages;
+        filterVideo = response.FilterVideo;
+        filterLinks = response.FilterLinks;
+        filterGifOnly=response.FilterGifOnly;
+        filterMp4Only=response.FilterMp4Only;
+        
     }
     );
 }
