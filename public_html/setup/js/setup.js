@@ -133,7 +133,22 @@ function CreateImageEvents()
     {
         SaveSwitch("known", "#filterKnown", "hug");
     });
+    $("#filterImages").click(function()
+    {
+        SaveSwitch("filterImages", "#filterImages", "filterimage");
+    });
+    $("#filterVideos").click(function()
+    {
+        SaveSwitch("filterVideo", "#filterVideos", "filtervideo");
+    });
+    $("#filterLinks").click(function()
+    {
+        SaveSwitch("filterLinks", "#filterLinks", "filterurl");
+    });
 }
+
+
+
 
 // Tags hinzufügen und entfernen
 function handleTagsInput()
@@ -194,18 +209,18 @@ function handleTagsInput()
  * @param {string} boxName id der Checkbox
  * @param {string} defaultValue description
  */
-function LoadCheckBox(propertyName, boxName,defaultValue)
+function LoadCheckBox(propertyName, boxName, defaultValue)
 {
-    if (defaultValue===undefined)
+    if (defaultValue === undefined)
     {
-        defaultValue="false";
+        defaultValue = "false";
     }
     var oldValue = localStorage.getItem(propertyName);
     if (oldValue === null || oldValue === "undefined")
     {
         oldValue = defaultValue;
     }
-    
+
     boxName.bootstrapSwitch('setState', JSON.parse(oldValue));
 
 }
@@ -295,7 +310,7 @@ function LoadExtended()
     {
         columns = 3;
     } else {
-        columns=JSON.parse(columns);
+        columns = JSON.parse(columns);
     }
 
     if ($('.sportPosition').length > 0)
@@ -353,19 +368,22 @@ function LoadSetup()
     LoadSwitch("community", "#filterCommunity", "community");
     LoadSwitch("birthday", "#filterBirthday", "kuchen");
     LoadSwitch("known", "#filterKnown", "hug");
-    
+
     // Erweiterte Einstellungen:		
-   
+
     LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
     LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
     LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
     LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
-    LoadCheckBox("colorUsers", $("#chkDisplayColors"),"true");
+    LoadCheckBox("colorUsers", $("#chkDisplayColors"), "true");
+    LoadCheckBox("filterGifOnly", $("#chkFilterGif"), "true");
+    LoadCheckBox("filterMp4Only", $("#chkFilterMp4"), "true");
+    
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
- LoadExtended();
+    LoadExtended();
 
 
-
+  
 
     var interval = JSON.parse(localStorage.getItem("interval"));
     if (interval === null || interval < 10)
@@ -557,27 +575,37 @@ function CreateTextboxEvents()
 function CreateCheckboxEvents()
 {
     // Filter:
-    $("#chkWhamText").on('switch-change',function(e, data)
+    $("#chkWhamText").on('switch-change', function(e, data)
     {
         SaveCheckBox("WHAMWhamText", data.value);
     });
-    $("#chkWhamUrl").on('switch-change',function(e, data)
+    $("#chkWhamUrl").on('switch-change', function(e, data)
     {
         SaveCheckBox("WHAMWhamUrl", data.value);
     });
-    $("#chkChristmasText").on('switch-change',function(e, data)
+    $("#chkChristmasText").on('switch-change', function(e, data)
     {
         SaveCheckBox("WHAMChristmasText", data.value);
     });
-    $("#chkChristmasUrl").on('switch-change',function(e, data)
+    $("#chkChristmasUrl").on('switch-change', function(e, data)
     {
         SaveCheckBox("WHAMChristmasUrl", data.value);
     });
+    $("#chkFilterGif").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("filterGifOnly", data.value);
+    });
+    $("#chkFilterMp4").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("filterMp4Only", data.value);
+    });    
+    
+    
     // Erweiterungen:
-    $("#chkDisplayColors").on('switch-change',function(e, data)
+    $("#chkDisplayColors").on('switch-change', function(e, data)
     {
         SaveCheckBox("colorUsers", data.value);
     });
-    
+
 }
 
