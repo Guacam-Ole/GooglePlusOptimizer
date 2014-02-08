@@ -368,15 +368,17 @@ function LoadSetup()
     LoadSwitch("community", "#filterCommunity", "community");
     LoadSwitch("birthday", "#filterBirthday", "kuchen");
     LoadSwitch("known", "#filterKnown", "hug");
+    LoadSwitch("filterImages", "#filterImages", "filterimage");
+    LoadSwitch("filterVideo", "#filterVideos", "filtervideo");
+    LoadSwitch("filterLinks", "#filterLinks", "filterurl");
 
     // Erweiterte Einstellungen:		
-
     LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
     LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
     LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
     LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
     LoadCheckBox("colorUsers", $("#chkDisplayColors"), "true");
-    LoadCheckBox("filterGifOnly", $("#chkFilterGif"), "true");
+    LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
     LoadCheckBox("filterMp4Only", $("#chkFilterMp4"), "true");
     
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
