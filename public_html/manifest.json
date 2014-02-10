@@ -6,7 +6,11 @@
     "default_locale": "en",
     "version": "2.2.0.1",
     "author": "Ole Albers",
-    "permissions": ["http://ajax.googleapis.com/", "storage"],
+    "permissions": [
+        "http://ajax.googleapis.com/",
+        "storage",
+        "identity"
+    ],
     "content_scripts":
             [{
                     "matches": ["https://plus.google.com/*"],
@@ -33,6 +37,14 @@
                 "48": "setup/images/googlefilter48.png",
                 "128": "setup/images/googlefilter128.png"
             },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp76qdy0ijZIRaxinspnkl0wua5Fq+QcRtZzBDFp1K3sGYQL3/Xs7R0/ttlROrQMhxYtOrdLiFRFwBhTzG/cvOYsfX58+c6d9yii2hHzlor18Gb6TWdQe9k7ZuQMW/1PUBHaLLR95vHubaY5uv0+74qHmMeTlnYTfmp2MFsG6/V4k9XgVm3exrs6DmQism5tOuRFAH2TRoZNIlyiF+z9fVKQ6tWRDIrJ6Dhr1FqyoYKhehpLfFutqhEcjEOC1FwEwFRenQWOGmpoE/RHKQfaSuBIIEml+U5A58nU1ZLi6Vh+lob1WglD5Rzll2VIXFmPGsmUyKyFPRK5GXxftJYWZ6QIDAQAB",
+"oauth2": {
+   "client_id": "249838705220-tca821c3lm90evrutlcvf7h49s5g2c65.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",      
+      "https://www.googleapis.com/auth/plus.me"
+    ]
+  }  ,
     "page_action":
             {
                 "default_icon": "setup/images/optimizer_favicon_clear.png"
@@ -40,10 +52,9 @@
     "web_accessible_resources": [
         "setup/images/*",
         "setup/images/weather/150x150/*",
-        "setup/images/weather/50x50/*",        
+        "setup/images/weather/50x50/*",
         "setup/css/*",
-        "setup/js/*",
-        "http://www.dilbert.com/*"
+        "setup/js/*"
     ]
 }
 

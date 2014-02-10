@@ -57,16 +57,23 @@
         "message": "show"
     },
     "DisplayImage": {
-        "message": "Show Image"
+        "message": "show Image ⇘"
     },
     "DisplayVideo": {
-        "message": "Show Video"
+        "message": "show Video ⇘"
     },
     "DisplayLink": {
-        "message": "Show Link"
+        "message": "show Link ⇘"
     },
     "DisplayContent": {
-        "message": "Show content"
+        "message": "show content ⇘"
+    }
+    ,
+    "DisplayImageAnimated": {
+        "message": "show animated Image ⇘"
+    },
+    "DisplayVideoAnimated": {
+        "message": "show animated video ⇘"
     }
 
 }
