@@ -73,6 +73,35 @@
     },
     "DisplayVideoAnimated": {
         "message": "Animiertes Video anzeigen ⇘"
+    },
+    "ReadingCircleData": {
+        "message": "Lese Daten aus den Kreisen"
+    },
+    
+    "ReadingCircleUsers": {
+        "message": "Lese Kontaktdaten"
+    },
+    
+    "TrophiesCollected": {
+        "message": "Trophäen gesammelt"
+    },
+    
+    "ReadingPublicStream": {
+        "message": "Lese Daten aus öffentlichen Stream"
+    },
+    
+    "ReadingDataFrom": {
+        "message": "Lese Beiträge vom:"
+    },
+    
+    "ReadingProfileData": {
+        "message": "Analysiere Profil"
+    },
+    
+    "done": {
+        "message": "fertig."
     }
+    
+    
     
 }
