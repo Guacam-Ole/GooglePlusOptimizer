@@ -59,10 +59,10 @@ function CA2T(haystack, needle, trophy)
 var hasBild = false;
 
 var circleCounter = 0;
-var treckkieCount = 0;
+var trekkieCount = 0;
 function GetCircleStatistics(pageToken, authToken)
 {
-    $('#currentAction').html("Lese Daten aus den Kreisen");
+    $('#currentAction').html(chrome.i18n.getMessage("ReadingCircleData"));
     if (pageToken === undefined || pageToken === null) {
         pageToken = "";
     }
@@ -100,7 +100,7 @@ function GetCircleStatistics(pageToken, authToken)
             if (name.indexOf("Wil Wheaton") >= 0) {
                 trekkieCount++;
             }
-            if (trekkieCount>=3) {
+            if (trekkieCount >= 3) {
                 A2T("goldTrekkie");
             }
 
@@ -160,8 +160,15 @@ function GetCircleStatistics(pageToken, authToken)
                 hasBild = true;
             }
         }
-        $('#currentPos').html("Lese Kreislinge " + circleCounter * 100 + "/" + totalCircles);
-        $('#trophyCount').html(trophyList.length + " Trophäen gesammelt<br/>");
+        var readedUsers = circleCounter * 100;
+        if (readedUsers > totalCircles)
+        {
+            readedUsers = totalCircles;
+        }
+        $('#currentPos').html(chrome.i18n.getMessage("ReadingCircleUsers") + " " + readedUsers + "/" + totalCircles);
+
+
+        $('#trophyCount').html(trophyList.length + " " + chrome.i18n.getMessage("TrophiesCollected") + "<br/>");
         if (data.nextPageToken !== null && data.nextPageToken !== undefined && data.nextPageToken !== "")
         {
             GetCircleStatistics(data.nextPageToken, authToken);
@@ -178,7 +185,7 @@ function SaveTrophies() {
     oldTrophies = oldTrophies || null;
     if (oldTrophies !== null)
     {
-        newTrophies = JSON.parse(newTrophies);
+        newTrophies = JSON.parse(oldTrophies);
         for (var newI in trophyList)
         {
             if (newTrophies.indexOf(trophyList[newI]) < 0)
@@ -191,6 +198,7 @@ function SaveTrophies() {
     }
 
     localStorage.setItem("trophies", JSON.stringify(newTrophies));
+
 }
 
 function CollectCircleStatisticsFinal(token)
@@ -212,7 +220,7 @@ function CollectCircleStatisticsFinal(token)
  */
 function GetActivityStatistics(pageToken, authToken)
 {
-    $('#currentAction').html("Lese Daten aus öffentlichem Stream");
+    $('#currentAction').html(chrome.i18n.getMessage("ReadingPublicStream"));
     if (pageToken === undefined || pageToken === null) {
         pageToken = "";
     }
@@ -237,7 +245,7 @@ function GetActivityStatistics(pageToken, authToken)
                     checkinCount++;
                 } else
                 {
-                    alert("unknown verb");
+                    consolte.log("unknown verb:" + item.verb);
                 }
 
                 // Datumsfunktionen:
@@ -330,8 +338,8 @@ function GetActivityStatistics(pageToken, authToken)
             }
         }
         if (itemDate !== null && itemDate !== undefined) {
-            $('#currentPos').html("Lese Daten vom " + itemDate.toString("d.M.yyyy h:m"));
-            $('#trophyCount').html(trophyList.length + " Trophäen gesammelt<br/>");
+            $('#currentPos').html(chrome.i18n.getMessage("ReadingDataFrom") + " " + itemDate.toString("d.M.yyyy h:mm"));
+            $('#trophyCount').html(trophyList.length + " " + chrome.i18n.getMessage("TrophiesCollected") + "<br/>");
         }
         if (data.nextPageToken !== null && data.nextPageToken !== undefined && data.nextPageToken !== "")
         {
@@ -348,8 +356,8 @@ function GetActivityStatistics(pageToken, authToken)
 }
 
 /**
- * Trophäe speichern
- * @param zu speichernde Trophäe
+ * 
+ * @param {string} value zu speichernder Wert
  */
 function A2T(value)
 {
@@ -437,20 +445,22 @@ function CollectStatisticsFinal()
         }
     }
 
-    $('#currentDate').val("fertig");
+    $('#currentDate').val(chrome.i18n.getMessage("done"));
     SaveTrophies();
     $('.trophyDiv').hide();
+
 }
 
 function GetStatisticsProfile(authToken)
 {
-    $('#currentAction').html("Lese Daten aus Profil");
+    $('#currentAction').html(chrome.i18n.getMessage("ReadingProfileData"));
 
     var url = "https://www.googleapis.com/plus/v1/people/me?access_token=" + authToken;
     $.getJSON(url, function(data)
     {
         var completeTag = data.tagline + " " + data.braggingRights + " " + data.aboutMe;
         CA2T(completeTag, "Weltherrschaft", "goldBrain");
+        CA2T(completeTag, "world domination", "goldBrain");
         CA2T(data.relationshipStatus, "its_complicated", "bronzeSchwierig");
         CA2T(data.id, "109932908573405797116", "goldDev");
         CA2T(data.url, "/+", "bronzeVanity");
@@ -466,7 +476,6 @@ function GetStatisticsProfile(authToken)
                 }
             }
         }
-
 
         for (var i in data.urls)
         {
@@ -488,21 +497,26 @@ function GetStatisticsProfile(authToken)
     });
 }
 
-function StartCalculation(id)
-{
-    CA2T(id, "109932908573405797116", "goldDev");
-    GetStatistics(id);
-
-}
 
 $(document).ready(function() {
-    $('#collectTrophy').click(function() {
-        GetAuth();
+    $('#collectTrophy').click(function()
+    {
+        if (!$('.trophyDiv').is(":visible"))
+        {
+            $('.trophyDiv').fadeIn();
+            GetAuth();
+        }
     });
+
+    $('#whyAuth').click(function()
+    {
+        $('.trophyDivWhy').fadeToggle();
+    });
+
+    $('#closeInfo').click(function()
+    {
+        $('.trophyDivWhy').fadeOut();
+    });
+
+
 });
-
-// GetAuth();
-//StartCalculation("109932908573405797116");
-
-
-      
