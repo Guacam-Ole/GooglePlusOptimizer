@@ -16,15 +16,30 @@
         <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
         <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
         <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+        
+        <script type="text/javascript" src="../../date.js" language="javascript"></script>
+        <script type="text/javascript" src="../../oauth2/oauth2.js"></script>
+        <script type="text/javascript" src="../js/trophy.js"></script>
+     
+
 
 
     </head>
 
 
     <body>
+        
+        
         <div id="bg_top">
             <div id="wrapper">
                 <div id="header"><div id="logo"><h1>Optimizer für Google+</h1></div></div>
+                <div class="trophyDiv" style="display:none;">
+                    Lade Daten für Trophäen:<br/>
+                    <span id="currentAction">...initialisiere...</span><br/>
+                    <span id="currentPos">...initialisiere...</span>
+                    <br/><br/>
+                    <span id="trophyCount">0 Trophäen gesammelt</span>
+        </div>
                 <!--end header-->
                 <div id="menu">
                     <ul id="navigation">
@@ -69,7 +84,7 @@
                                          </div>&nbsp;Beiträge farblich hervorheben<br/>
                                          <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkTrophies">
                                             <input class="toggle" type="checkbox"/>
-                                         </div>&nbsp;Trophäen aktivieren<br/>
+                                         </div>&nbsp;Trophäen aktivieren (<a href="#" id="collectTrophy">Trophäendaten lesen</a>)<br/>
                                          <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShortcut">
                                             <input class="toggle" type="checkbox"/>
                                          </div>&nbsp;Shortcuts anzeigen<br/>
@@ -86,10 +101,6 @@
                                             <input class="toggle" type="checkbox" />
                                          </div>&nbsp;"Minus 1" aktivieren <br/>
                                          
-                                        
-                                        
-                                        
-                          
                                         <hr class="clear" />
                                     </div>
                                    
@@ -120,5 +131,6 @@
                 </div>
             </div>
         </div>
+        
     </body>
 </html>
