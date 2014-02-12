@@ -34,43 +34,42 @@
             <div id="wrapper">
                 <div id="header"><div id="logo"><h1>Optimizer für Google+</h1></div></div>
                 <div class="trophyDiv" style="display:none;">
-                    Lade Daten für Trophäen:<br/>
-                    <span id="currentAction">...initialisiere...</span><br/>
-                    <span id="currentPos">...initialisiere...</span>
+                    Loading trophy-data:<br/>
+                    <span id="currentAction">...initialize...</span><br/>
+                    <span id="currentPos">...initialialize...</span>
                     <br/><br/>
-                    <span id="trophyCount">0 Trophäen gesammelt</span><br/>
+                    <span id="trophyCount">0 trophies collected</span><br/>
                     <center><img src="../images/progress.gif"/></center>
                     <br/>
-                    <b>Bitte warten, bis der Vorgang beendet ist.</b>
-                    Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
+                    <b>Please wait until the data is loaed.</b>
+                    This may take a few minutes. This window closes itself after the data is collected<br/><br/>
                     
                 </div>
                 
                 <div class="trophyDivWhy" style="display:none;">
-                    <h3>Wieso muss ich mich authentifizieren?</h3>
-                    Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.
-                    <h3>Was passiert mit meinen Daten?</h3>
-                    Die Daten werden ausschließlich zur Bestimmung der Trophäen verwendet. Sie werden nicht gespeichert.
-                    <h3>Wieso will der Google+ Optimizer in meinem Namen schreiben?</h3>
-                    Eigentlich will er das gar nicht. Aber die Berechtigung zum Auslesen Deines Profils beinhaltet immer auch die Schreibberechtigung. 
-                    Und obwohl der Optimizer nichts in Deinen Stream schreibt, wird diese Berechtigung angezeigt.
-                    <h3>Und das muss ich glauben?</h3>
-                    Nein. Natürlich nicht. Wenn Du auf Nummer Sicher gehen willst, wähle einfach "Nur für mich" aus
-                    <h3>Ich will das aber alles nicht</h3>
-                    Kein Problem. Die Authentifizierung wird ausschließlich für die Trophäen benötigt. Wenn Du darauf verzichten kannst, brauchst Du Dich auch nicht authentifizieren.
-                    <center><a href="#" id="closeInfo" >schließen</a>
+                    <h3>Why do I have to auhtenticate?</h3>
+                    The tropy-data is collected from your posts, your contacts and your profile. To collect this information you need to authenticate.
+                    <h3>What happens with my data?</h3>
+                    The data is only used to determine, which trophies should be displayed. They are not saved
+                    <h3>Why does the Google+ Optimizer want to post in my name?</h3>
+                    The Optimizer doesn't. But the permission to read your profile always also includes the write permission. Even though the Optimizer does not write into your stream this permission is shown.
+                    <h3>And if I don't believe that?</h3>
+                    Then don't. To be sure select "only for me" if you wish
+                    <h3>I do not want any of this crap!</h3>
+                    No problem. You just miss the trophies. All other features still work.
+                    <center><a href="#" id="closeInfo" >close</a>
                     
                 </div>
-                <!--end header-->
+                            <!--end header-->
                 <div id="menu">
                     <ul id="navigation">
-                        <li><a href="index.html">Willkommen</a></li>
+                        <li><a href="index.html">Welcome</a></li>
                         <li><a href="settings.html">Filter</a> </li>
-                        <li><a href="erweitert.html">Einstellungen</a> </li>
-                        <li><a href="widgets.html">Widgets</a> </li>
-                        <li><a href="additions.html" class="active">Erweiterungen</a> </li>
-                        <li><a href="help.html">Hilfe</a></li>
-                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=de&gl=DE">Plugin Bewerten (Danke!) </a></li>
+                        <li><a href="erweitert.html">Settings</a> </li>
+                        <li><a href="widgets.html" >Widgets</a> </li>
+                        <li><a href="additions.html" class="active">Features</a> </li>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=en&gl=EN">Rate plugin (Thanks!) </a></li>
                     </ul>
                 </div>
                 <!--end menu-->
@@ -86,23 +85,23 @@
                                 <div id="left_column">
                                     <!--side menu-->
                                     <div class="side_menu">
-                                     
+                        
                                     </div>
                                     <!--end side menu-->
                                 </div>
                                 <!--end left_column-->
                                 <div id="right_column">
-                                    <h1>Erweiterungen</h1>
-                                    <p>Hier können zusätzliche Features aktiviert und modifiziert werden</p>
+                                    <h1>Features</h1>
+                                    <p>Enable additional Features here</p>
                                     <!-- Sport - Start -->
                                     <div class="service_box_container">
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkDisplayColors">
                                             <input class="toggle" type="checkbox" />
-                                        </div>&nbsp;Beiträge farblich hervorheben<br/>
+                                        </div>&nbsp;Enable colors for users<br/>
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkTrophies">
                                             <input class="toggle" type="checkbox"/>
-                                        </div>&nbsp;Trophäen aktivieren <a href="#" class="blue searchWeather" id="collectTrophy">Trophäen aktualisieren</a> Authentifizierung erforderlich(<a href="#" id="whyAuth">warum?</a>)<br/>
-<!--                                        <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShortcut">
+                                        </div>&nbsp;Activate trophies <a href="#" class="blue searchWeather" id="collectTrophy">Reload trophy-data</a> Authentication required(<a href="#" id="whyAuth">why?</a>)<br/>
+                                       <!-- <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShortcut">
                                             <input class="toggle" type="checkbox"/>
                                         </div>&nbsp;Shortcuts anzeigen<br/>
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS"  id="chkFavs">
