@@ -22,6 +22,8 @@
                         "setup/js/ion.sound.js",
                         "setup/js/clock.js",
                         "setup/js/user.js",
+                        "setup/js/jquery.rc4.js",
+                        "setup/js/trophydisplay.js",
                         "date.js"]
                 }],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",

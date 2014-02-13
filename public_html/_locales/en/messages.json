@@ -67,8 +67,7 @@
     },
     "DisplayContent": {
         "message": "show content ⇘"
-    }
-    ,
+    },
     "DisplayImageAnimated": {
         "message": "show animated Image ⇘"
     },
@@ -76,30 +75,36 @@
         "message": "show animated video ⇘"
     },
     "ReadingCircleData": {
-        "message": "Lese Daten aus den Kreisen"
+        "message": "reading data from circles"
     },
-    
     "ReadingCircleUsers": {
-        "message": "Lese Kontaktdaten"
+        "message": "reading contactdata"
     },
-    
     "TrophiesCollected": {
-        "message": "Trophäen gesammelt"
+        "message": "trophies collected"
     },
-    
     "ReadingPublicStream": {
-        "message": "Lese Daten aus öffentlichen Stream"
+        "message": "reading data from public stream"
     },
-    
     "ReadingDataFrom": {
-        "message": "Lese Beiträge vom:"
+        "message": "reading data from:"
     },
-    
     "ReadingProfileData": {
-        "message": "Analysiere Profil"
+        "message": "analyze profile"
     },
-    
     "done": {
-        "message": "fertig."
+        "message": "done."
+    },
+    "trophies": {
+        "message": "Trophies"
+    },
+    "goldTrophies": {
+        "message": "Gold-Trophies"
+    },
+    "silverTrophies": {
+        "message": "Silver-Trophies"
+    },
+    "bronzeTrophies": {
+        "message": "Bronze-Trophies"
     }
 }
