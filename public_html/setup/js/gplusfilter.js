@@ -25,6 +25,10 @@ var filterVideo;
 var filterLinks;
 var filterGifOnly;
 var filterMp4Only;
+var showTrophies;
+var trophies;
+
+var domChangeAllowed=true;
 
 if (document.title.indexOf("Google+") !== -1)
 {
@@ -70,7 +74,7 @@ function LoadGoogle()
 
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function()
-    {
+    {       
         // Beim Nachladen der Seite neu aktiv werden
         if (timeout)
         {
@@ -90,6 +94,8 @@ function LoadGoogle()
         });
 
     }
+
+    
 
     if (soccer !== null && soccer !== undefined)
     {
@@ -131,8 +137,8 @@ function LoadGoogle()
         });
     }
 }
-var allCssColors;
 
+var allCssColors;
 var allUserSettingsFromBackground;
 
 /**
@@ -216,6 +222,12 @@ function AddToCssColor(name, cssclass)
 // Filter-Aktionen
 function StartFilter()
 {
+    if (!domChangeAllowed) {
+        return;
+    }
+    setInterval(function(){domChangeAllowed=true;},10000);
+    domChangeAllowed=false;
+    
     if (filterPlus1)
     {
         $('.xv').closest("[role='article']").hide();
@@ -369,6 +381,14 @@ function StartFilter()
         PaintForUser();
         PaintColorBlock();
     }
+    
+    if (showTrophies)
+    {
+        // Trophäen anzeigen
+        $.getScript(chrome.extension.getURL("./setup/js/trophydisplay.js"), function() {
+            DrawTrophies();
+        });
+    }
 }
 
 // Einstellungen Laden
@@ -414,9 +434,15 @@ function GetSettingsFromBackground()
         filterImages = response.FilterImages;
         filterVideo = response.FilterVideo;
         filterLinks = response.FilterLinks;
-        filterGifOnly=response.FilterGifOnly;
-        filterMp4Only=response.FilterMp4Only;
+        filterGifOnly = response.FilterGifOnly;
+        filterMp4Only = response.FilterMp4Only;
+        showTrophies = response.DisplayTrophy;
+        trophies = response.Trophies || null;
+        if (trophies!==null) {
+            trophies=$.parseJSON(trophies);
+        }
         
+
     }
     );
 }

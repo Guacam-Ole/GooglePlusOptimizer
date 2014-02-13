@@ -100,5 +100,17 @@
     
     "done": {
         "message": "fertig."
+    },
+    "trophies": {
+        "message": "Trophäen"
+    },
+    "goldTrophies": {
+        "message": "Gold-Trophäen"
+    },
+    "silverTrophies": {
+        "message": "Silber-Trophäen"
+    },
+    "bronzeTrophies": {
+        "message": "Bronze-Trophäen"
     }
 }

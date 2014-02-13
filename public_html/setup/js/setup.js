@@ -378,14 +378,15 @@ function LoadSetup()
     LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
     LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
     LoadCheckBox("colorUsers", $("#chkDisplayColors"), "true");
+    LoadCheckBox("displayTrophy", $("#chkTrophies"));
     LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
     LoadCheckBox("filterMp4Only", $("#chkFilterMp4"), "true");
-    
+
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
     LoadExtended();
 
 
-  
+
 
     var interval = JSON.parse(localStorage.getItem("interval"));
     if (interval === null || interval < 10)
@@ -600,13 +601,17 @@ function CreateCheckboxEvents()
     $("#chkFilterMp4").on('switch-change', function(e, data)
     {
         SaveCheckBox("filterMp4Only", data.value);
-    });    
-    
-    
+    });
+
+
     // Erweiterungen:
     $("#chkDisplayColors").on('switch-change', function(e, data)
     {
         SaveCheckBox("colorUsers", data.value);
+    });
+    $("#chkTrophies").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("displayTrophy", data.value);
     });
 
 }
