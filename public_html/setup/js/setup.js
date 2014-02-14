@@ -145,6 +145,9 @@ function CreateImageEvents()
     {
         SaveSwitch("filterLinks", "#filterLinks", "filterurl");
     });
+    
+    
+
 }
 
 
@@ -377,10 +380,11 @@ function LoadSetup()
     LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
     LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
     LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
-    LoadCheckBox("colorUsers", $("#chkDisplayColors"), "true");
+    LoadCheckBox("colorUsers", $("#chkDisplayColors"));
     LoadCheckBox("displayTrophy", $("#chkTrophies"));
     LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
-    LoadCheckBox("filterMp4Only", $("#chkFilterMp4"), "true");
+    LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
+    LodaCheckBox("showEmoticons",$('#chkShowEmoticons'));
 
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
     LoadExtended();
@@ -602,6 +606,7 @@ function CreateCheckboxEvents()
     {
         SaveCheckBox("filterMp4Only", data.value);
     });
+    
 
 
     // Erweiterungen:
@@ -612,6 +617,10 @@ function CreateCheckboxEvents()
     $("#chkTrophies").on('switch-change', function(e, data)
     {
         SaveCheckBox("displayTrophy", data.value);
+    });
+    $("#chkShowEmoticons").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("showEmoticons", data.value);
     });
 
 }

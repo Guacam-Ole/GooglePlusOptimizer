@@ -18,9 +18,9 @@ function PaintColorBlock()
     GetAllUserSettings();
 
     var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
-    var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\""+chrome.i18n.getMessage("RemarkPlaceholder")+"\" />";
+    var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
     //keine Anmerkung für " + userName + " vorhanden\" />";
-    $('[ guidedhelpid="profile_name"]').append(colorBlock + userInfo.replace('__USER__',userName));
+    $('[ guidedhelpid="profile_name"]').append(colorBlock + userInfo.replace('__USER__', userName));
     $('.colClick').click(function() {
         RemoveSelection();
         $(this).append("✓");
@@ -32,7 +32,6 @@ function PaintColorBlock()
 
     userColorTimeout = setTimeout(PaintCurrentUserSettings, 1000); // Ajax request (Scrollen: Alle halbe Sekunde checken)
 }
-
 
 function PaintForUser()
 {
@@ -51,10 +50,8 @@ function PaintForUser()
             {
                 if (allCssColors[u].Color === allUserSettingsFromBackground[i].Color)
                 {
-                    console.log(allCssColors[u].CssClass);
                     $('[oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass("vna");
                     $('[oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass(allCssColors[u].CssClass);
-
                 }
             }
         }
@@ -63,7 +60,7 @@ function PaintForUser()
             if ($('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').length > 0)
             {
                 if ($('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').html().indexOf('infoImg') === -1) {
-                    $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').prepend("<img class=\"infoImg\" title=\""+allUserSettingsFromBackground[i].Text+"\" src=\""+chrome.extension.getURL('setup/images/info.png')+"\" />");
+                    $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').prepend("<img class=\"infoImg\" title=\"" + allUserSettingsFromBackground[i].Text + "\" src=\"" + chrome.extension.getURL('setup/images/info.png') + "\" />");
                 }
             }
         }
@@ -100,9 +97,7 @@ function PaintCurrentUserSettings()
         }
     }
     );
-
 }
-
 
 /**
  * Aktuellen Benutzer bestimmen
@@ -125,13 +120,6 @@ function RemoveSelection()
     }
     );
 }
-
-
-
-
-
-
-
 
 /**
  * Einstellungen des aktuellen Users auslesen
@@ -236,6 +224,4 @@ function UpdateUserData()
             UpdateUserSettings(currentUserSettings.I, userRemark, selectedColor)
         }
     }
-
-    // Prüfen, ob speichern oder entfernen:
 }

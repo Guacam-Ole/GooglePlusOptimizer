@@ -27,8 +27,9 @@ var filterGifOnly;
 var filterMp4Only;
 var showTrophies;
 var trophies;
+var showEmoticons;
 
-var domChangeAllowed=true;
+var domChangeAllowed = true;
 
 if (document.title.indexOf("Google+") !== -1)
 {
@@ -74,7 +75,7 @@ function LoadGoogle()
 
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function()
-    {       
+    {
         // Beim Nachladen der Seite neu aktiv werden
         if (timeout)
         {
@@ -95,7 +96,7 @@ function LoadGoogle()
 
     }
 
-    
+
 
     if (soccer !== null && soccer !== undefined)
     {
@@ -225,9 +226,11 @@ function StartFilter()
     if (!domChangeAllowed) {
         return;
     }
-    setInterval(function(){domChangeAllowed=true;},10000);
-    domChangeAllowed=false;
-    
+    setInterval(function() {
+        domChangeAllowed = true;
+    }, 10000);
+    domChangeAllowed = false;
+
     if (filterPlus1)
     {
         $('.xv').closest("[role='article']").hide();
@@ -381,7 +384,7 @@ function StartFilter()
         PaintForUser();
         PaintColorBlock();
     }
-    
+
     if (showTrophies)
     {
         // Trophäen anzeigen
@@ -389,6 +392,14 @@ function StartFilter()
             DrawTrophies();
         });
     }
+
+    if (showEmoticons)
+    {
+        $.getScript(chrome.extension.getURL("./setup/js/smilies.js"), function() {
+            PaintEmoticons();
+        });
+    }
+
 }
 
 // Einstellungen Laden
@@ -437,12 +448,11 @@ function GetSettingsFromBackground()
         filterGifOnly = response.FilterGifOnly;
         filterMp4Only = response.FilterMp4Only;
         showTrophies = response.DisplayTrophy;
+        showEmoticons = response.ShowEmoticons;
         trophies = response.Trophies || null;
-        if (trophies!==null) {
-            trophies=$.parseJSON(trophies);
+        if (trophies !== null) {
+            trophies = $.parseJSON(trophies);
         }
-        
-
     }
     );
 }
