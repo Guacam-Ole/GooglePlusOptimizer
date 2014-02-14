@@ -108,6 +108,7 @@ chrome.runtime.onMessage.addListener(
                 var filterMp4Only = localStorage.getItem("filterMp4Only");
                 var displayTrophy=localStorage.getItem("displayTrophy");
                 var trophies=localStorage.getItem("trophies");
+                var showEmoticons=localStorage.getItem("showEmoticons");
 
 
                 var interval = JSON.parse(localStorage.getItem("interval"));
@@ -135,6 +136,7 @@ chrome.runtime.onMessage.addListener(
                 filterGifOnly = BoolNotNull(filterGifOnly);
                 filterMp4Only = BoolNotNull(filterMp4Only);
                 displayTrophy=BoolNotNull(displayTrophy);
+                showEmoticons=BoolNotNull(showEmoticons);
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -158,6 +160,7 @@ chrome.runtime.onMessage.addListener(
                     FilterMp4Only: GetBool(filterMp4Only),
                     FilterLinks: GetBool(filterLinks),
                     DisplayTrophy:GetBool(displayTrophy),
+                    ShowEmoticons:GetBool(showEmoticons),
                     Trophies:trophies,
                     Sport: sport,
                     Wetter: wetter,
