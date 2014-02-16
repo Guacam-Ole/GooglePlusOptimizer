@@ -228,7 +228,7 @@ function StartFilter()
     }
     setInterval(function() {
         domChangeAllowed = true;
-    }, 10000);
+    }, 5000);
     domChangeAllowed = false;
 
     if (filterPlus1)

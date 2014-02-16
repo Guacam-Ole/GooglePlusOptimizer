@@ -384,7 +384,7 @@ function LoadSetup()
     LoadCheckBox("displayTrophy", $("#chkTrophies"));
     LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
     LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
-    LodaCheckBox("showEmoticons",$('#chkShowEmoticons'));
+    LoadCheckBox("showEmoticons",$('#chkShowEmoticons'));
 
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
     LoadExtended();

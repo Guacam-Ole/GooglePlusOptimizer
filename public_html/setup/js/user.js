@@ -50,8 +50,8 @@ function PaintForUser()
             {
                 if (allCssColors[u].Color === allUserSettingsFromBackground[i].Color)
                 {
-                    $('[oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass("vna");
-                    $('[oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass(allCssColors[u].CssClass);
+                    $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass("vna");
+                    $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('[role="article"]').addClass(allCssColors[u].CssClass);
                 }
             }
         }
@@ -59,9 +59,12 @@ function PaintForUser()
         {
             if ($('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').length > 0)
             {
-                if ($('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').html().indexOf('infoImg') === -1) {
-                    $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').prepend("<img class=\"infoImg\" title=\"" + allUserSettingsFromBackground[i].Text + "\" src=\"" + chrome.extension.getURL('setup/images/info.png') + "\" />");
-                }
+                $('h3 [oid="' + allUserSettingsFromBackground[i].UserId + '"]').closest('.lea').each(function() {
+                    if ($(this).html().indexOf('infoImg')===-1)
+                    {
+                        $(this).prepend("<img class=\"infoImg\" title=\"" + allUserSettingsFromBackground[i].Text + "\" src=\"" + chrome.extension.getURL('setup/images/info.png') + "\" />");
+                    }
+                });
             }
         }
     }
