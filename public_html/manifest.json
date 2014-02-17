@@ -16,15 +16,17 @@
                     "matches": ["https://plus.google.com/*"],
                     "js": [
                         "setup/js/jquery-1.10.2.min.js",
+                        "setup/js/jquery.rc4.js",
+                        "setup/js/bootstrap-switch.min.js",
                         "setup/js/fussball.js",
                         "setup/js/weather.js",
                         "setup/js/gplusfilter.js",
                         "setup/js/ion.sound.js",
                         "setup/js/clock.js",
                         "setup/js/user.js",
-                        "setup/js/jquery.rc4.js",
                         "setup/js/trophydisplay.js",
                         "setup/js/smilies.js",
+                        "setup/js/wizard.js",
                         "date.js"]
                 }],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",
@@ -57,7 +59,13 @@
         "setup/images/weather/150x150/*",
         "setup/images/weather/50x50/*",
         "setup/css/*",
-        "setup/js/*"
+        "setup/js/*",
+        "setup/de/wizardloader.html",
+        "setup/de/wizard.html",
+        "setup/de/wizimg/*",
+        "setup/en/wizimg/*",
+        "setup/en/wizardloader.html",
+        "setup/en/wizard.html"
     ]
 }
 

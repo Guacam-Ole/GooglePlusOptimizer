@@ -47,6 +47,37 @@ $(document).ready(function()
         LoadGoogle();
         CountColumns();
     }
+
+
+    $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
+        var htmlObject = $('<div/>').html(htmlWizard).contents();
+        $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+
+        $('#wizardStart').click(function() {
+
+            $.when(
+                    $.getScript(chrome.extension.getURL("./setup/js/jquery-1.10.2.min.js")),
+                    $.getScript(chrome.extension.getURL("./setup/js/jquery.tools.min.js")),
+                    $.getScript(chrome.extension.getURL("./setup/js/jquery.ui.widget.js")),
+                    $.getScript(chrome.extension.getURL("./setup/js/bootstrap-switch.min.js")),
+                    $.getScript(chrome.extension.getURL("./setup/js/jquery.tagsinput.js")),
+                    $.getScript(chrome.extension.getURL("./setup/js/wizard.js")),
+                    $.Deferred(function(deferred) {
+                        $(deferred.resolve);
+                    })
+                    ).done(function()
+            {
+                $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
+                $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                var wizz = $('<div id="loadhere">&nbsp;</div>');
+                $('body').prepend(wizz);
+                $('#loadhere').load(chrome.extension.getURL("setup/de/wizard.html"), function() {
+                    InitWizard();
+                    console.log('Load was performed.');
+                });
+            });
+        });
+    });
 });
 
 
