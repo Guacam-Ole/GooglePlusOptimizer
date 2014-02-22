@@ -1,3 +1,11 @@
+var enabledSoccer;
+var soccerInterval;
+
+function OptStartSoccer() {
+    // Noting to do
+}
+
+
 
 function StartSoccer()
 {
@@ -28,7 +36,7 @@ function StartSoccer()
     }
 }
 
-var soccerInterval;
+
 
 // Fußball-Block aktualisieren
 function PingSoccer()
@@ -43,7 +51,7 @@ function PingSoccer()
         var id = setting.Sport + "-" + setting.League + "-" + setting.Season;
         UpdateSoccer("soccer" + id, setting.League, setting.Season);
     }
-    if (soccerInterval === null || soccerInterval===undefined) 
+    if (soccerInterval === null || soccerInterval === undefined)
     {
         soccerInterval = setInterval(function()
         {
@@ -52,13 +60,32 @@ function PingSoccer()
     }
 }
 
-var enabledSoccer;
+
 
 
 
 // Fußball-Widget füllen
 function UpdateSoccer(id, league, season)
 {
+    var soccerTop = "<table class=\"NeuesVomSpocht\" width=\"100%\">"
+            + "<tr><th align=\"left\">" + chrome.i18n.getMessage("Heimmannschaft") + "</th><th align=\"center\">" + chrome.i18n.getMessage("Stand") + "</th><th align=\"right\">" + chrome.i18n.getMessage("Gaestemannschaft") + "</th><th></th></tr>";
+    var soccerResult = "<tr>"
+            + "<td align=\"left\"><img alt=\"Heimlogo\" width=\"20\" height=\"20\" src=\"__imgLeft__\">&nbsp;__teamLeft__</td>"
+            + "<td align=\"center\"><font color=\"__color__\">__goalsLeft__ : __goalsRight__</font></td>"
+            + "<td align=\"right\">__teamRight__&nbsp;<img alt=\"Gästelogo\" src=\"__imgRight__\"></td>"
+            + "<td><div class=\"arrow\"></div></td>"
+            + "</tr>";
+
+    var soccerGoalTop = "<tr><td colspan=\"3\"><div class=\"goals\">";
+    var soccerGoalBottom = "</div></td></tr>";
+    var soccerBottom = "</table></div>";
+
+    var soccerGoalResult = "<div class=\"goal__ORI__\">"
+            + "<span class=\"goalImage\"><img src=\"" + chrome.extension.getURL('setup/images/tor.png') + "\"/></span>"
+            + "<span class=\'goalMin\'>__minute__&nbsp;</span>"
+            + "<span class=\"goalResult\">__goalsLeft__ : __goalsRight__</span>"
+            + "<span class=\"player\">__player__&nbsp;__addInfo__</span></div>";
+
     try
     {
         console.log("fussi update");
@@ -195,22 +222,5 @@ function CreateSportClickEvent()
 
 
 
-var soccerTop = "<table class=\"NeuesVomSpocht\" width=\"100%\">"
-        + "<tr><th align=\"left\">" + chrome.i18n.getMessage("Heimmannschaft") + "</th><th align=\"center\">" + chrome.i18n.getMessage("Stand") + "</th><th align=\"right\">" + chrome.i18n.getMessage("Gaestemannschaft") + "</th><th></th></tr>";
-var soccerResult = "<tr>"
-        + "<td align=\"left\"><img alt=\"Heimlogo\" width=\"20\" height=\"20\" src=\"__imgLeft__\">&nbsp;__teamLeft__</td>"
-        + "<td align=\"center\"><font color=\"__color__\">__goalsLeft__ : __goalsRight__</font></td>"
-        + "<td align=\"right\">__teamRight__&nbsp;<img alt=\"Gästelogo\" src=\"__imgRight__\"></td>"
-        + "<td><div class=\"arrow\"></div></td>"
-        + "</tr>";
 
-var soccerGoalTop = "<tr><td colspan=\"3\"><div class=\"goals\">";
-var soccerGoalBottom = "</div></td></tr>";
-var soccerBottom = "</table></div>";
-
-var soccerGoalResult = "<div class=\"goal__ORI__\">"
-        + "<span class=\"goalImage\"><img src=\"" + chrome.extension.getURL('setup/images/tor.png') + "\"/></span>"
-        + "<span class=\'goalMin\'>__minute__&nbsp;</span>"
-        + "<span class=\"goalResult\">__goalsLeft__ : __goalsRight__</span>"
-        + "<span class=\"player\">__player__&nbsp;__addInfo__</span></div>";
         

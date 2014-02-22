@@ -32,6 +32,19 @@ function BoolNotNullReverse(anyvalue)
     }
 }
 
+function GetToken()
+{
+    chrome.identity.getAuthToken({'interactive': true}, function(token)
+    {
+        console.log(token);
+        return token;
+    });
+    if (chrome.runtime.lastError) {
+        console.log(chrome.runtime.lastError);
+        return null;
+    }
+}
+
 // String-Bool in echtes Bool wandeln
 function GetBool(originalValue)
 {
@@ -51,11 +64,20 @@ chrome.extension.onMessage.addListener(function(request, sender) {
     }
 });
 
-
 // Datenaustausch mit Background-jQuery-File
 chrome.runtime.onMessage.addListener(
         function(request, sender, sendResponse)
         {
+            if (request.Action === "GetToken")
+            {
+                chrome.identity.getAuthToken({'interactive': true}, function(token)
+                {
+                    console.log("token:"+token);
+                    sendResponse({Result: token});
+                });
+                return true;
+            }
+
             if (request.Action === "SaveColumns")
             {
                 localStorage.setItem("columns", request.ParameterValue);
@@ -80,6 +102,40 @@ chrome.runtime.onMessage.addListener(
                     Result: "Settings loaded."
                 });
             }
+            else if (request.Action==="SaveWizardVersion") {
+                localStorage.setItem("lastWizard",request.ParameterValue);
+            }
+            else if (request.Action==="SaveAll") {
+                localStorage.setItem("plus1",request.plus1);
+                localStorage.setItem("yt",request.yt);
+                localStorage.setItem("wham",request.wham);
+                localStorage.setItem("hashtag",request.hashtag);
+                localStorage.setItem("custom",request.custom);
+                localStorage.setItem("community",request.community);
+                localStorage.setItem("birthday",request.birthday);
+                localStorage.setItem("known",request.known);
+                localStorage.setItem("fulltext",request.fulltext);
+                localStorage.setItem("WHAMWhamText",request.WHAMWhamText);
+                localStorage.setItem("WHAMWhamUrl",request.WHAMWhamUrl);
+                localStorage.setItem("WHAMChristmasText",request.WHAMChristmasText);
+                localStorage.setItem("WHAMChristmasUrl",request.WHAMChristmasUrl);
+                localStorage.setItem("StoppWatch",request.StoppWatch);
+                localStorage.setItem("Sport",request.Sport);
+                localStorage.setItem("Weather",request.Weather);
+                localStorage.setItem("colorUsers",request.colorUsers);
+                localStorage.setItem("filterImages",request.filterImages);
+                localStorage.setItem("filterVideo",request.filterVideo);
+                localStorage.setItem("filterLinks",request.filterLinks);
+                localStorage.setItem("filterGifOnly",request.filterGifOnly);
+                localStorage.setItem("filterMp4Only",request.filterMp4Only);
+                localStorage.setItem("displayTrophy",request.displayTrophy);
+                localStorage.setItem("trophies",request.trophies);
+                localStorage.setItem("showEmoticons",request.showEmoticons);
+                
+                sendResponse({Result: "Settings Saved."});
+                
+            }
+            
             else if (request.Action === "LoadAll")
             {
                 // Alle relevanten Paramter für Background-Script laden
@@ -106,10 +162,10 @@ chrome.runtime.onMessage.addListener(
                 var filterLinks = localStorage.getItem("filterLinks");
                 var filterGifOnly = localStorage.getItem("filterGifOnly");
                 var filterMp4Only = localStorage.getItem("filterMp4Only");
-                var displayTrophy=localStorage.getItem("displayTrophy");
-                var trophies=localStorage.getItem("trophies");
-                var showEmoticons=localStorage.getItem("showEmoticons");
-
+                var displayTrophy = localStorage.getItem("displayTrophy");
+                var trophies = localStorage.getItem("trophies");
+                var showEmoticons = localStorage.getItem("showEmoticons");
+                var lastWizard=localStorage.getItem("lastWizard");
 
                 var interval = JSON.parse(localStorage.getItem("interval"));
                 if (interval === null || interval < 10)
@@ -135,8 +191,8 @@ chrome.runtime.onMessage.addListener(
                 filterLinks = BoolNotNull(filterLinks);
                 filterGifOnly = BoolNotNull(filterGifOnly);
                 filterMp4Only = BoolNotNull(filterMp4Only);
-                displayTrophy=BoolNotNull(displayTrophy);
-                showEmoticons=BoolNotNull(showEmoticons);
+                displayTrophy = BoolNotNull(displayTrophy);
+                showEmoticons = BoolNotNull(showEmoticons);
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -159,13 +215,14 @@ chrome.runtime.onMessage.addListener(
                     FilterGifOnly: GetBool(filterGifOnly),
                     FilterMp4Only: GetBool(filterMp4Only),
                     FilterLinks: GetBool(filterLinks),
-                    DisplayTrophy:GetBool(displayTrophy),
-                    ShowEmoticons:GetBool(showEmoticons),
-                    Trophies:trophies,
+                    DisplayTrophy: GetBool(displayTrophy),
+                    ShowEmoticons: GetBool(showEmoticons),
+                    Trophies: trophies,
                     Sport: sport,
                     Wetter: wetter,
                     Interval: interval,
-                    Stoppwatch: stoppwatch,
+                    Stoppwatch: stoppwatch,  
+                    lastWizard:lastWizard,
                     Result: "Settings loaded."
                 });
             }

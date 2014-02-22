@@ -3,8 +3,8 @@
 .container {
     font: normal 13px Roboto,arial,sans-serif;
     position: absolute;
-    left: 641.5px;
-    top: 22.3333333333333px;
+    //left: 640px;
+    top: 20px;
     border-style: solid;
     border-width: 1px;
     width: 980px;
@@ -17,8 +17,46 @@
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    height: 520px;
+    height: 420px;
     overflow: auto;
+    
+}
+
+.spam {
+    width:960px;
+    height:250px;
+    position:absolute;
+    top:550px;
+    z-index: 2502;
+    border-style: solid;
+    border-width: 1px;
+    display: none;
+}
+
+.trophyDiv {
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    left:-240px;
+    top:-250px;
+    background-color: lightgoldenrodyellow;
+    padding-left:5px;
+    padding-top: 5px;
+    display:none;
+}
+
+.trophyDivWhy {
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    left:-240px;
+    top:-300px;
+    background-color: white;
+    padding: 10px;
+    padding-top: 5px;
+    display:none;
+    z-index: 3000;
+    font-size: 12px;
 }
 
 .wizHeader {

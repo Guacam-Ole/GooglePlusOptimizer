@@ -1,3 +1,4 @@
+ 
 
         <div class="container">
             <div  tabindex="0" role="dialog" aria-labelledby=":5l">
@@ -50,8 +51,14 @@
                 </div>
                 <div style="display: none;"></div>
             </div>
+            
         </div>
         <!-- DEMO-COntainer: -->
+           <div class="spam">
+               <a href="http://www.startnext.de/alstervergnuegen"><img src="http://www.nocarrier.de/optimizer.png" width="960" height="250" border="0"/></a>
+            </div>
+        
+     
 
         <div class="wizardContainer" id="Intro">
             <div class="version">1.0</div>
@@ -186,8 +193,8 @@
                 Der Volltextfilter benötigt etwas mehr Resourcen als der Hashtag-Filter. Außerdem sollte man beachten, dass man evtl. aus Versehen zu viele Beiträge filter. So filtert der Volltextfilter "Icke" auch Beiträge mit "Zicke" heraus.
                 Hashtags können direkt im Stream gefiltert werden
                 <br/>
-                Um einen Filter hinzuzufügen, diese(n) hier eingeben:
-                <div><input id="fulltext" type="text" class="form-control tags" value="Hamburger Sportverein" style="display: none;">
+                Um einen Filter hinzuzufügen, diese(n) hier eingeben:<br/><br/>
+                <div><input id="fulltext" type="text" class="form-control tags" value="Dschungelcamp" style="display: none;">
                     <div id="fulltext_tagsinput" style="width: auto; min-height: 30px; height: 100%;">
                         <div id="fulltext_addTag" style="display: none;">
                             <input id="fulltext_tag" value="" data-default="Neuer Filter" style="color: rgb(102, 102, 102); width: 80px;">
@@ -317,17 +324,17 @@
                     <tr class="trSport">
                         <td width="100px">Position</td>
                         <td width="320px">
-                            <select id="sport2Pos" class="sportPosition"><option selected value="-1">(nicht anzeigen)</option><option value="0">Links</option><option value="1">Mitte</option><option value="2">Rechts</option></select>
+                            <select id="sport1Pos" class="sportPosition"><option selected value="-1">(nicht anzeigen)</option><option value="0">Links</option><option value="1">Mitte</option><option value="2">Rechts</option></select>
                         </td>
 
                     </tr>
                     <tr class="trSport">
                         <td>Sportart</td>
-                        <td><select id="sport2Sport" class="sportType"><option value="-1">(wird geladen)</option></select></td>
+                        <td><select id="sport1Sport" class="sportType"><option value="-1">(wird geladen)</option></select></td>
                     </tr>
                     <tr class="trSport">
                         <td>Liga</td>
-                        <td><select disabled  class="sportLeague" id="cmbLeague2"><option></option></select></td>
+                        <td><select disabled  class="sportLeague" id="cmbLeague1"><option></option></select></td>
                     </tr>
                 </table><br/><br/>
                 <sup>Möchtest Du mehr als einen Sportblock anzeigen, kannst Du dies im Anschluss in den Optionen durchführen</sup>
@@ -355,7 +362,7 @@
                     <tr class="trWeather">
                         <td width="100px">Suchen</td>
                         <td width="320px"><input type="text" class="weathersearch"/>
-                            <a href="#" class="blue searchWeather">Suchen</a>
+                            <a class="blue searchWeather">Suchen</a>
                         </td>
                     </tr>                                                        
                     <tr class="trWeather">
@@ -403,6 +410,8 @@
         </div>
 
         <div class="wizardContainer" id="addonTrophies">
+
+            
             <div class="version">2.3</div>
             <div class="image">trophies.png</div>
             <div class="category">Feature</div>
@@ -414,11 +423,35 @@
 
 
                 <button  id="collectTrophy" class="wizButton">Trophäen aktivieren</button><br/><br/><br/>
-                <sup><b>Für die Nutzung der Trophäen ist eine Authentifizierung erforderlich (<a href="#" id="whyAuth">warum?</a>)</b></sup><br/><br/>
-
-                <br/><br/>
+                <sup><b>Für die Nutzung der Trophäen ist eine Authentifizierung erforderlich (<a  id="whyAuth">warum?</a>)</b></sup><br/><br/>
 
                 <br/>
+                 <div class="trophyDiv" >
+                    Lade Daten für Trophäen:<br/>
+                    <span id="currentAction">...initialisiere...</span><br/>
+                    <span id="currentPos">...initialisiere...</span>
+                    <br/><br/>
+                    <span id="trophyCount">0 Trophäen gesammelt</span><br/><br/>
+                    <center><img id ="robbe" alt="progress" /></center>
+                    <br/>
+                    <b>Bitte warten, bis der Vorgang beendet ist.</b>
+                    Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
+                </div>
+                                        
+                <div class="trophyDivWhy" style="display:none;">
+                    <h3>Wieso muss ich mich authentifizieren?</h3>
+                    Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.<br/><br/>
+                    <h3>Was passiert mit meinen Daten?</h3>
+                    Die Daten werden ausschließlich zur Bestimmung der Trophäen verwendet. Sie werden nicht gespeichert.<br/><br/>
+                    <h3>Wieso will der Google+ Optimizer in meinem Namen schreiben?</h3>
+                    Eigentlich will er das gar nicht. Aber die Berechtigung zum Auslesen Deines Profils beinhaltet immer auch die Schreibberechtigung. 
+                    Und obwohl der Optimizer nichts in Deinen Stream schreibt, wird diese Berechtigung angezeigt.<br/><br/>
+                    <h3>Und das muss ich glauben?</h3>
+                    Nein. Natürlich nicht. Wenn Du auf Nummer Sicher gehen willst, wähle einfach "Nur für mich" aus<br/><br/>
+                    <h3>Ich will das aber alles nicht</h3>
+                    Kein Problem. Die Authentifizierung wird ausschließlich für die Trophäen benötigt. Wenn Du darauf verzichten kannst, brauchst Du Dich auch nicht authentifizieren.<br/>
+                    <br/><center><a id="closeInfo" >schließen</a></center>
+                </div>
             </div>
         </div>
 

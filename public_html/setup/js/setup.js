@@ -7,38 +7,11 @@ $(document).ready(function()
         $("#accordion2").accordion();
     });
     FillSportData();
-    $('.searchWeather').click(function()
-    {
-        var weather = $(this);
-        var weatherCombo = weather.closest('.tableWeather').find('select.weatherType');
-        var weatherInput = weather.closest('.tableWeather').find('input');
-        weatherCombo.children().remove();
-        var query = "select woeid, country,name, postal from geo.places where text=\"" + weatherInput.val() + "\"";
-        var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=json';
-        console.log("API:" + api);
-        $.getJSON(api, function(data)
-        {
-            for (var i in data.query.results.place)
-            {
-                var place = data.query.results.place[i];
-                var plz = place.postal;
-                if (plz === null || plz === undefined)
-                {
-                    plz = "";
-                } else {
-                    plz = plz.content;
-                    if (plz === null || plz === undefined)
-                    {
-                        plz = "";
-                    }
-                }
-                var entry = plz + " " + place.name + ", " + place.country.content;
-                var id = place.woeid;
-                weatherCombo.append("<option value='" + id + "'>" + entry + "</option>");
-            }
-        });
-        return false;
-    });
+    FillWeatherData();
+    try {
+        OptStartTrophies();
+    } catch (ex) {
+    }
     $('#clockPos').change(function()
     {
         localStorage.setItem("StoppWatch", $("#clockPos").val());
@@ -47,6 +20,44 @@ $(document).ready(function()
 $(function() {
     $(".dial").knob();
 });
+function FillWeatherData() {
+    $('.searchWeather').click(function()
+    {
+        try {
+            var weather = $(this);
+            var weatherCombo = weather.closest('.tableWeather').find('select.weatherType');
+            var weatherInput = weather.closest('.tableWeather').find('input');
+            weatherCombo.children().remove();
+            var query = "select woeid, country,name, postal from geo.places where text=\"" + weatherInput.val() + "\"";
+            var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=json';
+            console.log("API:" + api);
+            $.getJSON(api, function(data)
+            {
+                for (var i in data.query.results.place)
+                {
+                    var place = data.query.results.place[i];
+                    var plz = place.postal;
+                    if (plz === null || plz === undefined)
+                    {
+                        plz = "";
+                    } else {
+                        plz = plz.content;
+                        if (plz === null || plz === undefined)
+                        {
+                            plz = "";
+                        }
+                    }
+                    var entry = plz + " " + place.name + ", " + place.country.content;
+                    var id = place.woeid;
+                    weatherCombo.append("<option value='" + id + "'>" + entry + "</option>");
+                }
+            });
+            return false;
+        } catch (ex) {
+            console.log(ex);
+        }
+    });
+}
 function FillSportData()
 {
     //GetAllSports
@@ -145,8 +156,8 @@ function CreateImageEvents()
     {
         SaveSwitch("filterLinks", "#filterLinks", "filterurl");
     });
-    
-    
+
+
 
 }
 
@@ -384,11 +395,11 @@ function LoadSetup()
     LoadCheckBox("displayTrophy", $("#chkTrophies"));
     LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
     LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
-    LoadCheckBox("showEmoticons",$('#chkShowEmoticons'));
+    LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
 
     //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
     LoadExtended();
-
+    LoadWeather();
 
 
 
@@ -420,6 +431,10 @@ function LoadSetup()
     CreateTextboxEvents();
     GetSportTypes();
     SaveWeatherSettings();
+
+    $('#reactivateWizard').click(function() {
+          localStorage.setItem("lastWizard","0");
+    });
 }
 
 /**
@@ -496,7 +511,6 @@ function GetSportTypes()
 
 function SaveWeatherSettings()
 {
-    LoadWeather();
     $('#saveWeather').click(function()
     {
         var weather1Id = $('#weather1Ort').val();
@@ -606,7 +620,7 @@ function CreateCheckboxEvents()
     {
         SaveCheckBox("filterMp4Only", data.value);
     });
-    
+
 
 
     // Erweiterungen:

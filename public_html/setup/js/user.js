@@ -1,5 +1,11 @@
 
 var userColorTimeout;
+var allCssColors;
+var allUserSettingsFromBackground;
+
+function OptStartColors() {
+    // nothing to do
+}
 /**
  * Farbigen Block und Texteingabe zeichnen
  * @returns {undefined}
@@ -14,8 +20,9 @@ function PaintColorBlock()
     {
         return;
     }
+    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
     var userName = GetUserName();
-    GetAllUserSettings();
+ //   GetAllUserSettings();
 
     var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
     var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
@@ -227,4 +234,69 @@ function UpdateUserData()
             UpdateUserSettings(currentUserSettings.I, userRemark, selectedColor)
         }
     }
+}
+
+
+
+/**
+ * Sämtliche Usereinstellungen auslesen
+ * @returns {userEinstellungen}
+ */
+function GetAllUserSettings()
+{
+
+    chrome.runtime.sendMessage(
+            {
+                Action: "LoadUsers"
+            }, function(response)
+    {
+        allUserSettingsFromBackground = JSON.parse(response.AllUserSettings);
+    }
+    );
+}
+
+
+function hexToR(h) {
+    return parseInt((cutHex(h)).substring(0, 2), 16);
+}
+function hexToG(h) {
+    return parseInt((cutHex(h)).substring(2, 4), 16);
+}
+function hexToB(h) {
+    return parseInt((cutHex(h)).substring(4, 6), 16);
+}
+function cutHex(h) {
+    return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
+}
+
+function hexToRGB(hex)
+{
+    var r = hexToR(hex);
+    var g = hexToG(hex);
+    var b = hexToB(hex);
+    return [r, g, b];
+}
+
+function GetCssColors()
+{
+    var colors = [];
+    colors.push(AddToCssColor("76a7fa", "Mqc"));
+    colors.push(AddToCssColor("fbcb43", "Jqc"));
+    colors.push(AddToCssColor("e46f61", "WRa"));
+    colors.push(AddToCssColor("4dbfd9", "Tqc"));
+    colors.push(AddToCssColor("8cc474", "Hqc"));
+    colors.push(AddToCssColor("bc5679", "CVb"));
+    return colors;
+}
+
+
+function AddToCssColor(name, cssclass)
+{
+    var col = hexToRGB(name);
+
+    var colorData = new Object();
+    colorData.Name = name;
+    colorData.Color = "rgb(" + col[0] + ", " + col[1] + ", " + col[2] + ")";
+    colorData.CssClass = cssclass;
+    return colorData;
 }
