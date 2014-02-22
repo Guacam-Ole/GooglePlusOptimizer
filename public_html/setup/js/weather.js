@@ -1,3 +1,10 @@
+var weatherInterval;
+var enabledWeather;
+
+function OptStartWeather() {
+    // nothing to do
+}
+
 function StartWeather()
 {
     try
@@ -24,8 +31,7 @@ function StartWeather()
     }
 }
 
-var weatherInterval;
-var enabledWeather;
+
 function PingWeather()
 {
     if (enabledWeather === null || enabledWeather === undefined)
@@ -155,6 +161,18 @@ function GetWeatherImage(code, big)
 
 function ReplaceWeatherForeCast(forecast, unit)
 {
+        var weatherHtmlForecast =
+            "<div class=\"weatherForecast\">"
+            + "<div><span class=\"forecastDay\">__DAY__</span>"
+            + "<div>"
+            + "<div class=\"forecastImage\"><img src=\"__IMG__\" /></div>"
+            + "<div class=\"forecastTemp\">__TEMP__</div>"
+            + "<div class=\"clear\"></div>"
+            + "</div>"
+            + "<span class=\"forecastType\">__KIND__</span>"
+            + "</div>"
+            + "<div class=\"clear\"> </div>"
+            + "</div>";
     var forImage = GetWeatherImage(forecast.code, false);
     return weatherHtmlForecast
             .replace("__IMG__", forImage)
@@ -166,6 +184,24 @@ function ReplaceWeatherForeCast(forecast, unit)
 // Wetter-Widget füllen
 function UpdateWeather(id, woeid)
 {
+    var weatherHtmlTop =
+            "<div class=\"Ee fP Ue\" role=\"article\" style=\"height:380px\">"
+            + "<div class=\"weatherWrapper\">"
+            + "<div class=\"weatherDate\">__DATE__</div>"
+            + "<div class=\"weatherTitle\">__CITY__</div>"
+            + "<div>"
+            + "<div class=\"weatherImageBig\"><img src=\"__IMG__\" /></div>"
+            + "<div class =\"weatherValuesBig\">"
+            + "<div class=\"weatherKind\">__TODAY__</div>"
+            + "<div class =\"weatherTemp\">__TEMP__</div>"
+            + "<div class=\"weatherKind\" >__KIND__</div>"
+            + "</div>"
+            + "<div class =\"clear\"></div>"
+            + "<hr class =\"grau\" >"
+            + "</div>";
+
+    var weatherHtmlBottom = "</div></div>";
+
     try {
         console.log("weather widget update");
         now = new Date();
@@ -210,31 +246,3 @@ function UpdateWeather(id, woeid)
     }
 }
 
-var weatherHtmlTop =
-        "<div class=\"Ee fP Ue\" role=\"article\" style=\"height:380px\">"
-        + "<div class=\"weatherWrapper\">"
-        + "<div class=\"weatherDate\">__DATE__</div>"
-        + "<div class=\"weatherTitle\">__CITY__</div>"
-        + "<div>"
-        + "<div class=\"weatherImageBig\"><img src=\"__IMG__\" /></div>"
-        + "<div class =\"weatherValuesBig\">"
-        + "<div class=\"weatherKind\">__TODAY__</div>"
-        + "<div class =\"weatherTemp\">__TEMP__</div>"
-        + "<div class=\"weatherKind\" >__KIND__</div>"
-        + "</div>"
-        + "<div class =\"clear\"></div>"
-        + "<hr class =\"grau\" >"
-        + "</div>";
-var weatherHtmlForecast =
-        "<div class=\"weatherForecast\">"
-        + "<div><span class=\"forecastDay\">__DAY__</span>"
-        + "<div>"
-        + "<div class=\"forecastImage\"><img src=\"__IMG__\" /></div>"
-        + "<div class=\"forecastTemp\">__TEMP__</div>"
-        + "<div class=\"clear\"></div>"
-        + "</div>"
-        + "<span class=\"forecastType\">__KIND__</span>"
-        + "</div>"
-        + "<div class=\"clear\"> </div>"
-        + "</div>";
-var weatherHtmlBottom = "</div></div>";

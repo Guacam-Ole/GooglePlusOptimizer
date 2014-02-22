@@ -1,10 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 
 var counter = 0;
 var oldestDate;
@@ -21,33 +14,56 @@ var maxComments = 0;
 var trophyList = [];
 var continousStart = null;
 var one_day = 1000 * 60 * 60 * 24;
+var hasBild = false;
+var circleCounter = 0;
+var trekkieCount = 0;
+
+function OptStartTrophies() {
+    $(document).ready(function() {
+        $('#collectTrophy').click(function()
+        {
+            if (!$('.trophyDiv').is(":visible"))
+            {
+                GetAuth();
+                return false;
+            }
+        });
+
+        $('#whyAuth').click(function()
+        {
+            $('.trophyDivWhy').fadeToggle();
+            return false;
+        });
+
+        $('#closeInfo').click(function()
+        {
+            $('.trophyDivWhy').fadeOut();
+            return false;
+        });
+    });
+}
+
 
 
 function GetAuth()
 {
-    counter = 0;
-    oldestDate = null;
-    lastDate = null;
-    continous = 0;
-    maxContinous = 0;
-    messageCount = 0;
-    postCount = 0;
-    checkinCount = 0;
-    shareCount = 0;
-    maxShares = 0;
-    maxPlus = 0;
-    maxComments = 0;
-    trophyList = [];
-    chrome.identity.getAuthToken({'interactive': true}, function(token)
+    chrome.runtime.sendMessage(
+            {
+                Action: "GetToken"
+            }, function(response)
     {
+        var token = response.Result;
+
         if (token === null || token === undefined) {
             // und tschüss
+            alert("no token");
         }
-        $('.trophyDiv').show();
+        $('.trophyDiv').fadeIn();
+        console.log("token=" + token);
         GetCircleStatistics(null, token);
-
-
+        $('#collectTrophy').fadeOut();
     });
+    return false;
 }
 
 function CA2T(haystack, needle, trophy)
@@ -56,10 +72,7 @@ function CA2T(haystack, needle, trophy)
         A2T(trophy);
     }
 }
-var hasBild = false;
 
-var circleCounter = 0;
-var trekkieCount = 0;
 function GetCircleStatistics(pageToken, authToken)
 {
     $('#currentAction').html(chrome.i18n.getMessage("ReadingCircleData"));
@@ -498,25 +511,4 @@ function GetStatisticsProfile(authToken)
 }
 
 
-$(document).ready(function() {
-    $('#collectTrophy').click(function()
-    {
-        if (!$('.trophyDiv').is(":visible"))
-        {
-            $('.trophyDiv').fadeIn();
-            GetAuth();
-        }
-    });
 
-    $('#whyAuth').click(function()
-    {
-        $('.trophyDivWhy').fadeToggle();
-    });
-
-    $('#closeInfo').click(function()
-    {
-        $('.trophyDivWhy').fadeOut();
-    });
-
-
-});

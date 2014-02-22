@@ -28,6 +28,8 @@ var filterMp4Only;
 var showTrophies;
 var trophies;
 var showEmoticons;
+var columnCount;
+var lastWizardVersion;
 
 var domChangeAllowed = true;
 
@@ -46,38 +48,36 @@ $(document).ready(function()
     {
         LoadGoogle();
         CountColumns();
-    }
 
+        if (colorUsers)
+        {
+            OptStartColors();
+            allCssColors = GetCssColors();
+            GetAllUserSettings();
+        }
+        
+         if (NewWizardOptionsExist(lastWizardVersion)) {
+        $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
+            var htmlObject = $('<div/>').html(htmlWizard).contents();
+            $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
 
-    $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
-        var htmlObject = $('<div/>').html(htmlWizard).contents();
-        $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
-
-        $('#wizardStart').click(function() {
-
-            $.when(
-                    $.getScript(chrome.extension.getURL("./setup/js/jquery-1.10.2.min.js")),
-                    $.getScript(chrome.extension.getURL("./setup/js/jquery.tools.min.js")),
-                    $.getScript(chrome.extension.getURL("./setup/js/jquery.ui.widget.js")),
-                    $.getScript(chrome.extension.getURL("./setup/js/bootstrap-switch.min.js")),
-                    $.getScript(chrome.extension.getURL("./setup/js/jquery.tagsinput.js")),
-                    $.getScript(chrome.extension.getURL("./setup/js/wizard.js")),
-                    $.Deferred(function(deferred) {
-                        $(deferred.resolve);
-                    })
-                    ).done(function()
-            {
+            $('#wizardStart').click(function() {
                 $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
                 $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+
                 var wizz = $('<div id="loadhere">&nbsp;</div>');
                 $('body').prepend(wizz);
                 $('#loadhere').load(chrome.extension.getURL("setup/de/wizard.html"), function() {
-                    InitWizard();
-                    console.log('Load was performed.');
+                    InitWizard(lastWizardVersion);
+                    OptStartTrophies();
+                    console.log('Wizard loaded');
                 });
             });
         });
-    });
+    }
+    }
+    // chrome.tabs.executeScript(null, {file: "setup/js/wizard.js"});
+   
 });
 
 
@@ -118,110 +118,34 @@ function LoadGoogle()
     // Wetter checken:
     if (wetter !== null && wetter !== undefined)
     {
-        // Mindestens ein Wetter-Widget ausgewählt
-        $.getScript(chrome.extension.getURL("./setup/js/weather.js"), function() {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
-            StartWeather();
-            console.log("weather loaded.");
-        });
-
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
+        OptStartWeather();
+        StartWeather();
+        console.log("weather loaded.");
     }
-
-
 
     if (soccer !== null && soccer !== undefined)
     {
-        $.getScript(chrome.extension.getURL("./setup/js/fussball.js"), function() {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
-            StartSoccer();
-            console.log("fuss loaded.");
-        });
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
+        OptStartSoccer();
+        StartSoccer();
+        console.log("sport loaded.");
     }
 
-    $.getScript(chrome.extension.getURL("./setup/js/user.js"), function() {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
-        allCssColors = GetCssColors();
-        if (1)  // Bedingung UserPaint
-        {
-            GetAllUserSettings();
 
-
-        }
-        console.log("colorblock loaded.");
-    });
 
     if (clock !== null && clock !== undefined)
     {
-        $.when(
-                $.getScript(chrome.extension.getURL("./setup/js/jquery-1.10.2.min.js")),
-                $.getScript(chrome.extension.getURL("./setup/js/clock.js")),
-                $.Deferred(function(deferred) {
-                    $(deferred.resolve);
-                })
-                ).done(function()
-        {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
-            CreateBlock(JSON.parse(clock) + 1, "clock");
-            InitTimer();
-            // StartTimer(clock);
-            console.log("clock loaded.");
-            //place your code here, the scripts are all loaded
-        });
+        OptStartClock();
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
+        CreateBlock(JSON.parse(clock) + 1, "clock");
+        InitTimer();
+        console.log("clock loaded.");
     }
 }
 
-var allCssColors;
-var allUserSettingsFromBackground;
 
-/**
- * Sämtliche Usereinstellungen auslesen
- * @returns {userEinstellungen}
- */
-function GetAllUserSettings()
-{
 
-    chrome.runtime.sendMessage(
-            {
-                Action: "LoadUsers"
-            }, function(response)
-    {
-        allUserSettingsFromBackground = JSON.parse(response.AllUserSettings);
-    }
-    );
-}
-
-function hexToR(h) {
-    return parseInt((cutHex(h)).substring(0, 2), 16);
-}
-function hexToG(h) {
-    return parseInt((cutHex(h)).substring(2, 4), 16);
-}
-function hexToB(h) {
-    return parseInt((cutHex(h)).substring(4, 6), 16);
-}
-function cutHex(h) {
-    return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
-}
-
-function hexToRGB(hex)
-{
-    var r = hexToR(hex);
-    var g = hexToG(hex);
-    var b = hexToB(hex);
-    return [r, g, b];
-}
-
-function GetCssColors()
-{
-    var colors = [];
-    colors.push(AddToCssColor("76a7fa", "Mqc"));
-    colors.push(AddToCssColor("fbcb43", "Jqc"));
-    colors.push(AddToCssColor("e46f61", "WRa"));
-    colors.push(AddToCssColor("4dbfd9", "Tqc"));
-    colors.push(AddToCssColor("8cc474", "Hqc"));
-    colors.push(AddToCssColor("bc5679", "CVb"));
-    return colors;
-}
 
 function CountColumns()
 {
@@ -240,16 +164,6 @@ function CountColumns()
     }
 }
 
-function AddToCssColor(name, cssclass)
-{
-    var col = hexToRGB(name);
-
-    var colorData = new Object();
-    colorData.Name = name;
-    colorData.Color = "rgb(" + col[0] + ", " + col[1] + ", " + col[2] + ")";
-    colorData.CssClass = cssclass;
-    return colorData;
-}
 
 // Filter-Aktionen
 function StartFilter()
@@ -410,6 +324,7 @@ function StartFilter()
             $('.Xx.xJ:contains(' + fulltext + ')').closest("[role='article']").hide();
         });
     }
+
     if (colorUsers)
     {
         PaintForUser();
@@ -418,19 +333,15 @@ function StartFilter()
 
     if (showTrophies)
     {
-        // Trophäen anzeigen
-        $.getScript(chrome.extension.getURL("./setup/js/trophydisplay.js"), function() {
-            DrawTrophies();
-        });
+        OptStartTrophyDisplay();
+        DrawTrophies();
     }
 
     if (showEmoticons)
     {
-        $.getScript(chrome.extension.getURL("./setup/js/smilies.js"), function() {
-            PaintEmoticons();
-        });
+        OptStartEmoticons();
+        PaintEmoticons();
     }
-
 }
 
 // Einstellungen Laden
@@ -480,6 +391,7 @@ function GetSettingsFromBackground()
         filterMp4Only = response.FilterMp4Only;
         showTrophies = response.DisplayTrophy;
         showEmoticons = response.ShowEmoticons;
+        lastWizardVersion = response.lastWizard;
         trophies = response.Trophies || null;
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
