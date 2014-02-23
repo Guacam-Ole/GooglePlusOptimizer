@@ -2,11 +2,12 @@ var enabledSoccer;
 var soccerInterval;
 
 function OptStartSoccer() {
-    // Noting to do
+    console.log("sport started");
 }
 
-
-
+/**
+ * Sportwidget starten
+ */
 function StartSoccer()
 {
     try
@@ -38,7 +39,9 @@ function StartSoccer()
 
 
 
-// Fußball-Block aktualisieren
+/**
+ * Sportblock aktualisieren
+ */
 function PingSoccer()
 {
     if (enabledSoccer === null || enabledSoccer === undefined)
@@ -62,9 +65,12 @@ function PingSoccer()
 
 
 
-
-
-// Fußball-Widget füllen
+/**
+ * Sport-Widget zeichnen 
+ * @param {int} id  Id des Blocks
+ * @param {string} league Liga
+ * @param {string} season Saison
+ */
 function UpdateSoccer(id, league, season)
 {
     var soccerTop = "<table class=\"NeuesVomSpocht\" width=\"100%\">"

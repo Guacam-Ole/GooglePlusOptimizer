@@ -30,9 +30,7 @@ var trophies;
 var showEmoticons;
 var columnCount;
 var lastWizardVersion;
-
 var domChangeAllowed = true;
-
 if (document.title.indexOf("Google+") !== -1)
 {
     InitGoogle();
@@ -48,59 +46,64 @@ $(document).ready(function()
     {
         LoadGoogle();
         CountColumns();
-
         if (colorUsers)
         {
             OptStartColors();
-            allCssColors = GetCssColors();
-            GetAllUserSettings();
         }
-        
-         if (NewWizardOptionsExist(lastWizardVersion)) {
-        $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
-            var htmlObject = $('<div/>').html(htmlWizard).contents();
-            $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
-
-            $('#wizardStart').click(function() {
-                $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
-                $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
-
-                var wizz = $('<div id="loadhere">&nbsp;</div>');
-                $('body').prepend(wizz);
-                $('#loadhere').load(chrome.extension.getURL("setup/de/wizard.html"), function() {
-                    InitWizard(lastWizardVersion);
-                    OptStartTrophies();
-                    console.log('Wizard loaded');
+        DrawWizardTile();
+    }
+});
+/**
+ * Wizard-Kachel zeichnen
+ */
+function DrawWizardTile() {
+    try {
+        if (NewWizardOptionsExist(lastWizardVersion)) {
+            $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
+                var htmlObject = $('<div/>').html(htmlWizard).contents();
+                $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+                $('#wizardStart').click(function() {
+                    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
+                    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                    var wizz = $('<div id="loadhere">&nbsp;</div>');
+                    $('body').prepend(wizz);
+                    $('#loadhere').load(chrome.extension.getURL("setup/de/wizard.html"), function() {
+                        InitWizard(lastWizardVersion);
+                        OptStartTrophies();
+                        console.log('Wizard loaded');
+                    });
                 });
             });
-        });
+        }
+    } catch (ex) {
+        console.log(ex);
     }
-    }
-    // chrome.tabs.executeScript(null, {file: "setup/js/wizard.js"});
-   
-});
-
-
-// Initiale Aktionen beim Laden der G+-Seite:
-function InitGoogle()
-{
-    // TODO: Backgroundscript!
-    var interval = JSON.parse(localStorage.getItem("interval"));
-    if (interval === null || interval < 10)
-    {
-        interval = 500;
-    }
-    LoadSettingsLive();
-
-    chrome.extension.sendMessage("show_page_action");
 }
 
-//var changingTheDomMyself=false;
+/**
+ * Aktionen beim initialisieren der Seite
+ * @returns {undefined}
+ */
+function InitGoogle()
+{
+    try {
+        var interval = JSON.parse(localStorage.getItem("interval"));
+        if (interval === null || interval < 10)
+        {
+            interval = 500;
+        }
+        LoadSettingsLive();
+        chrome.extension.sendMessage("show_page_action");
+    } catch (ex) {
+        console.log(ex);
+    }
+}
 
-// Google-Aktionen, wenn DOM bereit
+/**
+ * Google+ - Aktionen, wenn DOM bereit
+ */
 function LoadGoogle()
 {
-
     console.log('G+Filter: Google+ - Filter initialisiert');
     StartFilter(); // Initial ausführen
 
@@ -114,68 +117,77 @@ function LoadGoogle()
         }
         timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)
     }, false);
+    DrawWidgets();
+}
 
-    // Wetter checken:
-    if (wetter !== null && wetter !== undefined)
-    {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
-        OptStartWeather();
-        StartWeather();
-        console.log("weather loaded.");
-    }
+function DrawWidgets() {
+    try {
+        // Wetter checken:
+        if (wetter !== null && wetter !== undefined)
+        {
+            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
+            OptStartWeather();
+            StartWeather();
+        }
 
-    if (soccer !== null && soccer !== undefined)
-    {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
-        OptStartSoccer();
-        StartSoccer();
-        console.log("sport loaded.");
-    }
+        if (soccer !== null && soccer !== undefined)
+        {
+            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
+            OptStartSoccer();
+            StartSoccer();
+        }
 
-
-
-    if (clock !== null && clock !== undefined)
-    {
-        OptStartClock();
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
-        CreateBlock(JSON.parse(clock) + 1, "clock");
-        InitTimer();
-        console.log("clock loaded.");
+        if (clock !== null && clock !== undefined)
+        {
+            OptStartClock();
+            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
+            CreateBlock(JSON.parse(clock) + 1, "clock");
+            InitTimer();
+        }
+    } catch (ex) {
+        console.log(ex);
     }
 }
 
 
-
-
+/**
+ * Spalten zählen
+ */
 function CountColumns()
 {
-    var $wrapper = $('.ona.Fdb.bsa');
-    if ($wrapper.length > 0)
-    {
-        var columns = $wrapper.find('.Ypa.jw.Yc.am').first().nextUntil(':not(.Ypa.jw.Yc.am)').addBack().length;
-        if (columns > 0)
+    try {
+        var $wrapper = $('.ona.Fdb.bsa');
+        if ($wrapper.length > 0)
         {
-            chrome.runtime.sendMessage(
-                    {
-                        Action: "SaveColumns", ParameterValue: columns}, function(response) {
+            var columns = $wrapper.find('.Ypa.jw.Yc.am').first().nextUntil(':not(.Ypa.jw.Yc.am)').addBack().length;
+            if (columns > 0)
+            {
+                chrome.runtime.sendMessage(
+                        {
+                            Action: "SaveColumns", ParameterValue: columns}, function(response) {
+                }
+                );
             }
-            );
         }
+    } catch (ex) {
+        console.log(ex);
     }
 }
 
 
-// Filter-Aktionen
+/**
+ * Filteraktionen (bei jeder DOM-Änderung)
+ */
 function StartFilter()
 {
     if (!domChangeAllowed) {
+        // Es wird bereits eine Anpassung durchgeführt
         return;
     }
     setInterval(function() {
-        domChangeAllowed = true;
+        domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
     }, 5000);
     domChangeAllowed = false;
-
     if (filterPlus1)
     {
         $('.xv').closest("[role='article']").hide();
@@ -226,104 +238,10 @@ function StartFilter()
     {
         $('[data-iid="sii2:103"]').hide();
     }
-    if (filterHashTag)
-    {
 
-        // Einfügen von hinzufügen-Button
-        $('.zZ.a0').each(function(index, value)
-        {
-            if ($(this).find('a').length <= 1)
-            {
-                $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
-            }
-        });
-        if (propsHashtags !== null && propsHashtags !== "")
-        {
-            var hashTagArray = propsHashtags.split(',');
-            $.each(hashTagArray, function(i, hashTag)
-            {
-                if (hashTag.length > 1) {
-                    $('.zda.Zg:contains(' + hashTag + ')').closest("[role='article']").hide();
-                }
-            });
-        }
-
-        // Hashtag-Filter-Button geklickt
-        $('.removeHashTag').on("click", function()
-        {
-            console.log('Add Hashtag');
-            if (propsHashtags === null)
-            {
-                propsHashtags = "";
-            }
-            var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
-            if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
-            {
-                // Einmal reicht...
-                return;
-            }
-            propsHashtags += "," + newHashtag;
-            chrome.runtime.sendMessage(
-                    {
-                        Action: "SaveHashtags", ParameterValue: propsHashtags
-                    }, function(response) {
-            }
-            );
-            $(this).hide();
-            ShowNotification("success", "Hashtag wurde zum Filter hinzugefügt.", " Du wirst die nächste Zeit nichts mehr von " + newHashtag + " hören. Bitte Seite neu laden, um den Filter zu aktivieren.");
-            return false;
-        });
-    }
-
-    if (filterImages || filterLinks || filterVideo)
-    {
-        $('.unhideImage').click(function() {
-            $(this).parent().find('.hidewrapper').show();
-
-            $(this).remove();
-            return false;
-        }
-        );
-    }
-    if (filterImages && filterLinks && filterVideo && !filterGifOnly)
-    {
-        // Alles filtern
-        $('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayContent") + "</a>");
-    } else
-    {
-        if (filterVideo)
-        {
-            if (filterMp4Only) {
-                $('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
-            } else {
-
-                $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
-            }
-        }
-        if (filterLinks)
-        {
-            $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
-        }
-        if (filterImages)
-        {
-            if (filterGifOnly)
-            {
-                $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
-                $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
-            } else {
-                $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
-            }
-        }
-    }
-
-    if (filterCustom && propsFulltext !== null && propsFulltext !== "")
-    {
-        var textArray = propsFulltext.split(',');
-        $.each(textArray, function(i, fulltext)
-        {
-            $('.Xx.xJ:contains(' + fulltext + ')').closest("[role='article']").hide();
-        });
-    }
+    DOMFilterHashtags();
+    DOMFilterImages();  
+    DOMFilterFreetext();
 
     if (colorUsers)
     {
@@ -344,22 +262,138 @@ function StartFilter()
     }
 }
 
-// Einstellungen Laden
-function LoadSettingsLive()
-{
-    GetSettingsFromBackground();
-    anyFilterEnabled = filterPlus1 || filterYouTube || filterWham || filterHashTag || filterCustom || filterCommunity || filterBirthday || filterPersons;
-    if (anyFilterEnabled)
+/**
+ * Volltextfilter
+ */
+function DOMFilterFreetext() {
+
+    if (filterCustom && propsFulltext !== null && propsFulltext !== "")
     {
-        console.log('G+Filter: Filter aktiv');
-    } else {
-        console.log('G+Filter: KEIN Filter aktiv!');
+        try {
+            var textArray = propsFulltext.split(',');
+            $.each(textArray, function(i, fulltext)
+            {
+                $('.Xx.xJ:contains(' + fulltext + ')').closest("[role='article']").hide();
+            });
+        } catch (ex) {
+            console.log(ex);
+        }
     }
 }
 
-// Einstellungen von filter.js holen
-function GetSettingsFromBackground()
-{
+/**
+ * Bilder, Videos und Links ausblenden
+ */
+function DOMFilterImages() {
+    try {
+        if (filterImages || filterLinks || filterVideo)
+        {
+            $('.unhideImage').click(function() {
+                $(this).parent().find('.hidewrapper').show();
+                $(this).remove();
+                return false;
+            }
+            );
+        }
+        if (filterImages && filterLinks && filterVideo && !filterGifOnly)
+        {
+            // Alles filtern
+            $('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayContent") + "</a>");
+        } else
+        {
+            if (filterVideo)
+            {
+                if (filterMp4Only) {
+                    $('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+                } else {
+
+                    $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+                }
+            }
+            if (filterLinks)
+            {
+                $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
+            }
+            if (filterImages)
+            {
+                if (filterGifOnly)
+                {
+                    $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                    $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                } else {
+                    $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                }
+            }
+        }
+    }
+    catch (ex) {
+        console.log(ex);
+    }
+}
+
+/**
+ * Hashtags filtern
+ */
+function DOMFilterHashtags() {
+    try {
+        if (filterHashTag)
+        {
+
+            // Einfügen von hinzufügen-Button
+            $('.zZ.a0').each(function(index, value)
+            {
+                if ($(this).find('a').length <= 1)
+                {
+                    $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
+                }
+            });
+            if (propsHashtags !== null && propsHashtags !== "")
+            {
+                var hashTagArray = propsHashtags.split(',');
+                $.each(hashTagArray, function(i, hashTag)
+                {
+                    if (hashTag.length > 1) {
+                        $('.zda.Zg:contains(' + hashTag + ')').closest("[role='article']").hide();
+                    }
+                });
+            }
+
+            // Hashtag-Filter-Button geklickt
+            $('.removeHashTag').on("click", function()
+            {
+                console.log('Add Hashtag');
+                if (propsHashtags === null)
+                {
+                    propsHashtags = "";
+                }
+                var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
+                if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
+                {
+                    // Einmal reicht...
+                    return;
+                }
+                propsHashtags += "," + newHashtag;
+                chrome.runtime.sendMessage(
+                        {
+                            Action: "SaveHashtags", ParameterValue: propsHashtags
+                        }, function(response) {
+                }
+                );
+                $(this).hide();
+                ShowNotification("success", "Hashtag wurde zum Filter hinzugefügt.", " Du wirst die nächste Zeit nichts mehr von " + newHashtag + " hören. Bitte Seite neu laden, um den Filter zu aktivieren.");
+                return false;
+            });
+        }
+    } catch (ex) {
+        console.log(ex);
+    }
+}
+
+/**
+ * Einstellungen von Backgroundscript laden 
+ */
+function LoadSettingsLive()
+{  
     chrome.runtime.sendMessage(
             {
                 Action: "LoadAll"
@@ -400,7 +434,11 @@ function GetSettingsFromBackground()
     );
 }
 
-// Beliebigen Block erzeugen
+/**
+ * Widget-Block zeichnen
+ * @param {int} position position der Spalte
+ * @param {string} id Id des Blocks
+ */
 function CreateBlock(position, id)
 {
     var wrapper = "<div  tabindex=\"-1\" class=\"nja\" id=\"" + id + "\"></div>";
@@ -413,11 +451,15 @@ function CreateBlock(position, id)
     }
 }
 
-
+/**
+ * Meldung anzeigen
+ * @param {string} notificationType Art der Meldung
+ * @param {string} title Titel
+ * @param {string} text Text
+ */
 function ShowNotification(notificationType, title, text)
 {
     var style = "position: relative;vertical-align: middle;left: 20px;top: 15px;padding-left: 20px;padding-right: 20px;padding-top:10px;padding-bottom:10px;background-color: ";
-
     switch (notificationType) {
         case "error":
             style += "#FF7F7F";
@@ -436,18 +478,17 @@ function ShowNotification(notificationType, title, text)
             break;
     }
     style += ";";
-
-
-
-
-    var messageBox = "<div id='gplusMessage' style=\"" + style + "\"><b>" + title + ":</b>" + text + "</div>";
+    var messageBox = "<div id='gplusMessage' class='gplusMessage' style=\"" + style + "\"><b>" + title + ":</b>" + text + "</div>";
     $('.Ima.Xic').append(messageBox);
-    $('#gplusMessage').click(function() {
+    $('.gplusMessage').click(function() {
         ClearNotification();
     });
     timeout = setTimeout(ClearNotification, 10000);
 }
 
+/**
+ * Meldung löschen
+ */
 function ClearNotification()
 {
     $("#gplusMessage").remove();

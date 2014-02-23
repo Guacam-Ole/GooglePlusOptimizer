@@ -1,25 +1,33 @@
 $(document).ready(function()
 {
-    $(function() {
-        $("#accordion").accordion();
-    });
-    $(function() {
-        $("#accordion2").accordion();
-    });
-    FillSportData();
-    FillWeatherData();
     try {
-        OptStartTrophies();
+        $(function() {
+            $("#accordion").accordion();
+        });
+        $(function() {
+            $("#accordion2").accordion();
+        });
+        FillSportData();
+        FillWeatherData();
+        try {
+            OptStartTrophies();
+        } catch (ex) {
+        }
+        $('#clockPos').change(function()
+        {
+            localStorage.setItem("StoppWatch", $("#clockPos").val());
+        });
     } catch (ex) {
+        console.log(ex);
     }
-    $('#clockPos').change(function()
-    {
-        localStorage.setItem("StoppWatch", $("#clockPos").val());
-    });
 });
 $(function() {
     $(".dial").knob();
 });
+
+/**
+ * Wetterdaten
+ */
 function FillWeatherData() {
     $('.searchWeather').click(function()
     {
@@ -58,19 +66,28 @@ function FillWeatherData() {
         }
     });
 }
+
+/**
+ * Sportdaten
+ */
 function FillSportData()
 {
+
     //GetAllSports
     $completeUrl = "http://www.nocarrier.de/opendb.php?command=GetAllSports";
     $.getJSON($completeUrl, function(data)
     {
-        $('select.sportType').children().remove();
-        $('select.sportType').append("<option value='null'>(bitte wählen)</option>");
-        for (var i in data.Sport)
-        {
-            var id = data.Sport[i].sportsID;
-            var name = data.Sport[i].sportsName;
-            $('select.sportType').append("<option value='" + id + "'>" + name + "</option>");
+        try {
+            $('select.sportType').children().remove();
+            $('select.sportType').append("<option value='null'>(bitte wählen)</option>");
+            for (var i in data.Sport)
+            {
+                var id = data.Sport[i].sportsID;
+                var name = data.Sport[i].sportsName;
+                $('select.sportType').append("<option value='" + id + "'>" + name + "</option>");
+            }
+        } catch (ex) {
+            console.log(ex);
         }
     });
     $('select.sportType').change(function()
@@ -80,28 +97,32 @@ function FillSportData()
         $completeUrl = "http://www.nocarrier.de/opendb.php?command=GetLeagues&sport=" + $(this).val();
         $.getJSON($completeUrl, function(data)
         {
-            leagueCombo.children().remove();
-            var dictLeagues = {};
-            var leagueNames = new Array();
-            now = new Date();
-            for (var i in data.League)
-            {
-                var id = data.League[i].leagueShortcut;
-                var name = data.League[i].leagueName;
-                var league = JSON.parse(data.League[i].leagueSaison);
-                var savedYear = dictLeagues[id];
-                if (league === now.getFullYear() || league === now.getFullYear() - 1)
+            try {
+                leagueCombo.children().remove();
+                var dictLeagues = {};
+                var leagueNames = new Array();
+                now = new Date();
+                for (var i in data.League)
                 {
-                    if (savedYear === null || savedYear === undefined || savedYear < league)
+                    var id = data.League[i].leagueShortcut;
+                    var name = data.League[i].leagueName;
+                    var league = JSON.parse(data.League[i].leagueSaison);
+                    var savedYear = dictLeagues[id];
+                    if (league === now.getFullYear() || league === now.getFullYear() - 1)
                     {
-                        dictLeagues[id] = league;
-                        leagueNames[id] = name;
+                        if (savedYear === null || savedYear === undefined || savedYear < league)
+                        {
+                            dictLeagues[id] = league;
+                            leagueNames[id] = name;
+                        }
                     }
                 }
-            }
-            for (var id in dictLeagues)
-            {
-                leagueCombo.append("<option value='" + id + "|" + dictLeagues[id] + "'>" + leagueNames[id] + "</option>");
+                for (var id in dictLeagues)
+                {
+                    leagueCombo.append("<option value='" + id + "|" + dictLeagues[id] + "'>" + leagueNames[id] + "</option>");
+                }
+            } catch (ex) {
+                console.log(ex);
             }
         });
         leagueCombo.attr('disabled', false);
@@ -109,7 +130,9 @@ function FillSportData()
     return false;
 }
 
-// Bild-Events erzeugen
+/**
+ * Clickbilder-Events erzeugen
+ */
 function CreateImageEvents()
 {
     $("#filterPlus").click(function()
@@ -156,15 +179,14 @@ function CreateImageEvents()
     {
         SaveSwitch("filterLinks", "#filterLinks", "filterurl");
     });
-
-
-
 }
 
 
 
 
-// Tags hinzufügen und entfernen
+/**
+ * Tags-Eingaben
+ */
 function handleTagsInput()
 {
     if (!jQuery().tagsInput)
@@ -190,24 +212,28 @@ function handleTagsInput()
                 width: 'auto',
                 'onAddTag': function()
                 {
-                    var hashTags = $('#hashtags').val();
-                    $('#hashtags').val("");
-                    // Prüfen, ob alle Einträge eine Raute besitzen:
-                    var hashTagArray = hashTags.split(',');
-                    $.each(hashTagArray, function(i, hashTag)
-                    {
-                        var tmp;
-                        if ($('#hashtags').val() !== '')
+                    try {
+                        var hashTags = $('#hashtags').val();
+                        $('#hashtags').val("");
+                        // Prüfen, ob alle Einträge eine Raute besitzen:
+                        var hashTagArray = hashTags.split(',');
+                        $.each(hashTagArray, function(i, hashTag)
                         {
-                            tmp = $('#hashtags').val() + ",";
+                            var tmp;
+                            if ($('#hashtags').val() !== '')
+                            {
+                                tmp = $('#hashtags').val() + ",";
+                                $('#hashtags').val(tmp);
+                            }
+                            hashTag = "#" + hashTag.trim().replace("#", "");
+                            tmp = $('#hashtags').val() + hashTag;
                             $('#hashtags').val(tmp);
-                        }
-                        hashTag = "#" + hashTag.trim().replace("#", "");
-                        tmp = $('#hashtags').val() + hashTag;
-                        $('#hashtags').val(tmp);
-                    });
-                    // Speichern der geänderten Werte
-                    SaveString("hashTags", $('#hashtags').val());
+                        });
+                        // Speichern der geänderten Werte
+                        SaveString("hashTags", $('#hashtags').val());
+                    } catch (ex) {
+                        console.log(ex);
+                    }
                 },
                 'onRemoveTag': function()
                 {
@@ -225,18 +251,21 @@ function handleTagsInput()
  */
 function LoadCheckBox(propertyName, boxName, defaultValue)
 {
-    if (defaultValue === undefined)
-    {
-        defaultValue = "false";
-    }
-    var oldValue = localStorage.getItem(propertyName);
-    if (oldValue === null || oldValue === "undefined")
-    {
-        oldValue = defaultValue;
-    }
+    try {
+        if (defaultValue === undefined)
+        {
+            defaultValue = "false";
+        }
+        var oldValue = localStorage.getItem(propertyName);
+        if (oldValue === null || oldValue === "undefined")
+        {
+            oldValue = defaultValue;
+        }
 
-    boxName.bootstrapSwitch('setState', JSON.parse(oldValue));
-
+        boxName.bootstrapSwitch('setState', JSON.parse(oldValue));
+    } catch (ex) {
+        console.log(ex);
+    }
 }
 
 /**
@@ -312,129 +341,140 @@ function SaveSwitch(propertyName, imageId, imageSrc)
     }
 }
 
-// Erweiterte Einstellungen (Tags) laden
+/**
+ * Erweiterte Einstellungen laden
+ */
 function LoadExtended()
 {
-// Localstorage:
-    $('#hashtags').val(localStorage.getItem("hashTags"));
-    $('#fulltext').val(localStorage.getItem("fulltext"));
-    $("#clockPos").val(localStorage.getItem("StoppWatch"));
-    var columns = localStorage.getItem("columns");
-    if (columns === null || columns === undefined)
-    {
-        columns = 3;
-    } else {
-        columns = JSON.parse(columns);
-    }
-
-    if ($('.sportPosition').length > 0)
-    {
-        $('.sportPosition').empty();
-        $('.weatherPosition').empty();
-        $('.clockPos').empty();
-        $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.sportPosition');
-        $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.weatherPosition');
-        $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.clockPos');
-        if (columns === 1)
+    try {
+        $('#hashtags').val(localStorage.getItem("hashTags"));
+        $('#fulltext').val(localStorage.getItem("fulltext"));
+        $("#clockPos").val(localStorage.getItem("StoppWatch"));
+        var columns = localStorage.getItem("columns");
+        if (columns === null || columns === undefined)
         {
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.sportPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.weatherPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.clockPos');
+            columns = 3;
+        } else {
+            columns = JSON.parse(columns);
         }
-        else if (columns === 2)
-        {
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.sportPosition');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.weatherPosition');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.clockPos');
 
-        } else
+        if ($('.sportPosition').length > 0)
         {
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
-            $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.sportPosition');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.weatherPosition');
-            $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.clockPos');
-            $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.sportPosition');
-            $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.weatherPosition');
-            $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.clockPos');
+            $('.sportPosition').empty();
+            $('.weatherPosition').empty();
+            $('.clockPos').empty();
+            $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.sportPosition');
+            $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.weatherPosition');
+            $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.clockPos');
+            if (columns === 1)
+            {
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.sportPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.weatherPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.clockPos');
+            }
+            else if (columns === 2)
+            {
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.sportPosition');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.weatherPosition');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.clockPos');
+
+            } else
+            {
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
+                $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.sportPosition');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.weatherPosition');
+                $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetMiddle")).appendTo('.clockPos');
+                $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.sportPosition');
+                $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.weatherPosition');
+                $("<option/>").val(2).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.clockPos');
+            }
         }
+    } catch (ex) {
+        console.log(ex);
     }
 }
 
-// Setup-Aktionmen, wenn DOM bereit
+/**
+ * Setup-Einstellungne, sobald DOM bereit
+ */
 function LoadSetup()
 {
-    console.log('G+Filter: Einstellungsseite');
-    var manifest = chrome.runtime.getManifest();
-    $('#version').html("Version " + manifest.version);
-    $('#title').html(manifest.name);
-    document.title = manifest.name + " Setup";
-    // Allgemeine Einstellungen
-    LoadSwitch("plus1", "#filterPlus", "plus1");
-    LoadSwitch("yt", "#filterYt", "yt");
-    LoadSwitch("wham", "#filterWham", "wham");
-    LoadSwitch("hashtag", "#filterHashtag", "hashtag");
-    LoadSwitch("custom", "#filterCustom", "custom");
-    LoadSwitch("community", "#filterCommunity", "community");
-    LoadSwitch("birthday", "#filterBirthday", "kuchen");
-    LoadSwitch("known", "#filterKnown", "hug");
-    LoadSwitch("filterImages", "#filterImages", "filterimage");
-    LoadSwitch("filterVideo", "#filterVideos", "filtervideo");
-    LoadSwitch("filterLinks", "#filterLinks", "filterurl");
+    try {
+        console.log('G+Filter: Einstellungsseite');
+        var manifest = chrome.runtime.getManifest();
+        $('#version').html("Version " + manifest.version);
+        $('#title').html(manifest.name);
+        document.title = manifest.name + " Setup";
+        // Allgemeine Einstellungen
+        LoadSwitch("plus1", "#filterPlus", "plus1");
+        LoadSwitch("yt", "#filterYt", "yt");
+        LoadSwitch("wham", "#filterWham", "wham");
+        LoadSwitch("hashtag", "#filterHashtag", "hashtag");
+        LoadSwitch("custom", "#filterCustom", "custom");
+        LoadSwitch("community", "#filterCommunity", "community");
+        LoadSwitch("birthday", "#filterBirthday", "kuchen");
+        LoadSwitch("known", "#filterKnown", "hug");
+        LoadSwitch("filterImages", "#filterImages", "filterimage");
+        LoadSwitch("filterVideo", "#filterVideos", "filtervideo");
+        LoadSwitch("filterLinks", "#filterLinks", "filterurl");
 
-    // Erweiterte Einstellungen:		
-    LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
-    LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
-    LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
-    LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
-    LoadCheckBox("colorUsers", $("#chkDisplayColors"));
-    LoadCheckBox("displayTrophy", $("#chkTrophies"));
-    LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
-    LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
-    LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
+        // Erweiterte Einstellungen:		
+        LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
+        LoadCheckBox("WHAMWhamUrl", $("#chkWhamUrl"));
+        LoadCheckBox("WHAMChristmasText", $("#chkChristmasText"));
+        LoadCheckBox("WHAMChristmasUrl", $("#chkChristmasUrl"));
+        LoadCheckBox("colorUsers", $("#chkDisplayColors"));
+        LoadCheckBox("displayTrophy", $("#chkTrophies"));
+        LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
+        LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
+        LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
 
-    //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
-    LoadExtended();
-    LoadWeather();
+        //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
+        LoadExtended();
+        LoadWeather();
 
 
 
-    var interval = JSON.parse(localStorage.getItem("interval"));
-    if (interval === null || interval < 10)
-    {
-        interval = 500;
+        var interval = JSON.parse(localStorage.getItem("interval"));
+        if (interval === null || interval < 10)
+        {
+            interval = 500;
+        }
+        $("#dialDelay").val(interval);
+        // Bild-Wechsel bei Click
+        $(".trigger").click(function()
+        {
+            $(".panel").toggle("fast");
+            $(this).toggleClass("active");
+            return false;
+        });
+        // Tooltip anzeigeb
+        $('.tooltip_button').tooltip(
+                {
+                    effect: 'fade',
+                    predelay: 400,
+                    position: 'top center',
+                    offset: [-30, 94]
+                });
+        handleTagsInput();
+        // Events erzeugen
+        CreateImageEvents();
+        CreateCheckboxEvents();
+        CreateTextboxEvents();
+        GetSportTypes();
+        SaveWeatherSettings();
+
+        $('#reactivateWizard').click(function() {
+            localStorage.setItem("lastWizard", "0");
+        });
+    } catch (ex) {
+        console.log(ex);
     }
-    $("#dialDelay").val(interval);
-    // Bild-Wechsel bei Click
-    $(".trigger").click(function()
-    {
-        $(".panel").toggle("fast");
-        $(this).toggleClass("active");
-        return false;
-    });
-    // Tooltip anzeigeb
-    $('.tooltip_button').tooltip(
-            {
-                effect: 'fade',
-                predelay: 400,
-                position: 'top center',
-                offset: [-30, 94]
-            });
-    handleTagsInput();
-    // Events erzeugen
-    CreateImageEvents();
-    CreateCheckboxEvents();
-    CreateTextboxEvents();
-    GetSportTypes();
-    SaveWeatherSettings();
-
-    $('#reactivateWizard').click(function() {
-          localStorage.setItem("lastWizard","0");
-    });
 }
 
 /**
@@ -456,84 +496,102 @@ function EnDisImage(id, image, enable)
     $(id).attr("src", filePath);
 }
 
+
+/**
+ * Sport-Speichern
+ */
 function GetSportTypes()
 {
     $('#saveSport').click(function()
     {
-        var sport1League = $('#cmbLeague1').val();
-        var sport2League = $('#cmbLeague2').val();
-        var sport3League = $('#cmbLeague3').val();
-        var sport1Sport = $('#sport1Sport').val();
-        var sport2Sport = $('#sport2Sport').val();
-        var sport3Sport = $('#sport3Sport').val();
-        var sport1Pos = $('#sport1Pos').val();
-        var sport2Pos = $('#sport2Pos').val();
-        var sport3Pos = $('#sport3Pos').val();
-        if (sport1League === "null" || sport1League === undefined || sport1League === "")
-        {
-            sport1League = "|";
-        }
-        if (sport2League === "null" || sport2League === undefined || sport2League === "")
-        {
-            sport2League = "|";
-            ;
-        }
-        if (sport3League === "null" || sport3League === undefined || sport3League === "")
-        {
-            sport3League = "|";
-            ;
-        }
+        try {
+            var sport1League = $('#cmbLeague1').val();
+            var sport2League = $('#cmbLeague2').val();
+            var sport3League = $('#cmbLeague3').val();
+            var sport1Sport = $('#sport1Sport').val();
+            var sport2Sport = $('#sport2Sport').val();
+            var sport3Sport = $('#sport3Sport').val();
+            var sport1Pos = $('#sport1Pos').val();
+            var sport2Pos = $('#sport2Pos').val();
+            var sport3Pos = $('#sport3Pos').val();
+            if (sport1League === "null" || sport1League === undefined || sport1League === "")
+            {
+                sport1League = "|";
+            }
+            if (sport2League === "null" || sport2League === undefined || sport2League === "")
+            {
+                sport2League = "|";
+                ;
+            }
+            if (sport3League === "null" || sport3League === undefined || sport3League === "")
+            {
+                sport3League = "|";
+                ;
+            }
 
-        var sport1Season = sport1League.split("|")[1];
-        var sport2Season = sport2League.split("|")[1];
-        var sport3Season = sport3League.split("|")[1];
-        var sport1League = sport1League.split("|")[0];
-        var sport2League = sport2League.split("|")[0];
-        var sport3League = sport3League.split("|")[0];
-        var sport1LeagueName = $('#cmbLeague1 option:selected').text();
-        var sport2LeagueName = $('#cmbLeague2 option:selected').text();
-        var sport3LeagueName = $('#cmbLeague3 option:selected').text();
-        var sport1SportName = $('#sport1Sport option:selected').text();
-        var sport2SportName = $('#sport1Sport option:selected').text();
-        var sport3SportName = $('#sport1Sport option:selected').text();
-        var sport1 = {Position: sport1Pos, SportName: sport1SportName, Sport: sport1Sport, League: sport1League, Season: sport1Season, LeagueName: sport1LeagueName};
-        var sport2 = {Position: sport2Pos, SportName: sport2SportName, Sport: sport2Sport, League: sport2League, Season: sport2Season, LeagueName: sport2LeagueName};
-        var sport3 = {Position: sport3Pos, SportName: sport3SportName, Sport: sport3Sport, League: sport3League, Season: sport3Season, LeagueName: sport3LeagueName};
-        var sportSetting = new Array();
-        sportSetting.push(sport1);
-        sportSetting.push(sport2);
-        sportSetting.push(sport3);
-        localStorage.setItem("Sport", JSON.stringify(sportSetting));
-        return false;
+            var sport1Season = sport1League.split("|")[1];
+            var sport2Season = sport2League.split("|")[1];
+            var sport3Season = sport3League.split("|")[1];
+            var sport1League = sport1League.split("|")[0];
+            var sport2League = sport2League.split("|")[0];
+            var sport3League = sport3League.split("|")[0];
+            var sport1LeagueName = $('#cmbLeague1 option:selected').text();
+            var sport2LeagueName = $('#cmbLeague2 option:selected').text();
+            var sport3LeagueName = $('#cmbLeague3 option:selected').text();
+            var sport1SportName = $('#sport1Sport option:selected').text();
+            var sport2SportName = $('#sport1Sport option:selected').text();
+            var sport3SportName = $('#sport1Sport option:selected').text();
+            var sport1 = {Position: sport1Pos, SportName: sport1SportName, Sport: sport1Sport, League: sport1League, Season: sport1Season, LeagueName: sport1LeagueName};
+            var sport2 = {Position: sport2Pos, SportName: sport2SportName, Sport: sport2Sport, League: sport2League, Season: sport2Season, LeagueName: sport2LeagueName};
+            var sport3 = {Position: sport3Pos, SportName: sport3SportName, Sport: sport3Sport, League: sport3League, Season: sport3Season, LeagueName: sport3LeagueName};
+            var sportSetting = new Array();
+            sportSetting.push(sport1);
+            sportSetting.push(sport2);
+            sportSetting.push(sport3);
+            localStorage.setItem("Sport", JSON.stringify(sportSetting));
+            return false;
+        } catch (ex) {
+            console.log(ex);
+        }
     });
     LoadSport();
 }
 
+/**
+ * Wetter klick
+ */
 function SaveWeatherSettings()
 {
     $('#saveWeather').click(function()
     {
-        var weather1Id = $('#weather1Ort').val();
-        var weather2Id = $('#weather2Ort').val();
-        var weather3Id = $('#weather3Ort').val();
-        var weather1Name = $('#weather1Ort option:selected').text();
-        var weather2Name = $('#weather2Ort option:selected').text();
-        var weather3Name = $('#weather3Ort option:selected').text();
-        var weather1Pos = $('#weather1Pos').val();
-        var weather2Pos = $('#weather2Pos').val();
-        var weather3Pos = $('#weather3Pos').val();
-        var weather1 = {Position: weather1Pos, Id: weather1Id, Text: weather1Name};
-        var weather2 = {Position: weather2Pos, Id: weather2Id, Text: weather2Name};
-        var weather3 = {Position: weather3Pos, Id: weather3Id, Text: weather3Name};
-        var weatherSetting = new Array();
-        weatherSetting.push(weather1);
-        weatherSetting.push(weather2);
-        weatherSetting.push(weather3);
-        localStorage.setItem("Weather", JSON.stringify(weatherSetting));
-        return false;
+        try {
+            var weather1Id = $('#weather1Ort').val();
+            var weather2Id = $('#weather2Ort').val();
+            var weather3Id = $('#weather3Ort').val();
+            var weather1Name = $('#weather1Ort option:selected').text();
+            var weather2Name = $('#weather2Ort option:selected').text();
+            var weather3Name = $('#weather3Ort option:selected').text();
+            var weather1Pos = $('#weather1Pos').val();
+            var weather2Pos = $('#weather2Pos').val();
+            var weather3Pos = $('#weather3Pos').val();
+            var weather1 = {Position: weather1Pos, Id: weather1Id, Text: weather1Name};
+            var weather2 = {Position: weather2Pos, Id: weather2Id, Text: weather2Name};
+            var weather3 = {Position: weather3Pos, Id: weather3Id, Text: weather3Name};
+            var weatherSetting = new Array();
+            weatherSetting.push(weather1);
+            weatherSetting.push(weather2);
+            weatherSetting.push(weather3);
+            localStorage.setItem("Weather", JSON.stringify(weatherSetting));
+            return false;
+        } catch (ex) {
+            console.log(ex);
+        }
     });
 }
 
+/**
+ * Wetter laden
+ */
 function LoadWeather()
 {
     var weatherSetting = JSON.parse(localStorage.getItem("Weather"));
@@ -550,6 +608,9 @@ function LoadWeather()
     }
 }
 
+/** 
+ * Sport laden
+ */
 function LoadSport()
 {
     var sportSetting = JSON.parse(localStorage.getItem("Sport"));
@@ -571,8 +632,9 @@ function LoadSport()
     }
 }
 
-/************** SETUP **************/
-// Interval geändert
+/**
+ * Delay-Knob
+ */
 function CreateTextboxEvents()
 {
     $("#dialDelay").knob(
@@ -592,7 +654,9 @@ function CreateTextboxEvents()
             });
 }
 
-// Checkbox-Events erzeugen
+/**
+ * Checkbox-Events
+ */
 function CreateCheckboxEvents()
 {
     // Filter:
@@ -621,8 +685,6 @@ function CreateCheckboxEvents()
         SaveCheckBox("filterMp4Only", data.value);
     });
 
-
-
     // Erweiterungen:
     $("#chkDisplayColors").on('switch-change', function(e, data)
     {
@@ -636,6 +698,5 @@ function CreateCheckboxEvents()
     {
         SaveCheckBox("showEmoticons", data.value);
     });
-
 }
 
