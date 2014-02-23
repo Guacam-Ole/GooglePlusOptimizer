@@ -130,6 +130,7 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("filterMp4Only",request.filterMp4Only);
                 localStorage.setItem("displayTrophy",request.displayTrophy);
                 localStorage.setItem("trophies",request.trophies);
+                localStorage.setItem("lastTrophyRead",request.lastTrophyRead);
                 localStorage.setItem("showEmoticons",request.showEmoticons);
                 
                 sendResponse({Result: "Settings Saved."});
@@ -166,6 +167,7 @@ chrome.runtime.onMessage.addListener(
                 var trophies = localStorage.getItem("trophies");
                 var showEmoticons = localStorage.getItem("showEmoticons");
                 var lastWizard=localStorage.getItem("lastWizard");
+                var lastTrophyRead=localStorage.getItem("lastTrophyRead");
 
                 var interval = JSON.parse(localStorage.getItem("interval"));
                 if (interval === null || interval < 10)
@@ -222,6 +224,7 @@ chrome.runtime.onMessage.addListener(
                     Wetter: wetter,
                     Interval: interval,
                     Stoppwatch: stoppwatch,  
+                    LastTrophyRead:lastTrophyRead,
                     lastWizard:lastWizard,
                     Result: "Settings loaded."
                 });

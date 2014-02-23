@@ -239,6 +239,7 @@ function SaveTrophies() {
         }
 
         localStorage.setItem("trophies", JSON.stringify(newTrophies));
+        localStorage.setItem("lastTrophyRead", Date.today());
     } catch (ex) {
         console.log(ex);
     }
@@ -264,6 +265,7 @@ function CollectCircleStatisticsFinal(token)
  */
 function GetActivityStatistics(pageToken, authToken)
 {
+    oldestDate = Date.today();
     try {
         $('#currentAction').html(chrome.i18n.getMessage("ReadingPublicStream"));
         if (pageToken === undefined || pageToken === null) {
