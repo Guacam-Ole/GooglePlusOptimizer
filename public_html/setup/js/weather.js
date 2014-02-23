@@ -2,9 +2,12 @@ var weatherInterval;
 var enabledWeather;
 
 function OptStartWeather() {
-    // nothing to do
+    console.log("weather started.");
 }
 
+/**
+ * Wetter starten
+ */
 function StartWeather()
 {
     try
@@ -31,7 +34,9 @@ function StartWeather()
     }
 }
 
-
+/**
+ * Wetter aktualisieren
+ */
 function PingWeather()
 {
     if (enabledWeather === null || enabledWeather === undefined)
@@ -159,6 +164,12 @@ function GetWeatherImage(code, big)
     return prefix + "/" + fname + ".png";
 }
 
+/**
+ * Vorhersage in Bilder wandeln
+ * @param {string} forecast Vorhersagetoken
+ * @param {string} unit Einheit
+ * @returns {String} Vorhersageblock
+ */
 function ReplaceWeatherForeCast(forecast, unit)
 {
         var weatherHtmlForecast =
@@ -181,7 +192,11 @@ function ReplaceWeatherForeCast(forecast, unit)
             .replace("__KIND__", forecast.text);
 }
 
-// Wetter-Widget füllen
+/**
+ * Wetter-Widget füllen
+ * @param {string} id Id des Blocks
+ * @param {string} woeid Orts-ID
+ */
 function UpdateWeather(id, woeid)
 {
     var weatherHtmlTop =
