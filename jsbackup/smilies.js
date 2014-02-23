@@ -14,15 +14,12 @@ function PaintEmoticons() {
             + '{"img": "clap.gif","short": ":clap:"},'
             + '{"img": "confused.png","short": "?("},'
             + '{"img": "cool.png","short": "8)"},'
-            + '{"img": "cool.png","short": "8-)"},'  
             + '{"img": "crying.gif","short": ";("},'
-            + '{"img": "crying.gif","short": ";-("},'
             + '{"img": "essen.png","short": ":eat:"},'
             + '{"img": "gruebel.gif","short": ":think:"},'
             + '{"img": "handshake.gif","short": ":hs:"},'
             + '{"img": "help.png","short": ":help:"},'
             + '{"img": "kiss.gif","short": ":X"},'
-            + '{"img": "kiss.gif","short": ":-X"},'
             + '{"img": "knot.png","short": ":knot:"},'
             + '{"img": "love.png","short": ":love:"},'
             + '{"img": "love.png","short": "♡"},'
@@ -36,7 +33,6 @@ function PaintEmoticons() {
             + '{"img": "rofl.gif","short": ":rofl:"},'
             + '{"img": "rolleyes.png","short": ":rolleyes:"},'
             + '{"img": "sad.png","short": ":("},'
-            + '{"img": "sad.png","short": ":-("},'
             + '{"img": "pauli.gif","short": ":pauli:"},'
             + '{"img": "sad.png","short": "☹"},'
             + '{"img": "smile.png","short": ":)"},'
@@ -47,7 +43,6 @@ function PaintEmoticons() {
             + '{"img": "thumbsup.png","short": ":thumbsup:"},'
             + '{"img": "thumbup.png","short": ":thumb:"},'
             + '{"img": "tongue.png","short": ":P"},'
-            + '{"img": "tongue.png","short": ":-P"},'
             + '{"img": "winki.png","short": ";)"},'
             + '{"img": "winki.png","short": ";-)"},'
             + '{"img": "arghs.png","short": ":shocked:"},'
@@ -64,7 +59,7 @@ function PaintEmoticons() {
                 var smilie = smilies[i];
                 if ($(this).text().indexOf(smilie.short) >= 0)
                 {
-                    $(this).html($(this).html().replaceAll(smilie.short, "<img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
+                    $(this).html($(this).html().replaceAll(smilie.short, "<img src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
                 }
             }
         } catch (ex) {
