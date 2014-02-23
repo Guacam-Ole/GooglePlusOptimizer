@@ -58,8 +58,9 @@ $(document).ready(function()
  */
 function DrawWizardTile() {
     try {
+        var lang = chrome.i18n.getMessage("lang");
         if (NewWizardOptionsExist(lastWizardVersion)) {
-            $.get(chrome.extension.getURL("setup/de/wizardloader.html"), function(htmlWizard) {
+            $.get(chrome.extension.getURL("setup/"+lang+"/wizardloader.html"), function(htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
                 $('#wizardStart').click(function() {
@@ -67,7 +68,7 @@ function DrawWizardTile() {
                     $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
-                    $('#loadhere').load(chrome.extension.getURL("setup/de/wizard.html"), function() {
+                    $('#loadhere').load(chrome.extension.getURL("setup/"+lang+"/wizard.html"), function() {
                         InitWizard(lastWizardVersion);
                         OptStartTrophies();
                         console.log('Wizard loaded');
@@ -430,6 +431,7 @@ function LoadSettingsLive()
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
+        localStorage.setItem("lastTrophyRead",response.LastTrophyRead);
     }
     );
 }

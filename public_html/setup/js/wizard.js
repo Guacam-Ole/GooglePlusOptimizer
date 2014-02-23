@@ -585,6 +585,7 @@ function SaveWizardSportSettings() {
 function SaveWizardSettings()
 {
     trophies = localStorage.getItem("trophies");
+    var lastTrophyRead=localStorage.getItem("lastTrophyRead");
     filterWham = whamWhamText || whamWhamLink || whamChristmasText || whamChristmasLink;
     showTrophies = trophies !== null && trophies !== undefined && trophies.length > 0;
 
@@ -616,6 +617,7 @@ function SaveWizardSettings()
                 filterLinks: filterLinks,
                 trophies: trophies,
                 showEmoticons: showEmoticons,
+                lastTrophyRead:lastTrophyRead
             }, function(response) {
     }
     );
@@ -656,8 +658,8 @@ function DisplayStep(id, current, max) {
         var wizCategory = container.find('.category').text();
         var wizHeader = container.find('.heading').text();
 
-        //$('#wizardSubtitle').text(wizCategory);
-        $('.wizardImage img').attr('src', chrome.extension.getURL("setup/de/wizimg/" + wizImage));
+        var lang = chrome.i18n.getMessage("lang");
+        $('.wizardImage img').attr('src', chrome.extension.getURL("setup/"+lang+"/wizimg/" + wizImage));
         $('.wizardRight h3').text(wizHeader);
         $('#wr').empty();
 
