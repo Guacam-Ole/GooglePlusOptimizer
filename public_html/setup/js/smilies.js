@@ -26,13 +26,14 @@ function PaintEmoticons() {
             + '{"img": "love.png","short": "♥"},'
             + '{"img": "love.png","short": "❤"},'
             + '{"img": "party.png","short": ":*)"},'
-            + '{"img": "party.png","short": "\\\\o\\/"},'
-            + '{"img": "patsch.png","short": ":facepalm"},'
+            + '{"img": "cheer.gif","short": "\\\\o\\/"},'
+            + '{"img": "patsch.png","short": ":facepalm:"},'
             + '{"img": "pflaster.png","short": ":-#"},'
             + '{"img": "police.png","short": ":police:"},'
             + '{"img": "rofl.gif","short": ":rofl:"},'
             + '{"img": "rolleyes.png","short": ":rolleyes:"},'
             + '{"img": "sad.png","short": ":("},'
+            + '{"img": "pauli.gif","short": ":pauli:"},'
             + '{"img": "sad.png","short": "☹"},'
             + '{"img": "smile.png","short": ":)"},'
             + '{"img": "smile.png","short": ":-)"},'
@@ -44,9 +45,11 @@ function PaintEmoticons() {
             + '{"img": "tongue.png","short": ":P"},'
             + '{"img": "winki.png","short": ";)"},'
             + '{"img": "winki.png","short": ";-)"},'
+            + '{"img": "arghs.png","short": ":shocked:"},'
+            + '{"img": "arge.gif","short": ":mad:"},'
             + '{"img": "woot.png","short": "8o"}]';
 
-    var smilies = JSON.parse(emoticons);
+        var smilies = JSON.parse(emoticons);
 
     $('.Ct').each(function()
     {
