@@ -31,9 +31,19 @@ var showEmoticons;
 var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
+var waitForCircleBox;
+var waitForCircleDetails;
+var doShare = false;
+var lnk;
+var demoStart = false;
+
 if (document.title.indexOf("Google+") !== -1)
 {
     InitGoogle();
+}
+
+function IsDemo() {
+    return paramPos = document.location.search.indexOf("demoMode") > 0;
 }
 
 $(document).ready(function()
@@ -44,15 +54,31 @@ $(document).ready(function()
     }
     else if (document.title.indexOf("Google+") !== -1)
     {
-        LoadGoogle();
-        CountColumns();
-        if (colorUsers)
-        {
-            OptStartColors();
+        if (IsDemo) {
+            var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
+            $('.Ima.Xic').prepend(button);
+            $('#optimizerTest').click(function() {
+                demoStart = !demoStart;
+                StartUpGoogleFilter();
+                return false;
+            });
         }
-        DrawWizardTile();
+        StartUpGoogleFilter();
     }
 });
+
+function StartUpGoogleFilter() {
+    if (!IsDemo() || demoStart) {
+            LoadGoogle();
+            CountColumns();
+            if (colorUsers)
+            {
+                OptStartColors();
+            }
+            DrawWizardTile();
+        }
+}
+
 /**
  * Wizard-Kachel zeichnen
  */
@@ -60,15 +86,15 @@ function DrawWizardTile() {
     try {
         var lang = chrome.i18n.getMessage("lang");
         if (NewWizardOptionsExist(lastWizardVersion)) {
-            $.get(chrome.extension.getURL("setup/"+lang+"/wizardloader.html"), function(htmlWizard) {
+            $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function(htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
-                $('.Ypa.jw.Yc.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+                $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
                 $('#wizardStart').click(function() {
                     $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
                     $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
-                    $('#loadhere').load(chrome.extension.getURL("setup/"+lang+"/wizard.html"), function() {
+                    $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function() {
                         InitWizard(lastWizardVersion);
                         OptStartTrophies();
                         console.log('Wizard loaded');
@@ -123,6 +149,16 @@ function LoadGoogle()
 
 function DrawWidgets() {
     try {
+        if (wetter === "null") {
+            wetter = null;
+        }
+        if (soccer === "null") {
+            soccer = null;
+        }
+        if (clock === "null") {
+            clock = null;
+        }
+
         // Wetter checken:
         if (wetter !== null && wetter !== undefined)
         {
@@ -157,10 +193,10 @@ function DrawWidgets() {
 function CountColumns()
 {
     try {
-        var $wrapper = $('.ona.Fdb.bsa');
+        var $wrapper = $('.ona.Fdb');
         if ($wrapper.length > 0)
         {
-            var columns = $wrapper.find('.Ypa.jw.Yc.am').first().nextUntil(':not(.Ypa.jw.Yc.am)').addBack().length;
+            var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
             if (columns > 0)
             {
                 chrome.runtime.sendMessage(
@@ -181,6 +217,9 @@ function CountColumns()
  */
 function StartFilter()
 {
+    
+
+
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
         return;
@@ -191,41 +230,50 @@ function StartFilter()
     domChangeAllowed = false;
     if (filterPlus1)
     {
-        $('.xv').closest("[role='article']").hide();
+        $('.xv').closest("[jsmodel='XNmfOc']").hide();
     }
     if (filterYouTube)
     {
-        $('.SR').closest("[role='article']").hide();
+        $('.SR').closest("[jsmodel='XNmfOc']").hide();
     }
     if (filterWham)
     {
         if (whamWhamText)
         {
-            $('.Xx.xJ:contains("wham")').closest("[role='article']").hide();
-            $('.Xx.xJ:contains("Wham")').closest("[role='article']").hide();
-            $('.Xx.xJ:contains("WHAM")').closest("[role='article']").hide();
+            $('.Xx.xJ:contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamChristmasText)
         {
-            $('.Xx.xJ:contains("Last Christmas")').closest("[role='article']").hide();
-            $('.Xx.xJ:contains("last christmas")').closest("[role='article']").hide();
-            $('.Xx.xJ:contains("LastChristmas")').closest("[role='article']").hide();
-            $('.Xx.xJ:contains("lastchristmas")').closest("[role='article']").hide();
+            $('.Xx.xJ:contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamWhamLink)
         {
-            $('.yx.Nf:contains("wham")').closest("[role='article']").hide();
-            $('.yx.Nf:contains("Wham")').closest("[role='article']").hide();
-            $('.yx.Nf:contains("WHAM")').closest("[role='article']").hide();
+            $('.yx.Nf:contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamChristmasLink)
         {
-            $('.yx.Nf:contains("Last Christmas")').closest("[role='article']").hide();
-            $('.yx.Nf:contains("last christmas")').closest("[role='article']").hide();
-            $('.yx.Nf:contains("LastChristmas")').closest("[role='article']").hide();
-            $('.yx.Nf:contains("lastchristmas")').closest("[role='article']").hide();
+            $('.yx.Nf:contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
     }
+
+    var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
+    //$('[role="list"]').append(hinzu);
+    // Alle Auswahlmöglichkeiten bestimmen:
+
+
+
+
+
     if (filterCommunity)
     {
         $('[data-iid="sii2:112"]').hide();
@@ -241,7 +289,7 @@ function StartFilter()
     }
 
     DOMFilterHashtags();
-    DOMFilterImages();  
+    DOMFilterImages();
     DOMFilterFreetext();
 
     if (colorUsers)
@@ -274,7 +322,7 @@ function DOMFilterFreetext() {
             var textArray = propsFulltext.split(',');
             $.each(textArray, function(i, fulltext)
             {
-                $('.Xx.xJ:contains(' + fulltext + ')').closest("[role='article']").hide();
+                $('.Xx.xJ:contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
             });
         } catch (ex) {
             console.log(ex);
@@ -354,7 +402,7 @@ function DOMFilterHashtags() {
                 $.each(hashTagArray, function(i, hashTag)
                 {
                     if (hashTag.length > 1) {
-                        $('.zda.Zg:contains(' + hashTag + ')').closest("[role='article']").hide();
+                        $('.zda.Zg:contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();
                     }
                 });
             }
@@ -394,7 +442,7 @@ function DOMFilterHashtags() {
  * Einstellungen von Backgroundscript laden 
  */
 function LoadSettingsLive()
-{  
+{
     chrome.runtime.sendMessage(
             {
                 Action: "LoadAll"
@@ -431,9 +479,10 @@ function LoadSettingsLive()
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
-        localStorage.setItem("lastTrophyRead",response.LastTrophyRead);
+        localStorage.setItem("lastTrophyRead", response.LastTrophyRead);
     }
     );
+
 }
 
 /**
@@ -449,7 +498,8 @@ function CreateBlock(position, id)
         $('[data-iid="sii2:111"]').append(wrapper);
     } else
     {
-        $(".ona.Fdb.bsa .Ypa:nth-child(" + position + ")").prepend(wrapper);
+
+        $(".ona.Fdb .Ypa:nth-child(" + position + ")").prepend(wrapper);
     }
 }
 

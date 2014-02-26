@@ -21,6 +21,7 @@ function PaintEmoticons() {
             + '{"img": "gruebel.gif","short": ":think:"},'
             + '{"img": "handshake.gif","short": ":hs:"},'
             + '{"img": "help.png","short": ":help:"},'
+            + '{"img": "hand.gif","short": ":wink:"},'
             + '{"img": "kiss.gif","short": ":X"},'
             + '{"img": "kiss.gif","short": ":-X"},'
             + '{"img": "knot.png","short": ":knot:"},'

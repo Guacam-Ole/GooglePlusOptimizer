@@ -163,7 +163,7 @@ function PaintWatch()
         var clockWrapper = "<div style=\"height:300px;\" class=\"Ee fP Ue\" role=\"article\"><div class=\"a5 Gi\"><h3 class=\"EY Ni zj\"><span>" + chrome.i18n.getMessage("Stoppuhr") + "</span></h3>__CLOCKBLOCK__</div></div>";
         var secondTimer = "<div class=\"divSecond\"><input id=\"dialSeconds\" data-cursor=\"20\" class=\"knob\" data-width=\"132\" data-height=\"132\" data-thickness=\"0.22\" data-min=\"0\" data-max=\"59\" data-readOnly=\"true\" data-displayInput=\"false\" data-fgcolor=\"#999\" data-bgcolor=\"#FFFFFF\" value=\"0\" style=\"position: relative !important; margin-top: -300px !important; color:#999 !important;\" /></div>";
         var minuteTimer = "<div class=\"divMinute\"><input id=\"dialMinutes\" class=\"knob\" data-width=\"220\" data-height=\"220\" data-thickness=\"0.4\" data-min=\"0\" data-max=\"59\" data-readOnly=\"false\" data-fgcolor=\"#427fed\" data-bgcolor=\"#E5E5E5\" value=\"0\" style=\"position: relative !important; margin-top: -210px !important; color:\"#427fed\" !important;\" /></div>";
-        var clockButtons = "<button type=\"button\" class=\"topclock clockbtn\">Stoppuhr starten</button><button type=\"button\" class=\"bottomclock clockbtn\">Pause</button>";
+        var clockButtons = "<button type=\"button\" class=\"clockbtn topclock\">Stoppuhr starten</button><button type=\"button\" class=\"clockbtn bottomclock \">Pause</button>";
 
         var complete = clockWrapper.replace("__CLOCKBLOCK__", secondTimer + minuteTimer + clockButtons);
         $('#clock').append(complete);
