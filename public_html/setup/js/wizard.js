@@ -94,6 +94,10 @@ function InitWizard(version)
             return false;
         });
 
+
+        $('#reloadPage').click(function() {
+            window.location.reload(true);
+        });
         version = version || "0";
 
         //var version = window.location.search.substring(1) || "0";
@@ -585,7 +589,7 @@ function SaveWizardSportSettings() {
 function SaveWizardSettings()
 {
     trophies = localStorage.getItem("trophies");
-    var lastTrophyRead=localStorage.getItem("lastTrophyRead");
+    var lastTrophyRead = localStorage.getItem("lastTrophyRead");
     filterWham = whamWhamText || whamWhamLink || whamChristmasText || whamChristmasLink;
     showTrophies = trophies !== null && trophies !== undefined && trophies.length > 0;
 
@@ -617,7 +621,7 @@ function SaveWizardSettings()
                 filterLinks: filterLinks,
                 trophies: trophies,
                 showEmoticons: showEmoticons,
-                lastTrophyRead:lastTrophyRead
+                lastTrophyRead: lastTrophyRead
             }, function(response) {
     }
     );
@@ -659,7 +663,7 @@ function DisplayStep(id, current, max) {
         var wizHeader = container.find('.heading').text();
 
         var lang = chrome.i18n.getMessage("lang");
-        $('.wizardImage img').attr('src', chrome.extension.getURL("setup/"+lang+"/wizimg/" + wizImage));
+        $('.wizardImage img').attr('src', chrome.extension.getURL("setup/" + lang + "/wizimg/" + wizImage));
         $('.wizardRight h3').text(wizHeader);
         $('#wr').empty();
 
