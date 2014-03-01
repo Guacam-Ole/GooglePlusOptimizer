@@ -68,6 +68,19 @@ a:hover {
     letter-spacing:1px;
     font-weight:bold;
 }
+.dd-container {
+    float:left;
+    width:100px;
+}
+.removeDD {
+    float:left;
+    margin-top: 11px;
+}
+.inputDD {
+    width: 250px;
+    height: 475px;
+    float: left;
+}
 /*menu*/
 #menu { /*the container that holds the main menu*/
     height:49px;
@@ -905,7 +918,7 @@ div.tagsinput div { display:block; float: left; }
 .trophyDiv
 {
     width: 320px;
-      background-color: #d9edf7;
+    background-color: #d9edf7;
     border-color: #bce8f1;
     color: #31708f;
     border-style: solid;
@@ -917,7 +930,7 @@ div.tagsinput div { display:block; float: left; }
     padding-left: 20px;
     padding-right: 20px;
     z-index: 666;
-    
+
 }
 
 .trophyDivWhy
@@ -937,7 +950,123 @@ div.tagsinput div { display:block; float: left; }
     padding-right: 20px;
     z-index: 667;
 }
+.circlesLoaded
+{
+    width: 520px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 667;
+    display: none;
+}
+.circlesExplanation 
+{
+    width: 520px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 667;
+    display: none;
+}
+
+
 .trophyDivWhy h3
 {
     color: #31708f;
+}
+
+.iconSelectAll 
+{
+    //  position: relative;
+    vertical-align: middle;
+    float:top;
+    height:auto
+}
+
+.iconSelectAll .iconSelectCategory 
+{
+    // width: 48px;
+    vertical-align: middle;
+    float:top;
+    height: auto;
+    //background-color: lightgray;
+}
+
+.iconSelectAll .iconSelectCategory .category
+{
+    float: top;
+    height: auto;
+}
+
+.imgSelSize 
+{
+    padding-left: 0px;
+    padding-top: 0px;
+    height: 50px;
+    vertical-align: middle;
+    float: top;
+    height: auto;
+}
+
+.imgSelSize img {
+    vertical-align: middle;
+    border-width: 0px;  
+    margin-right: 5px;
+
+}
+
+.iconSelectAll .iconSelectCategory .category .categoryHeader
+{                              
+    border-style: solid;
+    border-width: 1px;
+    //border-bottom: 0px;
+    border-color: gray;         
+    display: none;
+    background-color: lightgray;
+    vertical-align: middle;
+    float:top;
+    height: auto;
+}
+.iconSelectAll .iconSelectCategory .category .categoryDetails
+{
+    float:top;
+    display: none;
+    background-color: lightgray;
+    height: auto;
+}
+.iconSelectAll .iconSelectCategory .category .categoryDetails .iconDescription
+{
+    float:left;
+}                              
+.listAllCircles {
+    display:none;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-width: 1px;
+    border-color: gray;
+    border-style: solid;
+    overflow: scroll;
+    
 }

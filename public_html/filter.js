@@ -72,18 +72,36 @@ chrome.runtime.onMessage.addListener(
             {
                 chrome.identity.getAuthToken({'interactive': true}, function(token)
                 {
-                    console.log("token:"+token);
+                    console.log("token:" + token);
                     sendResponse({Result: token});
                 });
                 return true;
             }
-
-            if (request.Action === "SaveColumns")
+            else if (request.Action==="SaveQS") 
+            {
+                localStorage.setItem("QuickShares", request.QuickShares);
+                sendResponse({Result: "Setting saved."});
+            }
+            else if (request.Action==="LoadQS") 
+            {
+                sendResponse({Result: localStorage.getItem("QuickShares")});
+            }
+            else if (request.Action === "LoadCircles")
+            {
+                var circles = localStorage.getItem("Circles") || null;
+                if (circles !== null) {
+                    circles = JSON.parse(circles);
+                } else {
+                    circles = [];
+                }
+                sendResponse({Result: circles});
+            }
+            else if (request.Action === "SaveColumns")
             {
                 localStorage.setItem("columns", request.ParameterValue);
                 sendResponse({Result: "Setting Saved."});
             }
-            if (request.Action === "SaveHashtags")
+            else if (request.Action === "SaveHashtags")
             {
                 // Hashtags speichern (Nach Live-Änderung in G+)
                 localStorage.setItem("hashTags", request.ParameterValue);
@@ -102,41 +120,44 @@ chrome.runtime.onMessage.addListener(
                     Result: "Settings loaded."
                 });
             }
-            else if (request.Action==="SaveWizardVersion") {
-                localStorage.setItem("lastWizard",request.ParameterValue);
+            else if (request.Action === "SaveCircles")
+            {
+                localStorage.setItem("Circles", request.ParameterValue);
             }
-            else if (request.Action==="SaveAll") {
-                localStorage.setItem("plus1",request.plus1);
-                localStorage.setItem("yt",request.yt);
-                localStorage.setItem("wham",request.wham);
-                localStorage.setItem("hashtag",request.hashtag);
-                localStorage.setItem("custom",request.custom);
-                localStorage.setItem("community",request.community);
-                localStorage.setItem("birthday",request.birthday);
-                localStorage.setItem("known",request.known);
-                localStorage.setItem("fulltext",request.fulltext);
-                localStorage.setItem("WHAMWhamText",request.WHAMWhamText);
-                localStorage.setItem("WHAMWhamUrl",request.WHAMWhamUrl);
-                localStorage.setItem("WHAMChristmasText",request.WHAMChristmasText);
-                localStorage.setItem("WHAMChristmasUrl",request.WHAMChristmasUrl);
-                localStorage.setItem("StoppWatch",request.StoppWatch);
-                localStorage.setItem("Sport",request.Sport);
-                localStorage.setItem("Weather",request.Weather);
-                localStorage.setItem("colorUsers",request.colorUsers);
-                localStorage.setItem("filterImages",request.filterImages);
-                localStorage.setItem("filterVideo",request.filterVideo);
-                localStorage.setItem("filterLinks",request.filterLinks);
-                localStorage.setItem("filterGifOnly",request.filterGifOnly);
-                localStorage.setItem("filterMp4Only",request.filterMp4Only);
-                localStorage.setItem("displayTrophy",request.displayTrophy);
-                localStorage.setItem("trophies",request.trophies);
-                localStorage.setItem("lastTrophyRead",request.lastTrophyRead);
-                localStorage.setItem("showEmoticons",request.showEmoticons);
-                
+            else if (request.Action === "SaveWizardVersion") {
+                localStorage.setItem("lastWizard", request.ParameterValue);
+            }
+            else if (request.Action === "SaveAll")
+            {
+                localStorage.setItem("plus1", request.plus1);
+                localStorage.setItem("yt", request.yt);
+                localStorage.setItem("wham", request.wham);
+                localStorage.setItem("hashtag", request.hashtag);
+                localStorage.setItem("custom", request.custom);
+                localStorage.setItem("community", request.community);
+                localStorage.setItem("birthday", request.birthday);
+                localStorage.setItem("known", request.known);
+                localStorage.setItem("fulltext", request.fulltext);
+                localStorage.setItem("WHAMWhamText", request.WHAMWhamText);
+                localStorage.setItem("WHAMWhamUrl", request.WHAMWhamUrl);
+                localStorage.setItem("WHAMChristmasText", request.WHAMChristmasText);
+                localStorage.setItem("WHAMChristmasUrl", request.WHAMChristmasUrl);
+                localStorage.setItem("StoppWatch", request.StoppWatch);
+                localStorage.setItem("Sport", request.Sport);
+                localStorage.setItem("Weather", request.Weather);
+                localStorage.setItem("colorUsers", request.colorUsers);
+                localStorage.setItem("filterImages", request.filterImages);
+                localStorage.setItem("filterVideo", request.filterVideo);
+                localStorage.setItem("filterLinks", request.filterLinks);
+                localStorage.setItem("filterGifOnly", request.filterGifOnly);
+                localStorage.setItem("filterMp4Only", request.filterMp4Only);
+                localStorage.setItem("displayTrophy", request.displayTrophy);
+                localStorage.setItem("trophies", request.trophies);
+                localStorage.setItem("lastTrophyRead", request.lastTrophyRead);
+                localStorage.setItem("showEmoticons", request.showEmoticons);
+
                 sendResponse({Result: "Settings Saved."});
-                
             }
-            
             else if (request.Action === "LoadAll")
             {
                 // Alle relevanten Paramter für Background-Script laden
@@ -166,8 +187,8 @@ chrome.runtime.onMessage.addListener(
                 var displayTrophy = localStorage.getItem("displayTrophy");
                 var trophies = localStorage.getItem("trophies");
                 var showEmoticons = localStorage.getItem("showEmoticons");
-                var lastWizard=localStorage.getItem("lastWizard");
-                var lastTrophyRead=localStorage.getItem("lastTrophyRead");
+                var lastWizard = localStorage.getItem("lastWizard");
+                var lastTrophyRead = localStorage.getItem("lastTrophyRead");
 
                 var interval = JSON.parse(localStorage.getItem("interval"));
                 if (interval === null || interval < 10)
@@ -223,9 +244,9 @@ chrome.runtime.onMessage.addListener(
                     Sport: sport,
                     Wetter: wetter,
                     Interval: interval,
-                    Stoppwatch: stoppwatch,  
-                    LastTrophyRead:lastTrophyRead,
-                    lastWizard:lastWizard,
+                    Stoppwatch: stoppwatch,
+                    LastTrophyRead: lastTrophyRead,
+                    lastWizard: lastWizard,
                     Result: "Settings loaded."
                 });
             }

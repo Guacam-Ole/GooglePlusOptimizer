@@ -1,116 +1,214 @@
 {
-    "appName": {
-        "message": "Google+ - Optimizer"
-    },
-    "appDesc": {
-        "message": "Der Google+ Optimizer verbessert die Benutzererfahrung mit Google+. "
-    },
-    "lang": {
-        "message": "de"
-    },
-    "removeHashtag": {
-        "message": "Hashtag filtern"
-    },
-    "ligaVon": {
-        "message": "Die Livedaten stammen von "
-    },
-    "Pause": {
-        "message": "Pause"
-    },
-    "Fortsetzen": {
-        "message": "Fortsetzen"
-    },
-    "Stoppuhr_starten": {
-        "message": "Stoppuhr starten"
-    },
-    "Stoppuhr_stoppen": {
-        "message": "Stopuhr stoppen"
-    },
-    "Stoppuhr": {
-        "message": "Stoppuhr"
-    },
-    "Heimmannschaft": {
-        "message": "Heimmannschaft"
-    },
-    "Gaestemannschaft": {
-        "message": "Gästemannschaft"
-    },
-    "Stand": {
-        "message": "Stand"
-    },
-    "RemarkPlaceholder": {
-        "message":"Kommentar für __USER__ fehlt"
-    },
-    "WidgetHide": {
-        "message":"(nicht anzeigen)"
-    },
-    "WidgetLeft":{
-        "message":"Links"
-    },
-    "WidgetMiddle":{
-        "message":"Mitte"
-    },
-    "WidgetRight":{
-        "message":"Rechts"
-    },
-    "WidgetShow":{
-        "message":"Anzeigen"
-    },
-    "DisplayImage":{
-        "message":"Bild anzeigen ⇘"
-    },
-    "DisplayVideo": {
-        "message": "Video anzeigen ⇘"
-    },
-    "DisplayLink": {
-        "message": "Link anzeigen ⇘"
-    },
-    "DisplayContent": {
-        "message": "Inhalt anzeigen ⇘"
-    },
-    "DisplayImageAnimated": {
-        "message": "Animierted Bild anzeigen ⇘"
-    },
-    "DisplayVideoAnimated": {
-        "message": "Animiertes Video anzeigen ⇘"
-    },
-    "ReadingCircleData": {
-        "message": "Lese Daten aus den Kreisen"
-    },
-    
-    "ReadingCircleUsers": {
-        "message": "Lese Kontaktdaten"
-    },
-    
-    "TrophiesCollected": {
-        "message": "Trophäen gesammelt"
-    },
-    
-    "ReadingPublicStream": {
-        "message": "Lese Daten aus öffentlichen Stream"
-    },
-    
-    "ReadingDataFrom": {
-        "message": "Lese Beiträge vom:"
-    },
-    
-    "ReadingProfileData": {
-        "message": "Analysiere Profil"
-    },
-    
-    "done": {
-        "message": "fertig."
-    },
-    "trophies": {
-        "message": "Trophäen"
-    },
-    "goldTrophies": {
-        "message": "Gold-Trophäen"
-    },
-    "silverTrophies": {
-        "message": "Silber-Trophäen"
-    },
-    "bronzeTrophies": {
-        "message": "Bronze-Trophäen"
-    }
+    "appName":
+            {
+                "message": "Google+ - Optimizer"
+            },
+    "appDesc":
+            {
+                "message": "Der Google+ Optimizer verbessert die Benutzererfahrung mit Google+. "
+            },
+    "lang":
+            {
+                "message": "de"
+            },
+    "removeHashtag":
+            {
+                "message": "Hashtag filtern"
+            },
+    "ligaVon":
+            {
+                "message": "Die Livedaten stammen von "
+            },
+    "Pause":
+            {
+                "message": "Pause"
+            },
+    "Fortsetzen":
+            {
+                "message": "Fortsetzen"
+            },
+    "Stoppuhr_starten":
+            {
+                "message": "Stoppuhr starten"
+            },
+    "Stoppuhr_stoppen":
+            {
+                "message": "Stopuhr stoppen"
+            },
+    "Stoppuhr":
+            {
+                "message": "Stoppuhr"
+            },
+    "Heimmannschaft":
+            {
+                "message": "Heimmannschaft"
+            },
+    "Gaestemannschaft":
+            {
+                "message": "Gästemannschaft"
+            },
+    "Stand":
+            {
+                "message": "Stand"
+            },
+    "RemarkPlaceholder":
+            {
+                "message": "Kommentar für __USER__ fehlt"
+            },
+    "WidgetHide":
+            {
+                "message": "(nicht anzeigen)"
+            },
+    "WidgetLeft":
+            {
+                "message": "Links"
+            },
+    "WidgetMiddle":
+            {
+                "message": "Mitte"
+            },
+    "WidgetRight":
+            {
+                "message": "Rechts"
+            },
+    "WidgetShow":
+            {
+                "message": "Anzeigen"
+            },
+    "DisplayImage":
+            {
+                "message": "Bild anzeigen ⇘"
+            },
+    "DisplayVideo":
+            {
+                "message": "Video anzeigen ⇘"
+            },
+    "DisplayLink":
+            {
+                "message": "Link anzeigen ⇘"
+            },
+    "DisplayContent":
+            {
+                "message": "Inhalt anzeigen ⇘"
+            },
+    "DisplayImageAnimated":
+            {
+                "message": "Animierted Bild anzeigen ⇘"
+            },
+    "DisplayVideoAnimated":
+            {
+                "message": "Animiertes Video anzeigen ⇘"
+            },
+    "ReadingCircleData":
+            {
+                "message": "Lese Daten aus den Kreisen"
+            },
+    "ReadingCircleUsers":
+            {
+                "message": "Lese Kontaktdaten"
+            },
+    "TrophiesCollected":
+            {
+                "message": "Trophäen gesammelt"
+            },
+    "ReadingPublicStream":
+            {
+                "message": "Lese Daten aus öffentlichen Stream"
+            },
+    "ReadingDataFrom":
+            {
+                "message": "Lese Beiträge vom:"
+            },
+    "ReadingProfileData":
+            {
+                "message": "Analysiere Profil"
+            },
+    "done":
+            {
+                "message": "fertig."
+            },
+    "trophies":
+            {
+                "message": "Trophäen"
+            },
+    "goldTrophies":
+            {
+                "message": "Gold-Trophäen"
+            },
+    "silverTrophies":
+            {
+                "message": "Silber-Trophäen"
+            },
+    "bronzeTrophies":
+            {
+                "message": "Bronze-Trophäen"
+            },
+    "icons_hh":
+            {
+                "message": "Tor zur Welt"
+            },
+    "icons_accounting":
+            {
+                "message": "Zaster, Penunsen, Moneten, Geld"
+            },
+    "icons_business":
+            {
+                "message": "Spaß für SEOs"
+            },
+    "icons_communications":
+            {
+                "message": "Kommunikation"
+            },
+    "icons_construction":
+            {
+                "message": "Was nicht passt wird passend gemacht..."
+            },
+    "icons_education":
+            {
+                "message": "Schulbank"
+            },
+    "icons_electrical":
+            {
+                "message": "Sachen mit Stecker"
+            },
+    "icons_flags":
+            {
+                "message": "Fahnen"
+            },
+    "icons_hh":
+            {
+                "message": "Hamburg"
+            },
+    "icons_gadgets":
+            {
+                "message": "Gadgets"
+            },
+    "icons_jobs":
+            {
+                "message": "Jobs"
+            },
+    "icons_gadgets":
+            {
+                "message": "Gadgets"
+            },
+    "icons_medical":
+            {
+                "message": "Lassen Sie mich durch, ich bin Arzt!"
+            },
+    "icons_multimedia":
+            {
+                "message": "Multimedia"
+            },
+    "icons_networking":
+            {
+                "message": "Netzwerk"
+            },
+    "icons_stock":
+            {
+                "message": "Sonstiges"
+            },
+    "icons_transport":
+            {
+                "message": "Zu Lande, zu Wasser und in der Luft"
+            }
 }
