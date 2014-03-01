@@ -31,18 +31,10 @@ var showEmoticons;
 var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
-var waitForCircleBox;
-var waitForCircleDetails;
-var doShare = false;
-var lnk;
-var quickShares;
-var circlesAsBookmark = false;
-var clickCircles = [];
-var demoStart = false;
-var lnk;
-var clearCircles = false;
-var startClickCircles = false;
-var finalizeCircleClick = false;
+//var waitForCircleBox;
+//var waitForCircleDetails;
+//var doShare = false;
+
 if (document.title.indexOf("Google+") !== -1)
 {
     InitGoogle();
@@ -54,7 +46,6 @@ function IsDemo() {
 
 $(document).ready(function()
 {
-
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
         LoadSetup();
@@ -70,8 +61,6 @@ $(document).ready(function()
                 return false;
             });
         }
-
-
         StartUpGoogleFilter();
     }
 
@@ -80,21 +69,6 @@ $(document).ready(function()
         GetCircles();
     }
 });
-function GetCircles() {
-
-    document.addEventListener("DOMSubtreeModified", function()
-    {
-        // Kreise aktualisieren
-        var kreise = [];
-        $('.xMa.uQa').each(function() {
-            var kreisname = $(this).text();
-            if (kreise.indexOf(kreisname) < 0) {
-                kreise.push(kreisname);
-            }
-        });
-        chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(kreise)});
-    });
-}
 
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
@@ -138,7 +112,6 @@ function DrawWizardTile() {
 
 /**
  * Aktionen beim initialisieren der Seite
- * @returns {undefined}
  */
 function InitGoogle()
 {
@@ -155,7 +128,8 @@ function InitGoogle()
     }
 }
 
-/**  * Google+ - Aktionen, wenn DOM bereit
+/**  
+ * Google+ - Aktionen, wenn DOM bereit
  */
 function LoadGoogle()
 {
@@ -176,6 +150,9 @@ function LoadGoogle()
     });
 }
 
+/**
+ * Widgets zeichnen
+ */
 function DrawWidgets() {
     try {
         if (wetter === "null") {
@@ -188,7 +165,7 @@ function DrawWidgets() {
             clock = null;
         }
 
-// Wetter checken:
+        // Wetter checken:
         if (wetter !== null && wetter !== undefined)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
@@ -214,7 +191,6 @@ function DrawWidgets() {
         console.log(ex);
     }
 }
-
 
 function LoadAllQuickShares()
 {
@@ -247,68 +223,12 @@ function CountColumns()
     }
 }
 
-
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter()
 {
-    if (clearCircles) {
-        if (lnk.closest('[role="article"]').parent() !== null) {
-            // bereits aktivierte Werte entfernen:
-            lnk.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function()
-            {
-                $(this).click();
-            }
-            );
-
-            clearCircles = false;
-            startClickCircles = true;
-        }
-    }
-
-    if (startClickCircles) {
-        if (lnk.closest('[role="article"]').parent() !== null)
-        {
-            if (lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0)
-            {
-                lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
-            }
-        }
-        startClickCircles = false;
-    }
-
-    if (finalizeCircleClick)
-    {
-        lnk.closest('[role="article"]').parent().find('[role="listbox"]').hide();
-        if (circlesAsBookmark) {
-            lnk.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
-        } else {
-            lnk.closest('[role="article"]').parent().find('[role="textbox"]').focus();
-        }
-        lnk.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
-        finalizeCircleClick = false;
-    }
-
-    if (clickCircles.length > 0 && !clearCircles && !startClickCircles) {
-        if (lnk.closest('[role="article"]').parent() !== null)
-        {
-            var lastCircle = clickCircles.pop();
-            $('.d-A').each(function()
-            {
-                if ($(this).text().indexOf(lastCircle) === 1) {
-                    $(this).click();
-
-                }
-            });
-
-            if (clickCircles.length === 0) {
-                finalizeCircleClick = true;
-            }
-
-
-        }
-    }
+    QSEvents();
 
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
@@ -392,48 +312,9 @@ function StartFilter()
         OptStartEmoticons();
         PaintEmoticons();
     }
-    if (quickShares.length > 0)
-    {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
-        $('.Qg').each(function() {
-            if ($(this).parent().find('.quickShare').length === 0)
-            {
-                var iconHtml = "";
-
-                for (var i in quickShares) {
-                    var qs = quickShares[i];
-                    iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
-                }
-                $(this).before('<div class="quickShare">' + iconHtml + '<br/></div>');
-            }
-        });
-
-        $('.quickShareImg').hover(
-                function() {
-                    var oldName = $(this).prop("src");
-                    $(this).prop("src", oldName.replace("disabled", "enabled"));
-                },
-                function() {
-                    var oldName = $(this).prop("src");
-                    $(this).prop("src", oldName.replace("enabled", "disabled"));
-                });
-        $('.quickShareImg').click(function()
-        {
-            StartAutoClick($(this));
-        });
-    }
+    PaintQsIcons();
 }
 
-
-function StartAutoClick(container)
-{
-    lnk = container;
-    clickCircles = container.attr("circles").split(',');
-    clearCircles = true;
-    circlesAsBookmark = JSON.parse(container.attr("isBookmark"));
-
-    lnk.closest('[role="article"]').find('.Dg.Ut').click();
-}
 
 /**
  * Volltextfilter
