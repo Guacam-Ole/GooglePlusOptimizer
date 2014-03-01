@@ -30,6 +30,7 @@
                         "setup/js/wizard.js",
                         "setup/js/smilies.js",
                         "setup/js/jquery.knob.js",
+                        "setup/js/quickshare.js",
                         "date.js"]
                 }],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",

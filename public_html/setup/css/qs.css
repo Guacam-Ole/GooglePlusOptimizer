@@ -1,0 +1,30 @@
+
+.quickShare {
+    margin: 20px 0 0 0;
+    padding: 0 0 20px 12px;
+}
+
+.quickShare div
+{
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
+    transition: background-color .218s,border-color .218s,box-shadow .218s;
+    -webkit-user-select: none;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    float: left;
+    margin-left: 8px;
+    outline: none;
+    width: 38px;
+    height: 38px;
+    background-image: none;
+    -webkit-appearance: none;
+    
+}
+
+.quickShare div img 
+{
+    width: 38px;    
+}

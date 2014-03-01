@@ -35,26 +35,33 @@ var waitForCircleBox;
 var waitForCircleDetails;
 var doShare = false;
 var lnk;
+var quickShares;
+var circlesAsBookmark = false;
+var clickCircles = [];
 var demoStart = false;
-
+var lnk;
+var clearCircles = false;
+var startClickCircles = false;
+var finalizeCircleClick = false;
 if (document.title.indexOf("Google+") !== -1)
 {
     InitGoogle();
 }
 
 function IsDemo() {
-    return paramPos = document.location.search.indexOf("demoMode") > 0;
+    return  document.location.search.indexOf("demoMode") > 0;
 }
 
 $(document).ready(function()
 {
+
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
         LoadSetup();
     }
     else if (document.title.indexOf("Google+") !== -1)
     {
-        if (IsDemo) {
+        if (IsDemo()) {
             var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
             $('.Ima.Xic').prepend(button);
             $('#optimizerTest').click(function() {
@@ -63,20 +70,42 @@ $(document).ready(function()
                 return false;
             });
         }
+
+
         StartUpGoogleFilter();
     }
+
+    if (document.location.href.indexOf("plus.google.com/circles") > 0)
+    {
+        GetCircles();
+    }
 });
+function GetCircles() {
+
+    document.addEventListener("DOMSubtreeModified", function()
+    {
+        // Kreise aktualisieren
+        var kreise = [];
+        $('.xMa.uQa').each(function() {
+            var kreisname = $(this).text();
+            if (kreise.indexOf(kreisname) < 0) {
+                kreise.push(kreisname);
+            }
+        });
+        chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(kreise)});
+    });
+}
 
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
-            LoadGoogle();
-            CountColumns();
-            if (colorUsers)
-            {
-                OptStartColors();
-            }
-            DrawWizardTile();
+        LoadGoogle();
+        CountColumns();
+        if (colorUsers)
+        {
+            OptStartColors();
         }
+        DrawWizardTile();
+    }
 }
 
 /**
@@ -126,8 +155,7 @@ function InitGoogle()
     }
 }
 
-/**
- * Google+ - Aktionen, wenn DOM bereit
+/**  * Google+ - Aktionen, wenn DOM bereit
  */
 function LoadGoogle()
 {
@@ -137,14 +165,15 @@ function LoadGoogle()
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function()
     {
+
+
         // Beim Nachladen der Seite neu aktiv werden
         if (timeout)
         {
             clearTimeout(timeout);
         }
-        timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)
-    }, false);
-    DrawWidgets();
+        timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)     }, false);     DrawWidgets();
+    });
 }
 
 function DrawWidgets() {
@@ -159,7 +188,7 @@ function DrawWidgets() {
             clock = null;
         }
 
-        // Wetter checken:
+// Wetter checken:
         if (wetter !== null && wetter !== undefined)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
@@ -187,6 +216,17 @@ function DrawWidgets() {
 }
 
 
+function LoadAllQuickShares()
+{
+    chrome.runtime.sendMessage(
+            {
+                Action: "LoadQS"
+            }, function(response)
+    {
+        quickShares = JSON.parse(response.Result);
+    });
+}
+
 /**
  * Spalten zählen
  */
@@ -199,11 +239,7 @@ function CountColumns()
             var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
             if (columns > 0)
             {
-                chrome.runtime.sendMessage(
-                        {
-                            Action: "SaveColumns", ParameterValue: columns}, function(response) {
-                }
-                );
+                chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
             }
         }
     } catch (ex) {
@@ -217,8 +253,62 @@ function CountColumns()
  */
 function StartFilter()
 {
-    
+    if (clearCircles) {
+        if (lnk.closest('[role="article"]').parent() !== null) {
+            // bereits aktivierte Werte entfernen:
+            lnk.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function()
+            {
+                $(this).click();
+            }
+            );
 
+            clearCircles = false;
+            startClickCircles = true;
+        }
+    }
+
+    if (startClickCircles) {
+        if (lnk.closest('[role="article"]').parent() !== null)
+        {
+            if (lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0)
+            {
+                lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
+            }
+        }
+        startClickCircles = false;
+    }
+
+    if (finalizeCircleClick)
+    {
+        lnk.closest('[role="article"]').parent().find('[role="listbox"]').hide();
+        if (circlesAsBookmark) {
+            lnk.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
+        } else {
+            lnk.closest('[role="article"]').parent().find('[role="textbox"]').focus();
+        }
+        lnk.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
+        finalizeCircleClick = false;
+    }
+
+    if (clickCircles.length > 0 && !clearCircles && !startClickCircles) {
+        if (lnk.closest('[role="article"]').parent() !== null)
+        {
+            var lastCircle = clickCircles.pop();
+            $('.d-A').each(function()
+            {
+                if ($(this).text().indexOf(lastCircle) === 1) {
+                    $(this).click();
+
+                }
+            });
+
+            if (clickCircles.length === 0) {
+                finalizeCircleClick = true;
+            }
+
+
+        }
+    }
 
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
@@ -267,12 +357,6 @@ function StartFilter()
     }
 
     var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
-    //$('[role="list"]').append(hinzu);
-    // Alle Auswahlmöglichkeiten bestimmen:
-
-
-
-
 
     if (filterCommunity)
     {
@@ -291,7 +375,6 @@ function StartFilter()
     DOMFilterHashtags();
     DOMFilterImages();
     DOMFilterFreetext();
-
     if (colorUsers)
     {
         PaintForUser();
@@ -309,13 +392,53 @@ function StartFilter()
         OptStartEmoticons();
         PaintEmoticons();
     }
+    if (quickShares.length > 0)
+    {
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
+        $('.Qg').each(function() {
+            if ($(this).parent().find('.quickShare').length === 0)
+            {
+                var iconHtml = "";
+
+                for (var i in quickShares) {
+                    var qs = quickShares[i];
+                    iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
+                }
+                $(this).before('<div class="quickShare">' + iconHtml + '<br/></div>');
+            }
+        });
+
+        $('.quickShareImg').hover(
+                function() {
+                    var oldName = $(this).prop("src");
+                    $(this).prop("src", oldName.replace("disabled", "enabled"));
+                },
+                function() {
+                    var oldName = $(this).prop("src");
+                    $(this).prop("src", oldName.replace("enabled", "disabled"));
+                });
+        $('.quickShareImg').click(function()
+        {
+            StartAutoClick($(this));
+        });
+    }
+}
+
+
+function StartAutoClick(container)
+{
+    lnk = container;
+    clickCircles = container.attr("circles").split(',');
+    clearCircles = true;
+    circlesAsBookmark = JSON.parse(container.attr("isBookmark"));
+
+    lnk.closest('[role="article"]').find('.Dg.Ut').click();
 }
 
 /**
  * Volltextfilter
  */
 function DOMFilterFreetext() {
-
     if (filterCustom && propsFulltext !== null && propsFulltext !== "")
     {
         try {
@@ -341,8 +464,7 @@ function DOMFilterImages() {
                 $(this).parent().find('.hidewrapper').show();
                 $(this).remove();
                 return false;
-            }
-            );
+            });
         }
         if (filterImages && filterLinks && filterVideo && !filterGifOnly)
         {
@@ -422,12 +544,7 @@ function DOMFilterHashtags() {
                     return;
                 }
                 propsHashtags += "," + newHashtag;
-                chrome.runtime.sendMessage(
-                        {
-                            Action: "SaveHashtags", ParameterValue: propsHashtags
-                        }, function(response) {
-                }
-                );
+                chrome.runtime.sendMessage({Action: "SaveHashtags", ParameterValue: propsHashtags});
                 $(this).hide();
                 ShowNotification("success", "Hashtag wurde zum Filter hinzugefügt.", " Du wirst die nächste Zeit nichts mehr von " + newHashtag + " hören. Bitte Seite neu laden, um den Filter zu aktivieren.");
                 return false;
@@ -482,7 +599,7 @@ function LoadSettingsLive()
         localStorage.setItem("lastTrophyRead", response.LastTrophyRead);
     }
     );
-
+    LoadAllQuickShares();
 }
 
 /**

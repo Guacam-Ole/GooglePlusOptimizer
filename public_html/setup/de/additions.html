@@ -7,6 +7,7 @@
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
         <link href="../css/styles.css" rel="stylesheet" type="text/css" />
         <link href="../css/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
@@ -14,10 +15,13 @@
         <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
         <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/typeahead.bundle.js" language="javascript"></script>
         <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
         <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
         <script type="text/javascript" src="../../date.js" language="javascript"></script>
         <script type="text/javascript" src="../js/trophy.js"></script>
+        <script type="text/javascript" src="../js/ddslick.js"></script>
+        <script type="text/javascript" src="../js/quickshare.js"></script>
     </head>
 
     <body>
@@ -35,7 +39,14 @@
                     <b>Bitte warten, bis der Vorgang beendet ist.</b>
                     Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
                 </div>
-                
+                <div class="circlesLoaded">
+                    Nachdem die Seite mit den Kreisen fertig geladen ist, diese Seite <a href="additions.html">neu laden</a>
+                </div>
+                <div class="circlesExplanation">
+                    Um die Auswahl der gültigen Kreise korrekt darzustellen, muss der Google+ - Optimizer diese aus der Kontaktübersicht lesen. Wenn die Kreise geändert werden, sollte dies von Zeit zu Zeit aktualisiert werden.<br/>
+                    <a id="closeCirclesExplanation">Fenster schließen</a>                                        
+                </div>
+                <div class="listAllCircles"></div>
                 <div class="trophyDivWhy" style="display:none;">
                     <h3>Wieso muss ich mich authentifizieren?</h3>
                     Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.
@@ -75,7 +86,7 @@
                                 <div id="left_column">
                                     <!--side menu-->
                                     <div class="side_menu">
-                                     
+
                                     </div>
                                     <!--end side menu-->
                                 </div>
@@ -94,9 +105,23 @@
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShowEmoticons">
                                             <input class="toggle" type="checkbox" />
                                         </div>&nbsp;Smilies aktivieren<br/> 
+
+
                                         <hr class="clear" />
                                     </div>
-                                    <!--end box 1-->
+                                    <div class="service_box_container">
+                                        <div>Quickshare-Icons:<br/>
+                                            <span id="circleCount">0</span> Kreise bekannt. (<a href="https://plus.google.com/circles" id="recalcCircles" target="_blank">aktualisieren</a>) <a id="displayCirclesExplanation">Wozu?</a> 
+
+                                            <div id="allShare" class="iconSelectAll"></div>
+
+                                            <div>
+                                                <button type="button" class="addDD btn btn-default btn-lg" id="addQuickShare"><span class="fa fa-plus-circle"></span> Hinzufügen</button>
+                                                <hr class="clear" />
+                                            </div>
+
+                                        </div>
+                                    </div>                                    <!--end box 1-->
                                 </div>
                                 <!--end right_column-->
 

@@ -9,6 +9,7 @@ $(document).ready(function()
         });
         FillSportData();
         FillWeatherData();
+
         try {
             OptStartTrophies();
         } catch (ex) {
@@ -17,6 +18,15 @@ $(document).ready(function()
         {
             localStorage.setItem("StoppWatch", $("#clockPos").val());
         });
+        $('#addQuickShare').click(function() {
+            AddQuickShareRow();
+        });
+        if (document.location.href.indexOf("additions") > 0) {
+            InitQSEvents();
+            GetQuickShareInfo();
+            LoadAllQuickShares();
+        }
+
     } catch (ex) {
         console.log(ex);
     }
@@ -193,6 +203,8 @@ function handleTagsInput()
     {
         return;
     }
+
+
     $('#fulltext').tagsInput(
             {
                 width: 'auto',
