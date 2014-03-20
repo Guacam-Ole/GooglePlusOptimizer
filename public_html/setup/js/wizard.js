@@ -49,6 +49,7 @@ function NewWizardOptionsExist(lastwizard) {
             // Nur bugfixes, keine Features
             return false;
         }
+
         return true;
     } catch (ex) {
         console.log(ex);
@@ -135,11 +136,11 @@ function InitWizard(version)
         FillWeatherData();
         DisplayStep(allPages[0], 0, 0);
         handleTagsInput();
-        $.get("http://www.nocarrier.de/optimizer.php", function(test) {
-            if (test === true) {
-                $('.spam').fadeIn();
-            }
-        });
+        $('#spam1').attr('src',chrome.extension.getURL("setup/images/alster.png"));
+        $('#spam2').attr('src',chrome.extension.getURL("setup/images/startnext_logo_green.png"));
+        $('.spam').fadeIn();
+        
+        
 
         $('#robbe').attr('src', chrome.extension.getURL("setup/images/progress.gif"));
         WizSwitchEvents();
@@ -213,6 +214,7 @@ function LoadWizardSettings() {
     LoadCheckBox(filterLinks, "#chkWizURL");
     LoadCheckBox(colorUsers, "#chkWizColors");
     LoadCheckBox(showEmoticons, "#chkWizEmoticons");
+    LoadCheckBox(autoSave, "#chkAutoSave");
 
     propsFulltext = propsFulltext || "";
     if (propsFulltext === null) {
@@ -400,7 +402,7 @@ function LoadSport()
  */
 function GetVersionLong(version) {
     var versionSplit = version.split('.');
-    var versionLong = version[0] * 1000000;
+    var versionLong = versionSplit[0] * 1000000;
     if (versionSplit.length > 1) {
         versionLong += versionSplit[1] * 10000;
     }
@@ -408,7 +410,7 @@ function GetVersionLong(version) {
         versionLong += versionSplit[2] * 100;
     }
     if (versionSplit.length > 3) {
-        versionLong += versionSplit[3];
+        versionLong += versionSplit[3] * 1;
     }
     return versionLong;
 }
@@ -496,6 +498,9 @@ function WizSwitchEvents() {
                 break;
             case "chkWizEmoticons":
                 showEmoticons = data.value;
+                break;
+            case "chkAutoSave":
+                autoSave = data.value;
                 break;
 
 
@@ -621,6 +626,7 @@ function SaveWizardSettings()
                 filterLinks: filterLinks,
                 trophies: trophies,
                 showEmoticons: showEmoticons,
+                UseAutoSave: autoSave,
                 lastTrophyRead: lastTrophyRead
             }, function(response) {
     }

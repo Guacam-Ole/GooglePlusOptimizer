@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google+ Filter</title>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../css/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.widget.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+
+
+    </head>
+
+
+    <body>
+        <div id="bg_top">
+            <div id="wrapper">
+                <div id="header"><div id="logo"><h1>Optimizer for Google+</h1></div></div>
+                <!--end header-->
+                <div id="menu">
+                    <ul id="navigation">
+                        <li><a href="index.html">Welcome</a></li>
+                        <li><a href="settings.html">Filter</a> </li>
+                        <li><a href="erweitert.html">Settings</a> </li>
+                        <li><a href="widgets.html" class="active">Widgets</a> </li>
+                        <li><a href="additions.html">Features</a> </li>>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=en&gl=EN">Rate plugin (Thanks!) </a></li>
+                    </ul>
+                </div>
+                <!--end menu-->
+
+                <div id="content">
+                    <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background" /></div>
+                    <!-- the shadow border down left/right -->
+                    <div id="content_border">
+                        <!-- the gradient from top to bottom -->
+                        <div id="content_bg">
+                            <!-- the optional line down the middle of the content area -->
+                            <div id="content_seperator">
+                                <div id="left_column">
+                                    <!--side menu-->
+                                    <div class="side_menu">
+                                        <h2>Advanced settings</h2>
+                                        <ul>
+                                            <li><a href="#hashtag">Hashtag-Filter</a></li>
+                                            <li><a href="#custom">Custom-Filter </a></li>
+                                            <li><a href="#wham">WHAM-Filter</a></li>
+                                            <li><a href="#timeout">Delay</a></li>
+                                        </ul>
+                                    </div>
+                                    <!--end side menu-->
+                                </div>
+                                <!--end left_column-->
+                                <div id="right_column">
+                                    <h1>Advanced Settings</h1>
+                                    <p>You can modify your settings for some filters here. To also have to activate each filter on the  <a href="settings.html">settings</a> page. The advanced settings will be saved even if you disable the corresponding filter.</p>
+                                    <div class="service_box_container">
+                                        <div class="image"> <img src="../images/icons/big/hashtag.jpg" alt="Document" width="120" height="74" border="0" /> </div>
+                                        <div class="text">
+                                            <h2 id="hashtag">Hashtag-Filter </h2>
+                                            <p>You can filter any hashtag out of the stream.<br/> <sup>(It doesn't care if you do or don't enter the '#')</sup></p>
+                                            <p><div><input id="hashtags" type="text" class="form-control tags" value="#catcontent" style="display: none;"/></div></p>                  
+                                        </div>
+                                        <hr class="clear" />
+                                    </div>
+                                    <!--end box 2-->
+                                    <!--start box 3-->
+                                    <div class="service_box_container">
+                                        <div class="image"> <img src="../images/icons/big/custom.jpg" alt="Phone" width="120" height="74" border="0" /> </div>
+                                        <div class="text">
+                                            <h2 id="custom">Custom Filter </h2>
+                                            <p>With these filters you can remove topics with any text included. This filter is case-sensitive.<br/>Please be advised: The custom filter needs a lot of processor power and should not be used on weak machines.</b></p>
+                                            <p><div><input id="fulltext" type="text" class="form-control tags" value="Hamburger Sportverein" style="display: none;"/></div></p> 
+                                        </div>
+                                        <hr class="clear" />
+                                    </div>
+                                    <!--end box 3-->
+                                    <!--start box 1-->
+                                    <div class="service_box_container" style="border-top:1px solid #e7e7e7;">
+                                        <div class="image"> <img src="../images/icons/big/wham.jpg" width="120" height="74" alt="Cart"  border="0" /> </div>
+                                        <div class="text">
+                                            <h2 id="wham">WHAM-Filter</h2>
+                                            <p>You can decide how "strict" the WHAM-Filter works:</p>
+                                            <p>
+                                                <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS">
+                                                    <input class="toggle" type="checkbox" id="chkWhamText"/>
+                                                </div>&nbsp;
+                                                Filter "WHAM" <b>in post</b> <br/>
+                                                <i>If "WHAM" appears in any post it will be filtered.</i><br/><br/>
+                                                <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS">
+                                                    <input class="toggle" type="checkbox" id="chkWhamUrl"/>
+                                                </div>&nbsp;
+                                                Filter "WHAM" <b>in Link</b><br/>
+                                                <i>If "WHAM" appears in a link it will be filtered.</i><br/><br/>
+                                                <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS">
+                                                    <input class="toggle" type="checkbox" id="chkChristmasText"/>
+                                                </div>&nbsp;
+                                                Filter "Last Christmas" <b>in Post</b> <br/>
+                                                <i>If "Last Christmas" appears in any post it will be filtered.</i><br/><br/>
+                                                <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS">
+                                                    <input class="toggle" type="checkbox" id="chkChristmasUrl"/>
+                                                </div>&nbsp;
+                                                Filter "Last Christmas" <b>in Link</b> <br/>
+                                                <i>If "Last Christmas" appears in a link it will be filtered.</i>   
+                                            </p>
+                                        </div>
+                                        <hr class="clear" />
+                                    </div>
+
+                                    
+                                    
+                                    <div class="service_box_container" style="border-top:1px solid #e7e7e7;">
+                                        <div class="image"> <img src="../images/icons/big/clock.jpg" width="120" height="74" alt="Cart"  border="0" /> </div>
+                                        <div class="text">
+                                            <h2 id="timeout">Delay</h2>
+                                            <p>Every time you scroll to the end of a google+ - page, new content will be loaded. Than the filter has to check again if any of its rules apply. This will not happen before a specific period of time has passed to reduce the power and memory needed for the filter. If you own a very old machine you might want to increase this value. On the other side if you got a state-of-the-art personal computer you can reduce this value.  </p>
+                                            <br/>
+                                            <input id="dialDelay" class="dial" data-width="100" data-min="10" data-max="2500" data-angleoffset="-125" data-anglearc="250" 
+                                                   data-fgcolor="#66EE66" value="35" style="position: relative !important; margin-top: -300px !important; color:#666666 !important;" />
+                                            <div style="position:relative; margin-top: -148px; margin-left: 43px; font-weight: bold">ms</div>
+                                        </div>
+
+
+                                        <hr class="clear" />
+                                    </div>
+                                    <!--end box 1-->
+                                </div>
+                                <!--end right_column-->
+
+                            </div>
+                            <!-- end line down the middle -->
+                        </div>
+                        <!-- end the gradient from top to bottom -->
+                    </div>
+                    <!-- end the shadow border down left/right -->
+                    <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background" /></div>
+                </div>
+                <!-- end content wrap -->
+                <div id="footer">
+                    <a href="help.html#license">Licences and sources</a>
+                    <div class="right">
+                        <ul>
+                            <li class="keep_in"> contact:</li>
+                            <li><a href="https://plus.google.com/u/0/communities/109839149408899563786" title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community" width="25" height="25" border="0" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

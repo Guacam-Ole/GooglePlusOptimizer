@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.3.0.3",
+    "version": "2.4.0.0",
     "author": "Ole Albers",
     "permissions": [
         "http://ajax.googleapis.com/",
@@ -31,6 +31,8 @@
                         "setup/js/smilies.js",
                         "setup/js/jquery.knob.js",
                         "setup/js/quickshare.js",
+                        "setup/js/qsdisplay.js",
+                        "setup/js/autosave.js",
                         "date.js"]
                 }],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",

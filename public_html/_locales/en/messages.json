@@ -1,110 +1,222 @@
 {
-    "appName": {
-        "message": "Google+ - Optimizer"
-    },
-    "appDesc": {
-        "message": "The Google+ - Optimizer increases the user experience with Google+. "
-    },
-    "lang": {
-        "message": "en"
-    },
-    "removeHashtag": {
-        "message": "filter this hashtag"
-    },
-    "ligaVon": {
-        "message": "Source of the lifedata: "
-    },
-    "Pause": {
-        "message": "Pause"
-    },
-    "Fortsetzen": {
-        "message": "Continue"
-    },
-    "Stoppuhr_starten": {
-        "message": "Start stopwatch"
-    },
-    "Stoppuhr_stoppen": {
-        "message": "Stop stopwatch"
-    },
-    "Stoppuhr": {
-        "message": "stopwatch"
-    },
-    "Heimmannschaft": {
-        "message": "home team"
-    },
-    "Gaestemannschaft": {
-        "message": "guest team"
-    },
-    "Stand": {
-        "message": "results"
-    },
-    "RemarkPlaceholder": {
-        "message": "No comments for __USER__"
-    },
-    "WidgetHide": {
-        "message": "(disabled)"
-    },
-    "WidgetLeft": {
-        "message": "left"
-    },
-    "WidgetMiddle": {
-        "message": "middle"
-    },
-    "WidgetRight": {
-        "message": "right"
-    },
-    "WidgetShow": {
-        "message": "show"
-    },
-    "DisplayImage": {
-        "message": "show Image ⇘"
-    },
-    "DisplayVideo": {
-        "message": "show Video ⇘"
-    },
-    "DisplayLink": {
-        "message": "show Link ⇘"
-    },
-    "DisplayContent": {
-        "message": "show content ⇘"
-    },
-    "DisplayImageAnimated": {
-        "message": "show animated Image ⇘"
-    },
-    "DisplayVideoAnimated": {
-        "message": "show animated video ⇘"
-    },
-    "ReadingCircleData": {
-        "message": "reading data from circles"
-    },
-    "ReadingCircleUsers": {
-        "message": "reading contactdata"
-    },
-    "TrophiesCollected": {
-        "message": "trophies collected"
-    },
-    "ReadingPublicStream": {
-        "message": "reading data from public stream"
-    },
-    "ReadingDataFrom": {
-        "message": "reading data from:"
-    },
-    "ReadingProfileData": {
-        "message": "analyze profile"
-    },
-    "done": {
-        "message": "done."
-    },
-    "trophies": {
-        "message": "Trophies"
-    },
-    "goldTrophies": {
-        "message": "Gold-Trophies"
-    },
-    "silverTrophies": {
-        "message": "Silver-Trophies"
-    },
-    "bronzeTrophies": {
-        "message": "Bronze-Trophies"
-    }
+    "appName":
+            {
+                "message": "Google+ - Optimizer"
+            },
+    "appDesc":
+            {
+                "message": "The Google+ - Optimizer increases the user experience with Google+. "
+            },
+    "lang":
+            {
+                "message": "en"
+            },
+    "removeHashtag":
+            {
+                "message": "filter this hashtag"
+            },
+    "ligaVon":
+            {
+                "message": "Source of the lifedata: "
+            },
+    "Pause":
+            {
+                "message": "Pause"
+            },
+    "Fortsetzen":
+            {
+                "message": "Continue"
+            },
+    "Stoppuhr_starten":
+            {
+                "message": "Start stopwatch"
+            },
+    "Stoppuhr_stoppen":
+            {
+                "message": "Stop stopwatch"
+            },
+    "Stoppuhr":
+            {
+                "message": "stopwatch"
+            },
+    "Heimmannschaft":
+            {
+                "message": "home team"
+            },
+    "Gaestemannschaft":
+            {
+                "message": "guest team"
+            },
+    "Stand":
+            {
+                "message": "results"
+            },
+    "RemarkPlaceholder":
+            {
+                "message": "No comments for __USER__"
+            },
+    "WidgetHide":
+            {
+                "message": "(disabled)"
+            },
+    "WidgetLeft":
+            {
+                "message": "left"
+            },
+    "WidgetMiddle":
+            {
+                "message": "middle"
+            },
+    "WidgetRight":
+            {
+                "message": "right"
+            },
+    "WidgetShow":
+            {
+                "message": "show"
+            },
+    "DisplayImage":
+            {
+                "message": "show Image ⇘"
+            },
+    "DisplayVideo":
+            {
+                "message": "show Video ⇘"
+            },
+    "DisplayLink":
+            {
+                "message": "show Link ⇘"
+            },
+    "DisplayContent":
+            {
+                "message": "show content ⇘"
+            },
+    "DisplayImageAnimated":
+            {
+                "message": "show animated Image ⇘"
+            },
+    "DisplayVideoAnimated":
+            {
+                "message": "show animated video ⇘"
+            },
+    "ReadingCircleData":
+            {
+                "message": "reading data from circles"
+            },
+    "ReadingCircleUsers":
+            {
+                "message": "reading contactdata"
+            },
+    "TrophiesCollected":
+            {
+                "message": "trophies collected"
+            },
+    "ReadingPublicStream":
+            {
+                "message": "reading data from public stream"
+            },
+    "ReadingDataFrom":
+            {
+                "message": "reading data from:"
+            },
+    "ReadingProfileData":
+            {
+                "message": "analyze profile"
+            },
+    "done":
+            {
+                "message": "done."
+            },
+    "trophies":
+            {
+                "message": "Trophies"
+            },
+    "goldTrophies":
+            {
+                "message": "Gold-Trophies"
+            },
+    "silverTrophies":
+            {
+                "message": "Silver-Trophies"
+            },
+    "bronzeTrophies":
+            {
+                "message": "Bronze-Trophies"
+            },
+    "icons_hh":
+            {
+                "message": "Hamburg"
+            },
+    "icons_accounting":
+            {
+                "message": "Accounting"
+            },
+    "icons_business":
+            {
+                "message": "Business"
+            },
+    "icons_communications":
+            {
+                "message": "Communications"
+            },
+    "icons_construction":
+            {
+                "message": "Construction"
+            },
+    "icons_education":
+            {
+                "message": "Eductation"
+            },
+    "icons_electrical":
+            {
+                "message": "Electrical"
+            },
+    "icons_flags":
+            {
+                "message": "Flags"
+            },    
+    "icons_gadgets":
+            {
+                "message": "Gadgets"
+            },
+    "icons_jobs":
+            {
+                "message": "Jobs"
+            },
+    "icons_medical":
+            {
+                "message": "Medical"
+            },
+    "icons_multimedia":
+            {
+                "message": "Multimedia"
+            },
+    "icons_networking":
+            {
+                "message": "Networking"
+            },
+    "icons_stock":
+            {
+                "message": "Stock"
+            },
+    "icons_transport":
+            {
+                "message": "Transport"
+            },
+    "selectIcon":
+            {
+                "message": "select icon"
+            },
+    "selectCircle":
+            {
+                "message": "select circle"
+            },
+    "BookmarkMode":
+            {
+                "message": "bookmark mode"
+            },
+    "sharedImmediatly":
+            {
+                "message": "(posts will be shared immediatly)"
+            }
 }

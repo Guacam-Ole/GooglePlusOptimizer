@@ -77,12 +77,12 @@ chrome.runtime.onMessage.addListener(
                 });
                 return true;
             }
-            else if (request.Action==="SaveQS") 
+            else if (request.Action === "SaveQS")
             {
                 localStorage.setItem("QuickShares", request.QuickShares);
                 sendResponse({Result: "Setting saved."});
             }
-            else if (request.Action==="LoadQS") 
+            else if (request.Action === "LoadQS")
             {
                 sendResponse({Result: localStorage.getItem("QuickShares")});
             }
@@ -155,6 +155,8 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("trophies", request.trophies);
                 localStorage.setItem("lastTrophyRead", request.lastTrophyRead);
                 localStorage.setItem("showEmoticons", request.showEmoticons);
+                localStorage.setItem("useAutoSave", request.UseAutoSave);
+
 
                 sendResponse({Result: "Settings Saved."});
             }
@@ -189,13 +191,18 @@ chrome.runtime.onMessage.addListener(
                 var showEmoticons = localStorage.getItem("showEmoticons");
                 var lastWizard = localStorage.getItem("lastWizard");
                 var lastTrophyRead = localStorage.getItem("lastTrophyRead");
+                var useAutoSave=localStorage.getItem("useAutoSave");
+                var wizardMode = localStorage.getItem("WizardMode") || 1;
+                if (wizardMode === null) {
+                    wizardMode = 1;
+                }
 
                 var interval = JSON.parse(localStorage.getItem("interval"));
                 if (interval === null || interval < 10)
                 {
                     interval = 500;
                 }
-
+                useAutoSave=BoolNotNull(useAutoSave);
                 filterPlus1 = BoolNotNull(filterPlus1);
                 filterYouTube = BoolNotNull(filterYouTube);
                 filterWham = BoolNotNull(filterWham);
@@ -240,6 +247,7 @@ chrome.runtime.onMessage.addListener(
                     FilterLinks: GetBool(filterLinks),
                     DisplayTrophy: GetBool(displayTrophy),
                     ShowEmoticons: GetBool(showEmoticons),
+                    WizardMode:wizardMode,
                     Trophies: trophies,
                     Sport: sport,
                     Wetter: wetter,
@@ -247,6 +255,7 @@ chrome.runtime.onMessage.addListener(
                     Stoppwatch: stoppwatch,
                     LastTrophyRead: lastTrophyRead,
                     lastWizard: lastWizard,
+                    UseAutoSave:useAutoSave,
                     Result: "Settings loaded."
                 });
             }

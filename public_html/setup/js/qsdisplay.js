@@ -1,5 +1,5 @@
 var lnk;
-var quickShares;
+var quickShares = [];
 var circlesAsBookmark = false;
 var clickCircles = [];
 var demoStart = false;
@@ -7,12 +7,39 @@ var lnk;
 var clearCircles = false;
 var startClickCircles = false;
 var finalizeCircleClick = false;
+var qsStep = -1;
+var clickHandlerAdded = false;
 
 /**
  * Kreise des Users speichern
  */
-function GetCircles() {
 
+function InitQS()
+{
+    $(document).on('mouseenter', '.quickShareImg', function()
+    {
+        var oldName = $(this).prop("src");
+        $(this).prop("src", oldName.replace("disabled", "enabled"));
+    });
+    $(document).on('mouseleave', '.quickShareImg', function()
+    {
+        var oldName = $(this).prop("src");
+        $(this).prop("src", oldName.replace("enabled", "disabled"));
+    });
+    $(document).on('click', '.quickShareImg', function()
+    {
+        StartAutoClick($(this));
+    });
+    $(document).on('click', '.UN', function()
+    {
+        if (qsStep > 0) {
+            qsStep = 1;
+        }
+    });
+}
+
+function GetCircles()
+{
     document.addEventListener("DOMSubtreeModified", function()
     {
         // Kreise aktualisieren
@@ -32,65 +59,67 @@ function GetCircles() {
  */
 function QSEvents()
 {
-    if (clearCircles)
+    switch (qsStep)
     {
-        // Standard-auswahl beim teilen löschen
-        if (lnk.closest('[role="article"]').parent() !== null)
-        {
-            lnk.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function()
+        case 0:
+//            lnk.closest('[role="article"]').find('.d-k-l.b-c.b-c-R.UN').click();
+            qsStep++;
+            break;
+        case 1:
+
+            // Standard-auswahl beim teilen löschen
+            if (lnk.closest('[role="article"]').parent() !== null)
             {
-                $(this).click();
-            });
-
-            clearCircles = false;
-            startClickCircles = true;
-        }
-    }
-
-    if (startClickCircles) 
-    {
-        // Kreisauswahl öffnen
-        if (lnk.closest('[role="article"]').parent() !== null)
-        {
-            if (lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0)
-            {
-                lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
-            }
-        }
-        startClickCircles = false;
-    }
-
-    if (finalizeCircleClick)
-    {
-        // Alle Kreise ausgewählt, Letzte Schritte
-        lnk.closest('[role="article"]').parent().find('[role="listbox"]').hide();
-        if (circlesAsBookmark) {
-            lnk.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
-        } else {
-            lnk.closest('[role="article"]').parent().find('[role="textbox"]').focus();
-        }
-        lnk.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
-        finalizeCircleClick = false;
-    }
-
-    if (clickCircles.length > 0 && !clearCircles && !startClickCircles) 
-    {
-        // Kreise auswählen
-        if (lnk.closest('[role="article"]').parent() !== null)
-        {
-            var lastCircle = clickCircles.pop();
-            $('.d-A').each(function()
-            {
-                if ($(this).text().indexOf(lastCircle) === 1) {
+                lnk.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function()
+                {
                     $(this).click();
+                });
 
-                }
-            });
-
-            if (clickCircles.length === 0) {
-                finalizeCircleClick = true;
+                qsStep++;
             }
-        }
+            break;
+        case 2:
+            // Kreisauswahl öffnen
+            if (lnk.closest('[role="article"]').parent() !== null)
+            {
+                if (lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0)
+                {
+                    lnk.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
+                    qsStep++;
+                }
+            }
+
+
+            break;
+        case 3:
+            // Kreise auswählen
+            if (lnk.closest('[role="article"]').parent() !== null)
+            {
+                var lastCircle = clickCircles.pop();
+                $('.d-A').each(function()
+                {
+                    if ($(this).text().indexOf(lastCircle) === 1) {
+                        $(this).click();
+
+                    }
+                });
+
+                if (clickCircles.length === 0) {
+                    qsStep++;
+                }
+            }
+            break;
+        case 4:
+            // Alle Kreise ausgewählt, Letzte Schritte
+            lnk.closest('[role="article"]').parent().find('[role="listbox"]').hide();
+            if (circlesAsBookmark) {
+                lnk.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
+            } else {
+                lnk.closest('[role="article"]').parent().find('[role="textbox"]').focus();
+            }
+            lnk.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
+            qsStep = -1;
+            break;
     }
 }
 
@@ -100,32 +129,28 @@ function QSEvents()
 function PaintQsIcons() {
     if (quickShares.length > 0)
     {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
-        $('.Qg').each(function() {
-            if ($(this).parent().find('.quickShare').length === 0)
-            {
-                var iconHtml = "";
+        $('[jsname="MxEsy"]:not(:has(.quickShare))>.Qg').each(function()
+        {
+            // normale
+            var iconHtml = "";
 
-                for (var i in quickShares) {
-                    var qs = quickShares[i];
-                    iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
-                }
-                $(this).before('<div class="quickShare">' + iconHtml + '<br/></div>');
+            for (var i in quickShares) {
+                var qs = quickShares[i];
+                iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
             }
+            $(this).before('<div class="quickShare">' + iconHtml + '<br/></div><div class="qscl"></div>');
         });
 
-        $('.quickShareImg').hover(
-                function() {
-                    var oldName = $(this).prop("src");
-                    $(this).prop("src", oldName.replace("disabled", "enabled"));
-                },
-                function() {
-                    var oldName = $(this).prop("src");
-                    $(this).prop("src", oldName.replace("enabled", "disabled"));
-                });
-        $('.quickShareImg').click(function()
+        $('.yM.bD:not(:has(.quickShare))>.Qg').each(function()
         {
-            StartAutoClick($(this));
+            // breite
+            var iconHtml = "";
+
+            for (var i in quickShares) {
+                var qs = quickShares[i];
+                iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
+            }
+            $(this).before('<div class="quickShare">' + iconHtml + '<br/></div><div class="qscl"></div>');
         });
     }
 }
@@ -138,8 +163,8 @@ function StartAutoClick(container)
 {
     lnk = container;
     clickCircles = container.attr("circles").split(',');
-    clearCircles = true;
     circlesAsBookmark = JSON.parse(container.attr("isBookmark"));
-
     lnk.closest('[role="article"]').find('.Dg.Ut').click();
+
+    qsStep = 1;
 }

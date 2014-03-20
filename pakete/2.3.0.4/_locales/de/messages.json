@@ -1,0 +1,116 @@
+{
+    "appName": {
+        "message": "Google+ - Optimizer"
+    },
+    "appDesc": {
+        "message": "Der Google+ Optimizer verbessert die Benutzererfahrung mit Google+. "
+    },
+    "lang": {
+        "message": "de"
+    },
+    "removeHashtag": {
+        "message": "Hashtag filtern"
+    },
+    "ligaVon": {
+        "message": "Die Livedaten stammen von "
+    },
+    "Pause": {
+        "message": "Pause"
+    },
+    "Fortsetzen": {
+        "message": "Fortsetzen"
+    },
+    "Stoppuhr_starten": {
+        "message": "Stoppuhr starten"
+    },
+    "Stoppuhr_stoppen": {
+        "message": "Stopuhr stoppen"
+    },
+    "Stoppuhr": {
+        "message": "Stoppuhr"
+    },
+    "Heimmannschaft": {
+        "message": "Heimmannschaft"
+    },
+    "Gaestemannschaft": {
+        "message": "Gästemannschaft"
+    },
+    "Stand": {
+        "message": "Stand"
+    },
+    "RemarkPlaceholder": {
+        "message":"Kommentar für __USER__ fehlt"
+    },
+    "WidgetHide": {
+        "message":"(nicht anzeigen)"
+    },
+    "WidgetLeft":{
+        "message":"Links"
+    },
+    "WidgetMiddle":{
+        "message":"Mitte"
+    },
+    "WidgetRight":{
+        "message":"Rechts"
+    },
+    "WidgetShow":{
+        "message":"Anzeigen"
+    },
+    "DisplayImage":{
+        "message":"Bild anzeigen ⇘"
+    },
+    "DisplayVideo": {
+        "message": "Video anzeigen ⇘"
+    },
+    "DisplayLink": {
+        "message": "Link anzeigen ⇘"
+    },
+    "DisplayContent": {
+        "message": "Inhalt anzeigen ⇘"
+    },
+    "DisplayImageAnimated": {
+        "message": "Animierted Bild anzeigen ⇘"
+    },
+    "DisplayVideoAnimated": {
+        "message": "Animiertes Video anzeigen ⇘"
+    },
+    "ReadingCircleData": {
+        "message": "Lese Daten aus den Kreisen"
+    },
+    
+    "ReadingCircleUsers": {
+        "message": "Lese Kontaktdaten"
+    },
+    
+    "TrophiesCollected": {
+        "message": "Trophäen gesammelt"
+    },
+    
+    "ReadingPublicStream": {
+        "message": "Lese Daten aus öffentlichen Stream"
+    },
+    
+    "ReadingDataFrom": {
+        "message": "Lese Beiträge vom:"
+    },
+    
+    "ReadingProfileData": {
+        "message": "Analysiere Profil"
+    },
+    
+    "done": {
+        "message": "fertig."
+    },
+    "trophies": {
+        "message": "Trophäen"
+    },
+    "goldTrophies": {
+        "message": "Gold-Trophäen"
+    },
+    "silverTrophies": {
+        "message": "Silber-Trophäen"
+    },
+    "bronzeTrophies": {
+        "message": "Bronze-Trophäen"
+    }
+}

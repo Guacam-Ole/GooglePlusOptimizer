@@ -37,8 +37,6 @@ function StartSoccer()
     }
 }
 
-
-
 /**
  * Sportblock aktualisieren
  */
@@ -213,7 +211,6 @@ function UpdateSoccer(id, league, season)
     }
 }
 
-
 function CreateSportClickEvent()
 {
     $(".NeuesVomSpocht tr:odd").addClass("odd");
@@ -225,8 +222,3 @@ function CreateSportClickEvent()
         $(this).find(".arrow").toggleClass("up");
     });
 }
-
-
-
-
-        

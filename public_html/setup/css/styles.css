@@ -26,6 +26,10 @@ a:hover {
     background:url(../images/bg_top_gradient.png) top repeat-x;
     width:100%;
 }
+.spam {
+    width:960px;
+    height:250px;
+}
 #wrapper {
     width:956px;
     margin:0px auto; /*centers your design on the page*/
@@ -79,7 +83,7 @@ a:hover {
 .inputDD {
     width: 250px;
     height: 475px;
-    float: left;
+    float: left;    
 }
 /*menu*/
 #menu { /*the container that holds the main menu*/
