@@ -5,12 +5,14 @@
         <title>Google+ Filter</title>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/styles.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.ui.widget.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
         <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
@@ -82,7 +84,20 @@
                                 <!--end left_column-->
                                 <div id="right_column">
                                     <h1>Help</h1><br/>
-                                    <a href="#" id="reactivateWizard" class="btn blue">Reactivate wizard</a>
+                                    Wizard-Setting:<br/>
+                                    <div class="btn-group">
+                                        <button type="button" id="butWizDisplay" class="btn blue">Display when new features available (default)</button>
+                                        <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">											
+                                            <li><a id="butWizDefault">Display when new features available (default)</a></li>
+                                            <li><a id="butWizDisable"href="#">Disable</a></li>
+                                            <li class="divider"></li>
+                                            <li><a id="butWizReset">Reset wizard(display all settings again)</a></li>
+                                        </ul>
+                                    </div><br/><br/>
                                     <p>Just move your mouse above the icons to know, what the setting does. Is there is a gray picture, this function is disabled. If it's in colour it's enabled.</p>
                                     <p>If you need more help or something goes terribly wrong, it would be wise to ask your question in the <a target="_blank" href="https://plus.google.com/u/0/communities/111606711991143283422">support-community</a>. Please be advised that I cannot offer 24/7 - support.</p>			  
                                     <p>You can also send me <a target="_blank" href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#bug">error reports</a> or <a target="_blank" href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#feature">improvement suggestions</a></p>

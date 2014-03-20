@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google+ Filter</title>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../css/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.widget.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+        <script type="text/javascript" src="../../date.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/trophy.js"></script>
+    </head>
+
+    <body>
+        <div id="bg_top">
+            <div id="wrapper">
+                <div id="header"><div id="logo"><h1>Optimizer für Google+</h1></div></div>
+                <div class="trophyDiv" style="display:none;">
+                    Lade Daten für Trophäen:<br/>
+                    <span id="currentAction">...initialisiere...</span><br/>
+                    <span id="currentPos">...initialisiere...</span>
+                    <br/><br/>
+                    <span id="trophyCount">0 Trophäen gesammelt</span><br/>
+                    <center><img src="../images/progress.gif"/></center>
+                    <br/>
+                    <b>Bitte warten, bis der Vorgang beendet ist.</b>
+                    Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
+                </div>
+                
+                <div class="trophyDivWhy" style="display:none;">
+                    <h3>Wieso muss ich mich authentifizieren?</h3>
+                    Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.
+                    <h3>Was passiert mit meinen Daten?</h3>
+                    Die Daten werden ausschließlich zur Bestimmung der Trophäen verwendet. Sie werden nicht gespeichert.
+                    <h3>Wieso will der Google+ Optimizer in meinem Namen schreiben?</h3>
+                    Eigentlich will er das gar nicht. Aber die Berechtigung zum Auslesen Deines Profils beinhaltet immer auch die Schreibberechtigung. 
+                    Und obwohl der Optimizer nichts in Deinen Stream schreibt, wird diese Berechtigung angezeigt.
+                    <h3>Und das muss ich glauben?</h3>
+                    Nein. Natürlich nicht. Wenn Du auf Nummer Sicher gehen willst, wähle einfach "Nur für mich" aus
+                    <h3>Ich will das aber alles nicht</h3>
+                    Kein Problem. Die Authentifizierung wird ausschließlich für die Trophäen benötigt. Wenn Du darauf verzichten kannst, brauchst Du Dich auch nicht authentifizieren.
+                    <center><a href="#" id="closeInfo" >schließen</a></center>
+                </div>
+                <!--end header-->
+                <div id="menu">
+                    <ul id="navigation">
+                        <li><a href="index.html">Willkommen</a></li>
+                        <li><a href="settings.html">Filter</a> </li>
+                        <li><a href="erweitert.html">Einstellungen</a> </li>
+                        <li><a href="widgets.html">Widgets</a> </li>
+                        <li><a href="additions.html" class="active">Erweiterungen</a> </li>
+                        <li><a href="help.html">Hilfe</a></li>
+                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=de&gl=DE">Plugin Bewerten (Danke!) </a></li>
+                    </ul>
+                </div>
+                <!--end menu-->
+
+                <div id="content">
+                    <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background" /></div>
+                    <!-- the shadow border down left/right -->
+                    <div id="content_border">
+                        <!-- the gradient from top to bottom -->
+                        <div id="content_bg">
+                            <!-- the optional line down the middle of the content area -->
+                            <div id="content_seperator">
+                                <div id="left_column">
+                                    <!--side menu-->
+                                    <div class="side_menu">
+                                     
+                                    </div>
+                                    <!--end side menu-->
+                                </div>
+                                <!--end left_column-->
+                                <div id="right_column">
+                                    <h1>Erweiterungen</h1>
+                                    <p>Hier können zusätzliche Features aktiviert und modifiziert werden</p>
+                                    <!-- Sport - Start -->
+                                    <div class="service_box_container">
+                                        <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkDisplayColors">
+                                            <input class="toggle" type="checkbox" />
+                                        </div>&nbsp;Beiträge farblich hervorheben<br/>
+                                        <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkTrophies">
+                                            <input class="toggle" type="checkbox"/>
+                                        </div>&nbsp;Trophäen aktivieren <a href="#" class="blue searchWeather" id="collectTrophy">Trophäen aktualisieren</a> Authentifizierung erforderlich(<a href="#" id="whyAuth">warum?</a>)<br/>
+                                        <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShowEmoticons">
+                                            <input class="toggle" type="checkbox" />
+                                        </div>&nbsp;Smilies aktivieren<br/> 
+                                        <hr class="clear" />
+                                    </div>
+                                    <!--end box 1-->
+                                </div>
+                                <!--end right_column-->
+
+                            </div>
+                            <!-- end line down the middle -->
+                        </div>
+                        <!-- end the gradient from top to bottom -->
+                    </div>
+                    <!-- end the shadow border down left/right -->
+                    <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background" /></div>
+                </div>
+                <!-- end content wrap -->
+                <div id="footer">
+                    <a href="help.html#license">Verwendete Lizenzen und Quellen</a>
+                    <div class="right">
+                        <ul>
+                            <li class="keep_in"> Kontakt:</li>
+                            <li><a href="https://plus.google.com/u/0/communities/111606711991143283422" title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community" width="25" height="25" border="0" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

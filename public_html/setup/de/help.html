@@ -5,12 +5,14 @@
         <title>Google+ Filter</title>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/styles.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.ui.widget.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
         <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
         <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
@@ -82,7 +84,21 @@
                                 <!--end left_column-->
                                 <div id="right_column">
                                     <h1>Hilfe</h1><br/>
-                                    <a href="#" id="reactivateWizard" class="btn blue">Wizard wieder aktivieren</a>
+                                    Wizard-Verhalten:<br/>
+                                    <div class="btn-group">
+                                        <button type="button" id="butWizDisplay" class="btn blue">Bei neuer Version anzeigen (Standard)</button>
+                                        <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">											
+                                            <li><a id="butWizDefault">Bei neuer Version anzeigen (Standard)</a></li>
+                                            <li><a id="butWizDisable"href="#">Deaktivieren</a></li>
+                                            <li class="divider"></li>
+                                            <li><a id="butWizReset">Wizard zurücksetzen (Alle Features zeigen)</a></li>
+                                        </ul>
+                                    </div><br/><br/>
+
                                     <p>Was eine Einstellung genau macht, erf&auml;hrst Du, wenn Du im Einstellungsmen&uuml; &uuml;ber die Bilder f&auml;hrst. Ist das Bild grau, so ist die Funktion deaktiviert, ansonsten aktiviert.</p>
                                     <p>Solltest Du weitere Hilfe ben&ouml;tigen oder etwas haken, stell am besten eine Frage in der <a target="_blank" href="https://plus.google.com/u/0/communities/111606711991143283422">Support-Community</a>. Verstehe aber bitte, dass ich keinen 24/7 - Support leisten kann.</p>			  
                                     <p>Es können auch gerne <a target="_blank" href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#bug">Fehler gemeldet</a> werden oder <a target="_blank" href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#feature">Verbesserungsvorschläge</a> gemacht werden.</p>
@@ -144,6 +160,9 @@
                     <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background" /></div>
                 </div>
                 <!-- end content wrap -->
+<div class="spam">
+                    <a href="http://www.xn--alstervergngen-qsb.com" title="Ich kann auch schreiben! :D Unterstützt mich mit meinem Buch 'Alstervergnügen' auf startnext" ><img id="spam1" src="../images/alster.png" width="960" height="250" border="0"/><img id="spam2" style="position: relative; left: 800px; top:-290px;" src="../images/startnext_logo_green.png"/></a>
+                </div>
                 <div id="footer">
                     <a href="help.html#license">Verwendete Lizenzen und Quellen</a>
                     <div class="right">

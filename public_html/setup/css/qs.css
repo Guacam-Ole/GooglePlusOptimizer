@@ -1,11 +1,21 @@
 
-.quickShare {
-    margin: 20px 0 0 0;
-    padding: 0 0 20px 12px;
+.quickShare {    
+    
+    //padding: 0 0 20px 12px;
+    padding-left: 12px;
+    padding-bottom: 20px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+.qscl + .Qg 
+{ 
+    margin-top: 5px !important;
 }
 
 .quickShare div
 {
+    margin-top: 5px;
     border-radius: 3px;
     -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
     box-shadow: 0 1px 0 rgba(0,0,0,.05);
@@ -22,6 +32,10 @@
     background-image: none;
     -webkit-appearance: none;
     
+}
+
+.qscl {
+    clear:both;
 }
 
 .quickShare div img 

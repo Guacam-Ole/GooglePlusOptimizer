@@ -175,10 +175,6 @@
             {
                 "message": "Fahnen"
             },
-    "icons_hh":
-            {
-                "message": "Hamburg"
-            },
     "icons_gadgets":
             {
                 "message": "Gadgets"
@@ -186,10 +182,6 @@
     "icons_jobs":
             {
                 "message": "Jobs"
-            },
-    "icons_gadgets":
-            {
-                "message": "Gadgets"
             },
     "icons_medical":
             {
@@ -210,5 +202,21 @@
     "icons_transport":
             {
                 "message": "Zu Lande, zu Wasser und in der Luft"
+            },
+    "selectIcon":
+            {
+                "message": "Icon auswählen"
+            },
+    "selectCircle":
+            {
+                "message": "Kreis auswählen"
+            },
+    "BookmarkMode":
+            {
+                "message": "Bookmark-Modus"
+            },
+    "sharedImmediatly":
+            {
+                "message": "(Beiträge werden sofort geteilt)"
             }
 }

@@ -31,14 +31,6 @@ var showEmoticons;
 var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
-//var waitForCircleBox;
-//var waitForCircleDetails;
-//var doShare = false;
-
-if (document.title.indexOf("Google+") !== -1)
-{
-    InitGoogle();
-}
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -61,7 +53,8 @@ $(document).ready(function()
                 return false;
             });
         }
-        StartUpGoogleFilter();
+        LoadAllQuickSharesG();
+        InitGoogle();
     }
 
     if (document.location.href.indexOf("plus.google.com/circles") > 0)
@@ -72,13 +65,16 @@ $(document).ready(function()
 
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
+        CreateAutoSaveEvents();
+
         LoadGoogle();
         CountColumns();
+
+
         if (colorUsers)
         {
             OptStartColors();
         }
-        DrawWizardTile();
     }
 }
 
@@ -146,8 +142,9 @@ function LoadGoogle()
         {
             clearTimeout(timeout);
         }
-        timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)     }, false);     DrawWidgets();
-    });
+        timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
+    }, false);
+    DrawWidgets();
 }
 
 /**
@@ -192,7 +189,7 @@ function DrawWidgets() {
     }
 }
 
-function LoadAllQuickShares()
+function LoadAllQuickSharesG()
 {
     chrome.runtime.sendMessage(
             {
@@ -200,6 +197,10 @@ function LoadAllQuickShares()
             }, function(response)
     {
         quickShares = JSON.parse(response.Result);
+        if (quickShares.length > 0)
+        {
+            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
+        }
     });
 }
 
@@ -228,8 +229,9 @@ function CountColumns()
  */
 function StartFilter()
 {
-    QSEvents();
-
+    if (quickShares.length > 0) {
+        QSEvents();
+    }
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
         return;
@@ -238,6 +240,7 @@ function StartFilter()
         domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
     }, 5000);
     domChangeAllowed = false;
+
     if (filterPlus1)
     {
         $('.xv').closest("[jsmodel='XNmfOc']").hide();
@@ -276,7 +279,7 @@ function StartFilter()
         }
     }
 
-    var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
+    //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
 
     if (filterCommunity)
     {
@@ -312,9 +315,9 @@ function StartFilter()
         OptStartEmoticons();
         PaintEmoticons();
     }
+    InitQS();
     PaintQsIcons();
 }
-
 
 /**
  * Volltextfilter
@@ -347,12 +350,7 @@ function DOMFilterImages() {
                 return false;
             });
         }
-        if (filterImages && filterLinks && filterVideo && !filterGifOnly)
-        {
-            // Alles filtern
-            $('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayContent") + "</a>");
-        } else
-        {
+       
             if (filterVideo)
             {
                 if (filterMp4Only) {
@@ -365,6 +363,7 @@ function DOMFilterImages() {
             if (filterLinks)
             {
                 $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
+                $('.sp.ej.A8Hhid').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
             }
             if (filterImages)
             {
@@ -376,7 +375,7 @@ function DOMFilterImages() {
                     $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
                 }
             }
-        }
+        
     }
     catch (ex) {
         console.log(ex);
@@ -473,14 +472,24 @@ function LoadSettingsLive()
         showTrophies = response.DisplayTrophy;
         showEmoticons = response.ShowEmoticons;
         lastWizardVersion = response.lastWizard;
+        wizardMode = response.WizardMode;
         trophies = response.Trophies || null;
+        autoSave = response.UseAutoSave;
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
         localStorage.setItem("lastTrophyRead", response.LastTrophyRead);
+        StartUpGoogleFilter();
+
+        wizardMode = JSON.parse(wizardMode);
+
+        if (wizardMode >= 0)
+        {
+            DrawWizardTile();
+        }
+
     }
     );
-    LoadAllQuickShares();
 }
 
 /**
@@ -530,9 +539,6 @@ function ShowNotification(notificationType, title, text)
     style += ";";
     var messageBox = "<div id='gplusMessage' class='gplusMessage' style=\"" + style + "\"><b>" + title + ":</b>" + text + "</div>";
     $('.Ima.Xic').append(messageBox);
-    $('.gplusMessage').click(function() {
-        ClearNotification();
-    });
     timeout = setTimeout(ClearNotification, 10000);
 }
 

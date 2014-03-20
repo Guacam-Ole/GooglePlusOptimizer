@@ -5,7 +5,7 @@
             <url>public_html/setup/js/gplusfilter.js</url>
             <bookmark id="7">
                 <name/>
-                <line>202</line>
+                <line>228</line>
                 <key/>
             </bookmark>
             <bookmark id="11">
@@ -15,34 +15,30 @@
             </bookmark>
             <bookmark id="10">
                 <name/>
-                <line>511</line>
+                <line>499</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>511</line>
+                <line>499</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>511</line>
+                <line>499</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/smilies.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/css/styles.css</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/trophy.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/clock.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/filter.js</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/erweitert.html</file>
             <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/wizard.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/manifest.json</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/en/wizard.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/gplusfilter.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/css/clock.css</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/filter.js</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/autosave.js</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/setup.js</file>
             <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/wizard.html</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/additions.html</file>
         </group>
     </open-files>
 </project-private>

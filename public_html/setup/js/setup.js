@@ -359,6 +359,29 @@ function SaveSwitch(propertyName, imageId, imageSrc)
 function LoadExtended()
 {
     try {
+        if (window.location.href.indexOf('help.html') > 0) {
+            $('.dropdown-toggle').dropdown();
+            var wizardMode = localStorage.getItem("WizardMode") || 1;
+            if (wizardMode === null)
+            {
+                wizardMode = 1;
+            } else {
+                wizardMode = JSON.parse(wizardMode);
+            }
+
+            switch (wizardMode) {
+                case 1:
+                    $('#butWizDisplay').text($('#butWizDefault').text());
+                    break;
+                case -1:
+                    $('#butWizDisplay').text($('#butWizDisable').text());
+                    break;
+                case 0:
+                    $('#butWizDisplay').text($('#butWizReset').text());
+                    break;
+            }
+        }
+
         $('#hashtags').val(localStorage.getItem("hashTags"));
         $('#fulltext').val(localStorage.getItem("fulltext"));
         $("#clockPos").val(localStorage.getItem("StoppWatch"));
@@ -445,6 +468,7 @@ function LoadSetup()
         LoadCheckBox("filterGifOnly", $("#chkFilterGif"));
         LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
         LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
+        LoadCheckBox("useAutoSave", $('#chkAutoSave'));
 
         //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
         LoadExtended();
@@ -481,8 +505,20 @@ function LoadSetup()
         GetSportTypes();
         SaveWeatherSettings();
 
-        $('#reactivateWizard').click(function() {
+
+
+        $('#butWizReset').click(function() {
             localStorage.setItem("lastWizard", "0");
+            localStorage.setItem("WizardMode", "0");
+            $('#butWizDisplay').text($(this).text());
+        });
+        $('#butWizDisable').click(function() {
+            localStorage.setItem("WizardMode", "-1");
+            $('#butWizDisplay').text($(this).text());
+        });
+        $('#butWizDefault').click(function() {
+            localStorage.setItem("WizardMode", "1");
+            $('#butWizDisplay').text($(this).text());
         });
     } catch (ex) {
         console.log(ex);
@@ -709,6 +745,10 @@ function CreateCheckboxEvents()
     $("#chkShowEmoticons").on('switch-change', function(e, data)
     {
         SaveCheckBox("showEmoticons", data.value);
+    });
+    $("#chkAutoSave").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("useAutoSave", data.value);
     });
 }
 
