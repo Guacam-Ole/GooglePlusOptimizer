@@ -14,7 +14,7 @@ function PaintEmoticons() {
             + '{"img": "clap.gif","short": ":clap:"},'
             + '{"img": "confused.png","short": "?("},'
             + '{"img": "cool.png","short": "8)"},'
-            + '{"img": "cool.png","short": "8-)"},'  
+            + '{"img": "cool.png","short": "8-)"},'
             + '{"img": "crying.gif","short": ";("},'
             + '{"img": "crying.gif","short": ";-("},'
             + '{"img": "essen.png","short": ":eat:"},'
@@ -55,9 +55,9 @@ function PaintEmoticons() {
             + '{"img": "arge.gif","short": ":mad:"},'
             + '{"img": "woot.png","short": "8o"}]';
 
-        var smilies = JSON.parse(emoticons);
+    var smilies = JSON.parse(emoticons);
 
-    $('.Ct').each(function()
+ $('.Ct').each(function()
     {
         try {
             for (var i in smilies)
@@ -65,7 +65,7 @@ function PaintEmoticons() {
                 var smilie = smilies[i];
                 if ($(this).text().indexOf(smilie.short) >= 0)
                 {
-                    $(this).html($(this).html().replaceAll(smilie.short, "<img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
+                    $(this).html($(this).html().replaceAll(" "+smilie.short, " <img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
                 }
             }
         } catch (ex) {
