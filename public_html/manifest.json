@@ -33,8 +33,26 @@
                         "setup/js/quickshare.js",
                         "setup/js/qsdisplay.js",
                         "setup/js/autosave.js",
+                        "setup/js/clippy.min.js",
+                        "setup/Agents/Clippy/agent.js",
+                        "setup/Agents/Clippy/sounds-mp3.js",
+                        "setup/Agents/Clippy/sounds-ogg.js",
+                        
                         "date.js"]
-                }],
+                },
+                {
+                    "matches":["https://www.google.de/*"],
+                    "js": [
+                        "setup/js/jquery-1.10.2.min.js",
+                        "setup/js/clippy.min.js",
+                        "setup/Agents/Clippy/agent.js",
+                        "setup/Agents/Clippy/sounds-mp3.js",
+                        "setup/Agents/Clippy/sounds-ogg.js",
+                        "setup/js/showclippy.js"
+                    ]
+                }
+                
+                ],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",
     "options_page": "setup/redirect.html",
     "background":
@@ -70,6 +88,7 @@
         "setup/de/wizard.html",
         "setup/de/wizimg/*",
         "setup/en/wizimg/*",
+        "setup/Agents/Clippy/*",
         "setup/en/wizardloader.html",
         "setup/en/wizard.html"
     ]
