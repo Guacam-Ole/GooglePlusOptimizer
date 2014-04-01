@@ -38,7 +38,7 @@ function IsDemo() {
 
 
 $(document).ready(function()
-{    
+{
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
         LoadSetup();
@@ -56,13 +56,47 @@ $(document).ready(function()
         }
         LoadAllQuickSharesG();
         InitGoogle();
-    }
+        GetAllCircles();
 
-    if (document.location.href.indexOf("plus.google.com/circles") > 0)
-    {
-        GetCircles();
+
     }
 });
+
+function GetAllCircles()
+{
+    // Kreise auslesen
+    $('script').each(function() {
+        try {
+            if (this.innerHTML.indexOf("AF_initDataCallback({key: '12'") > -1)
+            {
+                var newCircles = [];
+                var complete = this.innerHTML;
+                var startJSON = complete.indexOf('[');
+                var endJSON = complete.lastIndexOf(']');
+                var cstr = complete.substring(startJSON, endJSON + 1);
+
+                while (cstr.indexOf(",,") > 0)
+                {
+                    cstr = cstr.replace(",,", ",null,")
+                }
+                ;
+                var allCircles = $.parseJSON(cstr);
+                if (allCircles.length === 1)
+                {
+                    for (i = 0; i < allCircles[0].length; i++) {
+                        if (allCircles[0][i].length === 2 && allCircles[0][i][1].length === 16)
+                        {
+                            var circleName = allCircles[0][i][1][0];
+                            newCircles.push(circleName);
+                        }
+                    }
+                }
+                chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(newCircles)})
+            }
+        } catch (ex) {
+        }
+    });
+}
 
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
