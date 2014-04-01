@@ -232,7 +232,7 @@ function LoadAllQuickSharesG()
             }, function(response)
     {
         quickShares = JSON.parse(response.Result);
-        if (quickShares.length > 0)
+        if (quickShares!==null && quickShares.length > 0)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
         }

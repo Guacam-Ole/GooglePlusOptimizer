@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.4.0.1",
+    "version": "2.4.0.3",
     "author": "Ole Albers",
     "permissions": [
         "http://ajax.googleapis.com/",
@@ -33,23 +33,7 @@
                         "setup/js/quickshare.js",
                         "setup/js/qsdisplay.js",
                         "setup/js/autosave.js",
-                        "setup/js/clippy.min.js",
-                        "setup/Agents/Clippy/agent.js",
-                        "setup/Agents/Clippy/sounds-mp3.js",
-                        "setup/Agents/Clippy/sounds-ogg.js",
-                        
                         "date.js"]
-                },
-                {
-                    "matches":["https://www.google.de/*"],
-                    "js": [
-                        "setup/js/jquery-1.10.2.min.js",
-                        "setup/js/clippy.min.js",
-                        "setup/Agents/Clippy/agent.js",
-                        "setup/Agents/Clippy/sounds-mp3.js",
-                        "setup/Agents/Clippy/sounds-ogg.js",
-                        "setup/js/showclippy.js"
-                    ]
                 }
                 
                 ],
