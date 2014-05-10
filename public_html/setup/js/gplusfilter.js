@@ -58,7 +58,12 @@ $(document).ready(function()
         InitGoogle();
         GetAllCircles();
 
-
+        $(document).on('click', '.unhideImage', function()
+        {
+            $(this).parent().find('.hidewrapper').show();
+            $(this).remove();
+            return false;
+        });
     }
 });
 
@@ -77,7 +82,7 @@ function GetAllCircles()
 
                 while (cstr.indexOf(",,") > 0)
                 {
-                    cstr = cstr.replace(",,", ",null,")
+                    cstr = cstr.replace(",,", ",null,");
                 }
                 ;
                 var allCircles = $.parseJSON(cstr);
@@ -91,7 +96,7 @@ function GetAllCircles()
                         }
                     }
                 }
-                chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(newCircles)})
+                chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(newCircles)});
             }
         } catch (ex) {
         }
@@ -104,7 +109,6 @@ function StartUpGoogleFilter() {
 
         LoadGoogle();
         CountColumns();
-
 
         if (colorUsers)
         {
@@ -232,9 +236,10 @@ function LoadAllQuickSharesG()
             }, function(response)
     {
         quickShares = JSON.parse(response.Result);
-        if (quickShares!==null && quickShares.length > 0)
+        if (quickShares !== null && quickShares.length > 0)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
+            InitQS();
         }
     });
 }
@@ -264,14 +269,14 @@ function CountColumns()
  */
 function StartFilter()
 {
-    if (quickShares.length > 0) {
+    if (quickShares !== null && quickShares.length > 0) {
         QSEvents();
     }
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
         return;
     }
-    setInterval(function() {
+    setTimeout(function() {
         domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
     }, 5000);
     domChangeAllowed = false;
@@ -350,7 +355,7 @@ function StartFilter()
         OptStartEmoticons();
         PaintEmoticons();
     }
-    InitQS();
+
     PaintQsIcons();
 }
 

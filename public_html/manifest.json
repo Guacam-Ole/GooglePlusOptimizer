@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.4.0.3",
+    "version": "2.4.0.6",
     "author": "Ole Albers",
     "permissions": [
         "http://ajax.googleapis.com/",
