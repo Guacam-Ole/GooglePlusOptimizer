@@ -126,8 +126,8 @@ function QSEvents()
 /**
  * Icons für QuickShare zeichnen
  */
-function PaintQsIcons() {
-    if (quickShares.length > 0)
+function PaintQsIcons() {    
+    if (quickShares!==null && quickShares.length > 0)
     {
         $('[jsname="MxEsy"]:not(:has(.quickShare))>.Qg').each(function()
         {

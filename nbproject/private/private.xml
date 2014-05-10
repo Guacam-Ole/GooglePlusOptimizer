@@ -5,49 +5,39 @@
             <url>public_html/setup/js/gplusfilter.js</url>
             <bookmark id="7">
                 <name/>
-                <line>228</line>
+                <line>268</line>
                 <key/>
             </bookmark>
             <bookmark id="11">
                 <name/>
-                <line>228</line>
+                <line>268</line>
                 <key/>
             </bookmark>
             <bookmark id="10">
                 <name/>
-                <line>495</line>
+                <line>535</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>495</line>
+                <line>535</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>495</line>
+                <line>535</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/css/styles.css</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/erweitert.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/wizard.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/css/wizard.css</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/setup.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/wizard.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/additions.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/wizardloader.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/widgets.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/help.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/filter.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/en/wizard.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/autosave.js</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/smilies.js</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/manifest.json</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/qsdisplay.js</file>
             <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/gplusfilter.js</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/index.html</file>
-            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/de/settings.html</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/en/additions.html</file>
+            <file>file:/D:/Dox/g+Optimizer/g+Optimizer/public_html/setup/js/quickshare.js</file>
         </group>
     </open-files>
 </project-private>
