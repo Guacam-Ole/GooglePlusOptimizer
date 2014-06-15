@@ -187,6 +187,12 @@ ul#navigation ul.second-level li.hover a, ul#navigation ul.second-level li:hover
 }
 /*main content*/
 
+img .addBookmark {
+    float: left;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
 #content {
 }
 #content_border {

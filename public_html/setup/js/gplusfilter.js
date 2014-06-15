@@ -36,6 +36,12 @@ function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
 }
 
+// Case - INSensitive Contains Variant:
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function(elem) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});
 
 $(document).ready(function()
 {
@@ -43,7 +49,7 @@ $(document).ready(function()
     {
         LoadSetup();
     }
-    else if (document.title.indexOf("Google+") !== -1)
+    else if (window.location.hostname === "plus.google.com")
     {
         if (IsDemo()) {
             var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
@@ -54,6 +60,8 @@ $(document).ready(function()
                 return false;
             });
         }
+
+
         LoadAllQuickSharesG();
         InitGoogle();
         GetAllCircles();
@@ -64,6 +72,29 @@ $(document).ready(function()
             $(this).remove();
             return false;
         });
+
+        $(document).on('click', '.removeHashTag', function()
+        {
+            console.log('Add Hashtag');
+            if (propsHashtags === null)
+            {
+                propsHashtags = "";
+            }
+            var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
+            if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
+            {
+                // Einmal reicht...
+                return;
+            }
+            AddHashtagToList(newHashtag);
+            $(this).hide();
+
+            return false;
+        });
+
+
+        //     AddMuelltonne();
+
     }
 });
 
@@ -109,7 +140,7 @@ function StartUpGoogleFilter() {
 
         LoadGoogle();
         CountColumns();
-
+        InitBookmarks();
         if (colorUsers)
         {
             OptStartColors();
@@ -269,6 +300,7 @@ function CountColumns()
  */
 function StartFilter()
 {
+    AddMuelltonne();
     if (quickShares !== null && quickShares.length > 0) {
         QSEvents();
     }
@@ -280,7 +312,6 @@ function StartFilter()
         domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
     }, 5000);
     domChangeAllowed = false;
-
     if (filterPlus1)
     {
         $('.xv').closest("[jsmodel='XNmfOc']").hide();
@@ -293,29 +324,29 @@ function StartFilter()
     {
         if (whamWhamText)
         {
-            $('.Xx.xJ:contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamChristmasText)
         {
-            $('.Xx.xJ:contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamWhamLink)
         {
-            $('.yx.Nf:contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (whamChristmasLink)
         {
-            $('.yx.Nf:contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
     }
 
@@ -357,6 +388,7 @@ function StartFilter()
     }
 
     PaintQsIcons();
+    DisplayBookMarkIcons();
 }
 
 /**
@@ -369,7 +401,8 @@ function DOMFilterFreetext() {
             var textArray = propsFulltext.split(',');
             $.each(textArray, function(i, fulltext)
             {
-                $('.Xx.xJ:contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
+                $('.Xx.xJ:Contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
+                $('.Al.pf:Contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
             });
         } catch (ex) {
             console.log(ex);
@@ -422,6 +455,17 @@ function DOMFilterImages() {
     }
 }
 
+function AddMuelltonne() {
+    if (filterHashTag)
+        $('.zZ.a0').each(function(index, value)
+        {
+            if ($(this).find('a').length <= 1)
+            {
+                $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
+            }
+        });
+}
+
 /**
  * Hashtags filtern
  */
@@ -429,50 +473,41 @@ function DOMFilterHashtags() {
     try {
         if (filterHashTag)
         {
-
+            AddMuelltonne();
             // Einfügen von hinzufügen-Button
-            $('.zZ.a0').each(function(index, value)
-            {
-                if ($(this).find('a').length <= 1)
-                {
-                    $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
-                }
-            });
+
             if (propsHashtags !== null && propsHashtags !== "")
             {
                 var hashTagArray = propsHashtags.split(',');
                 $.each(hashTagArray, function(i, hashTag)
                 {
                     if (hashTag.length > 1) {
-                        $('.zda.Zg:contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();
+                        $('.zda.Zg:Contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();    // Hashtags im Beitrag
+                        $('.ot-hashtag:Contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();    // Hashtags in geteilten Beitrag
+                        $("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']").closest("[jsmodel='XNmfOc']").hide(); // Automatische Hashtags
                     }
+
                 });
             }
 
-            // Hashtag-Filter-Button geklickt
-            $('.removeHashTag').on("click", function()
-            {
-                console.log('Add Hashtag');
-                if (propsHashtags === null)
-                {
-                    propsHashtags = "";
-                }
-                var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
-                if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
-                {
-                    // Einmal reicht...
-                    return;
-                }
-                propsHashtags += "," + newHashtag;
-                chrome.runtime.sendMessage({Action: "SaveHashtags", ParameterValue: propsHashtags});
-                $(this).hide();
-                ShowNotification("success", "Hashtag wurde zum Filter hinzugefügt.", " Du wirst die nächste Zeit nichts mehr von " + newHashtag + " hören. Bitte Seite neu laden, um den Filter zu aktivieren.");
-                return false;
-            });
         }
     } catch (ex) {
         console.log(ex);
     }
+}
+
+function AddHashtagToList(newHashtag) {
+    propsHashtags += "," + newHashtag;
+    chrome.runtime.sendMessage({Action: "SaveHashtags", ParameterValue: propsHashtags});
+
+
+    ShowNotification("success", chrome.i18n.getMessage("HashtagFilteredTitle"), chrome.i18n.getMessage("HashtagFiltered").replace("_KEYWORD_", newHashtag));
+}
+
+function AddKeywordToList(newKeyword) {
+    propsFulltext += "," + newKeyword;
+    chrome.runtime.sendMessage({Action: "SaveKeywords", ParameterValue: propsFulltext});
+    ShowNotification("success", chrome.i18n.getMessage("KeywordFilteredTitle"), chrome.i18n.getMessage("KeywordFiltered").replace("_KEYWORD_", newKeyword));
 }
 
 /**
@@ -515,6 +550,7 @@ function LoadSettingsLive()
         wizardMode = response.WizardMode;
         trophies = response.Trophies || null;
         autoSave = response.UseAutoSave;
+        displayBookmarks = response.UseBookmarks;
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
@@ -582,6 +618,7 @@ function ShowNotification(notificationType, title, text)
     timeout = setTimeout(ClearNotification, 10000);
 }
 
+
 /**
  * Meldung löschen
  */
@@ -590,4 +627,10 @@ function ClearNotification()
     $("#gplusMessage").remove();
 }
 
+
+/**
+ * 
+ * Code von Marco Grätsch (Angepasst an Optimizer-Speicherung)
+ * 
+ */
 

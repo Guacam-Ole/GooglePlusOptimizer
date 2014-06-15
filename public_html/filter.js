@@ -107,6 +107,12 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("hashTags", request.ParameterValue);
                 sendResponse({Result: "Setting Saved."});
             }
+            else if (request.Action === "SaveKeywords")
+            {
+                // Keywords speichern (Nach Live-Änderung in G+)
+                localStorage.setItem("fulltext", request.ParameterValue);
+                sendResponse({Result: "Setting Saved."});
+            }
             else if (request.Action === "SaveUsers")
             {
                 localStorage.setItem("UserCols", request.ParameterValue);
@@ -120,9 +126,26 @@ chrome.runtime.onMessage.addListener(
                     Result: "Settings loaded."
                 });
             }
+
             else if (request.Action === "SaveCircles")
             {
                 localStorage.setItem("Circles", request.ParameterValue);
+            }
+            else if (request.Action === "SaveBookmarks")
+            {
+                localStorage.setItem("Bookmarks", request.ParameterValue);
+            }
+            else if (request.Action === "LoadBookmarks") {
+                var bookmarks = localStorage.getItem("Bookmarks");
+                sendResponse({Result: bookmarks});
+            }
+            else if (request.Action === "SaveBookmarkContents")
+            {
+                localStorage.setItem("BookmarkContents", request.ParameterValue);
+            }
+            else if (request.Action === "LoadBookmarkContents") {
+                var bookmarkContents = localStorage.getItem("BookmarkContents");
+                sendResponse({Result: bookmarkContents});
             }
             else if (request.Action === "SaveWizardVersion") {
                 localStorage.setItem("lastWizard", request.ParameterValue);
@@ -156,6 +179,8 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("lastTrophyRead", request.lastTrophyRead);
                 localStorage.setItem("showEmoticons", request.showEmoticons);
                 localStorage.setItem("useAutoSave", request.UseAutoSave);
+                localStorage.setItem("useBookmarks", request.UseBookmarks);
+
 
 
                 sendResponse({Result: "Settings Saved."});
@@ -191,7 +216,8 @@ chrome.runtime.onMessage.addListener(
                 var showEmoticons = localStorage.getItem("showEmoticons");
                 var lastWizard = localStorage.getItem("lastWizard");
                 var lastTrophyRead = localStorage.getItem("lastTrophyRead");
-                var useAutoSave=localStorage.getItem("useAutoSave");
+                var useBookmarks=localStorage.getItem("useBookmarks");
+                var useAutoSave = localStorage.getItem("useAutoSave");
                 var wizardMode = localStorage.getItem("WizardMode") || 1;
                 if (wizardMode === null) {
                     wizardMode = 1;
@@ -202,7 +228,7 @@ chrome.runtime.onMessage.addListener(
                 {
                     interval = 500;
                 }
-                useAutoSave=BoolNotNull(useAutoSave);
+                useAutoSave = BoolNotNull(useAutoSave);
                 filterPlus1 = BoolNotNull(filterPlus1);
                 filterYouTube = BoolNotNull(filterYouTube);
                 filterWham = BoolNotNull(filterWham);
@@ -223,6 +249,7 @@ chrome.runtime.onMessage.addListener(
                 filterMp4Only = BoolNotNull(filterMp4Only);
                 displayTrophy = BoolNotNull(displayTrophy);
                 showEmoticons = BoolNotNull(showEmoticons);
+                useBookmarks=BoolNotNull(useBookmarks);
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -247,18 +274,68 @@ chrome.runtime.onMessage.addListener(
                     FilterLinks: GetBool(filterLinks),
                     DisplayTrophy: GetBool(displayTrophy),
                     ShowEmoticons: GetBool(showEmoticons),
-                    WizardMode:wizardMode,
+                    WizardMode: wizardMode,
                     Trophies: trophies,
                     Sport: sport,
                     Wetter: wetter,
                     Interval: interval,
                     Stoppwatch: stoppwatch,
                     LastTrophyRead: lastTrophyRead,
+                    UseBookmarks:GetBool(useBookmarks),
                     lastWizard: lastWizard,
-                    UseAutoSave:useAutoSave,
+                    UseAutoSave: GetBool(useAutoSave),
                     Result: "Settings loaded."
                 });
             }
         });
 
-  
+
+function onClickHandler(info, tab) {
+    if (info.menuItemId === 'hashtagfilter') {
+        var tag = decodeURIComponent(info.linkUrl.replace('https://plus.google.com/s/', '').replace('https://plus.google.com/explore/', ''));
+        addHashtag(tag);
+    } else if (info.menuItemId === 'keywordfilter') {
+        var keywords = info.selectionText.split(/[^\w\d]+/);
+        addKeyword(keywords);
+    }
+}
+;
+
+function addKeyword(keyword) {
+    var keywords = localStorage.getItem("fulltext") || null;
+    if (keywords === null) {
+        keywords = keyword;
+    } else {
+        keywords += "," + keyword;
+    }
+    localStorage.setItem("fulltext", keywords);
+}
+
+function addHashtag(hashtag) {
+    var hashtags = localStorage.getItem("hashTags") || null;
+    if (hashtags === null) {
+        hashtags = hashtag;
+    } else {
+        hashtags += "," + hashtag;
+    }
+    localStorage.setItem("hashTags", hashtags);
+}
+
+
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+
+
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.contextMenus.create({
+        title: chrome.i18n.getMessage("RemoveHashtag"),
+        id: 'hashtagfilter',
+        contexts: ['link'],
+        targetUrlPatterns: ['*://*/s/*', '*://*/explore/*']
+    });
+
+    chrome.contextMenus.create({
+        title: chrome.i18n.getMessage("RemoveKeyword"),
+        id: 'keywordfilter',
+        contexts: ['selection']
+    });
+});

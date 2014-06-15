@@ -4,12 +4,13 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.4.0.9",
+    "version": "2.5.0.0",
     "author": "Ole Albers",
     "permissions": [
-        "http://ajax.googleapis.com/",
+       
         "storage",
-        "identity"
+        "identity",
+        "contextMenus"
     ],
     "content_scripts":
             [{
@@ -33,6 +34,7 @@
                         "setup/js/quickshare.js",
                         "setup/js/qsdisplay.js",
                         "setup/js/autosave.js",
+                        "setup/js/bookmarks.js",
                         "date.js"]
                 }
                 
@@ -72,7 +74,6 @@
         "setup/de/wizard.html",
         "setup/de/wizimg/*",
         "setup/en/wizimg/*",
-        "setup/Agents/Clippy/*",
         "setup/en/wizardloader.html",
         "setup/en/wizard.html"
     ]

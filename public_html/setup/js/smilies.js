@@ -1,7 +1,7 @@
 
 function OptStartEmoticons()
 {
-    console.log("smilies loaded.");
+ //   console.log("smilies loaded.");
 }
 
 

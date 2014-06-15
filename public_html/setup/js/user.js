@@ -106,7 +106,7 @@ function PaintCurrentUserSettings()
 {
     try {
         clearTimeout(userColorTimeout);
-        var currentUserSettings = GetCurrentUserSettings();
+        var currentUserSettings = GetCurrentUserSettings() || null;
         if (currentUserSettings === null)
         {
             return; // Noch keine Einstellungen
