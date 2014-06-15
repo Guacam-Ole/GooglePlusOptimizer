@@ -218,5 +218,29 @@
     "sharedImmediatly":
             {
                 "message": "(Beiträge werden sofort geteilt)"
+            },
+    "RemoveHashtag":
+            {
+                "message": "Hashtag filtern"
+            },
+    "RemoveKeyword":
+            {
+                "message": "Wort filtern"
+            },
+    "HashtagFilteredTitle":
+            {
+                "message": "Hashtag wurde zum Filter hinzugefügt"
+            },
+    "HashtagFiltered":
+            {
+                "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
+            },
+    "KeywordFilteredTitle":
+            {
+                "message": "Wort wurde zum Filter hinzugefügt."
+            },
+    "KeywordFiltered":
+            {
+                "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
             }
 }

@@ -215,6 +215,7 @@ function LoadWizardSettings() {
     LoadCheckBox(colorUsers, "#chkWizColors");
     LoadCheckBox(showEmoticons, "#chkWizEmoticons");
     LoadCheckBox(autoSave, "#chkAutoSave");
+    LoadCheckBox(displayBookmarks, "#chkWizBookmarks");
 
     propsFulltext = propsFulltext || "";
     if (propsFulltext === null) {
@@ -502,6 +503,9 @@ function WizSwitchEvents() {
             case "chkAutoSave":
                 autoSave = data.value;
                 break;
+            case "chkWizBookmarks":
+                displayBookmarks = data.value;
+                break;
 
 
         }
@@ -627,6 +631,7 @@ function SaveWizardSettings()
                 trophies: trophies,
                 showEmoticons: showEmoticons,
                 UseAutoSave: autoSave,
+                UseBookmarks: displayBookmarks,
                 lastTrophyRead: lastTrophyRead
             }, function(response) {
     }

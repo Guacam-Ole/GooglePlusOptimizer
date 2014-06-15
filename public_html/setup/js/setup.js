@@ -469,6 +469,7 @@ function LoadSetup()
         LoadCheckBox("filterMp4Only", $("#chkFilterMp4"));
         LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
         LoadCheckBox("useAutoSave", $('#chkAutoSave'));
+        LoadCheckBox("useBookmarks", $('#chkBookmarks'));
 
         //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
         LoadExtended();
@@ -749,6 +750,10 @@ function CreateCheckboxEvents()
     $("#chkAutoSave").on('switch-change', function(e, data)
     {
         SaveCheckBox("useAutoSave", data.value);
+    });
+    $("#chkBookmarks").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("useBookmarks", data.value);
     });
 }
 

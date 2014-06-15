@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.06.2014, 19:22:20
+    Author     : Tomato
+*/
+
+.addBookmark 
+{
+    float: left;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+.miniBookmark img
+{
+    height: 25px;
+    margin-left: 5px;
+    margin-right: -4px;
+}

@@ -218,5 +218,31 @@
     "sharedImmediatly":
             {
                 "message": "(posts will be shared immediatly)"
+            },
+    "RemoveHashtag":
+            {
+                "message": "filter Hashtag"
+            },
+    "RemoveKeyword":
+            {
+                "message": "filter Keyword"
+            },
+    "HashtagFilteredTitle":
+            {
+                "message": "Hashtag has been added to the filter."
+            },
+    "HashtagFiltered":
+            {
+                "message": "You won't see anything again from '_KEYWORD_'. Please refresh the page to reload the filter."
+            },
+    "KeywordFilteredTitle":
+            {
+                "message": "Hashtag has been added to the filter."
+            },
+    "KeywordFiltered":
+            {
+                "message": "You won't see anything again from '_KEYWORD_'. Please refresh the page to reload the filter."
             }
+            
+          
 }

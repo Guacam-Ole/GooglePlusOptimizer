@@ -110,6 +110,7 @@ function GetCircleStatistics(pageToken, authToken)
                     var id = item.id;
                     var name = item.displayName;
                     CA2T(name, "Union Berlin", "bronzeEisern");
+					CA2T(name, "Pauli", "goldPauli");
                     CA2T(name, "Der Postillon", "bronzeFun");
                     CA2T(name, "The Onion", "bronzeFun");
                     CA2T(name, "Titanic", "bronzeFun");
