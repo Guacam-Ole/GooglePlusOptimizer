@@ -5,6 +5,11 @@ table.colorUsers
     border-style: solid;
     border-width: 1px;
 }
+.InfoUsrTop {
+    float:right;
+    margin-top: -20px;
+    margin-right: 10px;
+}
 
 table.colorUsers td
 {

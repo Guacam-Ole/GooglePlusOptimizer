@@ -10,9 +10,10 @@ var bookmarkContent;
 var searchString = "displayBookmarks=abersicherdatt";
 
 function InitBookmarks() {
-    if (displayBookmarks==true) {
+    if (displayBookmarks===true) {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
         LoadBookmarkList();
+        LoadBookmarkContent();
 
         $(document).on('click', '.addBookmark', function()
         {
@@ -21,8 +22,9 @@ function InitBookmarks() {
         
         if ($('.miniBookmark').length===0) 
         {
-            var bookmarkIcon="<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='"+ chrome.extension.getURL("./setup/images/icons/quickshare/disabled/stock/star_48.png")+"' title='Bookmarks'></a>";
-            $('.gb_Sa').before($(bookmarkIcon));
+            var bookmarkIcon="<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='"+ chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png")+"' title='Bookmarks'></a>";
+            $('.Pzc').prepend($(bookmarkIcon));
+            //$('.gb_Sa').before();
         }
     }
 }
@@ -43,10 +45,10 @@ function ClickBookmark(bookmarkButton)
         if (IsBookmarkPage()) {
             bookmarkButton.closest("[jsmodel='XNmfOc']").hide();
         }
-        iconUrl = chrome.extension.getURL("./setup/images/icons/quickshare/disabled/stock/star_48.png");        
+        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");        
     } else {
-        AddBookmark(id,content[0].outerHTML.replace('/disabled/stock/star','/enabled/stock/star'));
-        iconUrl = chrome.extension.getURL("./setup/images/icons/quickshare/enabled/stock/star_48.png");
+        AddBookmark(id,content[0].outerHTML.replace('/star_24_dis','/star_24_hot'));
+        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
     }
     
     bookmarkButton.attr('src', iconUrl);
@@ -59,17 +61,18 @@ function DisplayBookMarkIcons()
             //if (bookmarkList !== null && quickShares.length > 0)
             {
                 DisplayBookmarks();
-                $('h3.zi:not(:has(.addBookmark))').each(function()
+                $('.lea:not(:has(.addBookmark))').each(function()      //$('h3.zi:not(:has(.addBookmark))').each(function()
                 {
+                    AddHeadWrapper($(this));
                     var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
                     var iconHtml = "";
-                    var iconUrl = chrome.extension.getURL("./setup/images/icons/quickshare/disabled/stock/star_48.png");
+                    var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
                     if (ContainsBookmark(id)) {
-                        iconUrl = chrome.extension.getURL("./setup/images/icons/quickshare/enabled/stock/star_48.png");
+                        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
                     }
                     iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
 
-                    $(this).append(iconHtml);
+                    $(this).find('.InfoUsrTop').append(iconHtml);
                 });
             }
 }
@@ -93,7 +96,9 @@ function LoadBookmarkList()
             }, function(response)
     {
         bookmarkList = JSON.parse(response.Result) || null;
-
+        if (bookmarkList!==null && bookmarkList.length>0) {
+            $('.miniBookmark img').attr("src",chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        }
     });
 }
 
@@ -122,8 +127,7 @@ function SaveBookmarks() {
 }
 
 function AddBookmark(id, content) {
-    LoadBookmarkList();
-    LoadBookmarkContent();
+
 
     if ((bookmarkList || null) === null) {
         bookmarkList = [];
@@ -136,8 +140,7 @@ function AddBookmark(id, content) {
 }
 
 function RemoveBookmark(id) {
-    LoadBookmarkList();
-    LoadBookmarkContent();
+
 
     var position = $.inArray(id, bookmarkList);
     if (position >= 0) {
