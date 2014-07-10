@@ -28,18 +28,22 @@ function importConfig(config) {
 
 
 $(document).ready(function() {
-	var exportHandler = function(ev) {
-			var config = exportConfig(),
-				blob = new Blob([JSON.stringify(config)], {type: 'application/json'});
-		    saveAs(blob, 'gplus-optimizer-config.json');
-		},
-		
-		loadHandler = function(ev) {
+	var loadHandler = function(ev) {
 	    	var content = ev.target.result;
 	    	if (content.length > 0) {
 	    	    importConfig(JSON.parse(content));
 	    	}
 	    },
+		
+		exportHandler = function(ev) {
+			try {
+				var config = exportConfig(),
+					blob = new Blob([JSON.stringify(config)], {type: 'application/json'});
+			    saveAs(blob, 'gplus-optimizer-config.json');
+			} catch(e) {
+				console.log(e);
+			}
+		},
 		
 		importHandler = function(ev1) {
 			try {
