@@ -126,6 +126,10 @@ chrome.runtime.onMessage.addListener(
                     Result: "Settings loaded."
                 });
             }
+            else if (request.Action==="CreateContextMenu") {
+                CreateContextMenu();
+                sendResponse({Result: "ContextMenu Created"});
+            }
 
             else if (request.Action === "SaveCircles")
             {
@@ -323,19 +327,25 @@ function addHashtag(hashtag) {
 
 
 chrome.contextMenus.onClicked.addListener(onClickHandler);
-
+var showForPages = ["https://plus.google.com/*"];
 
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.contextMenus.create({
+   CreateContextMenu();
+});
+
+function CreateContextMenu() {
+     chrome.contextMenus.create({
         title: chrome.i18n.getMessage("RemoveHashtag"),
         id: 'hashtagfilter',
         contexts: ['link'],
-        targetUrlPatterns: ['*://*/s/*', '*://*/explore/*']
+        targetUrlPatterns: ['*://*/s/*', '*://*/explore/*'],
+        "documentUrlPatterns":showForPages
     });
 
     chrome.contextMenus.create({
         title: chrome.i18n.getMessage("RemoveKeyword"),
         id: 'keywordfilter',
-        contexts: ['selection']
+        contexts: ['selection'],
+        "documentUrlPatterns":showForPages
     });
-});
+}
