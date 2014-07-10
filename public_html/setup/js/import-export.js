@@ -22,28 +22,32 @@ function importConfig(config) {
 
 
 $(document).ready(function() {
-	
-	$('#exportConfig').click(function(ev) {
-		var config = exportConfig(),
-			blob = new Blob([JSON.stringify(config)], {type: 'application/json'});
-        saveAs(blob, 'gplus-optimizer-config.json');
-	});
-
-	$('#importConfig').change(function(ev1) {
-		try {
-			var file = ev1.currentTarget.files[0];
-			if (file) {
-			    var reader = new FileReader();
-			    reader.readAsText(file, 'UTF-8');
-			    reader.onload = function(ev2) {
-			    	var content = ev2.target.result;
-			    	if (content.length > 0) {
-			    	    importConfig(JSON.parse(content));
-			    	}
-			    };
+	var exportHandler = function(ev) {
+			var config = exportConfig(),
+				blob = new Blob([JSON.stringify(config)], {type: 'application/json'});
+		    saveAs(blob, 'gplus-optimizer-config.json');
+		},
+		
+		loadHandler = function(ev) {
+	    	var content = ev.target.result;
+	    	if (content.length > 0) {
+	    	    importConfig(JSON.parse(content));
+	    	}
+	    },
+		
+		importHandler = function(ev1) {
+			try {
+				var file = ev1.currentTarget.files[0];
+				if (file) {
+				    var reader = new FileReader();
+				    reader.readAsText(file, 'UTF-8');
+				    reader.onload = loadHandler;
+				}
+			} catch(e) {
+				console.log(e);
 			}
-		} catch(e) {
-			console.log(e);
-		}
-	});
+		};
+	
+	$('#exportConfig').click(exportHandler);
+	$('#importConfig').change(importHandler);
 });
