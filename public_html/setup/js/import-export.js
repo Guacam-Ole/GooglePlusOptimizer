@@ -10,7 +10,20 @@ function exportConfig() {
     	config = {};
     
     for (var i = 0; i < keys.length; i++) {
-        config[keys[i]] = localStorage.getItem(keys[i]);
+    	switch (keys[i]) {
+    		case 'Circles':
+    	        config[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
+    			break;
+    		
+    		case 'fulltext':
+    		case 'hashTags':
+    	        config[keys[i]] = localStorage.getItem(keys[i]).split(',');
+    			break;
+    			
+    		default:
+    	        config[keys[i]] = localStorage.getItem(keys[i]);
+    			break;
+    	}
     }
     return config;
 }
@@ -18,12 +31,21 @@ function exportConfig() {
 
 function importConfig(config) {
 	for (key in config) {
-		localStorage.setItem(key, config[key]);
+		switch (key) {
+		case 'Circles':
+			localStorage.setItem(key, JSON.stringify(config[key]));
+			break;
+		
+		case 'fulltext':
+		case 'hashTags':
+			localStorage.setItem(key, config[key].join(','));
+			break;
+			
+		default:
+			localStorage.setItem(key, config[key]);
+			break;
+		}
 	}
-	
-	chrome.tabs.query({active: true}, function(tabs) {
-		chrome.tabs.reload(tabs[0].id);
-	});
 }
 
 
@@ -32,6 +54,10 @@ $(document).ready(function() {
 	    	var content = ev.target.result;
 	    	if (content.length > 0) {
 	    	    importConfig(JSON.parse(content));
+	    		
+	    		chrome.tabs.query({active: true}, function(tabs) {
+	    			chrome.tabs.reload(tabs[0].id);
+	    		});
 	    	}
 	    },
 		
