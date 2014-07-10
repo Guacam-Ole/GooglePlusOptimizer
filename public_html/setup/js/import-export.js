@@ -1,3 +1,9 @@
+/**
+ * Import/Export configuration
+ * 
+ * @author magdev
+ */
+
 
 function exportConfig() {
     var keys = Object.keys(localStorage),
