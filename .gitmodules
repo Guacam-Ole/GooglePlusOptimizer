@@ -1,3 +1,4 @@
-[submodule "blacklist"]
-	path = blacklist
+
+[submodule "public_html/lst-blacklist"]
+	path = public_html/lst-blacklist
 	url = git@github.com:magdev/leistungsschutzgelderpresser.git
