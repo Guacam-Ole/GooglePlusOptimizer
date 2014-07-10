@@ -1,7 +1,11 @@
 var allCircles;
 
-function GetAllImages() {
-    return JSON.parse($('#allIcons').val());
+function GetAllImages() 
+{    
+    $.ajaxSetup( { "async": false } );    
+    var result=$.getJSON( "../../_locales/de/icons.json");
+    $.ajaxSetup( { "async": true } )    ;
+    return JSON.parse(result.responseText);
 }
 
 function GetAllDirectories() {
@@ -40,17 +44,17 @@ function GetQuickShareInfo() {
 
 function AddQuickShareRow() {
     var alreadyExistingRows = $('#allShare').find('.iconSelectCategory').length;
-    var singleRow = $('<div class="iconSelectCategory imgSelSize" rowId="' + alreadyExistingRows + '"><button type="button" class="removeDD btn btn-default btn-lg"><span class="fa fa-cut"></span></button><a class="QuickShareIconSelect"><img class="mainImage" src="../images/icons/quickshare/Unknown.png" title="'+chrome.i18n.getMessage("selectIcon")+'"/></a><div class="category"/><a class="selectCircle">+ '+chrome.i18n.getMessage("selectCircle")+'</a><hr class="clear" /></div>');
+    var singleRow = $('<div class="iconSelectCategory imgSelSize" rowId="' + alreadyExistingRows + '"><button type="button" class="removeDD btn btn-default btn-lg"><span class="fa fa-cut"></span></button><a class="QuickShareIconSelect"><img class="mainImage" src="../images/icons/small/unknown.png" title="'+chrome.i18n.getMessage("selectIcon")+'"/></a><div class="category"/><a class="selectCircle">+ '+chrome.i18n.getMessage("selectCircle")+'</a><hr class="clear" /></div>');
     var allDirs = GetAllDirectories();
     allDirs.sort();
     for (var i in allDirs)
     {
         var allImages = GetImagesFromDirectory(allDirs[i]);
-        var directoryDiv = $('<div class="categoryHeader imgSelSize"><a class="QuickShareCategorySelect"><img src="../images/icons/quickshare/enabled/' + allImages[0] + '" title="' + allDirs[i] + '"/></a> ' + chrome.i18n.getMessage("icons_" + allDirs[i]) + '<hr class="clear" /></div>');
+        var directoryDiv = $('<div class="categoryHeader imgSelSize"><a class="QuickShareCategorySelect"><img src="../images/icons/small/' + allImages[0] + '" title="' + allDirs[i] + '"/></a> ' + chrome.i18n.getMessage("icons_" + allDirs[i]) + '<hr class="clear" /></div>');
 
         var details = $('<div class="categoryDetails"/>');
         for (var u in allImages) {
-            var singleImage = $('<div class="iconDescription imgSelSize" ><a imageId="' + u + '" class="QuickShareImageSelect"><img src="../images/icons/quickshare/enabled/' + allImages[u] + '"/></a></div>');
+            var singleImage = $('<div class="iconDescription imgSelSize" ><a imageId="' + u + '" class="QuickShareImageSelect"><img src="../images/icons/small/' + allImages[u] + '"/></a></div>');
             details.append(singleImage);
         }
         details.append($('<hr class="clear" />'));

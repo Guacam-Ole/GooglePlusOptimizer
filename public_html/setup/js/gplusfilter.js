@@ -148,6 +148,14 @@ function StartUpGoogleFilter() {
     }
 }
 
+
+function AddHeadWrapper(parent) {
+    if (parent.html().indexOf('InfoUsrTop') === -1)
+    {
+        parent.prepend("<div class='InfoUsrTop'>");
+    }    
+}
+
 /**
  * Wizard-Kachel zeichnen
  */
