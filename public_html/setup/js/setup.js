@@ -521,6 +521,10 @@ function LoadSetup()
             localStorage.setItem("WizardMode", "1");
             $('#butWizDisplay').text($(this).text());
         });
+
+        $('#butCreateContext').click(function() {
+            CreateContextMenu();
+        });
     } catch (ex) {
         console.log(ex);
     }
@@ -755,5 +759,14 @@ function CreateCheckboxEvents()
     {
         SaveCheckBox("useBookmarks", data.value);
     });
+
+
+}
+
+function CreateContextMenu() {
+    chrome.runtime.sendMessage(
+            {
+                Action: "CreateContextMenu"
+            });
 }
 
