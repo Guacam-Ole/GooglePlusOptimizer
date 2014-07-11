@@ -9,8 +9,15 @@ var bookmarkList;
 var bookmarkContent;
 var searchString = "displayBookmarks=abersicherdatt";
 
+$(document).ready(function()
+{
+    if (document.location.href.indexOf("bookmarks.html") > 0) {
+        LoadBookmarksForDisplay();
+    }
+});
+
 function InitBookmarks() {
-    if (displayBookmarks===true) {
+    if (displayBookmarks === true) {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
         LoadBookmarkList();
         LoadBookmarkContent();
@@ -19,10 +26,10 @@ function InitBookmarks() {
         {
             ClickBookmark($(this));
         });
-        
-        if ($('.miniBookmark').length===0) 
+
+        if ($('.miniBookmark').length === 0)
         {
-            var bookmarkIcon="<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='"+ chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png")+"' title='Bookmarks'></a>";
+            var bookmarkIcon = "<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
             $('.Pzc').prepend($(bookmarkIcon));
             //$('.gb_Sa').before();
         }
@@ -34,9 +41,9 @@ function ClickBookmark(bookmarkButton)
 {
     var id = bookmarkButton.closest('.ys').find('.uv.PL a').attr('href');
     var content = bookmarkButton.closest("[jsmodel='XNmfOc']").clone();
-      content.find('.quickShare').remove();
-      content.find('.Qg').remove();
-      content.find('.Tt.bj').remove();
+    content.find('.quickShare').remove();
+    content.find('.Qg').remove();
+    content.find('.Tt.bj').remove();
 
     var iconUrl;
     if (ContainsBookmark(id))
@@ -45,12 +52,12 @@ function ClickBookmark(bookmarkButton)
         if (IsBookmarkPage()) {
             bookmarkButton.closest("[jsmodel='XNmfOc']").hide();
         }
-        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");        
+        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
     } else {
-        AddBookmark(id,content[0].outerHTML.replace('/star_24_dis','/star_24_hot'));
+        AddBookmark(id, content[0].outerHTML.replace('/star_24_dis', '/star_24_hot'));
         iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
     }
-    
+
     bookmarkButton.attr('src', iconUrl);
 
 }
@@ -88,6 +95,28 @@ function ContainsBookmark(id) {
     }
 }
 
+function LoadBookmarksForDisplay() {
+    chrome.runtime.sendMessage(
+            {
+                Action: "LoadBookmarks"
+            }, function(response)
+    {
+        bookmarkList = JSON.parse(response.Result) || null;
+       /* if (bookmarkList !== null && bookmarkList.length > 0) {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        }*/
+        chrome.runtime.sendMessage(
+                {
+                    Action: "LoadBookmarkContents"
+                }, function(response)
+        {
+            bookmarkContent = JSON.parse(response.Result) || null;
+            DisplayBookmarksInside();
+
+        });
+    });
+}
+
 function LoadBookmarkList()
 {
     chrome.runtime.sendMessage(
@@ -96,8 +125,8 @@ function LoadBookmarkList()
             }, function(response)
     {
         bookmarkList = JSON.parse(response.Result) || null;
-        if (bookmarkList!==null && bookmarkList.length>0) {
-            $('.miniBookmark img').attr("src",chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        if (bookmarkList !== null && bookmarkList.length > 0) {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
         }
     });
 }
@@ -150,22 +179,44 @@ function RemoveBookmark(id) {
     SaveBookmarks();
 }
 
+function DisplayBookmarksInside() {
+    
+
+    if ((bookmarkContent || null) !== null && bookmarkContent.length > 0) {
+
+        $.each(bookmarkContent, function(index, value)
+        {
+            if (value !== null) {
+                $('.displayBookMarks').prepend($(value));
+            }
+        });
+
+
+    }
+}
+
 function DisplayBookmarks() {
+
+
 
     if (IsBookmarkPage())
     {
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarkdisplay.css") + "' type='text/css' media='screen' />"));
+        
+        
+        
         LoadBookmarkContent();
         // Erst mal alles ausblenden, was Benachrichtigung ist:
         $('.zia.vAa').hide();
         $('.d-s.L5').hide();
-        
+
         // Dann die einzelnen Bookmarks anfügen:
 
         if ((bookmarkContent || null) !== null && bookmarkContent.length > 0) {
 
             $.each(bookmarkContent, function(index, value)
             {
-                if (value!==null && $('.UPa.hHa.Ic').html().indexOf(value)<0) {
+                if (value !== null && $('.UPa.hHa.Ic').html().indexOf(value) < 0) {
                     $('.UPa.hHa.Ic').prepend($(value));
                 }
                 //$('.CF.he').prepend($(value));
@@ -175,5 +226,6 @@ function DisplayBookmarks() {
                 $('.UPa.hHa.Ic').append($("<div><p><br/>&nbsp;</p></div>oink."));
             }
         }
+        $('.CF').css( "width", "2000px;" );
     }
 }
