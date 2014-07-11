@@ -31,6 +31,7 @@ var showEmoticons;
 var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
+var markLSRPosts;
 var domainBlacklist = [];
 
 
@@ -374,6 +375,7 @@ function StartFilter()
     DOMFilterHashtags();
     DOMFilterImages();
     DOMFilterFreetext();
+    DOMMarkLSRLinks();
     if (colorUsers)
     {
         PaintForUser();
@@ -394,19 +396,20 @@ function StartFilter()
 
     PaintQsIcons();
     DisplayBookMarkIcons();
-    DOMMarkLSRLinks();
 }
 
 
 function DOMMarkLSRLinks() {
-	domainBlacklist.forEach(function(domain) {
-		$('.ki.ve a[href*="' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
-			$(this).find('[jsname="P3RoXc"]')
-				.not('.wrng')
-				.addClass('wrng')
-				.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+	if (markLSRPosts) {
+		domainBlacklist.forEach(function(domain) {
+			$('.ki.ve a[href*="' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
+				$(this).find('[jsname="P3RoXc"]')
+					.not('.wrng')
+					.addClass('wrng')
+					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			});
 		});
-	});
+	}
 }
 
 /**
@@ -569,6 +572,8 @@ function LoadSettingsLive()
         trophies = response.Trophies || null;
         autoSave = response.UseAutoSave;
         displayBookmarks = response.UseBookmarks;
+        markLSRPosts = response.MarkLSRPosts;
+        
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }

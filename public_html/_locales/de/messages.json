@@ -245,6 +245,6 @@
             },
     "WARNING":
             {
-                "message": "ACHTUNG"
+                "message": "ACHTUNG! Enthält LSR-Links!"
             }
 }

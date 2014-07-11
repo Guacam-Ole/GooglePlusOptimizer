@@ -470,6 +470,7 @@ function LoadSetup()
         LoadCheckBox("showEmoticons", $('#chkShowEmoticons'));
         LoadCheckBox("useAutoSave", $('#chkAutoSave'));
         LoadCheckBox("useBookmarks", $('#chkBookmarks'));
+        LoadCheckBox("markLSRPosts", $('#chkLSRMarker'));
 
         //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
         LoadExtended();
@@ -758,6 +759,10 @@ function CreateCheckboxEvents()
     $("#chkBookmarks").on('switch-change', function(e, data)
     {
         SaveCheckBox("useBookmarks", data.value);
+    });
+    $("#chkLSRMarker").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("markLSRPosts", data.value);
     });
 
 

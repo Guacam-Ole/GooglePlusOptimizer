@@ -184,6 +184,7 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("showEmoticons", request.showEmoticons);
                 localStorage.setItem("useAutoSave", request.UseAutoSave);
                 localStorage.setItem("useBookmarks", request.UseBookmarks);
+                localStorage.setItem("markLSRPosts", request.markLSRPosts);
 
 
 
@@ -222,6 +223,7 @@ chrome.runtime.onMessage.addListener(
                 var lastTrophyRead = localStorage.getItem("lastTrophyRead");
                 var useBookmarks=localStorage.getItem("useBookmarks");
                 var useAutoSave = localStorage.getItem("useAutoSave");
+                var markLSRPosts = localStorage.getItem('markLSRPosts');
                 var wizardMode = localStorage.getItem("WizardMode") || 1;
                 if (wizardMode === null) {
                     wizardMode = 1;
@@ -254,6 +256,7 @@ chrome.runtime.onMessage.addListener(
                 displayTrophy = BoolNotNull(displayTrophy);
                 showEmoticons = BoolNotNull(showEmoticons);
                 useBookmarks=BoolNotNull(useBookmarks);
+                markLSRPosts = BoolNotNull(markLSRPosts);
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -288,6 +291,7 @@ chrome.runtime.onMessage.addListener(
                     UseBookmarks:GetBool(useBookmarks),
                     lastWizard: lastWizard,
                     UseAutoSave: GetBool(useAutoSave),
+                    MarkLSRPosts: GetBool(markLSRPosts),
                     Result: "Settings loaded."
                 });
             }
