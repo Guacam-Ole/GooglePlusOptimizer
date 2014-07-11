@@ -75,7 +75,8 @@
         "setup/de/wizimg/*",
         "setup/en/wizimg/*",
         "setup/en/wizardloader.html",
-        "setup/en/wizard.html"
+        "setup/en/wizard.html",
+        "lsr-blacklist/domains.json"
     ]
 }
 
