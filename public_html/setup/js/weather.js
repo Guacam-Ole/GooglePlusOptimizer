@@ -237,7 +237,7 @@ function UpdateWeather(id, woeid)
             var weatherblock = weatherHtmlTop
                     .replace("__IMG__", bigImage)
                     .replace("__TEMP__", item.condition.temp + " °" + units.temperature)
-                    .replace("__DATE__", now)
+                    .replace("__DATE__", now.toUTCString())
                     .replace("__CITY__", location.city + ", " + location.country)
                     .replace("__TODAY__", chrome.i18n.getMessage("weatherNow"))
                     .replace("__KIND__", item.condition.text);
