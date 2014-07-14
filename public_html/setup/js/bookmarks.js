@@ -144,7 +144,7 @@ function LoadBookmarkContent()
 }
 
 function IsBookmarkPage() {
-    return window.location.search.indexOf(searchString) >= 0;
+    return window.location.href.indexOf(searchString) >= 0;
 }
 
 function SaveBookmarks() {
