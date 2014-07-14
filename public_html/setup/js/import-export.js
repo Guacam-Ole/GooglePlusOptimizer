@@ -12,6 +12,8 @@ function exportConfig() {
     for (var i = 0; i < keys.length; i++) {
     	switch (keys[i]) {
     		case 'Circles':
+    		case 'QuickShares':
+    		case 'trophies':
     	        config[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
     			break;
     		
