@@ -216,6 +216,8 @@ function LoadWizardSettings() {
     LoadCheckBox(showEmoticons, "#chkWizEmoticons");
     LoadCheckBox(autoSave, "#chkAutoSave");
     LoadCheckBox(displayBookmarks, "#chkWizBookmarks");
+    LoadCheckBox(markLSRPosts, "#chkWizLSR");
+    LoadCheckBox(filterSharedCircles, "#chkWizCircle");
 
     propsFulltext = propsFulltext || "";
     if (propsFulltext === null) {
@@ -506,6 +508,15 @@ function WizSwitchEvents() {
             case "chkWizBookmarks":
                 displayBookmarks = data.value;
                 break;
+            case "chkWizLSR":
+                markLSRPosts=data.value;
+                break;
+            case "chkWizCircle":
+                filterSharedCircles=data.value;
+                break;
+                
+                
+    
 
 
         }
@@ -612,6 +623,8 @@ function SaveWizardSettings()
                 custom: filterCustom,
                 community: filterCommunity,
                 birthday: filterBirthday,
+                markLSRPosts: markLSRPosts,
+                filterSharedCircles: filterSharedCircles,
                 known: filterPersons,
                 fulltext: propsFulltext,
                 WHAMWhamText: whamWhamText,
