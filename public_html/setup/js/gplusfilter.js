@@ -25,6 +25,7 @@ var filterVideo;
 var filterLinks;
 var filterGifOnly;
 var filterMp4Only;
+var filterSharedCircles;
 var showTrophies;
 var trophies;
 var showEmoticons;
@@ -377,6 +378,7 @@ function StartFilter()
     DOMFilterHashtags();
     DOMFilterImages();
     DOMFilterFreetext();
+    DOMFilterSharedCircles();
     if (colorUsers)
     {
         PaintForUser();
@@ -398,6 +400,23 @@ function StartFilter()
     PaintQsIcons();
     DisplayBookMarkIcons();
 }
+
+
+
+/**
+ * Filter Shared Circles
+ */
+function DOMFilterSharedCircles()
+{
+	if (filterSharedCircles) {
+		try {
+			$('.ki.ve').find('.Wy').closest("[jsmodel='XNmfOc']").hide();
+		} catch (ex) {
+            console.log(ex);
+        }
+	}
+}
+
 
 /**
  * Volltextfilter
@@ -552,6 +571,7 @@ function LoadSettingsLive()
         filterLinks = response.FilterLinks;
         filterGifOnly = response.FilterGifOnly;
         filterMp4Only = response.FilterMp4Only;
+        filterSharedCircles = response.FilterSharedCircles;
         showTrophies = response.DisplayTrophy;
         showEmoticons = response.ShowEmoticons;
         lastWizardVersion = response.lastWizard;

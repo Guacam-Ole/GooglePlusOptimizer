@@ -178,6 +178,7 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("filterLinks", request.filterLinks);
                 localStorage.setItem("filterGifOnly", request.filterGifOnly);
                 localStorage.setItem("filterMp4Only", request.filterMp4Only);
+                localStorage.setItem("filterSharedCircles", request.filterSharedCircles);
                 localStorage.setItem("displayTrophy", request.displayTrophy);
                 localStorage.setItem("trophies", request.trophies);
                 localStorage.setItem("lastTrophyRead", request.lastTrophyRead);
@@ -215,6 +216,7 @@ chrome.runtime.onMessage.addListener(
                 var filterLinks = localStorage.getItem("filterLinks");
                 var filterGifOnly = localStorage.getItem("filterGifOnly");
                 var filterMp4Only = localStorage.getItem("filterMp4Only");
+                var filterSharedCircles = localStorage.getItem('filterSharedCircles');
                 var displayTrophy = localStorage.getItem("displayTrophy");
                 var trophies = localStorage.getItem("trophies");
                 var showEmoticons = localStorage.getItem("showEmoticons");
@@ -251,6 +253,7 @@ chrome.runtime.onMessage.addListener(
                 filterLinks = BoolNotNull(filterLinks);
                 filterGifOnly = BoolNotNull(filterGifOnly);
                 filterMp4Only = BoolNotNull(filterMp4Only);
+                filterSharedCircles = BoolNotNull(filterSharedCircles);
                 displayTrophy = BoolNotNull(displayTrophy);
                 showEmoticons = BoolNotNull(showEmoticons);
                 useBookmarks=BoolNotNull(useBookmarks);
@@ -276,6 +279,7 @@ chrome.runtime.onMessage.addListener(
                     FilterGifOnly: GetBool(filterGifOnly),
                     FilterMp4Only: GetBool(filterMp4Only),
                     FilterLinks: GetBool(filterLinks),
+                    FilterSharedCircles: GetBool(filterSharedCircles),
                     DisplayTrophy: GetBool(displayTrophy),
                     ShowEmoticons: GetBool(showEmoticons),
                     WizardMode: wizardMode,
