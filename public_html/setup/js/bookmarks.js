@@ -7,7 +7,7 @@
 var displayBookmarks;
 var bookmarkList;
 var bookmarkContent;
-var searchString = "displayBookmarks=abersicherdatt";
+var searchString = "notifications/all?displayBookmarks=abersicherdatt";
 
 $(document).ready(function()
 {
