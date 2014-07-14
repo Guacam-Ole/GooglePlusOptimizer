@@ -373,6 +373,8 @@ function StartFilter()
     if (filterPersons)
     {
         $('[data-iid="sii2:103"]').hide();
+        $('[data-iid="sii2:105"]').hide(); // Interesting Pages
+        $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
     }
 
     DOMFilterHashtags();
