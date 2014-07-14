@@ -429,7 +429,7 @@ function DOMFilterSharedCircles()
 function DOMMarkLSRLinks() {
 	if (markLSRPosts) {
 		domainBlacklist.forEach(function(domain) {
-			$('.ki.ve a[href*="' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
+			$('.ki.ve a[href*=".' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
 				$(this).find('[jsname="P3RoXc"]')
 					.not('.wrng')
 					.addClass('wrng')
