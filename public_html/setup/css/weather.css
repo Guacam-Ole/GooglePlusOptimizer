@@ -9,7 +9,7 @@
         }
         .weatherWrapper .weatherDate 
         {
-            font-size: 0.8em;   
+            font-size: 0.7em;   
             color: #999;
 
         }
@@ -32,12 +32,12 @@
 
         .forecastDay, .forecastType
         {
-            font-size: 0.8em;  
+            font-size: 0.7em;  
             color: #999;
         }
         .forecastTemp
         {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #999;
         }
         .weatherForecast
