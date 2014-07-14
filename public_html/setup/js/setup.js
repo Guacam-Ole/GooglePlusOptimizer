@@ -189,6 +189,10 @@ function CreateImageEvents()
     {
         SaveSwitch("filterLinks", "#filterLinks", "filterurl");
     });
+    $("#filterSharedCircles").click(function()
+    {
+        SaveSwitch("filterSharedCircles", "#filterSharedCircles", "circles");
+    });
 }
 
 
@@ -457,6 +461,7 @@ function LoadSetup()
         LoadSwitch("filterImages", "#filterImages", "filterimage");
         LoadSwitch("filterVideo", "#filterVideos", "filtervideo");
         LoadSwitch("filterLinks", "#filterLinks", "filterurl");
+        LoadSwitch("filterSharedCircles", "#filterSharedCircles", "circles");
 
         // Erweiterte Einstellungen:		
         LoadCheckBox("WHAMWhamText", $("#chkWhamText"));
