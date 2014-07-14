@@ -22,6 +22,8 @@
         <script type="text/javascript" src="../js/trophy.js"></script>
         <script type="text/javascript" src="../js/ddslick.js"></script>
         <script type="text/javascript" src="../js/quickshare.js"></script>
+        <script type="text/javascript" src="../js/import-export.js"></script>
+        <script type="text/javascript" src="../js/FileSaver.js"></script>
     </head>
 
     <body>
@@ -118,6 +120,17 @@
 
                                         </div>
                                     </div>          
+                                    <div class="service_box_container">
+                                    	<h2>Configuration Save &amp; Restore</h2>
+                                    	
+                                    	<div>
+                                    		<button type="button" class="btn btn-default" id="exportConfig">Save Configuration</button>
+                                    	</div>
+                                    	<div>
+                                    		<strong><label for="importConfig" class="control-label">Restore Configuration</label></strong><br/>
+                                    		<input type="file" id="importConfig"/>
+                                    	</div>
+                                    </div>
                                     <!--end box 1-->
                                 </div>
                                 <!--end right_column-->
