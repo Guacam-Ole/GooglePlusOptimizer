@@ -207,5 +207,9 @@
     "KeywordFiltered":
             {
                 "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
+            },
+    "WARNING":
+            {
+                "message": "ACHTUNG! Enthält LSR-Links!"
             }
 }

@@ -18,7 +18,7 @@ function CreateAutoSaveEvents()
                 // Beliebiger Buttonklick führt zum löschen des Autosave-Textes
                 localStorage.removeItem(storageName);
             });
-            $(this).closest('[guidedhelpid="sharebox"]').find('[role="button]').click(function() {
+            $(this).closest('[guidedhelpid="sharebox"]').find('[role="button"]').click(function() {
                 localStorage.removeItem(storageName);
             });
         });

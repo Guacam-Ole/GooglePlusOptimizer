@@ -242,6 +242,10 @@
     "KeywordFiltered":
             {
                 "message": "You won't see anything again from '_KEYWORD_'. Please refresh the page to reload the filter."
+            },
+    "WARNING":
+            {
+                "message": "ATTENTION! Contains LSR-Links!"
             }
             
           
