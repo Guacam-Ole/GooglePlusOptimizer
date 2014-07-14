@@ -85,5 +85,9 @@ $(document).ready(function() {
 		};
 	
 	$('#exportConfig').click(exportHandler);
-	$('#importConfig').change(importHandler);
+	$('#importConfig').click(function(ev) {
+		ev.stopImmediatePropagation();
+		$('#importConfigFile').click();
+	});
+	$('#importConfigFile').change(importHandler);
 });
