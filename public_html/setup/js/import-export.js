@@ -14,6 +14,8 @@ function exportConfig() {
     		case 'Circles':
     		case 'QuickShares':
     		case 'trophies':
+    		case 'BookmarkContents':
+    		case 'Bookmarks':
     	        config[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
     			break;
     		
@@ -37,6 +39,8 @@ function importConfig(config) {
 		case 'Circles':
 		case 'QuickShares':
 		case 'trophies':
+		case 'BookmarkContents':
+		case 'Bookmarks':
 			localStorage.setItem(key, JSON.stringify(config[key]));
 			break;
 		
