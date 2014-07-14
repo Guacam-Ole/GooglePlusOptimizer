@@ -435,6 +435,12 @@ function DOMMarkLSRLinks() {
 					.addClass('wrng')
 					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
 			});
+                        $('.ki.ve a[href*="//' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
+				$(this).find('[jsname="P3RoXc"]')
+					.not('.wrng')
+					.addClass('wrng')
+					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			});
 		});
 	}
 }
