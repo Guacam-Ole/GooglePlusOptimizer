@@ -32,6 +32,9 @@ var showEmoticons;
 var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
+var markLSRPosts;
+var domainBlacklist = [];
+
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -61,7 +64,10 @@ $(document).ready(function()
                 return false;
             });
         }
-
+        
+        $.getJSON(chrome.extension.getURL('/lsr-blacklist/domains.json'), function(domains) {
+        	domainBlacklist = domains;
+        });
 
         LoadAllQuickSharesG();
         InitGoogle();
@@ -381,6 +387,7 @@ function StartFilter()
     DOMFilterImages();
     DOMFilterFreetext();
     DOMFilterSharedCircles();
+    DOMMarkLSRLinks();
     if (colorUsers)
     {
         PaintForUser();
@@ -419,6 +426,18 @@ function DOMFilterSharedCircles()
 	}
 }
 
+function DOMMarkLSRLinks() {
+	if (markLSRPosts) {
+		domainBlacklist.forEach(function(domain) {
+			$('.ki.ve a[href*="' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
+				$(this).find('[jsname="P3RoXc"]')
+					.not('.wrng')
+					.addClass('wrng')
+					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			});
+		});
+	}
+}
 
 /**
  * Volltextfilter
@@ -581,6 +600,8 @@ function LoadSettingsLive()
         trophies = response.Trophies || null;
         autoSave = response.UseAutoSave;
         displayBookmarks = response.UseBookmarks;
+        markLSRPosts = response.MarkLSRPosts;
+        
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
