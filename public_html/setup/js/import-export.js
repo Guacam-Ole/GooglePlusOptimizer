@@ -35,6 +35,8 @@ function importConfig(config) {
 	for (key in config) {
 		switch (key) {
 		case 'Circles':
+		case 'QuickShares':
+		case 'trophies':
 			localStorage.setItem(key, JSON.stringify(config[key]));
 			break;
 		
