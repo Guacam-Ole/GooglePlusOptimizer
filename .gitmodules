@@ -2,6 +2,3 @@
 [submodule "public_html/lsr-blacklist"]
 	path = public_html/lsr-blacklist
 	url = git@github.com:magdev/leistungsschutzgelderpresser.git
-[submodule "public_html/gplus-api"]
-	path = public_html/gplus-api
-	url = git@github.com:mohamedmansour/google-plus-extension-jsapi.git
