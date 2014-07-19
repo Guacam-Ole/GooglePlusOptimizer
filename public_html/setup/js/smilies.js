@@ -60,13 +60,21 @@ function PaintEmoticons() {
  $('.Ct').each(function()
     {
         try {
+            var smilieCount=0;
             for (var i in smilies)
             {
                 var smilie = smilies[i];
-                if ($(this).text().indexOf(smilie.short) >= 0)
+                if ($(this).text().indexOf(" "+smilie.short) >= 0)
                 {
                     $(this).html($(this).html().replaceAll(" "+smilie.short, " <img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
+                    smilieCount++;
                 }
+            }
+            if (smilieCount>0) {
+                var oldHeight=$(this).parent().height();
+               // $(this).parent().height(oldHeight+40);
+                $(this).parent().css('max-height',(oldHeight+40)+'px');
+                
             }
         } catch (ex) {
             console.log(ex);
