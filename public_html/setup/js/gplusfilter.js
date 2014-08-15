@@ -437,10 +437,10 @@ function DOMMarkLSRLinks() {
 			$parent = $('div.ki.ve');
 		
 		domainBlacklist.forEach(function(domain) {
-			$parent.find('a[href*=".' + domain + '"').closest("div.Yp.yt.Xa").each(function() {
+			$parent.find('a[href*=".' + domain + '"]').closest("div.Yp.yt.Xa").each(function() {
 				mark($(this));
 			});
-			$parent.find('a[href*="//' + domain + '"').closest("div.Yp.yt.Xa").each(function() {
+			$parent.find('a[href*="//' + domain + '"]').closest("div.Yp.yt.Xa").each(function() {
             	mark($(this));
 			});
 		});
@@ -457,8 +457,8 @@ function DOMFilterFreetext() {
             var textArray = propsFulltext.split(',');
             $.each(textArray, function(i, fulltext)
             {
-                $('.Xx.xJ:Contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
-                $('.Al.pf:Contains(' + fulltext + ')').closest("[jsmodel='XNmfOc']").hide();
+                $('div.Xx.xJ:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
+                $('div.Al.pf:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
             });
         } catch (ex) {
             console.log(ex);
