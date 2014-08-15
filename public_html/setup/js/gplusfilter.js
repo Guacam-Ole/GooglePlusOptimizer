@@ -419,7 +419,7 @@ function DOMFilterSharedCircles()
 {
 	if (filterSharedCircles) {
 		try {
-			$('.ki.ve').find('.Wy').closest("[jsmodel='XNmfOc']").hide();
+			$('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
 		} catch (ex) {
             console.log(ex);
         }
@@ -428,18 +428,20 @@ function DOMFilterSharedCircles()
 
 function DOMMarkLSRLinks() {
 	if (markLSRPosts) {
+		var mark = function($el) {
+				$el.find('div[jsname="P3RoXc"]')
+					.not('.wrng')
+					.addClass('wrng')
+					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			},
+			$parent = $('div.ki.ve');
+		
 		domainBlacklist.forEach(function(domain) {
-			$('.ki.ve a[href*=".' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
-				$(this).find('[jsname="P3RoXc"]')
-					.not('.wrng')
-					.addClass('wrng')
-					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			$parent.find('a[href*=".' + domain + '"').closest("div.Yp.yt.Xa").each(function() {
+				mark($(this));
 			});
-            $('.ki.ve a[href*="//' + domain + '"').closest("[jsmodel='XNmfOc']").each(function() {
-				$(this).find('[jsname="P3RoXc"]')
-					.not('.wrng')
-					.addClass('wrng')
-					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+			$parent.find('a[href*="//' + domain + '"').closest("div.Yp.yt.Xa").each(function() {
+            	mark($(this));
 			});
 		});
 	}
