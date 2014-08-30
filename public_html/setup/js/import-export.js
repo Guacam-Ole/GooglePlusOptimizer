@@ -12,6 +12,10 @@ function exportConfig() {
     for (var i = 0; i < keys.length; i++) {
     	switch (keys[i]) {
     		case 'Circles':
+    		case 'QuickShares':
+    		case 'trophies':
+    		case 'BookmarkContents':
+    		case 'Bookmarks':
     	        config[keys[i]] = JSON.parse(localStorage.getItem(keys[i]));
     			break;
     		
@@ -33,6 +37,10 @@ function importConfig(config) {
 	for (key in config) {
 		switch (key) {
 		case 'Circles':
+		case 'QuickShares':
+		case 'trophies':
+		case 'BookmarkContents':
+		case 'Bookmarks':
 			localStorage.setItem(key, JSON.stringify(config[key]));
 			break;
 		
@@ -85,5 +93,9 @@ $(document).ready(function() {
 		};
 	
 	$('#exportConfig').click(exportHandler);
-	$('#importConfig').change(importHandler);
+	$('#importConfig').click(function(ev) {
+		ev.stopImmediatePropagation();
+		$('#importConfigFile').click();
+	});
+	$('#importConfigFile').change(importHandler);
 });
