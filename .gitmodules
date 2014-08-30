@@ -1,4 +1,0 @@
-
-[submodule "public_html/lsr-blacklist"]
-	path = public_html/lsr-blacklist
-	url = git@github.com:magdev/leistungsschutzgelderpresser.git
