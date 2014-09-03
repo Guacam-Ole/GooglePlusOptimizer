@@ -227,8 +227,7 @@ function UpdateWeather(id, woeid)
         var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&rnd=' + now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + '&format=json';
 
         $.getJSON(api, function(data)
-        {
-            console.log("inside");
+        {           
             var item = data.query.results.channel.item;
             var location = data.query.results.channel.location;
             var units = data.query.results.channel.units;

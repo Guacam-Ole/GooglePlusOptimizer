@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.6.0.4",
+    "version": "2.6.1.0",
     "author": "Ole Albers",
     "permissions": [
        
@@ -35,6 +35,7 @@
                         "setup/js/qsdisplay.js",
                         "setup/js/autosave.js",
                         "setup/js/bookmarks.js",
+                        
                         "date.js"]
                 }
                 
@@ -77,6 +78,8 @@
         "setup/en/wizardloader.html",
         "setup/en/wizard.html",
         "lsr-blacklist/domains.json"
+
+        
     ]
 }
 
