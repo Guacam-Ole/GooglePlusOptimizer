@@ -9,6 +9,7 @@ $(document).ready(function()
         });
         FillSportData();
         FillWeatherData();
+        ShowTicks();
 
         try {
             OptStartTrophies();
@@ -35,6 +36,70 @@ $(function() {
     $(".dial").knob();
 });
 
+
+function ShowTicks() {
+    try {
+        var displayTicks = [];
+        var displayTicksStart = [];
+
+        if (window.location.href.indexOf('measure.html') > 0) {
+            chrome.runtime.sendMessage({
+                Action: "LoadTicks"
+            }, function(response) {
+                ticks = response.Ticks;
+                if (ticks !== null) {
+                    ticks = JSON.parse(ticks);
+
+                    $.each(ticks, function(i, val) {
+
+                        if (val.Type === "START") {
+                            if (val.IsInit) {
+                                displayTicksStart.push({Name: val.Name, Start: val.Time, IsInit: val.IsInit, Stopp: null, Diff: null});
+                            } else {
+                                displayTicks.push({Name: val.Name, Start: val.Time, IsInit: val.IsInit, Stopp: null, Diff: null});
+                            }
+                        } else if (val.Type === "STOPP") {
+                            if (val.IsInit) {
+                                var oldEntry = $.grep(displayTicksStart, function(e) {
+                                    return e.Name === val.Name && e.Stopp === null;
+                                });
+                            } else {
+                                var oldEntry = $.grep(displayTicks, function(e) {
+                                    return e.Name === val.Name && e.Stopp === null;
+                                });
+                            }
+                            if (oldEntry !== undefined && oldEntry.length > 0) {
+                                oldEntry[0].Stopp = val.Time;
+                                oldEntry[0].Diff = (oldEntry[0].Stopp - oldEntry[0].Start) / 1000;
+                            }
+                        }
+                    });
+                }
+                var displayStart = "<pre>";
+            $.each(displayTicksStart, function(i, val) {
+                displayStart += val.Name + ":" + val.Diff + "s\n";
+            });
+            displayStart += "</pre>";
+
+            var displayDyn = "<pre>";
+            $.each(displayTicks, function(i, val) {
+                displayDyn += val.Name + ":" + val.Diff + "s \n";
+            });
+            displayDyn += "</pre>";
+            $('#messStart')[0].innerHTML = displayStart;
+            $('#messDyn')[0].innerHTML = displayDyn;
+            });
+
+
+
+
+            
+
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
 /**
  * Wetterdaten
  */
@@ -476,6 +541,8 @@ function LoadSetup()
         LoadCheckBox("useAutoSave", $('#chkAutoSave'));
         LoadCheckBox("useBookmarks", $('#chkBookmarks'));
         LoadCheckBox("markLSRPosts", $('#chkLSRMarker'));
+        LoadCheckBox("CollectTicks", $('#chkMeasure'));
+        LoadCheckBox("displayQuickHashes", $('#chkQuickHashes'));
 
         //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
         LoadExtended();
@@ -768,6 +835,16 @@ function CreateCheckboxEvents()
     $("#chkLSRMarker").on('switch-change', function(e, data)
     {
         SaveCheckBox("markLSRPosts", data.value);
+    });
+
+    // Filter:
+    $("#chkMeasure").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("CollectTicks", data.value);
+    });
+    $("#chkQuickHashes").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("displayQuickHashes", data.value);
     });
 
 

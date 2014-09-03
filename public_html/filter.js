@@ -126,6 +126,17 @@ chrome.runtime.onMessage.addListener(
                     Result: "Settings loaded."
                 });
             }
+            
+            else if (request.Action === "LoadTicks")
+            {
+                var ticks = localStorage.getItem("Ticks");
+                 
+                sendResponse({
+                   
+                    Ticks: ticks,
+                    Result: "Settings loaded."
+                });
+            }
             else if (request.Action==="CreateContextMenu") {
                 CreateContextMenu();
                 sendResponse({Result: "ContextMenu Created"});
@@ -153,6 +164,33 @@ chrome.runtime.onMessage.addListener(
             }
             else if (request.Action === "SaveWizardVersion") {
                 localStorage.setItem("lastWizard", request.ParameterValue);
+            }
+            else if (request.Action==="ClearTicks") {
+                localStorage.removeItem("Ticks");
+                var allTicks=[];
+                localStorage.setItem("Ticks",JSON.stringify(allTicks));
+            }
+            else if (request.Action==="AddTick") {
+                var oldTicks=localStorage.getItem("Ticks");
+                if (oldTicks!==undefined) {
+                    var oldTicks = JSON.parse(oldTicks);
+                    oldTicks.push({Name:request.Name, Time:request.Time, IsInit:request.IsInit, Type:"START"});
+                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));                 
+                }
+            }
+            else if (request.Action==="EndTick") {
+                var oldTicks=localStorage.getItem("Ticks");
+                if (oldTicks!==undefined) {
+                    var oldTicks = JSON.parse(oldTicks);
+                    oldTicks.push({Name:request.Name, Time:request.Time, IsInit:request.IsInit,  Type:"STOPP"});
+                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));                 
+                }
+            }
+            else if (request.Action==="GetTicks") {
+                var ticks = JSON.parse(localStorage.getItem("Ticks"));
+                 sendResponse({
+                    TIcks: ticks
+                });
             }
             else if (request.Action === "SaveAll")
             {
@@ -186,8 +224,8 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("useAutoSave", request.UseAutoSave);
                 localStorage.setItem("useBookmarks", request.UseBookmarks);
                 localStorage.setItem("markLSRPosts", request.markLSRPosts);
-
-
+                localStorage.setItem("CollectTicks", request.CollectTicks);
+                localStorage.setItem("displayQuickHashes", request.DisplayQuickHashes);
 
                 sendResponse({Result: "Settings Saved."});
             }
@@ -226,6 +264,8 @@ chrome.runtime.onMessage.addListener(
                 var useBookmarks=localStorage.getItem("useBookmarks");
                 var useAutoSave = localStorage.getItem("useAutoSave");
                 var markLSRPosts = localStorage.getItem('markLSRPosts');
+                var collectTicks = localStorage.getItem('CollectTicks');
+                var displayQuickHashes = localStorage.getItem('displayQuickHashes');
                 var wizardMode = localStorage.getItem("WizardMode") || 1;
                 if (wizardMode === null) {
                     wizardMode = 1;
@@ -260,6 +300,10 @@ chrome.runtime.onMessage.addListener(
                 showEmoticons = BoolNotNull(showEmoticons);
                 useBookmarks=BoolNotNull(useBookmarks);
                 markLSRPosts = BoolNotNull(markLSRPosts);
+                collectTicks=BoolNotNull(collectTicks);
+                displayQuickHashes=BoolNotNull(displayQuickHashes);
+                
+                
 
                 sendResponse({
                     FilterPlus1: GetBool(filterPlus1),
@@ -296,6 +340,8 @@ chrome.runtime.onMessage.addListener(
                     lastWizard: lastWizard,
                     UseAutoSave: GetBool(useAutoSave),
                     MarkLSRPosts: GetBool(markLSRPosts),
+                    CollectTicks: GetBool(collectTicks),
+                    DisplayQuickHashes: GetBool(displayQuickHashes),
                     Result: "Settings loaded."
                 });
             }

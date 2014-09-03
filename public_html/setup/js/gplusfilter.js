@@ -33,6 +33,8 @@ var columnCount;
 var lastWizardVersion;
 var domChangeAllowed = true;
 var markLSRPosts;
+var saveTicks;
+var displayQuickHashes;
 var domainBlacklist = [];
 
 
@@ -64,14 +66,13 @@ $(document).ready(function()
                 return false;
             });
         }
-        
-        $.getJSON(chrome.extension.getURL('/lsr-blacklist/domains.json'), function(domains) {
-        	domainBlacklist = domains;
-        });
 
-        LoadAllQuickSharesG();
+
+
+
         InitGoogle();
-        GetAllCircles();
+
+
 
         $(document).on('click', '.unhideImage', function()
         {
@@ -100,13 +101,43 @@ $(document).ready(function()
         });
 
 
-        //     AddMuelltonne();
-
     }
 });
+function DisplayHashtags()
+{
+    if (displayQuickHashes) {
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
+        $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
+    }
+}
+
+function SortByName(a, b) {
+    var aName = a.text.toLowerCase();
+    var bName = b.text.toLowerCase();
+    return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+}
+
+function LoadHashTags()
+{
+    if (displayQuickHashes) {
+        var lasthashtag;
+        //if ($('#quickht')!==undefined) {
+        $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
+
+        var allLinks = $('a[href^="explore/"]').sort(SortByName);
+        allLinks.each(function(i, val) {
+            if (lasthashtag !== val.text.toLowerCase()) {
+                lasthashtag = val.text.toLowerCase();
+                $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
+            }
+        });
+
+    }
+}
 
 function GetAllCircles()
 {
+
     // Kreise auslesen
     $('script').each(function() {
         try {
@@ -152,6 +183,7 @@ function StartUpGoogleFilter() {
         {
             OptStartColors();
         }
+        DisplayHashtags();
     }
 }
 
@@ -160,7 +192,7 @@ function AddHeadWrapper(parent) {
     if (parent.html().indexOf('InfoUsrTop') === -1)
     {
         parent.prepend("<div class='InfoUsrTop'>");
-    }    
+    }
 }
 
 /**
@@ -215,7 +247,7 @@ function InitGoogle()
 function LoadGoogle()
 {
     console.log('G+Filter: Google+ - Filter initialisiert');
-    StartFilter(); // Initial ausführen
+
 
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function()
@@ -230,6 +262,7 @@ function LoadGoogle()
         timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
     }, false);
     DrawWidgets();
+
 }
 
 /**
@@ -315,9 +348,11 @@ function CountColumns()
  */
 function StartFilter()
 {
-    AddMuelltonne();
+
     if (quickShares !== null && quickShares.length > 0) {
+        StartTick(false, "Quickshare");
         QSEvents();
+        StoppTick(false, "Quickshare");
     }
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
@@ -327,16 +362,31 @@ function StartFilter()
         domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
     }, 5000);
     domChangeAllowed = false;
+
+
+
+    StartTick(false, "Hashtags");
+    LoadHashTags();
+    StoppTick(false, "Hashtags");
+    StartTick(false, "Hashtag-Delete");
+    AddMuelltonne();
+    StoppTick(false, "Hashtag-Delete");
+
     if (filterPlus1)
     {
+        StartTick(false, "Plus1");
         $('.xv').closest("[jsmodel='XNmfOc']").hide();
+        StoppTick(false, "Plus1");
     }
     if (filterYouTube)
     {
+        StartTick(false, "Youtube");
         $('.SR').closest("[jsmodel='XNmfOc']").hide();
+        StoppTick(false, "Youtube");
     }
     if (filterWham)
     {
+        StartTick(false, "Wham");
         if (whamWhamText)
         {
             $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
@@ -363,88 +413,129 @@ function StartFilter()
             $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
             //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
+        StoppTick(false, "Wham");
     }
 
     //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
 
     if (filterCommunity)
     {
+        StartTick(false, "Community");
         $('[data-iid="sii2:112"]').hide();
         $('[data-iid="sii2:116"]').hide();
+        StoppTick(false, "Community");
     }
     if (filterBirthday)
     {
+        StartTick(false, "Birthday");
         $('[data-iid="sii2:114"]').hide();
+        StoppTick(false, "Birthday");
     }
     if (filterPersons)
     {
+        StartTick(false, "Persons");
         $('[data-iid="sii2:103"]').hide();
         $('[data-iid="sii2:105"]').hide(); // Interesting Pages
         $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
+        StoppTick(false, "Persons");
     }
 
+    StartTick(false, "Hashtag-Filter");
     DOMFilterHashtags();
+    StoppTick(false, "Hashtag-Filter");
+    StartTick(false, "Images");
     DOMFilterImages();
+    StoppTick(false, "Images");
+    StartTick(false, "Fulltext");
     DOMFilterFreetext();
+    StoppTick(false, "Fulltext");
+    StartTick(false, "Shared Circles");
     DOMFilterSharedCircles();
+    StoppTick(false, "Shared Circles");
+    StartTick(false, "LSR");
     DOMMarkLSRLinks();
+    StoppTick(false, "LSR");
     if (colorUsers)
     {
+        StartTick(false, "Color Users");
         PaintForUser();
         PaintColorBlock();
+        StoppTick(false, "Color Users");
     }
 
     if (showTrophies)
     {
+        StartTick(false, "Trophies");
         OptStartTrophyDisplay();
         DrawTrophies();
+        StoppTick(false, "Trophies");
     }
 
     if (showEmoticons)
     {
+        StartTick(false, "Emoticons");
         OptStartEmoticons();
         PaintEmoticons();
+        StoppTick(false, "Emoticons");
     }
-
+    StartTick(false, "Quickshare Icons");
     PaintQsIcons();
+    StoppTick(false, "Quickshare Icons");
+    StartTick(false, "Bookmark Icons");
     DisplayBookMarkIcons();
+    StoppTick(false, "Bookmark Icons");
 }
 
+function ClearAllTicks() {
+    if (saveTicks) {
+        chrome.runtime.sendMessage({Action: "ClearTicks"});
+    }
+}
 
+function StartTick(isInit, timerName) {
+    if (saveTicks) {
+        chrome.runtime.sendMessage({Action: "AddTick", IsInit: isInit, Name: timerName, Time: $.now()});
+    }
+}
+
+function StoppTick(isInit, timerName) {
+    if (saveTicks) {
+        chrome.runtime.sendMessage({Action: "EndTick", IsInit: isInit, Name: timerName, Time: $.now()});
+    }
+}
 
 /**
  * Filter Shared Circles
  */
 function DOMFilterSharedCircles()
 {
-	if (filterSharedCircles) {
-		try {
-			$('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
-		} catch (ex) {
+    if (filterSharedCircles) {
+        try {
+            $('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
+        } catch (ex) {
             console.log(ex);
         }
-	}
+    }
 }
 
 function DOMMarkLSRLinks() {
-	if (markLSRPosts) {
-		var mark = function($el) {
-				$el.find('div[jsname="P3RoXc"]')
-					.not('.wrng')
-					.addClass('wrng')
-					.prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
-			},
-			$parent = $('div.ki.ve');
-		
-		domainBlacklist.forEach(function(domain) {
-			$parent.find('a[href*=".' + domain + '"]').closest("div.Yp.yt.Xa").each(function() {
-				mark($(this));
-			});
-			$parent.find('a[href*="//' + domain + '"]').closest("div.Yp.yt.Xa").each(function() {
-            	mark($(this));
-			});
-		});
-	}
+    if (markLSRPosts) {
+        var mark = function($el) {
+            $el.find('div[jsname="P3RoXc"]')
+                    .not('.wrng')
+                    .addClass('wrng')
+                    .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+        },
+                $parent = $('div.ki.ve');
+
+        $('div.ki.ve a').each(function(i, obj) {
+            domainBlacklist.forEach(function(domain) {
+                if (obj.href.indexOf(domain) > -1) {
+                    mark($(obj).closest("div.Yp.yt.Xa"));
+                }
+            });
+        });
+    }
 }
 
 /**
@@ -576,6 +667,8 @@ function LoadSettingsLive()
                 Action: "LoadAll"
             }, function(response)
     {
+
+
         filterPlus1 = response.FilterPlus1;
         filterYouTube = response.FilterYouTube;
         filterWham = response.FilterWham;
@@ -609,7 +702,12 @@ function LoadSettingsLive()
         autoSave = response.UseAutoSave;
         displayBookmarks = response.UseBookmarks;
         markLSRPosts = response.MarkLSRPosts;
-        
+        saveTicks = response.CollectTicks;
+        displayQuickHashes = response.DisplayQuickHashes;
+
+
+
+        ClearAllTicks();
         if (trophies !== null) {
             trophies = $.parseJSON(trophies);
         }
@@ -622,7 +720,18 @@ function LoadSettingsLive()
         {
             DrawWizardTile();
         }
-
+        StartTick(true, "LSR");
+        $.getJSON(chrome.extension.getURL('/lsr-blacklist/domains.json'), function(domains) {
+            domainBlacklist = domains;
+        });
+        StoppTick(true, "LSR");
+        StartTick(true, "Quickshare");
+        LoadAllQuickSharesG();
+        StoppTick(true, "Quickshare");
+        StartTick(true, "Circles");
+        GetAllCircles();
+        StoppTick(true, "Circles");
+        StartFilter(); // Initial ausführen
     }
     );
 }

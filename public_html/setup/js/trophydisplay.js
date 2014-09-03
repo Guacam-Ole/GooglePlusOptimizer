@@ -1,5 +1,5 @@
 function OptStartTrophyDisplay() {
-    console.log("trophydisplay loaded.");
+    
 }
 
 /**
