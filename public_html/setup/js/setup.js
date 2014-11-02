@@ -11,10 +11,7 @@ $(document).ready(function()
         FillWeatherData();
         ShowTicks();
 
-        try {
-            OptStartTrophies();
-        } catch (ex) {
-        }
+       
         $('#clockPos').change(function()
         {
             localStorage.setItem("StoppWatch", $("#clockPos").val());
@@ -543,6 +540,8 @@ function LoadSetup()
         LoadCheckBox("markLSRPosts", $('#chkLSRMarker'));
         LoadCheckBox("CollectTicks", $('#chkMeasure'));
         LoadCheckBox("displayQuickHashes", $('#chkQuickHashes'));
+        LoadCheckBox("displayLang", $('#chkLang'));
+        
 
         //LoadCheckBox("StoppWatch", $("#chkStopWatch"));
         LoadExtended();
@@ -832,6 +831,11 @@ function CreateCheckboxEvents()
     {
         SaveCheckBox("useBookmarks", data.value);
     });
+     $("#chkLang").on('switch-change', function(e, data)
+    {
+        SaveCheckBox("displayLang", data.value);
+    });
+    
     $("#chkLSRMarker").on('switch-change', function(e, data)
     {
         SaveCheckBox("markLSRPosts", data.value);

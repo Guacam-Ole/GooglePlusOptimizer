@@ -30,34 +30,11 @@
         <div id="bg_top">
             <div id="wrapper">
                 <div id="header"><div id="logo"><h1>Optimizer für Google+</h1></div></div>
-                <div class="trophyDiv" style="display:none;">
-                    Lade Daten für Trophäen:<br/>
-                    <span id="currentAction">...initialisiere...</span><br/>
-                    <span id="currentPos">...initialisiere...</span>
-                    <br/><br/>
-                    <span id="trophyCount">0 Trophäen gesammelt</span><br/>
-                    <center><img src="../images/progress.gif"/></center>
-                    <br/>
-                    <b>Bitte warten, bis der Vorgang beendet ist.</b>
-                    Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
-                </div>
+                
                 
              
                 <div class="listAllCircles"></div>
-                <div class="trophyDivWhy" style="display:none;">
-                    <h3>Wieso muss ich mich authentifizieren?</h3>
-                    Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.
-                    <h3>Was passiert mit meinen Daten?</h3>
-                    Die Daten werden ausschließlich zur Bestimmung der Trophäen verwendet. Sie werden nicht gespeichert.
-                    <h3>Wieso will der Google+ Optimizer in meinem Namen schreiben?</h3>
-                    Eigentlich will er das gar nicht. Aber die Berechtigung zum Auslesen Deines Profils beinhaltet immer auch die Schreibberechtigung. 
-                    Und obwohl der Optimizer nichts in Deinen Stream schreibt, wird diese Berechtigung angezeigt.
-                    <h3>Und das muss ich glauben?</h3>
-                    Nein. Natürlich nicht. Wenn Du auf Nummer Sicher gehen willst, wähle einfach "Nur für mich" aus
-                    <h3>Ich will das aber alles nicht</h3>
-                    Kein Problem. Die Authentifizierung wird ausschließlich für die Trophäen benötigt. Wenn Du darauf verzichten kannst, brauchst Du Dich auch nicht authentifizieren.
-                    <center><a href="#" id="closeInfo" >schließen</a></center>
-                </div>
+               
                 <!--end header-->
                 <div id="menu">
                     <ul id="navigation">
@@ -98,7 +75,7 @@
                                         </div>&nbsp;Beiträge farblich hervorheben<br/>
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkTrophies">
                                             <input class="toggle" type="checkbox"/>
-                                        </div>&nbsp;Trophäen aktivieren <a href="#" class="blue searchWeather" id="collectTrophy">Trophäen aktualisieren</a> Authentifizierung erforderlich(<a href="#" id="whyAuth">warum?</a>)<br/>
+                                        </div>&nbsp;Trophäen aktivieren <br/>
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkShowEmoticons">
                                             <input class="toggle" type="checkbox" />
                                         </div>&nbsp;Smilies aktivieren<br/> 
@@ -115,6 +92,9 @@
                                         <div class="make-switch switch-mini" data-on-label="AN" data-off-label="AUS" id="chkBookmarks">
                                             <input class="toggle" type="checkbox" />
                                         </div>&nbsp;Bookmarks aktivieren<br/> 
+                                        <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkLang">
+                                            <input class="toggle" type="checkbox" />
+                                        </div>&nbsp;Sprachauswahl aktivieren (unter "Angesagte Beiträge")<br/> 
                                         <hr class="clear" />
                                     </div>
                                     <div class="service_box_container">

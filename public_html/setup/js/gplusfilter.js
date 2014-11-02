@@ -57,6 +57,7 @@ $(document).ready(function()
     }
     else if (window.location.hostname === "plus.google.com")
     {
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
         if (IsDemo()) {
             var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
             $('.Ima.Xic').prepend(button);
@@ -66,13 +67,8 @@ $(document).ready(function()
                 return false;
             });
         }
-
-
-
-
+        
         InitGoogle();
-
-
 
         $(document).on('click', '.unhideImage', function()
         {
@@ -106,7 +102,7 @@ $(document).ready(function()
 function DisplayHashtags()
 {
     if (displayQuickHashes) {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
+        
         $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
     }
 }
@@ -175,13 +171,19 @@ function GetAllCircles()
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
         CreateAutoSaveEvents();
-
+        CleanupAutosave();
         LoadGoogle();
         CountColumns();
         InitBookmarks();
         if (colorUsers)
         {
             OptStartColors();
+        }
+        if (showTrophies)
+        {
+            StartTick(false, "LoadTrophyUsers");
+            OptStartTrophyDisplay();
+            StoppTick(false, "LoadTrophyUsers");
         }
         DisplayHashtags();
     }
@@ -212,7 +214,6 @@ function DrawWizardTile() {
                     $('body').prepend(wizz);
                     $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function() {
                         InitWizard(lastWizardVersion);
-                        OptStartTrophies();
                         console.log('Wizard loaded');
                     });
                 });
@@ -343,6 +344,12 @@ function CountColumns()
     }
 }
 
+function CleanDate(anyDate) {
+    if (anyDate.indexOf("(")>0) {
+        return anyDate.substring(0,anyDate.indexOf("(")-1);
+    }
+}
+
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
@@ -354,136 +361,178 @@ function StartFilter()
         QSEvents();
         StoppTick(false, "Quickshare");
     }
+    MoveBookmark();
+
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
         return;
     }
+    try {
+
+        
+        StartTick(false, "Hashtags");
+        LoadHashTags();
+        StoppTick(false, "Hashtags");
+        StartTick(false, "Hashtag-Delete");
+        AddMuelltonne();
+        StoppTick(false, "Hashtag-Delete");
+
+        if (filterPlus1)
+        {
+            StartTick(false, "Plus1");
+            $('.xv').closest("[jsmodel='XNmfOc']").hide();
+            StoppTick(false, "Plus1");
+        }
+        if (filterYouTube)
+        {
+            StartTick(false, "Youtube");
+            $('.SR').closest("[jsmodel='XNmfOc']").hide();
+            StoppTick(false, "Youtube");
+        }
+        if (filterWham)
+        {
+            StartTick(false, "Wham");
+            if (whamWhamText)
+            {
+                $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+            }
+            if (whamChristmasText)
+            {
+                $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+                $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+            }
+            if (whamWhamLink)
+            {
+                $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+            }
+            if (whamChristmasLink)
+            {
+                $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+                $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+                //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+            }
+            StoppTick(false, "Wham");
+        }
+
+        //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
+
+        if (filterCommunity)
+        {
+            StartTick(false, "Community");
+            $('[data-iid="sii2:112"]').hide();
+            $('[data-iid="sii2:116"]').hide();
+            StoppTick(false, "Community");
+        }
+        if (filterBirthday)
+        {
+            StartTick(false, "Birthday");
+            $('[data-iid="sii2:114"]').hide();
+            StoppTick(false, "Birthday");
+        }
+        if (filterPersons)
+        {
+            StartTick(false, "Persons");
+            $('[data-iid="sii2:103"]').hide();
+            $('[data-iid="sii2:105"]').hide(); // Interesting Pages
+            $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
+            StoppTick(false, "Persons");
+        }
+
+        StartTick(false, "Hashtag-Filter");
+        DOMFilterHashtags();
+        StoppTick(false, "Hashtag-Filter");
+        StartTick(false, "Images");
+        DOMFilterImages();
+        StoppTick(false, "Images");
+        StartTick(false, "Fulltext");
+        DOMFilterFreetext();
+        StoppTick(false, "Fulltext");
+        StartTick(false, "Shared Circles");
+        DOMFilterSharedCircles();
+        StoppTick(false, "Shared Circles");
+        StartTick(false, "LSR");
+        DOMMarkLSRLinks();
+        StoppTick(false, "LSR");
+        if (colorUsers)
+        {
+            StartTick(false, "Color Users");
+            PaintForUser();
+            PaintColorBlock();
+            StoppTick(false, "Color Users");
+        }
+
+        if (showTrophies)
+        {
+            StartTick(false, "Trophies");
+            //OptStartTrophyDisplay();
+            DrawTrophies();
+            StoppTick(false, "Trophies");
+        }
+
+        if (showEmoticons)
+        {
+            StartTick(false, "Emoticons");
+            OptStartEmoticons();
+            PaintEmoticons();
+            StoppTick(false, "Emoticons");
+        }
+        StartTick(false, "Quickshare Icons");
+        PaintQsIcons();
+        StoppTick(false, "Quickshare Icons");
+        StartTick(false, "Bookmark Icons");
+        DisplayBookMarkIcons();
+        StoppTick(false, "Bookmark Icons");
+        StartTick(false, "Paint Trophy Icons");
+        PaintTrophyOverview();
+        StoppTick(false, "Paint Trophy Icons");
+        WhatsHot();
+    } catch (ex) {
+    }
     setTimeout(function() {
-        domChangeAllowed = true; // Nach 5 Sekunden Änderungen wieder erlauben
-    }, 5000);
+        domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
+    }, interval);
     domChangeAllowed = false;
+}
 
+function GetLangImage(short, img) {
+    return '<a href="' + location.protocol + '//' + location.host + location.pathname + '?hl=' + short + '"><img src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
+}
 
+function WhatsHot() {
+    if (showLang) {
+        if (window.location.href.indexOf("/explore") > 0 && $(".langSelect").length === 0) {
+            var languageSelector = "<div class='langSelect'>";
+            languageSelector += GetLangImage("de", "Germany");
+            languageSelector += GetLangImage("en", "United_Kingdom");
+            languageSelector += GetLangImage("es", "Spain");
+            languageSelector += GetLangImage("pt", "Portugal");
+            languageSelector += GetLangImage("fr", "France");
+            languageSelector += GetLangImage("ru", "Russia");
+            languageSelector += GetLangImage("no", "Norway");
+            languageSelector += GetLangImage("hr", "Croatia");
+            languageSelector += GetLangImage("cz", "Czech_Republic");
+            languageSelector += GetLangImage("da", "Denmark");
+            languageSelector += GetLangImage("fi", "Finland");
+            languageSelector += GetLangImage("it", "Italy");
+            languageSelector += GetLangImage("pl", "Poland");
+            languageSelector += GetLangImage("sv", "Sweden");
+            languageSelector += GetLangImage("tr", "Turkey");
 
-    StartTick(false, "Hashtags");
-    LoadHashTags();
-    StoppTick(false, "Hashtags");
-    StartTick(false, "Hashtag-Delete");
-    AddMuelltonne();
-    StoppTick(false, "Hashtag-Delete");
+            languageSelector += GetLangImage("ja", "Japan");
+            languageSelector += GetLangImage("cz-CN", "China");
 
-    if (filterPlus1)
-    {
-        StartTick(false, "Plus1");
-        $('.xv').closest("[jsmodel='XNmfOc']").hide();
-        StoppTick(false, "Plus1");
-    }
-    if (filterYouTube)
-    {
-        StartTick(false, "Youtube");
-        $('.SR').closest("[jsmodel='XNmfOc']").hide();
-        StoppTick(false, "Youtube");
-    }
-    if (filterWham)
-    {
-        StartTick(false, "Wham");
-        if (whamWhamText)
-        {
-            $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+            languageSelector += "</div>";
+            $('[role="article"]').first().prepend($(languageSelector));
         }
-        if (whamChristmasText)
-        {
-            $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        if (whamWhamLink)
-        {
-            $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        if (whamChristmasLink)
-        {
-            $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        StoppTick(false, "Wham");
     }
-
-    //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
-
-    if (filterCommunity)
-    {
-        StartTick(false, "Community");
-        $('[data-iid="sii2:112"]').hide();
-        $('[data-iid="sii2:116"]').hide();
-        StoppTick(false, "Community");
-    }
-    if (filterBirthday)
-    {
-        StartTick(false, "Birthday");
-        $('[data-iid="sii2:114"]').hide();
-        StoppTick(false, "Birthday");
-    }
-    if (filterPersons)
-    {
-        StartTick(false, "Persons");
-        $('[data-iid="sii2:103"]').hide();
-        $('[data-iid="sii2:105"]').hide(); // Interesting Pages
-        $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
-        StoppTick(false, "Persons");
-    }
-
-    StartTick(false, "Hashtag-Filter");
-    DOMFilterHashtags();
-    StoppTick(false, "Hashtag-Filter");
-    StartTick(false, "Images");
-    DOMFilterImages();
-    StoppTick(false, "Images");
-    StartTick(false, "Fulltext");
-    DOMFilterFreetext();
-    StoppTick(false, "Fulltext");
-    StartTick(false, "Shared Circles");
-    DOMFilterSharedCircles();
-    StoppTick(false, "Shared Circles");
-    StartTick(false, "LSR");
-    DOMMarkLSRLinks();
-    StoppTick(false, "LSR");
-    if (colorUsers)
-    {
-        StartTick(false, "Color Users");
-        PaintForUser();
-        PaintColorBlock();
-        StoppTick(false, "Color Users");
-    }
-
-    if (showTrophies)
-    {
-        StartTick(false, "Trophies");
-        OptStartTrophyDisplay();
-        DrawTrophies();
-        StoppTick(false, "Trophies");
-    }
-
-    if (showEmoticons)
-    {
-        StartTick(false, "Emoticons");
-        OptStartEmoticons();
-        PaintEmoticons();
-        StoppTick(false, "Emoticons");
-    }
-    StartTick(false, "Quickshare Icons");
-    PaintQsIcons();
-    StoppTick(false, "Quickshare Icons");
-    StartTick(false, "Bookmark Icons");
-    DisplayBookMarkIcons();
-    StoppTick(false, "Bookmark Icons");
+    // sii2:151
 }
 
 function ClearAllTicks() {
@@ -518,25 +567,6 @@ function DOMFilterSharedCircles()
     }
 }
 
-function DOMMarkLSRLinks() {
-    if (markLSRPosts) {
-        var mark = function($el) {
-            $el.find('div[jsname="P3RoXc"]')
-                    .not('.wrng')
-                    .addClass('wrng')
-                    .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
-        },
-                $parent = $('div.ki.ve');
-
-        $('div.ki.ve a').each(function(i, obj) {
-            domainBlacklist.forEach(function(domain) {
-                if (obj.href.indexOf(domain) > -1) {
-                    mark($(obj).closest("div.Yp.yt.Xa"));
-                }
-            });
-        });
-    }
-}
 
 /**
  * Volltextfilter
@@ -657,6 +687,21 @@ function AddKeywordToList(newKeyword) {
     ShowNotification("success", chrome.i18n.getMessage("KeywordFilteredTitle"), chrome.i18n.getMessage("KeywordFiltered").replace("_KEYWORD_", newKeyword));
 }
 
+function CleanupAutosave() {
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key.indexOf("autosave.") === 0) {
+            var autosaveitem = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            var oldDate = Date.parse(CleanDate(autosaveitem.date));
+            if (oldDate < (3).days().ago()) {
+                // Autosave braucht nicht tagelang im Speicher bleiben
+                localStorage.removeItem(key);
+            }
+        }
+    }
+}
+
+
 /**
  * Einstellungen von Backgroundscript laden 
  */
@@ -695,6 +740,7 @@ function LoadSettingsLive()
         filterMp4Only = response.FilterMp4Only;
         filterSharedCircles = response.FilterSharedCircles;
         showTrophies = response.DisplayTrophy;
+        showLang = response.DisplayLang;
         showEmoticons = response.ShowEmoticons;
         lastWizardVersion = response.lastWizard;
         wizardMode = response.WizardMode;
@@ -720,11 +766,9 @@ function LoadSettingsLive()
         {
             DrawWizardTile();
         }
-        StartTick(true, "LSR");
-        $.getJSON(chrome.extension.getURL('/lsr-blacklist/domains.json'), function(domains) {
-            domainBlacklist = domains;
-        });
-        StoppTick(true, "LSR");
+        StartTick(true, "LSRLoad");
+        LoadLsrList();
+        StoppTick(true, "LSRLoad");
         StartTick(true, "Quickshare");
         LoadAllQuickSharesG();
         StoppTick(true, "Quickshare");

@@ -445,48 +445,35 @@
 </div>
 
 <div class="wizardContainer" id="addonTrophies">
-
-
-    <div class="version">2.3</div>
+    <div class="version">2.6.2</div>
     <div class="image">trophies.png</div>
     <div class="category">Feature</div>
     <div class="heading">Trophäen aktivieren</div>
     <div class="content">
-        Trophäen sind Belohnungen für Aktionen bei Google+. Auch wenn es keinen echten Preis zu gewinnen gibt, so kannst Du nun auch in Google+ mit Deinen Fähigkeiten angeben. Um die Trophäen zu berechnen müssen Deine sämtlichen (öffentlichen) Beiträge, Kontakte und Profildaten einmalig durchsucht werden.
+        Trophäen sind Belohnungen für Aktionen bei Google+. Auch wenn es keinen echten Preis zu gewinnen gibt, so kannst Du nun auch in Google+ mit Deinen Fähigkeiten angeben. 
         <br/><br/>
-        Die Trophäen werden im "Über mich" - Bereich Deines Profils (nur für Dich) angezeigt.<br/><br/>
+        Die Trophäen werden im "Über mich" - Bereich Deines Profils angezeigt. Zusätzlich bekommen alle Benutzer, die mindestens eine Trophäe besitzen mit einem kleinen Icon markiert.<br/><br/>
 
-
-        <button  id="collectTrophy" class="wizButton">Trophäen aktivieren</button><br/><br/><br/>
-        <sup><b>Für die Nutzung der Trophäen ist eine Authentifizierung erforderlich (<a  id="whyAuth">warum?</a>)</b></sup><br/><br/>
-
+        <br/><br/>
+        <div class="make-switch " data-on-label="AN" data-off-label="AUS" id="chkTrophies">
+            <input class="toggle" type="checkbox"/>
+        </div> <br/>
         <br/>
-        <div class="trophyDiv" >
-            Lade Daten für Trophäen:<br/>
-            <span id="currentAction">...initialisiere...</span><br/>
-            <span id="currentPos">...initialisiere...</span>
-            <br/><br/>
-            <span id="trophyCount">0 Trophäen gesammelt</span><br/><br/>
-            <center><img id ="robbe" alt="progress" /></center>
-            <br/>
-            <b>Bitte warten, bis der Vorgang beendet ist.</b>
-            Dies kann mehrere Minuten dauern. Dieses Fenster schließt sich im Anschluss selbsttätig<br/><br/>
-        </div>
+    </div>
+</div>
 
-        <div class="trophyDivWhy" style="display:none;">
-            <h3>Wieso muss ich mich authentifizieren?</h3>
-            Die Trophäendaten werden anhand Deiner Beiträge, Deiner Kontakte und Deines Profils ermittelt. Hierfür ist eine Anmeldung notwendig.<br/><br/>
-            <h3>Was passiert mit meinen Daten?</h3>
-            Die Daten werden ausschließlich zur Bestimmung der Trophäen verwendet. Sie werden nicht gespeichert.<br/><br/>
-            <h3>Wieso will der Google+ Optimizer in meinem Namen schreiben?</h3>
-            Eigentlich will er das gar nicht. Aber die Berechtigung zum Auslesen Deines Profils beinhaltet immer auch die Schreibberechtigung. 
-            Und obwohl der Optimizer nichts in Deinen Stream schreibt, wird diese Berechtigung angezeigt.<br/><br/>
-            <h3>Und das muss ich glauben?</h3>
-            Nein. Natürlich nicht. Wenn Du auf Nummer Sicher gehen willst, wähle einfach "Nur für mich" aus<br/><br/>
-            <h3>Ich will das aber alles nicht</h3>
-            Kein Problem. Die Authentifizierung wird ausschließlich für die Trophäen benötigt. Wenn Du darauf verzichten kannst, brauchst Du Dich auch nicht authentifizieren.<br/>
-            <br/><center><a id="closeInfo" >schließen</a></center>
-        </div>
+<div class="wizardContainer" id="addonLanguages">
+    <div class="version">2.6.2</div>
+    <div class="image">lang.png</div>
+    <div class="category">Feature</div>
+    <div class="heading">Sprachen aktivieren</div>
+    <div class="content">
+        Der sog. "Angesagt"-Bereich bei Google+ ist für jedes Land anders. Wenn dieses Feature aktiviert ist, kann bequem zwischen den verschiedenen Variantemn umgeschaltet werden.<br/><br/>
+
+        <div class="make-switch " data-on-label="AN" data-off-label="AUS" id="chkLang">
+            <input class="toggle" type="checkbox"/>
+        </div> <br/>
+        <br/>
     </div>
 </div>
 

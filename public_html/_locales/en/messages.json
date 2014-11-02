@@ -11,6 +11,10 @@
             {
                 "message": "en"
             },
+    "HasTrophies":
+            {
+                "message": "Trophäen vorhanden"
+            },
     "removeHashtag":
             {
                 "message": "filter this hashtag"
@@ -246,7 +250,24 @@
     "WARNING":
             {
                 "message": "ATTENTION! Contains LSR-Links!"
+            },
+    "hasnotrophies":
+            {
+                "message": "hasn't collected any trophies yet. "
+            },
+    "youhavenotrophies":
+            {
+                "message": "You haven't collected any trophies yet! "
+            },
+    "letsgo":
+            {
+                "message": "Let's change that!"
             }
-            
+            ,
+    "moredetails":
+            {
+                "message": "I want more details!"
+            }        
+          
           
 }

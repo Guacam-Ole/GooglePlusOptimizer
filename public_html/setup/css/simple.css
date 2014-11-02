@@ -16,5 +16,16 @@ and open the template in the editor.
     background:white;
     padding: 5px;
     overflow:scroll;
-    
+}
+
+.langSelect {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -2px;
+}
+
+.InfoUsrTop {
+    float:right;
+    margin-top: -15px;
+    margin-right: 5px;
 }
