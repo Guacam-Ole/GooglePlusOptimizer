@@ -30,32 +30,10 @@
         <div id="bg_top">
             <div id="wrapper">
                 <div id="header"><div id="logo"><h1>Optimizer for Google+</h1></div></div>
-                <div class="trophyDiv" style="display:none;">
-                    Loading trophy-data:<br/>
-                    <span id="currentAction">...initialize...</span><br/>
-                    <span id="currentPos">...initialialize...</span>
-                    <br/><br/>
-                    <span id="trophyCount">0 trophies collected</span><br/>
-                    <center><img src="../images/progress.gif"/></center>
-                    <br/>
-                    <b>Please wait until the data is loaed.</b>
-                    This may take a few minutes. This window closes itself after the data is collected<br/><br/>
-                </div>
+                
                 
                 <div class="listAllCircles"></div>
-                <div class="trophyDivWhy" style="display:none;">
-                    <h3>Why do I have to auhtenticate?</h3>
-                    The tropy-data is collected from your posts, your contacts and your profile. To collect this information you need to authenticate.
-                    <h3>What happens with my data?</h3>
-                    The data is only used to determine, which trophies should be displayed. They are not saved
-                    <h3>Why does the Google+ Optimizer want to post in my name?</h3>
-                    The Optimizer doesn't. But the permission to read your profile always also includes the write permission. Even though the Optimizer does not write into your stream this permission is shown.
-                    <h3>And if I don't believe that?</h3>
-                    Then don't. To be sure select "only for me" if you wish
-                    <h3>I do not want any of this crap!</h3>
-                    No problem. You just miss the trophies. All other features still work.
-                    <center><a href="#" id="closeInfo" >close</a></center>
-                </div>
+                
                 <!--end header-->
                 <div id="menu">
                     <ul id="navigation">
@@ -96,7 +74,7 @@
                                         </div>&nbsp;Enable colors for users<br/>
                                         <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkTrophies">
                                             <input class="toggle" type="checkbox"/>
-                                        </div>&nbsp;Activate trophies <a href="#" class="blue searchWeather" id="collectTrophy">Reload trophy-data</a> Authentication required(<a href="#" id="whyAuth">why?</a>)<br/>
+                                        </div>&nbsp;Activate trophies <br/>
                                         <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkShowEmoticons">
                                             <input class="toggle" type="checkbox" />
                                         </div>&nbsp;Activate smileys<br/> 
@@ -105,10 +83,11 @@
                                         </div>&nbsp;Activate Bookmarks<br/> 
                                         <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkQuickHashes">
                                             <input class="toggle" type="checkbox" />
-                                        </div>&nbsp;Quick-Hashtags aktivieren<br/> 
-                                        <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkLSRMarker">
+                                        </div>&nbsp;Activate Quick-Hashtags<br/> 
+                                        <div class="make-switch switch-mini" data-on-label="ON" data-off-label="OFF" id="chkLang">
                                             <input class="toggle" type="checkbox" />
-                                        </div>&nbsp;Mark Posts with LSR-Links <em>(Germany only, <a href="https://github.com/magdev/leistungsschutzgelderpresser" target="_blank">Domain-Blacklist</a>)</em><br/> 
+                                        </div>&nbsp;Activate Language-Selector in "What's hot"<br/> 
+                                        
 
                                         <hr class="clear" />
                                     </div>

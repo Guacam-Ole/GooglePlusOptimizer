@@ -117,6 +117,38 @@
     </div>
 </div>
 
+<div class="wizardContainer" id="addonTrophies">
+    <div class="version">2.6.2</div>
+    <div class="image">trophies.png</div>
+    <div class="category">Feature</div>
+    <div class="heading">Activate trophies</div>
+    <div class="content">
+        Trophies are rewards for things you've done in Google+. Even if there are no real prices to win, they give you the possibility to brag in front of your friends. 
+        <br/><br/>
+
+        <br/><br/>
+        <div class="make-switch " data-on-label="ON" data-off-label="OFF" id="chkTrophies">
+            <input class="toggle" type="checkbox"/>
+        </div> <br/>
+        <br/>
+    </div>
+</div>
+
+<div class="wizardContainer" id="addonLanguages">
+    <div class="version">2.6.2</div>
+    <div class="image">lang.png</div>
+    <div class="category">Feature</div>
+    <div class="heading">Activate languages</div>
+    <div class="content">
+        Every nation got its own "what's hot" in Google+. Activate this feature to look what other nations are interesed in.<br/><br/>
+
+        <div class="make-switch " data-on-label="ON" data-off-label="OFF" id="chkLang">
+            <input class="toggle" type="checkbox"/>
+        </div> <br/>
+        <br/>
+    </div>
+</div>
+
 <div class="wizardContainer" id="filterYT">
     <div class="version">1.0</div>
     <div class="image">yt.png</div>
@@ -412,47 +444,6 @@
         </div> <br/>
 
         <br/>
-    </div>
-</div>
-
-<div class="wizardContainer" id="addonTrophies">
-    <div class="version">2.3</div>
-    <div class="image">trophies.png</div>
-    <div class="category">Feature</div>
-    <div class="heading">Activate trophies</div>
-    <div class="content">
-        Trophies are rewards for things you've done in Google+. Even if there are no real prices to win, they give you the possibility to brag in front of your friends. To collect the trophies your posts and contacts have to be analyzed.
-        <br/><br/>
-        The trophies will be shown in your "about be" - area of your profile (just for you).<br/><br/>
-        <button  id="collectTrophy" class="wizButton">Activate trophies</button><br/><br/><br/>
-        <sup><b>You need to authenticate before your trophies can be collected(<a  id="whyAuth">why?</a>)</b></sup><br/><br/>
-
-        <br/>
-        <div class="trophyDiv" >
-            Loading trophy-data:<br/>
-            <span id="currentAction">...initialize...</span><br/>
-            <span id="currentPos">...initialize...</span>
-            <br/><br/>
-            <span id="trophyCount">0 trophies collected</span><br/><br/>
-            <center><img id ="robbe" alt="progress" /></center>
-            <br/>
-            <b>Please wait until all trophies are collected.</b>
-            This can take a few minutes. This window closes itself at the end<br/><br/>
-        </div>
-
-        <div class="trophyDivWhy" style="display:none;">
-            <h3>Why do I have to auhtenticate?</h3>
-            The tropy-data is collected from your posts, your contacts and your profile. To collect this information you need to authenticate.
-            <h3>What happens with my data?</h3>
-            The data is only used to determine, which trophies should be displayed. They are not saved
-            <h3>Why does the Google+ Optimizer want to post in my name?</h3>
-            The Optimizer doesn't. But the permission to read your profile always also includes the write permission. Even though the Optimizer does not write into your stream this permission is shown.
-            <h3>And if I don't believe that?</h3>
-            Then don't. To be sure select "only for me" if you wish
-            <h3>I do not want any of this crap!</h3>
-            No problem. You just miss the trophies. All other features still work.
-            <center><a href="#" id="closeInfo" >close</a></center>
-        </div>
     </div>
 </div>
 

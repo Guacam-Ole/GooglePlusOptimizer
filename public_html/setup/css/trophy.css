@@ -52,3 +52,8 @@
     background-image: url(../images/bronze.png);        
     color: #CC9966;
 }
+
+.moredetails {
+text-align: right;
+margin-top: 4px;
+}

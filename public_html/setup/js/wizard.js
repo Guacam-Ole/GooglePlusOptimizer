@@ -218,6 +218,9 @@ function LoadWizardSettings() {
     LoadCheckBox(displayBookmarks, "#chkWizBookmarks");
     LoadCheckBox(markLSRPosts, "#chkWizLSR");
     LoadCheckBox(filterSharedCircles, "#chkWizCircle");
+    LoadCheckBox(showTrophies, "#chkTrophies");
+    LoadCheckBox(showLang, "#chkLang");
+    
 
     propsFulltext = propsFulltext || "";
     if (propsFulltext === null) {
@@ -514,6 +517,12 @@ function WizSwitchEvents() {
             case "chkWizCircle":
                 filterSharedCircles=data.value;
                 break;
+            case "chkTrophies":
+                showTrophies=data.value;
+                break;
+            case "chkLang":
+                showLang=data.value;
+                break;                
                 
                 
     
@@ -608,10 +617,10 @@ function SaveWizardSportSettings() {
  */
 function SaveWizardSettings()
 {
-    trophies = localStorage.getItem("trophies");
-    var lastTrophyRead = localStorage.getItem("lastTrophyRead");
+    
+    
     filterWham = whamWhamText || whamWhamLink || whamChristmasText || whamChristmasLink;
-    showTrophies = trophies !== null && trophies !== undefined && trophies.length > 0;
+    
 
     chrome.runtime.sendMessage(
             {
@@ -641,11 +650,10 @@ function SaveWizardSettings()
                 filterMp4Only: filterMp4Only,
                 displayTrophy: showTrophies,
                 filterLinks: filterLinks,
-                trophies: trophies,
                 showEmoticons: showEmoticons,
                 UseAutoSave: autoSave,
                 UseBookmarks: displayBookmarks,
-                lastTrophyRead: lastTrophyRead
+                DisplayLang: showLang
             }, function(response) {
     }
     );

@@ -26,12 +26,19 @@ function InitBookmarks() {
         {
             ClickBookmark($(this));
         });
-
+    
+        
+        
+        
+        
+        
         if ($('.miniBookmark').length === 0)
         {
-            var bookmarkIcon = "<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-            $('.Pzc').prepend($(bookmarkIcon));
-            //$('.gb_Sa').before();
+           
+         //   if (document.title.indexOf("Google+")===0) {
+                var bookmarkIcon = "<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
+                $('.Pzc').prepend($(bookmarkIcon));
+           // }
         }
     }
 }
@@ -61,12 +68,30 @@ function ClickBookmark(bookmarkButton)
     bookmarkButton.attr('src', iconUrl);
 
 }
+function MoveBookmark() {
+     if (displayBookmarks) {
+        if ($('.V9b').length>0) {
+            var oldStyle=$('.V9b').attr('style');
+            if (oldStyle.indexOf("modified")===-1) {
+                var oldValEnd=oldStyle.indexOf("px");
+                var oldValStart=oldStyle.indexOf(" ");
+                var oldVal=oldStyle.substring(oldValStart,oldValEnd);
+                var oldValI=parseInt(oldVal);
+                $('.V9b').attr('style',"right: "+(oldValI+60)+"px; modified");
+            }
+        }
+    }
+}
 
 function DisplayBookMarkIcons()
 {
     if (displayBookmarks)
+    
+    
             //if (bookmarkList !== null && quickShares.length > 0)
             {
+               
+                
                 DisplayBookmarks();
                 $('.lea:not(:has(.addBookmark))').each(function()      //$('h3.zi:not(:has(.addBookmark))').each(function()
                 {
@@ -102,9 +127,6 @@ function LoadBookmarksForDisplay() {
             }, function(response)
     {
         bookmarkList = JSON.parse(response.Result) || null;
-       /* if (bookmarkList !== null && bookmarkList.length > 0) {
-            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-        }*/
         chrome.runtime.sendMessage(
                 {
                     Action: "LoadBookmarkContents"

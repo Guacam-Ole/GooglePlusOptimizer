@@ -62,7 +62,52 @@ chrome.extension.onMessage.addListener(function(request, sender) {
     if (request === "show_page_action") {
         chrome.pageAction.show(sender.tab.id);
     }
+
 });
+
+// Trophies
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    
+    if (request.Action==="getTrophyUsers") {
+        var users;
+        var file="http://www.appschleppen.com/php/getusers.php?version=1.0";
+         $.ajax({
+            url: file,
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                users=data;
+            }
+        });       
+        sendResponse({Result: users});
+    } else if (request.Action==="getTrophyDescriptions") {
+        var trophynames;
+        var file="http://www.appschleppen.com/js/trophy."+request.Language+".json";
+        $.ajax({
+            url: file,
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                trophynames=data;
+            }
+        });
+        sendResponse({Result: trophynames});
+    } else if (request.Action==="getTrophiesForUser") {
+        var trophies;
+        var file="http://www.appschleppen.com/php/loadtrophies.php?version=1.0&userId="+request.UserId;
+        $.ajax({
+            url: file,
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                trophies=data;
+            }
+        });
+        sendResponse({Result: trophies});
+    }
+});
+
+
 
 // Datenaustausch mit Background-jQuery-File
 chrome.runtime.onMessage.addListener(
@@ -218,8 +263,7 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("filterMp4Only", request.filterMp4Only);
                 localStorage.setItem("filterSharedCircles", request.filterSharedCircles);
                 localStorage.setItem("displayTrophy", request.displayTrophy);
-                localStorage.setItem("trophies", request.trophies);
-                localStorage.setItem("lastTrophyRead", request.lastTrophyRead);
+                localStorage.setItem("displayLang", request.DisplayLang);
                 localStorage.setItem("showEmoticons", request.showEmoticons);
                 localStorage.setItem("useAutoSave", request.UseAutoSave);
                 localStorage.setItem("useBookmarks", request.UseBookmarks);
@@ -257,10 +301,9 @@ chrome.runtime.onMessage.addListener(
                 var filterMp4Only = localStorage.getItem("filterMp4Only");
                 var filterSharedCircles = localStorage.getItem('filterSharedCircles');
                 var displayTrophy = localStorage.getItem("displayTrophy");
-                var trophies = localStorage.getItem("trophies");
+                var displayLang = localStorage.getItem("displayLang");
                 var showEmoticons = localStorage.getItem("showEmoticons");
                 var lastWizard = localStorage.getItem("lastWizard");
-                var lastTrophyRead = localStorage.getItem("lastTrophyRead");
                 var useBookmarks=localStorage.getItem("useBookmarks");
                 var useAutoSave = localStorage.getItem("useAutoSave");
                 var markLSRPosts = localStorage.getItem('markLSRPosts');
@@ -300,6 +343,8 @@ chrome.runtime.onMessage.addListener(
                 showEmoticons = BoolNotNull(showEmoticons);
                 useBookmarks=BoolNotNull(useBookmarks);
                 markLSRPosts = BoolNotNull(markLSRPosts);
+                displayLang=BoolNotNull(displayLang);
+                
                 collectTicks=BoolNotNull(collectTicks);
                 displayQuickHashes=BoolNotNull(displayQuickHashes);
                 
@@ -328,14 +373,13 @@ chrome.runtime.onMessage.addListener(
                     FilterLinks: GetBool(filterLinks),
                     FilterSharedCircles: GetBool(filterSharedCircles),
                     DisplayTrophy: GetBool(displayTrophy),
+                    DisplayLang: GetBool(displayLang),                    
                     ShowEmoticons: GetBool(showEmoticons),
                     WizardMode: wizardMode,
-                    Trophies: trophies,
                     Sport: sport,
                     Wetter: wetter,
                     Interval: interval,
                     Stoppwatch: stoppwatch,
-                    LastTrophyRead: lastTrophyRead,
                     UseBookmarks:GetBool(useBookmarks),
                     lastWizard: lastWizard,
                     UseAutoSave: GetBool(useAutoSave),
