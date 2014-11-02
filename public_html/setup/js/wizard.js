@@ -137,7 +137,6 @@ function InitWizard(version)
         DisplayStep(allPages[0], 0, 0);
         handleTagsInput();
         $('#spam1').attr('src',chrome.extension.getURL("setup/images/alster.png"));
-        $('#spam2').attr('src',chrome.extension.getURL("setup/images/startnext_logo_green.png"));
         $('.spam').fadeIn();
         
         

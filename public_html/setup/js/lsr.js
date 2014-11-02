@@ -3,7 +3,7 @@ function LoadLsrList() {
     if (markLSRPosts) {
         domainBlacklist=localStorage.getItem("domainBlacklist");
         var lastLsrDownload=localStorage.getItem("lastLsrDownload");
-        if (lastLsrDownload==undefined || lastLsrDownload==null  || lastLsrDownload<(7).days().ago() || domainBlacklist==undefined || domainBlacklist==null  ) {
+        if (lastLsrDownload==undefined || lastLsrDownload==null  || Date.parse(CleanDate(lastLsrDownload))<(7).days().ago() || domainBlacklist==undefined || domainBlacklist==null  ) {
             $.getJSON('https://cdn.rawgit.com/magdev/leistungsschutzgelderpresser/master/domains.json', function(domains) {
                 domainBlacklist = domains;
                 localStorage.setItem("lastLsrDownload",Date.today());

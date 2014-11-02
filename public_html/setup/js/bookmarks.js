@@ -26,11 +26,6 @@ function InitBookmarks() {
         {
             ClickBookmark($(this));
         });
-    
-        
-        
-        
-        
         
         if ($('.miniBookmark').length === 0)
         {
