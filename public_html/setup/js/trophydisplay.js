@@ -1,10 +1,55 @@
 
 
 function OptStartTrophyDisplay() {
+    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/trophy.css") + "' type='text/css' media='screen' />"));
     GetTrophyUsers();
+    
+    $(document).on({
+        click: function () {
+            if ($(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').length>0) {
+                $(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').remove();
+            } else {
+               HoverTrophies($(this));
+            }
+            return false;
+        }
+    }, ".trophyImg"); //pass the element as an argument to .on
 }
 
 
+function HoverTrophies($trophy) {
+     var userId=$trophy.attr("userid");
+    
+     chrome.runtime.sendMessage(
+    {
+        Action: "getTrophiesForUser",
+        UserId: userId
+    }, function(response)
+    {
+        if (response.Result.length>0) {
+            trophies=response.Result;
+
+            // Beschreibungen auslesen:
+            chrome.runtime.sendMessage(
+            {
+                Action: "getTrophyDescriptions",
+                Language: chrome.i18n.getMessage("lang")
+            }, function(response)
+            {
+                allTrophies=response.Result;
+                
+                RenderTrophyBlockHover(allTrophies, trophies,$trophy.closest('.InfoUsrTop').next(),userId,false);
+            });
+        } else {
+
+           RenderEmptyTrophyBlock();
+        }
+    });
+}
+
+function UnHoverTrophies(trophy) {
+    
+}
 
 
 /**
@@ -17,7 +62,7 @@ function DrawTrophies()
         if (window.location.pathname.indexOf("/about") > 0)
         {
            try {
-                if ($('#trophyDisplay').length > 0) {
+                if ($('.trophyDisplay').length > 0) {
                     // schon gezeichnet
                     return;
                 }
@@ -40,7 +85,7 @@ function DrawTrophies()
                         }, function(response)
                         {
                             allTrophies=response.Result;
-                            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/trophy.css") + "' type='text/css' media='screen' />"));
+                            //$("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/trophy.css") + "' type='text/css' media='screen' />"));
                             RenderTrophyBlock(allTrophies, trophies);
                         });
                     } else {
@@ -59,12 +104,18 @@ function ItsMe() {
     return $('[guidedhelpid="profile_viewas_button"]').length>0;
 }
 
+
+
 function RenderEmptyTrophyBlock() {
+      if ($('.trophyDisplay').length > 0) {
+        // schon gezeichnet
+        return;
+    }
     var itsmeblock="";
     var noTrophiesYet="";
     
     
-      var html = "<div id=\"trophyDisplay\" class=\"Ee i5a vna CVb\" role=\"article\">"
+      var html = "<div  class=\"trophyDisplay Ee i5a vna CVb\" role=\"article\">"
                     + "<div class=\"ZYa ukoEtfi\"><div class=\"Lqc\"><div class=\"F9a\">" + chrome.i18n.getMessage("trophies") + "</div></div><br/><br/>"
                     + "<div class=\"Uia\">"
                     + "{{NOTROPHY}}"
@@ -86,13 +137,14 @@ function PaintTrophyOverview() {
         var allusers=JSON.parse(localStorage.getItem("allTrophyUsers"));
         if (allusers!=undefined && allusers!=null && allusers.length>0) {
             for (var i in allusers) {
-                if ($('h3 [oid="' + allusers[i].id + '"]').closest('.lea').length > 0)
+                var currentUser=allusers[i].id;
+                if ($('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0)
                 {
-                    $('h3 [oid="' + allusers[i].id + '"]').closest('.lea').each(function() {
+                    $('h3 [oid="' + currentUser + '"]').closest('.lea').each(function() {
                         AddHeadWrapper($(this));
                         if ($(this).html().indexOf('trophyImg') === -1)
                         {
-                            $(this).find('.InfoUsrTop').prepend("<img class=\"trophyImg\" title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
+                            $(this).find('.InfoUsrTop').prepend("<a href=\"#\"><img class=\"trophyImg\" userId='"+currentUser+"' title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
                         }
                     });
                 }
@@ -104,7 +156,7 @@ function PaintTrophyOverview() {
  function GetTrophyUsers() {
      var lastTrophyDownload=localStorage.getItem("lastTrophyDownload");
      var allTrophyUsers=localStorage.getItem("allTrophyUsers");
-     if (lastTrophyDownload===undefined || lastTrophyDownload===null  || lastTrophyDownload<(1).days().ago() || allTrophyUsers==null || allTrophyUsers==undefined) {
+     if (lastTrophyDownload===undefined || lastTrophyDownload===null  || Date.parse(CleanDate(lastTrophyDownload))<(1).days().ago() || allTrophyUsers==null || allTrophyUsers==undefined) {
         chrome.runtime.sendMessage( {
             Action: "getTrophyUsers"
         }, function(response)
@@ -131,16 +183,9 @@ function GetTrophyObject(id, alltrophies) {
     return result[0];
 }
 
-/**
- * Trophäenblock rendern
- */
-function RenderTrophyBlock(allTrophies, trophies) {
-    if ($('#trophyDisplay').length > 0) {
-                    // schon gezeichnet
-                    return;
-                }
+function RenderTrophyBlockHover(allTrophies, trophies, parent, currentUserId, tothetop) {
     console.log("render trophies");
-    try {
+ //   try {
         trophies = trophies || null;
         var goldHtml = "";
         var silverHtml = "";
@@ -198,17 +243,32 @@ function RenderTrophyBlock(allTrophies, trophies) {
                 }
                 bronzeHtml += "</div>";
             }
-            var html = "<div id=\"trophyDisplay\" class=\"Ee i5a vna CVb\" role=\"article\">"
+            var html = "<div  class=\"trophyDisplay Ee i5a vna CVb\" role=\"article\">"
                     + "<div class=\"ZYa ukoEtfi\"><div class=\"Lqc\"><div class=\"F9a\">" + chrome.i18n.getMessage("trophies") + "</div></div><br/><br/>"
                     + "<div class=\"Uia\">"
                     + goldHtml
                     + silverHtml
                     + bronzeHtml
-                    + "</div><div class='moredetails'><a href='http://www.appschleppen.com/index."+chrome.i18n.getMessage("lang")+".php?userId="+GetCurrentUserId()+"'>" + chrome.i18n.getMessage("moredetails") + "</a></div></div>";
-
-            $('.Ypa.jw.am:first').prepend(html);
+                    + "</div><div class='moredetails'><a href='http://www.appschleppen.com/index."+chrome.i18n.getMessage("lang")+".php?userId="+currentUserId+"'>" + chrome.i18n.getMessage("moredetails") + "</a></div></div>";
+            if (tothetop) {
+                $(parent).prepend(html);
+            } else {
+                $(parent).append(html);
+            }
         }
-    } catch (ex) {
-        console.log(ex);
+ //   } catch (ex) {
+  //      console.log(ex);
+  //  }
+}
+
+/**
+ * Trophäenblock rendern
+ */
+function RenderTrophyBlock(allTrophies, trophies) {
+    if ($('.trophyDisplay').length > 0) {
+        // schon gezeichnet
+        return;
     }
+
+    RenderTrophyBlockHover(allTrophies, trophies, $('.Ypa.jw.am:first'),GetCurrentUserId(),true);
 }
