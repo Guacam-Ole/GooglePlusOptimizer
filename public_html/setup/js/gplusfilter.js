@@ -460,6 +460,17 @@ function StartFilter()
         StartTick(false, "LSR");
         DOMMarkLSRLinks();
         StoppTick(false, "LSR");
+        
+         if (showTrophies)
+        {
+            StartTick(false, "Trophies");
+            //OptStartTrophyDisplay();
+            DrawTrophies();
+            StoppTick(false, "Trophies");
+             StartTick(false, "Paint Trophy Icons");
+            PaintTrophyOverview();
+            StoppTick(false, "Paint Trophy Icons");
+        }
         if (colorUsers)
         {
             StartTick(false, "Color Users");
@@ -468,13 +479,7 @@ function StartFilter()
             StoppTick(false, "Color Users");
         }
 
-        if (showTrophies)
-        {
-            StartTick(false, "Trophies");
-            //OptStartTrophyDisplay();
-            DrawTrophies();
-            StoppTick(false, "Trophies");
-        }
+       
 
         if (showEmoticons)
         {
@@ -489,9 +494,7 @@ function StartFilter()
         StartTick(false, "Bookmark Icons");
         DisplayBookMarkIcons();
         StoppTick(false, "Bookmark Icons");
-        StartTick(false, "Paint Trophy Icons");
-        PaintTrophyOverview();
-        StoppTick(false, "Paint Trophy Icons");
+       
         WhatsHot();
     } catch (ex) {
     }

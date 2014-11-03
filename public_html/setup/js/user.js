@@ -30,7 +30,7 @@ function PaintColorBlock()
         var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
         //keine Anmerkung für " + userName + " vorhanden\" />";
-        $('[ guidedhelpid="profile_name"]').append(colorBlock + userInfo.replace('__USER__', userName));
+        $('[guidedhelpid="profile_name"]').parent().append(colorBlock + userInfo.replace('__USER__', userName));
         $('.colClick').click(function() {
             RemoveSelection();
             $(this).append("✓");
