@@ -101,6 +101,7 @@ function DrawTrophies()
 }
 
 function ItsMe() {
+    return true;
     return $('[guidedhelpid="profile_viewas_button"]').length>0;
 }
 

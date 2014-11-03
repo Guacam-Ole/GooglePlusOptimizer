@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.6.2.2",
+    "version": "2.6.2.3",
     "author": "Ole Albers",
     "permissions": [
        
@@ -52,14 +52,6 @@
                 "48": "setup/images/googlefilter48.png",
                 "128": "setup/images/googlefilter128.png"
             },
-  
-"oauth2": {
-   "client_id": "249838705220-tca821c3lm90evrutlcvf7h49s5g2c65.apps.googleusercontent.com",
-    "scopes": [
-      "https://www.googleapis.com/auth/plus.login",      
-      "https://www.googleapis.com/auth/plus.me"
-    ]
-  }  ,
     "page_action":
             {
                 "default_icon": "setup/images/optimizer_favicon_clear.png"
