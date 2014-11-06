@@ -29,11 +29,8 @@ function InitBookmarks() {
         
         if ($('.miniBookmark').length === 0)
         {
-           
-         //   if (document.title.indexOf("Google+")===0) {
-                var bookmarkIcon = "<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-                $('.Pzc').prepend($(bookmarkIcon));
-           // }
+            var bookmarkIcon = "<a class='miniBookmark' href='https://plus.google.com/u/0/notifications/all?displayBookmarks=abersicherdatt'> <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
+            $('.Pzc').prepend($(bookmarkIcon));
         }
     }
 }
@@ -63,45 +60,29 @@ function ClickBookmark(bookmarkButton)
     bookmarkButton.attr('src', iconUrl);
 
 }
-function MoveBookmark() {
-     if (displayBookmarks) {
-        if ($('.V9b').length>0) {
-            var oldStyle=$('.V9b').attr('style');
-            if (oldStyle.indexOf("modified")===-1) {
-                var oldValEnd=oldStyle.indexOf("px");
-                var oldValStart=oldStyle.indexOf(" ");
-                var oldVal=oldStyle.substring(oldValStart,oldValEnd);
-                var oldValI=parseInt(oldVal);
-                $('.V9b').attr('style',"right: "+(oldValI+60)+"px; modified");
-            }
-        }
-    }
-}
+
 
 function DisplayBookMarkIcons()
 {
     if (displayBookmarks)
-    
-    
-            //if (bookmarkList !== null && quickShares.length > 0)
-            {
-               
-                
-                DisplayBookmarks();
-                $('.lea:not(:has(.addBookmark))').each(function()      //$('h3.zi:not(:has(.addBookmark))').each(function()
-                {
-                    AddHeadWrapper($(this));
-                    var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
-                    var iconHtml = "";
-                    var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
-                    if (ContainsBookmark(id)) {
-                        iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
-                    }
-                    iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+    {
 
-                    $(this).find('.InfoUsrTop').append(iconHtml);
-                });
+
+        DisplayBookmarks();
+        $('.lea:not(:has(.addBookmark))').each(function()      //$('h3.zi:not(:has(.addBookmark))').each(function()
+        {
+            AddHeadWrapper($(this));
+            var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
+            var iconHtml = "";
+            var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
+            if (ContainsBookmark(id)) {
+                iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
             }
+            iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+
+            $(this).find('.InfoUsrTop').append(iconHtml);
+        });
+    }
 }
 
 
@@ -236,7 +217,6 @@ function DisplayBookmarks() {
                 if (value !== null && $('.UPa.hHa.Ic').html().indexOf(value) < 0) {
                     $('.UPa.hHa.Ic').prepend($(value));
                 }
-                //$('.CF.he').prepend($(value));
             });
 
             for (var i = 0; i < 500; i++) {

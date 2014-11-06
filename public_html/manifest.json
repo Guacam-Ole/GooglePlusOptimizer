@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.6.2.3",
+    "version": "2.6.2.6",
     "author": "Ole Albers",
     "permissions": [
        
@@ -35,7 +35,10 @@
                         "setup/js/qsdisplay.js",
                         "setup/js/autosave.js",
                         "setup/js/bookmarks.js",
-                        "setup/js/lsr.js"                      ]
+                        "setup/js/lsr.js",
+                        "setup/js/flags.js"
+                        
+                        ]
                 }
                 
                 ],

@@ -1,0 +1,34 @@
+{
+    "title" : "trophies for user",
+    "type": "array",
+    "items": {
+        "title":"single trophy data",
+        "type":"object",
+        "properties": {
+            "short": {
+                "type":"string",
+                "description":"unique identifier"
+            },
+            "dateAchieved": {
+                "type":"string",
+                "description":"date when this trophy has been earned"
+            },
+            "isGold": {
+                "type":"string",
+                "description":"is this a gold trophy?(1)"
+            },
+            "isSilver": {
+                "type":"string",
+                "description":"is this a silver trophy?"
+            },
+            "isBronze": {
+                "type":"string",
+                "description":"is this a bronze trophy?"
+            },
+            "anz": {
+                "type":"string",
+                "description":"how many users (including this one) have earned this trophy?"
+            }
+        }
+    }   
+}
