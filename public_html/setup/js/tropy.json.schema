@@ -1,0 +1,69 @@
+{
+    "title" : "trophy descriptions",
+    "type": "object",
+    "properties": {
+        gold: {
+            "description": "gold trophies",
+            "type":"array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "unique identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "label of trophy"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "description of trophy"
+                    }
+                }
+            }
+        },
+        silber: {
+            "description": "gold trophies",
+            "type":"array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "unique identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "label of trophy"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "description of trophy"
+                    }
+                }
+            }
+        },
+        bronze: {
+            "description": "gold trophies",
+            "type":"array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "unique identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "label of trophy"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "description of trophy"
+                    }
+                }
+            }
+        }
+    }
+}

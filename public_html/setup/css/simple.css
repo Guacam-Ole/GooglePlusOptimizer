@@ -19,13 +19,31 @@ and open the template in the editor.
 }
 
 .langSelect {
+
+}
+
+.langOpen {
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: -2px;
+    margin-bottom: 8px;    
 }
 
 .InfoUsrTop {
     float:right;
     margin-top: -15px;
     margin-right: 5px;
+}
+
+.langAll {
+    z-index: 920;
+    display: none;
+    position: absolute;
+    top: 60px;
+    width: 100px;
+    left: 8px;
+}
+
+.langAll img {
+    margin-top: -20px;
+    margin-left: 2px;
 }

@@ -43,13 +43,13 @@ function IsDemo() {
 }
 
 // Case - INSensitive Contains Variant:
-jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
-    return function(elem) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
+    return function (elem) {
         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
     };
 });
 
-$(document).ready(function()
+$(document).ready(function ()
 {
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
@@ -61,23 +61,23 @@ $(document).ready(function()
         if (IsDemo()) {
             var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
             $('.Ima.Xic').prepend(button);
-            $('#optimizerTest').click(function() {
+            $('#optimizerTest').click(function () {
                 demoStart = !demoStart;
                 StartUpGoogleFilter();
                 return false;
             });
         }
-        
+
         InitGoogle();
 
-        $(document).on('click', '.unhideImage', function()
+        $(document).on('click', '.unhideImage', function ()
         {
             $(this).parent().find('.hidewrapper').show();
             $(this).remove();
             return false;
         });
 
-        $(document).on('click', '.removeHashTag', function()
+        $(document).on('click', '.removeHashTag', function ()
         {
             console.log('Add Hashtag');
             if (propsHashtags === null)
@@ -102,7 +102,7 @@ $(document).ready(function()
 function DisplayHashtags()
 {
     if (displayQuickHashes) {
-        
+
         $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
     }
 }
@@ -121,7 +121,7 @@ function LoadHashTags()
         $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
 
         var allLinks = $('a[href^="explore/"]').sort(SortByName);
-        allLinks.each(function(i, val) {
+        allLinks.each(function (i, val) {
             if (lasthashtag !== val.text.toLowerCase()) {
                 lasthashtag = val.text.toLowerCase();
                 $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
@@ -135,7 +135,7 @@ function GetAllCircles()
 {
 
     // Kreise auslesen
-    $('script').each(function() {
+    $('script').each(function () {
         try {
             if (this.innerHTML.indexOf("AF_initDataCallback({key: '12'") > -1)
             {
@@ -204,15 +204,15 @@ function DrawWizardTile() {
     try {
         var lang = chrome.i18n.getMessage("lang");
         if (NewWizardOptionsExist(lastWizardVersion)) {
-            $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function(htmlWizard) {
+            $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
-                $('#wizardStart').click(function() {
+                $('#wizardStart').click(function () {
                     $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
                     $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
-                    $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function() {
+                    $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function () {
                         InitWizard(lastWizardVersion);
                         console.log('Wizard loaded');
                     });
@@ -251,7 +251,7 @@ function LoadGoogle()
 
 
     var timeout = null;
-    document.addEventListener("DOMSubtreeModified", function()
+    document.addEventListener("DOMSubtreeModified", function ()
     {
 
 
@@ -313,7 +313,7 @@ function LoadAllQuickSharesG()
     chrome.runtime.sendMessage(
             {
                 Action: "LoadQS"
-            }, function(response)
+            }, function (response)
     {
         quickShares = JSON.parse(response.Result);
         if (quickShares !== null && quickShares.length > 0)
@@ -345,8 +345,30 @@ function CountColumns()
 }
 
 function CleanDate(anyDate) {
-    if (anyDate.indexOf("(")>0) {
-        return anyDate.substring(0,anyDate.indexOf("(")-1);
+    if (anyDate.indexOf("(") > 0) {
+        return anyDate.substring(0, anyDate.indexOf("(") - 1);
+    }
+}
+
+function MoveHeaderIcon() {
+     if (displayBookmarks || showLang) {
+        var icondiff=0;
+        if (showLang) {
+            icondiff+=60;
+        }
+        if (displayBookmarks) {
+            icondiff+=60;
+        }
+        if ($('.V9b').length>0) {
+            var oldStyle=$('.V9b').attr('style');
+            if (oldStyle.indexOf("modified")===-1) {
+                var oldValEnd=oldStyle.indexOf("px");
+                var oldValStart=oldStyle.indexOf(" ");
+                var oldVal=oldStyle.substring(oldValStart,oldValEnd);
+                var oldValI=parseInt(oldVal);
+                $('.V9b').attr('style',"right: "+(oldValI+icondiff)+"px; modified");
+            }
+        }
     }
 }
 
@@ -361,7 +383,7 @@ function StartFilter()
         QSEvents();
         StoppTick(false, "Quickshare");
     }
-    MoveBookmark();
+    MoveHeaderIcon();
 
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
@@ -369,7 +391,7 @@ function StartFilter()
     }
     try {
 
-        
+
         StartTick(false, "Hashtags");
         LoadHashTags();
         StoppTick(false, "Hashtags");
@@ -460,14 +482,14 @@ function StartFilter()
         StartTick(false, "LSR");
         DOMMarkLSRLinks();
         StoppTick(false, "LSR");
-        
-         if (showTrophies)
+
+        if (showTrophies)
         {
             StartTick(false, "Trophies");
             //OptStartTrophyDisplay();
             DrawTrophies();
             StoppTick(false, "Trophies");
-             StartTick(false, "Paint Trophy Icons");
+            StartTick(false, "Paint Trophy Icons");
             PaintTrophyOverview();
             StoppTick(false, "Paint Trophy Icons");
         }
@@ -479,7 +501,7 @@ function StartFilter()
             StoppTick(false, "Color Users");
         }
 
-       
+
 
         if (showEmoticons)
         {
@@ -494,49 +516,33 @@ function StartFilter()
         StartTick(false, "Bookmark Icons");
         DisplayBookMarkIcons();
         StoppTick(false, "Bookmark Icons");
-       
+
         WhatsHot();
     } catch (ex) {
     }
-    setTimeout(function() {
+    setTimeout(function () {
         domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
     }, interval);
     domChangeAllowed = false;
 }
 
-function GetLangImage(short, img) {
-    return '<a href="' + location.protocol + '//' + location.host + location.pathname + '?hl=' + short + '"><img src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
-}
 
-function WhatsHot() {
-    if (showLang) {
-        if (window.location.href.indexOf("/explore") > 0 && $(".langSelect").length === 0) {
-            var languageSelector = "<div class='langSelect'>";
-            languageSelector += GetLangImage("de", "Germany");
-            languageSelector += GetLangImage("en", "United_Kingdom");
-            languageSelector += GetLangImage("es", "Spain");
-            languageSelector += GetLangImage("pt", "Portugal");
-            languageSelector += GetLangImage("fr", "France");
-            languageSelector += GetLangImage("ru", "Russia");
-            languageSelector += GetLangImage("no", "Norway");
-            languageSelector += GetLangImage("hr", "Croatia");
-            languageSelector += GetLangImage("cz", "Czech_Republic");
-            languageSelector += GetLangImage("da", "Denmark");
-            languageSelector += GetLangImage("fi", "Finland");
-            languageSelector += GetLangImage("it", "Italy");
-            languageSelector += GetLangImage("pl", "Poland");
-            languageSelector += GetLangImage("sv", "Sweden");
-            languageSelector += GetLangImage("tr", "Turkey");
 
-            languageSelector += GetLangImage("ja", "Japan");
-            languageSelector += GetLangImage("cz-CN", "China");
-
-            languageSelector += "</div>";
-            $('[role="article"]').first().prepend($(languageSelector));
+function getUrlParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) 
+        {
+            return sParameterName[1];
         }
     }
-    // sii2:151
-}
+}  
+
+
 
 function ClearAllTicks() {
     if (saveTicks) {
@@ -579,7 +585,7 @@ function DOMFilterFreetext() {
     {
         try {
             var textArray = propsFulltext.split(',');
-            $.each(textArray, function(i, fulltext)
+            $.each(textArray, function (i, fulltext)
             {
                 $('div.Xx.xJ:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
                 $('div.Al.pf:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
@@ -597,7 +603,7 @@ function DOMFilterImages() {
     try {
         if (filterImages || filterLinks || filterVideo)
         {
-            $('.unhideImage').click(function() {
+            $('.unhideImage').click(function () {
                 $(this).parent().find('.hidewrapper').show();
                 $(this).remove();
                 return false;
@@ -637,7 +643,7 @@ function DOMFilterImages() {
 
 function AddMuelltonne() {
     if (filterHashTag)
-        $('.zZ.a0').each(function(index, value)
+        $('.zZ.a0').each(function (index, value)
         {
             if ($(this).find('a').length <= 1)
             {
@@ -659,7 +665,7 @@ function DOMFilterHashtags() {
             if (propsHashtags !== null && propsHashtags !== "")
             {
                 var hashTagArray = propsHashtags.split(',');
-                $.each(hashTagArray, function(i, hashTag)
+                $.each(hashTagArray, function (i, hashTag)
                 {
                     if (hashTag.length > 1) {
                         $('.zda.Zg:Contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();    // Hashtags im Beitrag
@@ -713,7 +719,7 @@ function LoadSettingsLive()
     chrome.runtime.sendMessage(
             {
                 Action: "LoadAll"
-            }, function(response)
+            }, function (response)
     {
 
 
