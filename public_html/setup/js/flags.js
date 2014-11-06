@@ -8,7 +8,7 @@ var languages = [
 ]
 
 function GetLangImage(short, img) {
-    return '<a href="' + location.protocol + '//' + location.host + location.pathname + '?hl=' + short + '"><img src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
+    return '<a><img data-short="'+short+'" src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
 }
 
 function WhatsHot() {
@@ -34,7 +34,9 @@ function WhatsHot() {
                 thisImage = $(this).attr("src");
                 $(this).closest('.langSelect').find('.langOpen').attr("src", thisImage);
                 $(this).closest('.langSelect').find('.langAll').toggle();
-                this.location.href = $(this).closest('a').attr('href');
+                
+                window.location.href = location.protocol + '//' + location.host + location.pathname + '?hl=' + $(this).data("short");
+                return false;
             });
             var oldLang = getUrlParameter('hl');
             
