@@ -1,14 +1,14 @@
 
 var languages = [
-    {short: "de", img: "Germany"}, {short: "en", img: "United_Kingdom"}, {short: "es", img: "Spain"}, {short: "pt", img: "Portugal"},
+    {short: "de", img: "Germany"}, {short: "en-uk", img: "United_Kingdom"}, {short: "es", img: "Spain"}, {short: "pt", img: "Portugal"},
     {short: "fr", img: "France"}, {short: "ru", img: "Russia"}, {short: "hr", img: "Croatia"}, {short: "no", img: "Norway"},
     {short: "da", img: "Denmark"}, {short: "fi", img: "Finland"}, {short: "sv", img: "Sweden"}, {short: "tr", img: "Turkey"},
-    {short: "it", img: "Italy"}, {short: "pl", img: "Poland"}, {short: "ja", img: "Japan"}
+    {short: "it", img: "Italy"}, {short: "pl", img: "Poland"}, {short: "ja", img: "Japan"}, {short: "en-us", img: "United_States"}
 
-]
+];
 
 function GetLangImage(short, img) {
-    return '<a><img data-short="'+short+'" src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
+    return '<a><img data-short="'+short+'" title="'+img+'" src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
 }
 
 function WhatsHot() {
@@ -42,12 +42,10 @@ function WhatsHot() {
             
             if (oldLang===null || oldLang===undefined) {
                 oldLang= window.navigator.userLanguage || window.navigator.language;
-                if (oldLang.length>2) {
-                    oldLang=oldLang.substr(0,2);
-                }
             }
             
             if (oldLang!==undefined && oldLang!==null) {
+                oldLang=oldLang.toLowerCase();
                 var selectedLang = $.grep(languages, function(e){ return e.short === oldLang; });
                 if(selectedLang.length>0) {
                    $('.langOpen').attr("src", chrome.extension.getURL('setup/images/icons/small/flags/' +  selectedLang[0].img + '_24.png'));
