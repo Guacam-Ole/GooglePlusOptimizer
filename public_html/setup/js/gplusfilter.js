@@ -390,6 +390,9 @@ function StartFilter()
         return;
     }
     try {
+        if (displayBookmarks === true) {
+            PaintStars();
+        }   
 
 
         StartTick(false, "Hashtags");
