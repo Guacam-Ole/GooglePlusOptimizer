@@ -1,0 +1,32 @@
+[
+    {   
+        "Short": "beitrag",
+        "TextOnly":true,
+        "Title": "Beitragsarten",
+        "Description": "Wähle aus, welche Arten von Beiträgen ausgeblendet werden sollen",
+        "Cost":null
+    },
+    {   
+        "Short": "plus1",
+        "Title": "+1 Filter",
+        "Description": "Mit diesem Filter werden sämtliche \"<i><b>John Doe</b> gibt +1 für folgenden Beitrag</i>\" - Beiträge entfernt.",
+        "Image":"plus1.png",
+        "Cost":0
+    },
+    {   
+        "Short": "yt",
+        "Title": "YouTube Filter",
+        "Description": "Dieser Filter entfernt sämtliche YouTube-Kommentare aus dem Stream.",
+        "Image":"yt.png",
+        "Cost":0
+    },
+    {   
+        "Short": "welcome",
+        "TextOnly":true,
+        "Title": "Herzlich willkommen beim Google+ Optimizer",
+        "Description": "Hier steht nur grütze",
+        "Cost":null
+    }
+    
+    
+]
