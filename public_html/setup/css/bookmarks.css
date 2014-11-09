@@ -72,10 +72,15 @@ and open the template in the editor.
 
 .bookDate {
     float: right;
-    margin-right: 20px;
+    margin-right: 5px;
     color: gray;
+    font-size: smaller;
 }
 
 .littleBookmarkTeaser {
     margin-right: 20px;
+}
+
+.RemoveBookmarkCross {
+    float: right;
 }

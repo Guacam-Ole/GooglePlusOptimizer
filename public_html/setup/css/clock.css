@@ -1,48 +1,29 @@
-.divSecond
-{
-    position:relative;
-    left:44px;
-    top:61px;
-}
-.divMinute
-{
-    position:relative;
-    left:0px;
-    top:-120px;
-}
-.btn.blue 
-{
-    color: white;
-    text-shadow: none;
-    background-color: #4d90fe;
+
+
+.clock {
+    padding: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: lightgray;
 }
 
-.clockbtn 
-{
-    text-align: center;
-    border-width: 0;
-    padding: 2px 2px; 	
-    font-size: 14px;  
-    outline: none !important;
-    text-shadow: none;  
-    width:150px;
-    height:25px;
-    color: white;
-    text-shadow: none;
-    background-color: #4d90fe;    
+.clockLabel {
+    float: left;
+    width: 300px;
 }
 
-.topclock
-{
-    position:relative;
-    left: 175px;
-    top:-350px;
+#slider-clock {
+    margin-left: 200px;
 }
 
 
-.bottomclock
-{
-    position:relative;
-    left: 25px;
-    top:-150px;
+#slider-clock {
+    margin-left: 50px;
+    margin-top: 3px;
+}
+
+#slider-clock span {
+
 }
