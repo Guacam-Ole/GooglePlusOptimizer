@@ -39,6 +39,7 @@ function UpdateWatch()
             if (diff <=  0)
             {
                 $("#slider-clock").slider('value',0);
+                $('.clockLabel').text("00:00");
                 PlayAlarm();
                 clockHasStarted = false;
                 tmpSeconds = 59;

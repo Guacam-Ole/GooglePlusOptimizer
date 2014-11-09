@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google+ Filter</title>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
+        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.10.2.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tools.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.tagsinput.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.widget.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.ui.accordion.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/jquery.knob.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
+        <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+
+
+    </head>
+
+
+    <body>
+        <div id="bg_top">
+            <div id="wrapper">
+                <div id="header"><div id="logo"><h1>Optimizer für Google+</h1></div></div>
+                <!--end header-->
+                <div id="menu">
+                    <ul id="navigation">
+                        <li><a href="index.html"  class="active">Willkommen</a></li>
+                        <li><a href="settings.html">Filter</a> </li>
+                        <li><a href="erweitert.html">Einstellungen</a> </li>
+                        <li><a href="widgets.html">Widgets</a> </li>
+                        <li><a href="additions.html">Erweiterungen</a> </li>
+                        <li><a href="help.html">Hilfe</a></li>
+                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=de&gl=DE">Plugin Bewerten (Danke!) </a></li>
+                    </ul>
+                </div>
+                <!--end menu-->
+                <div id="content">
+                    <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background" /></div>
+                    <!-- the shadow border down left/right -->
+                    <div id="content_border">
+                        <!-- the gradient from top to bottom -->
+                        <div id="content_bg">
+                            <!-- the optional line down the middle of the content area -->
+                            <!-- end line down the middle -->
+                            <div id="content_seperator">
+                                <div id="left_column">
+                                    <div id="proposal" onclick="location.href = '#';" style="cursor:pointer;">
+                                        <div class="text">
+                                            <h3 id="title">Google+-Filter</h3>
+                                            <p><div id="version">keine Ahnung</div></p>
+                                            <p><b>Autor:</b> <a href="https://plus.google.com/+OleAlbers/about">Ole Albers</a></p>
+                                            <p><b>Weitere Autoren:</b> <a href="https://plus.google.com/+MarcoGr%C3%A4tsch/about">Marco Grätsch</a></p>                                            
+                                        </div>
+                                        <div class="icon"><img src="../images/icon_proposal.png" alt="Proposal" width="42" height="42" border="0"></div>
+                                    </div>
+                                    <!--end proposal-->
+                                    <div id="clients">
+                                        <h3>Gibt es eine Pro-Version?</h3>
+                                        <p><br/>N&ouml;. Eine Pro-Version gibt es nicht und wird es auch nie geben.</p>
+                                        <p>Alle Features bleiben also immer kostenlos.<br/><br/></p>
+                                        <p>Wenn Du das Projekt unterst&uuml;tzen willst, darfst Du aber nat&uuml;rlich gerne einen freiwilligen Betrag &uuml;ber PayPal oder Flattr spenden. Dadurch kann ich das Plugin auch zuk&uuml;nftig weiterentwickeln. <br/><br/>Ich sag schon mal Danke :)</p>
+                                        <p>
+                                            <br/><div id="flattr"><center><a href="https://flattr.com/submit/auto?user_id=T0mat0&url=http://goo.gl/nDe4om&title=Google%2B%20Filter" target="_blank"><img src="../images/flattr.png" /></a></center></div><br/><br/>
+                                        </p>
+                                        <p>
+                                            <div id="paypal">
+                                                <center>
+                                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                                        <input type="hidden" name="cmd" value="_s-xclick"/>
+                                                        <input type="hidden" name="hosted_button_id" value="485C5FATPYB7S"/>
+                                                        <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal."/>
+                                                        <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1"/>
+                                                    </form>
+                                                </center> 
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <!--end clients-->
+                                </div>
+                                <!--end left_column-->
+                                <div id="right_column">
+                                    <h1>Willkommen beim Google+ - Optimizer</h1>
+                                    <p>Sinn und Zweck des Google+ - Optimizers ist es Google+ den eigenen Bedürfnissen anzupassen. Zu diesem Zweck lassen sich einzelne Features von Google+ - deaktivieren oder auch nach konkreten Inhalten filtern, sowie zusätzliche Features aktivieren.</p>
+                                    <p>Die einzelnen Filter lassen sich &uuml;ber die <a href="settings.html">Filter</a> bearbeiten und unter den <a href="erweitert.html">Einstellungen</a> genauer anpassen.</p>
+                                    <p>Zusätzliche Features werden unter <a href="widgets.html">Widgets</a> aktiviert.</p>
+                                    <p>Sollte es Probleme oder Fragen geben: Vielleicht wei&szlig; ja der Men&uuml;punkt <a href="help.html">Hilfe</a> weiter... :)</p>
+
+                                    <h2>Weitere Informationen:</h2>
+                                    <p><a href="https://plus.google.com/u/0/communities/111606711991143283422">Deutsche Supportcommunity</a> Für Hilfe aus der Community</p>
+                                    <p><a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#bug">Bugs</a> Einen   Fehler melden</p>
+                                    <p><a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=de&gl=DE#feature">Verbesserungsvorschläge</a> Fehlt ein wichtiges Feature? Sag einfach Bescheid</p>
+                                    
+                                    <h2>Grafiken</h2>
+                                    <p>Die Grafiken im Chrome Webstore und das Icon für diese Erweiterung wurden freundlicherweise von <a href="https://plus.google.com/u/0/+IngoDingerKreativstapler/about">Ingo Dinger</a> (<a href="www.kreativstapler.de">www.kreativstapler.de</a>) zur Verfügung gestellt.</p>
+                                    <img src="../images/optimizer_setup.jpg"/>
+                                </div>
+
+                                <!--end right_column-->
+                                <hr class="clear">
+                                    <!--hr makes sure the bottom of the box stays at the bottom-->
+                            </div>
+                        </div>
+                        <!-- end the gradient from top to bottom -->
+                    </div>
+                    <!-- end the shadow border down left/right -->
+                    <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background" /></div>
+                </div>
+                <!-- end content wrap -->
+                    <div class="spam">
+                    <a href="http://www.xn--alstervergngen-qsb.com" title="Ich kann auch schreiben! 'Alstervergnügen' ist jetzt erhältlich im Buchhandel" ><img id="spam1" src="../images/alster.png" width="960" height="250" border="0"/></a>
+                </div>
+                <div id="footer">
+                    <a href="help.html#license">Verwendete Lizenzen und Quellen</a>
+                    <div class="right">
+                        <ul>
+                            <li class="keep_in"> Kontakt:</li>
+                            <li><a href="https://plus.google.com/u/0/communities/111606711991143283422" title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community" width="25" height="25" border="0" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
