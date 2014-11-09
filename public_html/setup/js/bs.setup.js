@@ -94,6 +94,10 @@ function ReplaceDataInTemplate(template, feature) {
     } else {
         template.find('.examplePicture').remove();
     }
+    if (feature.Cost!==undefined) {
+        var costClass=".cost"+feature.Cost;
+        template.find('.costSelector').find(costClass).html('<i class="fa fa-check"></i>');
+    }
 }
 
 function AddFeatureBlock(featureName) {
