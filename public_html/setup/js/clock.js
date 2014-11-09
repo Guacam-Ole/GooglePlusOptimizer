@@ -1,8 +1,9 @@
 
 var clockHasStarted = false;
-var isPause = false;
 var startTime;
 var tmpSeconds = 59;
+
+var clockObj;
 
 
 function OptStartClock() {
@@ -16,7 +17,7 @@ function UpdateWatch()
 {
     try {
         $.ionSound({
-            sounds: ["bell_ring"],
+            sounds: ["hamster"],
             path: chrome.extension.getURL("./setup/js/"),
             multiPlay: true,
             volume: "1.0"
@@ -25,7 +26,7 @@ function UpdateWatch()
 
         var refreshId = setInterval(function()
         {
-            if (!clockHasStarted || isPause)
+            if (!clockHasStarted )
             {
                 return;
             }
@@ -35,17 +36,26 @@ function UpdateWatch()
             minutes = Math.floor(seconds / 60);
             seconds = seconds % 60;
             tmpSeconds = seconds;
-            if (diff <= 60 * 1000)
+            if (diff <=  0)
             {
-                PlayAlarm(5);
+                $("#slider-clock").slider('value',0);
+                PlayAlarm();
                 clockHasStarted = false;
                 tmpSeconds = 59;
-                $('#dialMinutes').val(0).trigger("change");
             }
             else
             {
-                $('#dialSeconds').val(seconds).trigger("change");
-                $('#dialMinutes').val(minutes).trigger("change");
+                $("#slider-clock").slider('value',minutes+1);
+                
+                var lblMinutes=minutes;
+                if (minutes<10) {
+                    lblMinutes="0"+lblMinutes;
+                }
+                var lblSeconds=seconds;
+                if (seconds<10) {
+                    lblSeconds="0"+lblSeconds;
+                }
+                $('.clockLabel').text(lblMinutes+":"+lblSeconds);
             }
         }, 1000);
     } catch (ex) {
@@ -57,98 +67,69 @@ function UpdateWatch()
  * Alarm abspielen
  * @param {int} maxCount Anzahl der Töne
  */
-function PlayAlarm(maxCount)
+function PlayAlarm()
 {
     try {
-        var alarmCount = 0;
-        var refreshAlarm = setInterval(function()
-        {
-            alarmCount++;
-            if (alarmCount === maxCount) {
-                clearInterval(refreshAlarm);
-            }
-            $.ionSound.play("bell_ring");
-        }, 1000
-
-                );
+        $.ionSound.play("hamster");
+        
     } catch (ex) {
         console.log(ex);
     }
 }
 
+function DisplayFromSlider(minutes) {
+     var lblMinutes=minutes;
+    if (minutes<10) {
+        lblMinutes="0"+lblMinutes;
+    }
+    $('.clockLabel').text(lblMinutes+":00");
+}
 
 /**
  * Timer initialisieren
  */
 function InitTimer() {
-
+    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/jquery-ui.min.css") + "' type='text/css' media='screen' />"));
+    var clockWrapper="<div class= 'clock'><div class='clockLabel'></div><div id='slider-clock'></div><div style='clear:both'></div></div>";
+    clockObj=$(clockWrapper);
     clockHasStarted = false;
     $(document).ready(function()
     {
         try {
-            clockHasStarted = false;
-
-            $(function($) {
-                $(".knob").knob({
+             $(function() {
+                $( "#slider-clock" ).slider({
+                    value: 0,
+                    min: 0,
+                    max: 60,
+                    slide: function( event, ui ) {
+                        DisplayFromSlider(ui.value);
+                    },
+                    stop: function(event,ui) {
+                        StartTimer(ui.value);
+                    }
                 });
             });
-
+            clockHasStarted = false;
             PaintWatch();
-
-            $('.bottomclock').click(function() {
-                var bottomClock = $('.bottomclock');
-                if (bottomClock.text() === chrome.i18n.getMessage("Pause"))
-                {
-                    if (clockHasStarted) {
-                        bottomClock.text(chrome.i18n.getMessage("Fortsetzen"));
-                        isPause = true;
-                    }
-                } else {
-                    bottomClock.text(chrome.i18n.getMessage("Pause"));
-                    StartTimer();
-                }
-            });
-
-            $('.topclock').click(function()
-            {
-                $('.bottomclock').text(chrome.i18n.getMessage("Pause"));
-                var topClock = $('.topclock');
-                if (topClock.text() === chrome.i18n.getMessage("Stoppuhr_starten"))
-                {
-                    if ($('#dialMinutes').val() > 0)
-                    {
-                        topClock.text(chrome.i18n.getMessage("Stoppuhr_stoppen"));
-                        StartTimer();
-                    }
-                } else {
-                    tmpSeconds = 59;
-                    topClock.text(chrome.i18n.getMessage("Stoppuhr_starten"));
-                    clockHasStarted = false;
-                    $('#dialSeconds').val(0).trigger("change");
-                    $('#dialMinutes').val(0).trigger("change");
-                }
-            });
         } catch (ex) {
             console.log(ex);
         }
     });
-
-    $('.knob').knob();
 }
 /**
  * Timer starten
  */
-function StartTimer()
+function StartTimer(timerMinutes)
 {
     try {
-        var timerMinutes = JSON.parse($('#dialMinutes').val());
+       // var timerMinutes = JSON.parse($('#dialMinutes').val());
         startTime = new Date();
         targetTime = new Date();
         targetTime.setMinutes(startTime.getMinutes() + timerMinutes);
-        targetTime.setSeconds(startTime.getSeconds() - 1 + JSON.parse(tmpSeconds));
-        isPause = false;
+        targetTime.setSeconds(startTime.getSeconds());
+        
         clockHasStarted = true;
-        ShowNotificationSuccess(title, text);
+       // ShowNotificationSuccess(title, text);
     } catch (ex) {
         console.log(ex);
     }
@@ -159,15 +140,15 @@ function StartTimer()
  */
 function PaintWatch()
 {
+    
+    
     try {
-        var clockWrapper = "<div style=\"height:300px;\" class=\"Ee fP Ue\" role=\"article\"><div class=\"a5 Gi\"><h3 class=\"EY Ni zj\"><span>" + chrome.i18n.getMessage("Stoppuhr") + "</span></h3>__CLOCKBLOCK__</div></div>";
-        var secondTimer = "<div class=\"divSecond\"><input id=\"dialSeconds\" data-cursor=\"20\" class=\"knob\" data-width=\"132\" data-height=\"132\" data-thickness=\"0.22\" data-min=\"0\" data-max=\"59\" data-readOnly=\"true\" data-displayInput=\"false\" data-fgcolor=\"#999\" data-bgcolor=\"#FFFFFF\" value=\"0\" style=\"position: relative !important; margin-top: -300px !important; color:#999 !important;\" /></div>";
-        var minuteTimer = "<div class=\"divMinute\"><input id=\"dialMinutes\" class=\"knob\" data-width=\"220\" data-height=\"220\" data-thickness=\"0.4\" data-min=\"0\" data-max=\"59\" data-readOnly=\"false\" data-fgcolor=\"#427fed\" data-bgcolor=\"#E5E5E5\" value=\"0\" style=\"position: relative !important; margin-top: -210px !important; color:\"#427fed\" !important;\" /></div>";
-        var clockButtons = "<button type=\"button\" class=\"clockbtn topclock\">Stoppuhr starten</button><button type=\"button\" class=\"clockbtn bottomclock \">Pause</button>";
-
-        var complete = clockWrapper.replace("__CLOCKBLOCK__", secondTimer + minuteTimer + clockButtons);
-        $('#clock').append(complete);
-        UpdateWatch();
+        if ($('.clock').length===0) {
+              $('.ona.Fdb').prepend(clockObj);
+              $('.clockLabel').text("00:00");
+  
+            UpdateWatch();
+        }
     } catch (ex) {
         console.log(ex);
     }

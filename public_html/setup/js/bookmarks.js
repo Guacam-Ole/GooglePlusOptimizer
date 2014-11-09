@@ -5,7 +5,7 @@
  */
 
 var bookmarkPrefix="Google+Optimizer.Bookmark->";
-var maxTeaserLength=120;
+var maxTeaserLength=100;
 var displayBookmarks;
 var bookmarkList;
 var newBookmarkList;
@@ -37,6 +37,16 @@ function InitBookmarks() {
             ClickBookmark($(this));
         });
         
+        $(document).on('click', '.RemoveBookmarkCross', function()
+        {
+            var id=$(this).parent().data("target");
+            var bookmark={Id:id};
+            RemoveNewBookmark(bookmark, false, $(this).parent());
+           
+            return false;
+        });
+        
+        
         if ($('.miniBookmark').length === 0)
         {
             $(document).on('click', '.miniBookmark', function()
@@ -51,8 +61,7 @@ function InitBookmarks() {
     }
 }
 
-function ShowBookmarkFloat() {
-    $(".BookmarksHover").toggle();
+function CalcBookmarkFloat() {
     var maxHeight=$(window).height()-200;
     var bookmarkCount=$(".allBookmarks").find(".clickOntoBookmark").length;
     var singleHeight=88;
@@ -63,6 +72,11 @@ function ShowBookmarkFloat() {
         totalHeight=maxHeight;
     }
     $(".BookmarksHover").height(totalHeight);
+}
+
+function ShowBookmarkFloat() {
+    $(".BookmarksHover").toggle();
+    CalcBookmarkFloat();
     
     return false;
 }
@@ -71,7 +85,7 @@ function ShowBookmarkFloat() {
 function AddNewBookmark($source) {
     var $bmDateElement=$source.find('.o-U-s.FI.Rg');
     var $bmSenderPicElement=$source.find(".Uk.wi.hE");
-    var $bmSenderNameElement=$source.find(".ob.tv.Ub.Hf");
+    var $bmSenderNameElement=$source.find(".ob.tv.Ub.Hf").first();
     var $bmImageElement=$source.find(".ar.Mc");
     var $bmLinkElement=$source.find(".ot-anchor");
     var $bmVisibilityElement=$source.find(".d-s.Vt.Hm.dk.Q9");
@@ -137,11 +151,19 @@ function AddNewBookmark($source) {
     $source.find('.addBookmark').attr('src', iconUrl);
 }
 
-function RemoveNewBookmark(bookmark) {
+function RemoveNewBookmark(bookmark, displayBookmarks, $parent) {
+    if (displayBookmarks===undefined) {
+        displayBookmarks=true;
+    }
     var storageName=bookmarkPrefix+bookmark.Id;
     chrome.storage.local.remove(storageName, function(){
         chrome.storage.sync.remove(storageName,function() {
-            DisplayBookmarksHover();
+            if (displayBookmarks) {
+                DisplayBookmarksHover();
+            } else {
+                $parent.remove();
+                CalcBookmarkFloat();
+            }
         });
     });
 }
@@ -169,24 +191,25 @@ function DisplayBookmarksHover() {
     var savedBookmarks=[];
     var container='<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
     
-    var bookmarkDivTemplate='<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
+    var bookmarkDivTemplate='<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross Sgb" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
     var bookmarkDivs='';
     
-    chrome.storage.local.get(null,function(localResult) {
-        // Erst einmal die lokalen Bookmarks:
-        $.each(localResult,function(key,value) {
+    chrome.storage.sync.get(null,function(syncResult) {
+        // Erst einmal die cloud-Bookmarks:
+        $.each(syncResult,function(key,value) {
             if (key.indexOf(bookmarkPrefix)===0) {
                 savedBookmarks.push(JSON.parse(value));
             }
         });
         
-        chrome.storage.sync.get(null,function(syncResult){
-            // Jetzt, wenn vorhanden: Bookmarks, die NUR in der Cloud liegen
-            $.each(syncResult,function(key,value) {
+        chrome.storage.local.get(null,function(localResult){
+            // Jetzt, wenn vorhanden: Bookmarks, die lokal liegen
+            $.each(localResult,function(key,value) {
                 if (key.indexOf(bookmarkPrefix)===0) {
                     var foundBookmark = $.grep(savedBookmarks, function(e){ return e.Id === JSON.parse(value).Id; });
-                    if (foundBookmark.length===0) {
-                        savedBookmarks.push(JSON.parse(value));
+                    if (foundBookmark.length>0) {
+                        var index=savedBookmarks.indexOf(foundBookmark[0]);
+                        savedBookmarks[index]=JSON.parse(value);
                     }
                 }
             });
@@ -221,9 +244,8 @@ function DisplayBookmarksHover() {
                     e.preventDefault();
                     $(this).scrollTop(scrollTo + $(this).scrollTop());
                 }
-                PaintStars();
             });
-            
+            PaintStars();
            
             console.log("bookmarks read");
         });
@@ -369,7 +391,7 @@ function DisplayBookmarksInside() {
 function DisplayBookmarks() {
     if (IsBookmarkPage())
     {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarkdisplay.css") + "' type='text/css' media='screen' />"));
+        //$("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarkdisplay.css") + "' type='text/css' media='screen' />"));
         
         LoadBookmarkContent();
         // Erst mal alles ausblenden, was Benachrichtigung ist:

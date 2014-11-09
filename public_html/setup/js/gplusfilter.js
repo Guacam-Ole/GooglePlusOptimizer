@@ -391,8 +391,9 @@ function StartFilter()
     }
     try {
         if (displayBookmarks === true) {
-            PaintStars();
+           // PaintStars();
         }   
+        
 
 
         StartTick(false, "Hashtags");
@@ -468,6 +469,11 @@ function StartFilter()
             $('[data-iid="sii2:105"]').hide(); // Interesting Pages
             $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
             StoppTick(false, "Persons");
+        }
+        if (clock !== null && clock !== undefined) {
+            StartTick(false, "Watch");
+            PaintWatch();
+            StoppTick(false, "Watch");
         }
 
         StartTick(false, "Hashtag-Filter");
