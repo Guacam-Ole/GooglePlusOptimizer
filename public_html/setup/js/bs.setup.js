@@ -32,6 +32,34 @@ function MenuClick(menu) {
     DisplayFeatures(modules);
 }
 
+function ShowTokens() {
+    $.each($('.sub-menu li'),function(index,value){
+        if ($(value).data("modules") !== undefined) {
+            var anyNotEnabled=false;
+            var anyEnabled=false;
+            var allModules=$(value).data("modules").split(",");
+            $.each(allModules,function(indexModule,valueModule){
+               var currentFeature = GetFeatureDetails(valueModule);
+               if (currentFeature.TextOnly!==true) {
+                    if (localStorage.getItem(valueModule) === true || localStorage.getItem(valueModule) === "true") {
+                        anyEnabled = true;
+                    } else {
+                        anyNotEnabled = true;
+                    }
+                }
+            });
+            if (anyEnabled) {
+                if (anyNotEnabled) {
+                    $(value).find('a').append('<span class="badge badge-roundless badge-yellow">teilweise aktiv</span>')
+                } else {
+                    $(value).find('a').append('<span class="badge badge-roundless badge-green">aktiv</span>')
+                }
+            }
+            
+        }
+    });
+}
+
 function SubmenuClick(sm) {
     FillHeader(sm.data("title"), sm.data("subtitle"), sm.closest('.menu').data("title") + "," + sm.data("title"));
     
@@ -85,12 +113,15 @@ function GetAllFeatures() {
         StartUp();
         ClearContent();
         AddFeatureBlock("welcome");
+        ShowTokens();
     });
 }
 
 function ReplaceDataInTemplate(template, feature) {
+    
     template.find('.featureName').text(feature.Title);
     template.find('.featureDescription').html(feature.Description);
+    template.find('.btn.optimizer').attr('data-setting', feature.Short);
     if (feature.Image !== undefined) {
         template.find('.examplePicture').attr("src", "./wizimg/" + feature.Image);
     } else {
@@ -102,29 +133,44 @@ function ReplaceDataInTemplate(template, feature) {
     }
 }
 
+function GetFeatureDetails(featureName) {
+    var foundFeatures = $.grep(features, function (e) {
+        return e.Short === featureName;
+    });
+    if (foundFeatures.length>0) {
+        return foundFeatures[0];
+    } else {
+        return null;
+    }
+}
+
 function AddFeatureBlock(featureName) {
     if (featureName === undefined || featureName === null || featureName === "") {
         return;
     }
-    var foundFeatures = $.grep(features, function (e) {
-        return e.Short === featureName;
-    });
-    if (foundFeatures.length > 0) {
-        var currentFeature = foundFeatures[0];
-        var divFeature = $("<div></div>");
-        divFeature.find('.featureName').text(currentFeature.Title);
-        if (currentFeature.TextOnly === true) {
-            divFeature.load("bs.custom.html", function () {
-                ReplaceDataInTemplate(divFeature, currentFeature);
-                $('.features').append(divFeature);
-            });
-        } else {
-            divFeature.load("bs.feature.html", function () {
-                ReplaceDataInTemplate(divFeature, currentFeature);
-                $('.features').append(divFeature);
-            });
-        }
+    var currentFeature = GetFeatureDetails(featureName);
+    
+    var divFeature = $("<div></div>");
+    divFeature.find('.featureName').text(currentFeature.Title);
+    if (currentFeature.TextOnly === true) {
+        divFeature.load("bs.custom.html", function () {
+            ReplaceDataInTemplate(divFeature, currentFeature);
+            $('.features').append(divFeature);
+        });
+    } else {
+        divFeature.load("bs.feature.html", function () {
+            ReplaceDataInTemplate(divFeature, currentFeature);
+            if (FeatureEnabled(featureName)) {
+                divFeature.find('.btn.optimizer').addClass("active");
+                divFeature.find('.btn.optimizer').find('i').removeClass("fa-times").addClass("fa-check");
+            }
+            $('.features').append(divFeature);
+        });
     }
+}
+
+function FeatureEnabled(featureName) {
+    return localStorage.getItem(featureName)===true || localStorage.getItem(featureName)==="true";
 }
 
 function ClearContent() {
