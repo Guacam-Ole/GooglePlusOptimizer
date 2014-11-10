@@ -83,6 +83,8 @@ function GetAllFeatures() {
     $.getJSON("../../_locales/" + currentLang + "/features.json", function (jsonFeatures) {
         features = jsonFeatures;
         StartUp();
+        ClearContent();
+        AddFeatureBlock("welcome");
     });
 }
 
@@ -174,6 +176,8 @@ function LoadContent() {
         $('#bsContentNavigation').load("./bs.navigation.html", function () {
             GetAllFeatures();
             FillHeader($('.start').data("title"), $('.start').data("subtitle"), $('.start').data("title"));
+            
+            
         });
     });
 }
