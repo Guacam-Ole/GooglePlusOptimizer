@@ -105,6 +105,8 @@ function DisplayFeatures(features) {
     $.each(features.split(","), function (index, feature) {
         AddFeatureBlock(feature);
     });
+    window.scrollTo(0,0);
+    return false;
 }
 
 function GetAllFeatures() {
@@ -131,6 +133,10 @@ function ReplaceDataInTemplate(template, feature) {
         var costClass=".cost"+feature.Cost;
         template.find('.costSelector').find(costClass).html('<i class="fa fa-check"></i>');
     }
+    template.find('.loadHtml').each(function(index,value){
+        var filename=$(value).data("filename");
+        $(value).load(filename+".html");
+    });
 }
 
 function GetFeatureDetails(featureName) {
@@ -198,7 +204,7 @@ function DisplayMenuContent(parent) {
 }
 
 function MenuToggle(parent) {
-    if (parent.hasClass("open")) {
+    if (!parent.hasClass("open")) {
         parent.closest(".menu").removeClass("active open");
         parent.removeClass("open");
     } else {
