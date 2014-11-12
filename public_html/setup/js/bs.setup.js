@@ -1,7 +1,15 @@
+var setup;
 $(document).ready(function ()
 {
     InitMetronic();
-    var setup=new Setup();
+    setup=new Setup();
+});
+
+document.addEventListener("DOMSubtreeModified", function ()
+{
+    if (setup!==undefined) {
+        setup.ReadIndividualSettings();
+    }
 });
 
 var Setup=function() {
@@ -123,8 +131,10 @@ Setup.prototype= {
         var obj=this;
         $.each(features.split(","), function (index, feature) {
             obj.AddFeatureBlock(feature);
+           
         });
         window.scrollTo(0,0);
+        
         return false;
     },
     
@@ -178,6 +188,7 @@ Setup.prototype= {
                     divFeature.find('.btn.optimizer').find('i').removeClass("fa-times").addClass("fa-check");
                 }
                 $('.features').append(divFeature);
+                
             });
         }
     },
@@ -210,6 +221,26 @@ Setup.prototype= {
             $('.arrow').removeClass("open");
             parent.closest(".menu").addClass("active open");
             parent.addClass("open");
+        }
+    },
+    ReadIndividualSettings:function() {
+        // WHAM:
+        this.SetSingleCheck($('#chkWhamText'), "WHAMWhamText");
+        this.SetSingleCheck($('#chkWhamUrl'), "WHAMWhamUrl");
+        this.SetSingleCheck($('#chkChristmasText'), "WHAMChristmasText");
+        this.SetSingleCheck($('#chkChristmasUrl'), "WHAMChristmasUrl");
+    
+        // Minimieren:
+        this.SetSingleCheck($('#chkFilterGif'), "filterGifOnly");
+        this.SetSingleCheck($('#chkFilterMp4'), "filterMp4Only");
+    },
+    SetSingleCheck:function(button, value) {
+        var obj=this;
+        if (button!==undefined && button.length===1) {
+            if (obj.FeatureEnabled(value)) {
+                button.addClass("active");
+                button.find('i').removeClass("fa-times").addClass("fa-check");
+            }
         }
     }
 };
