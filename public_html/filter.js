@@ -7,6 +7,33 @@
  */
 
 
+chrome.runtime.onMessage.addListener(
+    function(request,sender,sendResponse)  {
+        if (request.Action==="GetSetting") {
+            var returnvalue=localStorage.getItem(request.Name);
+            sendResponse({Result: returnvalue});
+        }
+        else if (request.Action==="AddTick") {
+            var oldTicks=localStorage.getItem("Measurements_"+request.Scope);
+            if (oldTicks===undefined || oldTicks===null) {
+                oldTicks= [];
+            } else {
+                oldTicks = JSON.parse(oldTicks);
+            }
+            oldTicks.push({Name:request.Name, Scope:request.Scope, Start:request.Start, Stop:request.Stop});
+            localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));                 
+        }
+        else if (request.Action==="DeleteTicks") {
+             localStorage.removeItem("Measurements_"+request.Scope);
+        }
+    }
+);
+
+
+ 
+
+
+
 // Null-Wert in Boolean umwandeln
 function BoolNotNull(anyvalue)
 {
@@ -107,15 +134,6 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-
-chrome.runtime.onMessage.addListener(
-    function(request,sender,sendResponse)  {
-        if (request.Action==="GetSetting") {
-            var returnvalue=localStorage.getItem(request.Name);
-            sendResponse({Result: returnvalue});
-        }
-    }
-);
 
 
 // Datenaustausch mit Background-jQuery-File
@@ -224,14 +242,7 @@ chrome.runtime.onMessage.addListener(
                 var allTicks=[];
                 localStorage.setItem("Ticks",JSON.stringify(allTicks));
             }
-            else if (request.Action==="AddTick") {
-                var oldTicks=localStorage.getItem("Ticks");
-                if (oldTicks!==undefined) {
-                    var oldTicks = JSON.parse(oldTicks);
-                    oldTicks.push({Name:request.Name, Time:request.Time, IsInit:request.IsInit, Type:"START"});
-                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));                 
-                }
-            }
+           
             else if (request.Action==="EndTick") {
                 var oldTicks=localStorage.getItem("Ticks");
                 if (oldTicks!==undefined) {
