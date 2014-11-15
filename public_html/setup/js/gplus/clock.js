@@ -96,7 +96,7 @@ gpoClock.prototype = {
          try {
             $.ionSound({
                sounds: ["hamster"],
-               path: chrome.extension.getURL("./setup/js/"),
+               path: chrome.extension.getURL("./setup/media/"),
                multiPlay: true,
                volume: "1.0"
            });
