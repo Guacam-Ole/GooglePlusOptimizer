@@ -2,7 +2,7 @@ var gpoClock=function() {
     this.HasStarted = false;
     this.StartTime;
     this.Seconds = 59;
-    this.ClockObj;
+    this.ClockObj=null;
     this.Minutes;
     this.TargetTime;
     
@@ -16,30 +16,35 @@ gpoClock.prototype = {
         var obj=this;
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/jquery-ui.min.css") + "' type='text/css' media='screen' />"));
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
-        var clockWrapper="<div class= 'clock'><div class='clockLabel'></div><div id='slider-clock'></div><div style='clear:both'></div></div>";
+        var clockWrapper="<div class= 'clock'><div class='clockLabel'></div><div class='slider-clock'></div><div style='clear:both'></div></div>";
         obj.ClockObj=$(clockWrapper);
+        
         obj.HasStarted = false;
+        
+        $(document).on("slide",".slider-clock",function(event,ui) {
+            obj.Display(ui.value);
+        });
+        $(document).on("slidestop",".slider-clock",function(event,ui) {
+             obj.StartTimer(ui.value);
+        });
+        
+        
         $(document).ready(function() {
             try {
-                 $(function() {
-                    $( "#slider-clock" ).slider({
-                        value: 0,
-                        min: 0,
-                        max: 60,
-                        slide: function( event, ui ) {
-                            obj.Display(ui.value);
-                        },
-                        stop: function(event,ui) {
-                            obj.StartTimer(ui.value);
-                        }
-                    });
-                });
+               
                 obj.HasStarted = false;
                 obj.PaintWatch();
             } catch (ex) {
                 console.log(ex);
             }
         });
+        // Nach einem Reload schauen, ob evtl. noch ein alter Timer gespeichert ist:
+        var oldValue=localStorage.getItem("StopWatchTargetTime");
+        if (oldValue!==null && oldValue!==undefined) {
+            obj.HasStarted = true;
+            obj.TargetTime=new Date(oldValue);
+        };
+        
         console.log("Clock started.");  
     },
     UpdateWatch:function() {
@@ -49,22 +54,27 @@ gpoClock.prototype = {
 
             var refreshId = setInterval(function()
             {
+                
+
                 if (!obj.HasStarted )
                 {
                     return;
                 }
                 var now = new Date();
                 var diff = obj.TargetTime - now;
-
+                domChangeAllowed = false;
+                
                 if (diff <=  0)
                 {
-                    $("#slider-clock").slider('value',0);
+                    $(".slider-clock").slider('value',0);
                     $('.clockLabel').text("00:00");
                     obj.PlayAlarm();
+                    localStorage.removeItem("StopWatchTargetTime");
+                    
                     obj.HasStarted = false;
                     obj.Seconds = 0;
                     obj.Display(0);
-                    clearInterval(refreshId);
+                   // clearInterval(refreshId);
                 }
                 else
                 {
@@ -84,8 +94,10 @@ gpoClock.prototype = {
                     $('.clockLabel').text(lblMinutes+":"+lblSeconds);
                     if (minutes!==obj.Minutes) {
                         obj.Minutes=minutes;
-                        $("#slider-clock").slider('value',minutes+1);
+                        $(".slider-clock").slider('value',minutes+1);
                     }
+                    domChangeAllowed = false;
+                    AllowDomChange();
                 }
             }, 1000);
         } catch (ex) {
@@ -119,6 +131,7 @@ gpoClock.prototype = {
             obj.TargetTime = new Date();
             obj.TargetTime.setMinutes(obj.StartTime.getMinutes() + minutes);
             obj.TargetTime.setSeconds(obj.StartTime.getSeconds());
+            localStorage.setItem("StopWatchTargetTime",obj.TargetTime.toISOString());
             obj.HasStarted = true;
         } catch (ex) {
             console.log(ex);
@@ -130,8 +143,8 @@ gpoClock.prototype = {
             if ($('.clock').length===0) {
                   $('.ona.Fdb').prepend(obj.ClockObj);
                   $('.clockLabel').text("00:00");
-
-                obj.UpdateWatch();
+                  $( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
+                  obj.UpdateWatch();
             }
         } catch (ex) {
            console.log(ex);
