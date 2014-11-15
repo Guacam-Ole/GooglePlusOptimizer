@@ -47,6 +47,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("displayQuickHashes"));
         obj.AllSettings.push(new gpoSetting("WizardMode",1));
         obj.AllSettings.push(new gpoSetting("interval",500));
+        obj.AllSettings.push(new gpoSetting("QuickShares"));
     },
     Load:function(ret) {
         var obj=this;
