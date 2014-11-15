@@ -131,7 +131,7 @@ function RenderEmptyTrophyBlock() {
 
 function PaintTrophyOverview() {
     
-    if (showTrophies) {
+    if (objSettings.Values.DisplayTrophy) {
         var allusers=JSON.parse(localStorage.getItem("allTrophyUsers"));
         if (allusers!=undefined && allusers!=null && allusers.length>0) {
             for (var i in allusers) {

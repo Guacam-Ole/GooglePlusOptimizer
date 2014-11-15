@@ -2,7 +2,7 @@ var autoSave;
 
 function CreateAutoSaveEvents()
 {
-    if (autoSave) {
+    if (objSettings.Values.UseAutoSave) {
         $(document).on('focus', '[role="textbox"]', function()
         {            
             if ($(this).closest('.Kf').length===0 && $(this).text().length === 0)

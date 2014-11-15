@@ -12,16 +12,16 @@ function StartWeather()
 {
     try
     {
-        if (wetter === null || wetter === undefined)
+        if (objSettings.Values.Weather === null || objSettings.Values.Weather === undefined)
         {
             return;
         }
 
-        var weatherSetting = JSON.parse(wetter);
+        //var weatherSetting = JSON.parse(objSettings.Values.Weather);
         enabledWeather = new Array();
-        for (var i in weatherSetting)
+        for (var i in objSettings.Values.Weather)
         {
-            var setting = weatherSetting[i];
+            var setting = objSettings.Values.Weather[i];
             if (setting.Position >= 0)
             {
                 enabledWeather.push(setting.Id);
