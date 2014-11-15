@@ -231,5 +231,15 @@
     "moredetails":
             {
                 "message": "Ich brauche mehr Details!"
-            }   
+            },
+            
+            
+    "Setup_newHashtag":
+    {
+        "message": "Neuer Hashtag"
+    },
+    "Setup_newFilter":
+    {
+        "message": "Neuer Filter"
+    }
 }

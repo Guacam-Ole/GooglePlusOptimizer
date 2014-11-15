@@ -267,7 +267,16 @@
     "moredetails":
             {
                 "message": "I want more details!"
-            }        
+            }    ,
+            
+    "Setup_newHashtag":
+    {
+        "message": "Neuer Hashtag"
+    },
+    "Setup_newFilter":
+    {
+        "message": "Neuer Filter"
+    }
           
           
 }

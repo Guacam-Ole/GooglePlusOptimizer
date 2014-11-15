@@ -18,7 +18,6 @@ var anyFilterEnabled;
 var interval;
 var wetter;
 var soccer;
-var clock;
 var colorUsers;
 var filterImages;
 var filterVideo;
@@ -37,6 +36,8 @@ var saveTicks;
 var displayQuickHashes;
 var domainBlacklist = [];
 
+var objClock;
+var objSettings;
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -51,8 +52,10 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
 
 $(document).ready(function ()
 {
+   
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
+       
         LoadSetup();
     }
     else if (window.location.hostname === "plus.google.com")
@@ -68,7 +71,7 @@ $(document).ready(function ()
             });
         }
 
-        InitGoogle();
+        InitSettings();
 
         $(document).on('click', '.unhideImage', function ()
         {
@@ -224,12 +227,19 @@ function DrawWizardTile() {
     }
 }
 
+function InitSettings() {
+      objSettings=new gpoSettings();
+      objSettings.Init();
+      objSettings.Load(InitGoogle);
+}
+
 /**
  * Aktionen beim initialisieren der Seite
  */
 function InitGoogle()
 {
     try {
+        //clock=objSettings.Values.StoppWatch;
         var interval = JSON.parse(localStorage.getItem("interval"));
         if (interval === null || interval < 10)
         {
@@ -263,7 +273,6 @@ function LoadGoogle()
         timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
     }, false);
     DrawWidgets();
-
 }
 
 /**
@@ -276,9 +285,6 @@ function DrawWidgets() {
         }
         if (soccer === "null") {
             soccer = null;
-        }
-        if (clock === "null") {
-            clock = null;
         }
 
         // Wetter checken:
@@ -296,12 +302,11 @@ function DrawWidgets() {
             StartSoccer();
         }
 
-        if (clock !== null && clock !== undefined)
+        if (objSettings.Values.StoppWatch !== null && objSettings.Values.StoppWatch!== undefined)
         {
-            OptStartClock();
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
-            CreateBlock(JSON.parse(clock) + 1, "clock");
-            InitTimer();
+            CreateBlock(JSON.parse(objSettings.Values.StoppWatch) + 1, "clock");
+            objClock=new gpoClock();
+            objClock.Init();
         }
     } catch (ex) {
         console.log(ex);
@@ -470,9 +475,10 @@ function StartFilter()
             $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
             StoppTick(false, "Persons");
         }
-        if (clock !== null && clock !== undefined) {
+        if (objSettings.Values.StoppWatch !== null && objSettings.Values.StoppWatch !== undefined) {
+            
             StartTick(false, "Watch");
-            PaintWatch();
+            objClock.PaintWatch();
             StoppTick(false, "Watch");
         }
 
@@ -725,6 +731,8 @@ function CleanupAutosave() {
  */
 function LoadSettingsLive()
 {
+    
+    
     chrome.runtime.sendMessage(
             {
                 Action: "LoadAll"
@@ -749,7 +757,7 @@ function LoadSettingsLive()
         interval = response.Interval;
         wetter = response.Wetter;
         soccer = response.Sport;
-        clock = response.Stoppwatch;
+       // clock = response.Stoppwatch;
         colorUsers = response.ColorUsers;
         filterImages = response.FilterImages;
         filterVideo = response.FilterVideo;
