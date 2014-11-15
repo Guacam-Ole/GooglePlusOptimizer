@@ -1,39 +1,9 @@
 console.log('g+ - filter started');
-// Einstellungen G+-LiveTracking
-var filterPlus1;
-var filterYouTube;
-var filterWham;
-var filterHashTag;
-var filterCustom;
-var filterCommunity;
-var filterBirthday;
-var filterPersons;
-var propsHashtags;
-var propsFulltext;
-var whamWhamText;
-var whamWhamLink;
-var whamChristmasText;
-var whamChristmasLink;
-var anyFilterEnabled;
-var interval;
-var wetter;
-var soccer;
-var colorUsers;
-var filterImages;
-var filterVideo;
-var filterLinks;
-var filterGifOnly;
-var filterMp4Only;
-var filterSharedCircles;
-var showTrophies;
-var trophies;
-var showEmoticons;
+
 var columnCount;
-var lastWizardVersion;
+
 var domChangeAllowed = true;
-var markLSRPosts;
-var saveTicks;
-var displayQuickHashes;
+
 var domainBlacklist = [];
 
 var objClock;
@@ -83,9 +53,9 @@ $(document).ready(function ()
         $(document).on('click', '.removeHashTag', function ()
         {
             console.log('Add Hashtag');
-            if (propsHashtags === null)
+            if (objSettings.Values.HashTags === null)
             {
-                propsHashtags = "";
+                objSettings.Values.HashTags = "";
             }
             var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
             if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
@@ -104,7 +74,7 @@ $(document).ready(function ()
 });
 function DisplayHashtags()
 {
-    if (displayQuickHashes) {
+    if (objSettings.Values.DisplayQuickHashes) {
 
         $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
     }
@@ -118,7 +88,7 @@ function SortByName(a, b) {
 
 function LoadHashTags()
 {
-    if (displayQuickHashes) {
+    if (objSettings.Values.DisplayQuickHashes ) {
         var lasthashtag;
         //if ($('#quickht')!==undefined) {
         $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
@@ -178,11 +148,11 @@ function StartUpGoogleFilter() {
         LoadGoogle();
         CountColumns();
         InitBookmarks();
-        if (colorUsers)
+        if (objSettings.Values.ColorUsers)
         {
             OptStartColors();
         }
-        if (showTrophies)
+        if (objSettings.Values.DisplayTrophy)
         {
             StartTick(false, "LoadTrophyUsers");
             OptStartTrophyDisplay();
@@ -206,7 +176,7 @@ function AddHeadWrapper(parent) {
 function DrawWizardTile() {
     try {
         var lang = chrome.i18n.getMessage("lang");
-        if (NewWizardOptionsExist(lastWizardVersion)) {
+        if (NewWizardOptionsExist(objSettings.Values.LastWizard)) {
             $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
@@ -216,7 +186,7 @@ function DrawWizardTile() {
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
                     $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function () {
-                        InitWizard(lastWizardVersion);
+                        InitWizard(objSettings.Values.LastWizard);
                         console.log('Wizard loaded');
                     });
                 });
@@ -240,10 +210,10 @@ function InitGoogle()
 {
     try {
         //clock=objSettings.Values.StoppWatch;
-        var interval = JSON.parse(localStorage.getItem("interval"));
-        if (interval === null || interval < 10)
+        //var interval = JSON.parse(localStorage.getItem("interval"));
+        if (objSettings.Values.Interval === null || objSettings.Values.Interval< 10)
         {
-            interval = 500;
+            objSettings.Values.Interval = 500;
         }
         LoadSettingsLive();
         chrome.extension.sendMessage("show_page_action");
@@ -270,7 +240,7 @@ function LoadGoogle()
         {
             clearTimeout(timeout);
         }
-        timeout = setTimeout(StartFilter, interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
+        timeout = setTimeout(StartFilter, objSettings.Values.Interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
     }, false);
     DrawWidgets();
 }
@@ -280,27 +250,22 @@ function LoadGoogle()
  */
 function DrawWidgets() {
     try {
-        if (wetter === "null") {
-            wetter = null;
-        }
-        if (soccer === "null") {
-            soccer = null;
-        }
-
+       
+      
         // Wetter checken:
-        if (wetter !== null && wetter !== undefined)
+        if (objSettings.Values.Weather !== null )
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
             OptStartWeather();
             StartWeather();
         }
 
-        if (soccer !== null && soccer !== undefined)
+       /* if (soccer !== null && soccer !== undefined)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
             OptStartSoccer();
             StartSoccer();
-        }
+        }*/
 
         if (objSettings.Values.StoppWatch !== null && objSettings.Values.StoppWatch!== undefined)
         {
@@ -356,12 +321,12 @@ function CleanDate(anyDate) {
 }
 
 function MoveHeaderIcon() {
-     if (displayBookmarks || showLang) {
+     if (objSettings.Values.UseBookmarks || objSettings.Values.DisplayLang) {
         var icondiff=0;
-        if (showLang) {
+        if (objSettings.Values.DisplayLang) {
             icondiff+=60;
         }
-        if (displayBookmarks) {
+        if (objSettings.Values.UseBookmarks) {
             icondiff+=60;
         }
         if ($('.V9b').length>0) {
@@ -408,41 +373,41 @@ function StartFilter()
         AddMuelltonne();
         StoppTick(false, "Hashtag-Delete");
 
-        if (filterPlus1)
+        if (objSettings.Values.Plus)
         {
             StartTick(false, "Plus1");
             $('.xv').closest("[jsmodel='XNmfOc']").hide();
             StoppTick(false, "Plus1");
         }
-        if (filterYouTube)
+        if (objSettings.Values.Yt)
         {
             StartTick(false, "Youtube");
             $('.SR').closest("[jsmodel='XNmfOc']").hide();
             StoppTick(false, "Youtube");
         }
-        if (filterWham)
+        if (objSettings.Values.Wham);
         {
             StartTick(false, "Wham");
-            if (whamWhamText)
+            if (objSettings.Values.WhamWhamText)
             {
                 $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
             }
-            if (whamChristmasText)
+            if (objSettings.Values.WhamChristmasText)
             {
                 $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
                 $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
             }
-            if (whamWhamLink)
+            if (objSettings.Values.WhamWhamLink)
             {
                 $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
             }
-            if (whamChristmasLink)
+            if (objSettings.Values.WhamChristmasLink)
             {
                 $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
                 //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
@@ -454,20 +419,20 @@ function StartFilter()
 
         //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
 
-        if (filterCommunity)
+        if (objSettings.Values.Community)
         {
             StartTick(false, "Community");
             $('[data-iid="sii2:112"]').hide();
             $('[data-iid="sii2:116"]').hide();
             StoppTick(false, "Community");
         }
-        if (filterBirthday)
+        if (objSettings.Values.Birthday)
         {
             StartTick(false, "Birthday");
             $('[data-iid="sii2:114"]').hide();
             StoppTick(false, "Birthday");
         }
-        if (filterPersons)
+        if (objSettings.Values.Known)
         {
             StartTick(false, "Persons");
             $('[data-iid="sii2:103"]').hide();
@@ -498,7 +463,7 @@ function StartFilter()
         DOMMarkLSRLinks();
         StoppTick(false, "LSR");
 
-        if (showTrophies)
+        if (objSettings.Values.DisplayTrophy)
         {
             StartTick(false, "Trophies");
             //OptStartTrophyDisplay();
@@ -508,7 +473,7 @@ function StartFilter()
             PaintTrophyOverview();
             StoppTick(false, "Paint Trophy Icons");
         }
-        if (colorUsers)
+        if (objSettings.Values.ColorUsers)
         {
             StartTick(false, "Color Users");
             PaintForUser();
@@ -518,7 +483,7 @@ function StartFilter()
 
 
 
-        if (showEmoticons)
+        if (objSettings.Values.ShowEmoticons)
         {
             StartTick(false, "Emoticons");
             OptStartEmoticons();
@@ -537,7 +502,7 @@ function StartFilter()
     }
     setTimeout(function () {
         domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
-    }, interval);
+    }, objSettings.Values.Interval);
     domChangeAllowed = false;
 }
 
@@ -560,19 +525,19 @@ function getUrlParameter(sParam)
 
 
 function ClearAllTicks() {
-    if (saveTicks) {
+    if (objSettings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "ClearTicks"});
     }
 }
 
 function StartTick(isInit, timerName) {
-    if (saveTicks) {
+    if (objSettings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "AddTick", IsInit: isInit, Name: timerName, Time: $.now()});
     }
 }
 
 function StoppTick(isInit, timerName) {
-    if (saveTicks) {
+    if (objSettings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "EndTick", IsInit: isInit, Name: timerName, Time: $.now()});
     }
 }
@@ -582,7 +547,7 @@ function StoppTick(isInit, timerName) {
  */
 function DOMFilterSharedCircles()
 {
-    if (filterSharedCircles) {
+    if (objSettings.Values.FilterSharedCircles) {
         try {
             $('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
         } catch (ex) {
@@ -596,10 +561,10 @@ function DOMFilterSharedCircles()
  * Volltextfilter
  */
 function DOMFilterFreetext() {
-    if (filterCustom && propsFulltext !== null && propsFulltext !== "")
+    if (objSettings.Values.Custom && objSettings.Values.Fulltext !== null && objSettings.Values.Fulltext !== "")
     {
         try {
-            var textArray = propsFulltext.split(',');
+            var textArray = objSettings.Values.Fulltext.split(',');
             $.each(textArray, function (i, fulltext)
             {
                 $('div.Xx.xJ:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
@@ -616,7 +581,7 @@ function DOMFilterFreetext() {
  */
 function DOMFilterImages() {
     try {
-        if (filterImages || filterLinks || filterVideo)
+        if (objSettings.Values.FilterImages || objSettings.Values.FilterLinks || objSettings.Values.FilterVideo)
         {
             $('.unhideImage').click(function () {
                 $(this).parent().find('.hidewrapper').show();
@@ -625,23 +590,23 @@ function DOMFilterImages() {
             });
         }
 
-        if (filterVideo)
+        if (objSettings.Values.FilterVideo)
         {
-            if (filterMp4Only) {
+            if (objSettings.Values.FilterMp4Only) {
                 $('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             } else {
 
                 $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             }
         }
-        if (filterLinks)
+        if (objSettings.Values.FilterLinks)
         {
             $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
             $('.sp.ej.A8Hhid').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
         }
-        if (filterImages)
+        if (objSettings.Values.FilterImages)
         {
-            if (filterGifOnly)
+            if (objSettings.Values.FilterGifOnly)
             {
                 $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
                 $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
@@ -657,7 +622,7 @@ function DOMFilterImages() {
 }
 
 function AddMuelltonne() {
-    if (filterHashTag)
+    if (objSettings.Values.Hashtag)
         $('.zZ.a0').each(function (index, value)
         {
             if ($(this).find('a').length <= 1)
@@ -672,14 +637,14 @@ function AddMuelltonne() {
  */
 function DOMFilterHashtags() {
     try {
-        if (filterHashTag)
+        if (objSettings.Values.Hashtag)
         {
             AddMuelltonne();
             // Einfügen von hinzufügen-Button
 
-            if (propsHashtags !== null && propsHashtags !== "")
+            if (objSettings.Values.HashTags !== null && objSettings.Values.HashTags !== "")
             {
-                var hashTagArray = propsHashtags.split(',');
+                var hashTagArray = objSettings.Values.HashTags.split(',');
                 $.each(hashTagArray, function (i, hashTag)
                 {
                     if (hashTag.length > 1) {
@@ -698,18 +663,12 @@ function DOMFilterHashtags() {
 }
 
 function AddHashtagToList(newHashtag) {
-    propsHashtags += "," + newHashtag;
-    chrome.runtime.sendMessage({Action: "SaveHashtags", ParameterValue: propsHashtags});
-
+    objSettings.Values.HashTags += "," + newHashtag;
+    objSettings.Save("HashTags",objSettings.Values.HashTags);
 
     ShowNotification("success", chrome.i18n.getMessage("HashtagFilteredTitle"), chrome.i18n.getMessage("HashtagFiltered").replace("_KEYWORD_", newHashtag));
 }
 
-function AddKeywordToList(newKeyword) {
-    propsFulltext += "," + newKeyword;
-    chrome.runtime.sendMessage({Action: "SaveKeywords", ParameterValue: propsFulltext});
-    ShowNotification("success", chrome.i18n.getMessage("KeywordFilteredTitle"), chrome.i18n.getMessage("KeywordFiltered").replace("_KEYWORD_", newKeyword));
-}
 
 function CleanupAutosave() {
     for (var i = 0; i < localStorage.length; i++) {
@@ -733,62 +692,12 @@ function LoadSettingsLive()
 {
     
     
-    chrome.runtime.sendMessage(
-            {
-                Action: "LoadAll"
-            }, function (response)
-    {
-
-
-        filterPlus1 = response.FilterPlus1;
-        filterYouTube = response.FilterYouTube;
-        filterWham = response.FilterWham;
-        filterHashTag = response.FilterHashTag;
-        filterCustom = response.FilterCustom;
-        filterCommunity = response.FilterCommunity;
-        filterBirthday = response.FilterBirthday;
-        filterPersons = response.FilterPersons;
-        propsHashtags = response.PropsHashtags;
-        propsFulltext = response.PropsFulltext;
-        whamWhamText = response.WhamWhamText;
-        whamWhamLink = response.WhamWhamLink;
-        whamChristmasText = response.WhamChristmasText;
-        whamChristmasLink = response.WhamChristmasLink;
-        interval = response.Interval;
-        wetter = response.Wetter;
-        soccer = response.Sport;
-       // clock = response.Stoppwatch;
-        colorUsers = response.ColorUsers;
-        filterImages = response.FilterImages;
-        filterVideo = response.FilterVideo;
-        filterLinks = response.FilterLinks;
-        filterGifOnly = response.FilterGifOnly;
-        filterMp4Only = response.FilterMp4Only;
-        filterSharedCircles = response.FilterSharedCircles;
-        showTrophies = response.DisplayTrophy;
-        showLang = response.DisplayLang;
-        showEmoticons = response.ShowEmoticons;
-        lastWizardVersion = response.lastWizard;
-        wizardMode = response.WizardMode;
-        trophies = response.Trophies || null;
-        autoSave = response.UseAutoSave;
-        displayBookmarks = response.UseBookmarks;
-        markLSRPosts = response.MarkLSRPosts;
-        saveTicks = response.CollectTicks;
-        displayQuickHashes = response.DisplayQuickHashes;
-
-
-
+        
         ClearAllTicks();
-        if (trophies !== null) {
-            trophies = $.parseJSON(trophies);
-        }
-        localStorage.setItem("lastTrophyRead", response.LastTrophyRead);
         StartUpGoogleFilter();
 
-        wizardMode = JSON.parse(wizardMode);
-
-        if (wizardMode >= 0)
+        var wizard=JSON.parse(objSettings.Values.WizardMode);
+        if (wizard >= 0)
         {
             DrawWizardTile();
         }
@@ -802,8 +711,7 @@ function LoadSettingsLive()
         GetAllCircles();
         StoppTick(true, "Circles");
         StartFilter(); // Initial ausführen
-    }
-    );
+    
 }
 
 /**

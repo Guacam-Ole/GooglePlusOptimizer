@@ -1,6 +1,6 @@
 
 function LoadLsrList() {
-    if (markLSRPosts) {
+    if (objSettings.Values.MarkLSRPosts) {
         domainBlacklist=localStorage.getItem("domainBlacklist");
         var lastLsrDownload=localStorage.getItem("lastLsrDownload");
         if (lastLsrDownload==undefined || lastLsrDownload==null  || Date.parse(CleanDate(lastLsrDownload))<(7).days().ago() || domainBlacklist==undefined || domainBlacklist==null  ) {
@@ -20,7 +20,7 @@ function LoadLsrList() {
 
 
 function DOMMarkLSRLinks() {
-    if (markLSRPosts) {
+    if (objSettings.Values.MarkLSRPosts) {
         
          var mark = function($el) {
             $el.find('div[jsname="P3RoXc"]')
