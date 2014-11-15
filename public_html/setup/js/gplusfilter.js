@@ -8,6 +8,8 @@ var domainBlacklist = [];
 
 var objClock;
 var objSettings;
+var objAutosave;
+var objBookmarks;
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -143,11 +145,13 @@ function GetAllCircles()
 
 function StartUpGoogleFilter() {
     if (!IsDemo() || demoStart) {
-        CreateAutoSaveEvents();
-        CleanupAutosave();
+       
         LoadGoogle();
         CountColumns();
-        InitBookmarks();
+        if (objSettings.Values.UseBookmarks) {
+            objBookmarks=new gpoBookmarks();
+            objBookmarks.Init();
+        }
         if (objSettings.Values.ColorUsers)
         {
             OptStartColors();
@@ -360,8 +364,8 @@ function StartFilter()
         return;
     }
     try {
-        if (displayBookmarks === true) {
-           // PaintStars();
+        if (objSettings.Values.UseBookmarks) {
+         
         }   
         
 
@@ -494,7 +498,12 @@ function StartFilter()
         PaintQsIcons();
         StoppTick(false, "Quickshare Icons");
         StartTick(false, "Bookmark Icons");
-        DisplayBookMarkIcons();
+        if (objSettings.Values.UseBookmarks) {
+            objBookmarks.Dom();
+            objBookmarks.DisplayBookmarks();
+            objBookmarks.PaintStars();
+        }
+        
         StoppTick(false, "Bookmark Icons");
 
         WhatsHot();
@@ -670,21 +679,6 @@ function AddHashtagToList(newHashtag) {
 }
 
 
-function CleanupAutosave() {
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        if (key.indexOf("autosave.") === 0) {
-            var autosaveitem = JSON.parse(localStorage.getItem(localStorage.key(i)));
-            var oldDate = Date.parse(CleanDate(autosaveitem.date));
-            if (oldDate < (3).days().ago()) {
-                // Autosave braucht nicht tagelang im Speicher bleiben
-                localStorage.removeItem(key);
-            }
-        }
-    }
-}
-
-
 /**
  * Einstellungen von Backgroundscript laden 
  */
@@ -695,6 +689,12 @@ function LoadSettingsLive()
         
         ClearAllTicks();
         StartUpGoogleFilter();
+
+        if (objSettings.Values.UseAutoSave) {
+            objAutosave=new gpoAutosave();
+            objAutosave.CleanupAutosave();
+            objAutosave.Init();
+        }
 
         var wizard=JSON.parse(objSettings.Values.WizardMode);
         if (wizard >= 0)

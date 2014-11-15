@@ -20,8 +20,7 @@
                         "setup/js/jquery.rc4.js",
                         "setup/js/jquery-ui.min.js",
                         "date.js",
-                        "setup/js/bootstrap-switch.min.js",
-                        "setup/js/jquery.tagsinput.js",
+             
                         "setup/js/fussball.js",
                         "setup/js/weather.js",
                         "setup/js/gplusfilter.js",
@@ -33,14 +32,14 @@
                         "setup/js/smilies.js",
                         "setup/js/quickshare.js",
                         "setup/js/qsdisplay.js",
-                        "setup/js/autosave.js",
+                        
                         "setup/js/bookmarks.js",
                         "setup/js/lsr.js",
                         "setup/js/flags.js",
                         
-                        
                         "setup/js/gplus/settings.js",
-                        "setup/js/gplus/clock.js"
+                        "setup/js/gplus/clock.js",
+                        "setup/js/gplus/autosave.js"
                                                 
                         ]
                 }
