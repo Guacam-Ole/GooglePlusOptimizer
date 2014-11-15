@@ -6,11 +6,15 @@ var domChangeAllowed = true;
 
 var domainBlacklist = [];
 
-var objClock;
-var objSettings;
-var objAutosave;
-var objBookmarks;
-var objMeasure;
+var Subs={
+    Settings:null,
+    Clock:null,
+    Autosave:null,
+    Bookmarks:null,
+    Measure:null,
+    Flags:null,
+    Lsr:null
+};
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -26,15 +30,13 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
 function AllowDomChange() {
     setTimeout(function () {
         domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
-    }, objSettings.Values.Interval);
+    }, Subs.Settings.Values.Interval);
 }
 
 $(document).ready(function ()
 {
-   
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
-       
         LoadSetup();
     }
     else if (window.location.hostname === "plus.google.com")
@@ -53,9 +55,9 @@ $(document).ready(function ()
         $(document).on('click', '.removeHashTag', function ()
         {
             console.log('Add Hashtag');
-            if (objSettings.Values.HashTags === null)
+            if (Subs.Settings.Values.HashTags === null)
             {
-                objSettings.Values.HashTags = "";
+                Subs.Settings.Values.HashTags = "";
             }
             var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
             if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$")))
@@ -74,7 +76,7 @@ $(document).ready(function ()
 });
 function DisplayHashtags()
 {
-    if (objSettings.Values.DisplayQuickHashes) {
+    if (Subs.Settings.Values.DisplayQuickHashes) {
 
         $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
     }
@@ -88,7 +90,7 @@ function SortByName(a, b) {
 
 function LoadHashTags()
 {
-    if (objSettings.Values.DisplayQuickHashes ) {
+    if (Subs.Settings.Values.DisplayQuickHashes ) {
         var lasthashtag;
         //if ($('#quickht')!==undefined) {
         $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
@@ -100,7 +102,6 @@ function LoadHashTags()
                 $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
             }
         });
-
     }
 }
 
@@ -156,7 +157,7 @@ function AddHeadWrapper(parent) {
 function DrawWizardTile() {
     try {
         var lang = chrome.i18n.getMessage("lang");
-        if (NewWizardOptionsExist(objSettings.Values.LastWizard)) {
+        if (NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
             $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
@@ -166,7 +167,7 @@ function DrawWizardTile() {
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
                     $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function () {
-                        InitWizard(objSettings.Values.LastWizard);
+                        InitWizard(Subs.Settings.Values.LastWizard);
                         console.log('Wizard loaded');
                     });
                 });
@@ -178,46 +179,31 @@ function DrawWizardTile() {
 }
 
 function InitSettings() {
-      objSettings=new gpoSettings();
-      objSettings.Init();
-      objSettings.Load(InitGoogle);
+    Subs.Settings=new gpoSettings();
+    Subs.Settings.Init();
+    Subs.Settings.Load(InitGoogle);
 }
 
-/**
- * Aktionen beim initialisieren der Seite
- */
-function InitGoogle()
-{
-    try {
-        if (objSettings.Values.Interval === null || objSettings.Values.Interval< 10)
-        {
-            objSettings.Values.Interval = 500;
-        }
-        PageLoad();
-        chrome.extension.sendMessage("show_page_action");
-    } catch (ex) {
-        console.log(ex);
+function InitGoogle() {
+    if (Subs.Settings.Values.Interval === null || Subs.Settings.Values.Interval< 10)
+    {
+        Subs.Settings.Values.Interval = 500;
     }
+    PageLoad();
+    chrome.extension.sendMessage("show_page_action");
 }
 
-/**  
- * Google+ - Aktionen, wenn DOM bereit
- */
-function LoadGoogle()
-{
+function LoadGoogle() {
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function ()
     {
-
-
         // Beim Nachladen der Seite neu aktiv werden
         if (timeout)
         {
             clearTimeout(timeout);
         }
-        timeout = setTimeout(StartFilter, objSettings.Values.Interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
+        timeout = setTimeout(StartFilter, Subs.Settings.Values.Interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
     }, false);
-    
 }
 
 /**
@@ -225,10 +211,8 @@ function LoadGoogle()
  */
 function DrawWidgets() {
     try {
-       
-      
         // Wetter checken:
-        if (objSettings.Values.Weather !== null )
+        if (Subs.Settings.Values.Weather !== null )
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
             OptStartWeather();
@@ -242,11 +226,11 @@ function DrawWidgets() {
             StartSoccer();
         }*/
 
-        if (objSettings.Values.StoppWatch !== null && objSettings.Values.StoppWatch!== undefined)
+        if (Subs.Settings.Values.StoppWatch !== null && Subs.Settings.Values.StoppWatch!== undefined)
         {
-            CreateBlock(JSON.parse(objSettings.Values.StoppWatch) + 1, "clock");
-            objClock=new gpoClock();
-            objClock.Init();
+            CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
+            Subs.Clock=new gpoClock();
+            Subs.Clock.Init();
         }
     } catch (ex) {
         console.log(ex);
@@ -296,12 +280,12 @@ function CleanDate(anyDate) {
 }
 
 function MoveHeaderIcon() {
-     if (objSettings.Values.UseBookmarks || objSettings.Values.DisplayLang) {
+     if (Subs.Settings.Values.UseBookmarks || Subs.Settings.Values.DisplayLang) {
         var icondiff=0;
-        if (objSettings.Values.DisplayLang) {
+        if (Subs.Settings.Values.DisplayLang) {
             icondiff+=60;
         }
-        if (objSettings.Values.UseBookmarks) {
+        if (Subs.Settings.Values.UseBookmarks) {
             icondiff+=60;
         }
         if ($('.V9b').length>0) {
@@ -334,152 +318,158 @@ function StartFilter()
         // Es wird bereits eine Anpassung durchgeführt
         return;
     }
-    try {
-        if (objSettings.Values.UseBookmarks) {
-         
-        }   
-        
+  
+    Subs.Measure=new gpoMeasure("DOM", true);
 
 
-        StartTick(false, "Hashtags");
-        LoadHashTags();
-        StoppTick(false, "Hashtags");
-        StartTick(false, "Hashtag-Delete");
-        AddMuelltonne();
-        StoppTick(false, "Hashtag-Delete");
+    StartTick(false, "Hashtags");
+    LoadHashTags();
+    StoppTick(false, "Hashtags");
+    StartTick(false, "Hashtag-Delete");
+    AddMuelltonne();
+    StoppTick(false, "Hashtag-Delete");
 
-        if (objSettings.Values.Plus)
-        {
-            StartTick(false, "Plus1");
-            $('.xv').closest("[jsmodel='XNmfOc']").hide();
-            StoppTick(false, "Plus1");
-        }
-        if (objSettings.Values.Yt)
-        {
-            StartTick(false, "Youtube");
-            $('.SR').closest("[jsmodel='XNmfOc']").hide();
-            StoppTick(false, "Youtube");
-        }
-        if (objSettings.Values.Wham);
-        {
-            StartTick(false, "Wham");
-            if (objSettings.Values.WhamWhamText)
-            {
-                $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
-            }
-            if (objSettings.Values.WhamChristmasText)
-            {
-                $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-                $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
-            }
-            if (objSettings.Values.WhamWhamLink)
-            {
-                $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
-            }
-            if (objSettings.Values.WhamChristmasLink)
-            {
-                $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
-                $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-                //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
-            }
-            StoppTick(false, "Wham");
-        }
-
-        //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
-
-        if (objSettings.Values.Community)
-        {
-            StartTick(false, "Community");
-            $('[data-iid="sii2:112"]').hide();
-            $('[data-iid="sii2:116"]').hide();
-            StoppTick(false, "Community");
-        }
-        if (objSettings.Values.Birthday)
-        {
-            StartTick(false, "Birthday");
-            $('[data-iid="sii2:114"]').hide();
-            StoppTick(false, "Birthday");
-        }
-        if (objSettings.Values.Known)
-        {
-            StartTick(false, "Persons");
-            $('[data-iid="sii2:103"]').hide();
-            $('[data-iid="sii2:105"]').hide(); // Interesting Pages
-            $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
-            StoppTick(false, "Persons");
-        }
-        if (objSettings.Values.StoppWatch !== null && objSettings.Values.StoppWatch !== undefined) {
-            
-            StartTick(false, "Watch");
-            objClock.PaintWatch();
-            StoppTick(false, "Watch");
-        }
-
-        StartTick(false, "Hashtag-Filter");
-        DOMFilterHashtags();
-        StoppTick(false, "Hashtag-Filter");
-        StartTick(false, "Images");
-        DOMFilterImages();
-        StoppTick(false, "Images");
-        StartTick(false, "Fulltext");
-        DOMFilterFreetext();
-        StoppTick(false, "Fulltext");
-        StartTick(false, "Shared Circles");
-        DOMFilterSharedCircles();
-        StoppTick(false, "Shared Circles");
-        StartTick(false, "LSR");
-        DOMMarkLSRLinks();
-        StoppTick(false, "LSR");
-
-        if (objSettings.Values.DisplayTrophy)
-        {
-            StartTick(false, "Trophies");
-            //OptStartTrophyDisplay();
-            DrawTrophies();
-            StoppTick(false, "Trophies");
-            StartTick(false, "Paint Trophy Icons");
-            PaintTrophyOverview();
-            StoppTick(false, "Paint Trophy Icons");
-        }
-        if (objSettings.Values.ColorUsers)
-        {
-            StartTick(false, "Color Users");
-            PaintForUser();
-            PaintColorBlock();
-            StoppTick(false, "Color Users");
-        }
-
-
-
-        if (objSettings.Values.ShowEmoticons)
-        {
-            StartTick(false, "Emoticons");
-            OptStartEmoticons();
-            PaintEmoticons();
-            StoppTick(false, "Emoticons");
-        }
-        StartTick(false, "Quickshare Icons");
-        PaintQsIcons();
-        StoppTick(false, "Quickshare Icons");
-        StartTick(false, "Bookmark Icons");
-        if (objSettings.Values.UseBookmarks) {
-            objBookmarks.Dom();
-            objBookmarks.DisplayBookmarks();
-            objBookmarks.PaintStars();
-        }
-        
-        StoppTick(false, "Bookmark Icons");
-
-        WhatsHot();
-    } catch (ex) {
+    if (Subs.Settings.Values.Plus)
+    {
+        StartTick(false, "Plus1");
+        $('.xv').closest("[jsmodel='XNmfOc']").hide();
+        StoppTick(false, "Plus1");
     }
+    if (Subs.Settings.Values.Yt)
+    {
+        StartTick(false, "Youtube");
+        $('.SR').closest("[jsmodel='XNmfOc']").hide();
+        StoppTick(false, "Youtube");
+    }
+    if (Subs.Settings.Values.Wham);
+    {
+        StartTick(false, "Wham");
+        if (Subs.Settings.Values.WhamWhamText)
+        {
+            $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+        }
+        if (Subs.Settings.Values.WhamChristmasText)
+        {
+            $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+        }
+        if (Subs.Settings.Values.WhamWhamLink)
+        {
+            $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
+        }
+        if (Subs.Settings.Values.WhamChristmasLink)
+        {
+            $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
+            $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
+            //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
+        }
+        StoppTick(false, "Wham");
+    }
+
+    //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
+
+    if (Subs.Settings.Values.Community)
+    {
+        StartTick(false, "Community");
+        $('[data-iid="sii2:112"]').hide();
+        $('[data-iid="sii2:116"]').hide();
+        StoppTick(false, "Community");
+    }
+    if (Subs.Settings.Values.Birthday)
+    {
+        StartTick(false, "Birthday");
+        $('[data-iid="sii2:114"]').hide();
+        StoppTick(false, "Birthday");
+    }
+    if (Subs.Settings.Values.Known)
+    {
+        StartTick(false, "Persons");
+        $('[data-iid="sii2:103"]').hide();
+        $('[data-iid="sii2:105"]').hide(); // Interesting Pages
+        $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
+        StoppTick(false, "Persons");
+    }
+    if (Subs.Settings.Values.StoppWatch !== null && Subs.Settings.Values.StoppWatch !== undefined) {
+
+        StartTick(false, "Watch");
+        Subs.Clock.PaintWatch();
+        StoppTick(false, "Watch");
+    }
+
+    StartTick(false, "Hashtag-Filter");
+    DOMFilterHashtags();
+    StoppTick(false, "Hashtag-Filter");
+    StartTick(false, "Images");
+    DOMFilterImages();
+    StoppTick(false, "Images");
+    StartTick(false, "Fulltext");
+    DOMFilterFreetext();
+    StoppTick(false, "Fulltext");
+    StartTick(false, "Shared Circles");
+    DOMFilterSharedCircles();
+    StoppTick(false, "Shared Circles");
+    
+    if (Subs.Lsr!==null) {
+         Subs.Measure.Do("markLSRPosts",function() {
+            Subs.Lsr.Dom();
+        });
+    }
+
+    if (Subs.Settings.Values.DisplayTrophy)
+    {
+        StartTick(false, "Trophies");
+        //OptStartTrophyDisplay();
+        DrawTrophies();
+        StoppTick(false, "Trophies");
+        StartTick(false, "Paint Trophy Icons");
+        PaintTrophyOverview();
+        StoppTick(false, "Paint Trophy Icons");
+    }
+    if (Subs.Settings.Values.ColorUsers)
+    {
+        StartTick(false, "Color Users");
+        PaintForUser();
+        PaintColorBlock();
+        StoppTick(false, "Color Users");
+    }
+
+
+
+    if (Subs.Settings.Values.ShowEmoticons)
+    {
+        StartTick(false, "Emoticons");
+        OptStartEmoticons();
+        PaintEmoticons();
+        StoppTick(false, "Emoticons");
+    }
+    StartTick(false, "Quickshare Icons");
+    PaintQsIcons();
+    StoppTick(false, "Quickshare Icons");
+    StartTick(false, "Bookmark Icons");
+    
+    if (Subs.Bookmarks!==null) {
+         Subs.Measure.Do("useBookmarks",function() {
+             Subs.Bookmarks.Dom();
+            Subs.Bookmarks.DisplayBookmarks();
+            Subs.Bookmarks.PaintStars();
+        });
+    }
+    
+    StoppTick(false, "Bookmark Icons");
+
+    if (Subs.Flags!==null) {
+        Subs.Measure.Do("displayLang",function() {
+            Subs.Flags.Dom();
+        });
+    }
+   
     AllowDomChange();
     domChangeAllowed = false;
 }
@@ -503,19 +493,19 @@ function getUrlParameter(sParam)
 
 
 function ClearAllTicks() {
-    if (objSettings.Values.CollectTicks) {
+    if (Subs.Settings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "ClearTicks"});
     }
 }
 
 function StartTick(isInit, timerName) {
-    if (objSettings.Values.CollectTicks) {
+    if (Subs.Settings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "AddTick", IsInit: isInit, Name: timerName, Time: $.now()});
     }
 }
 
 function StoppTick(isInit, timerName) {
-    if (objSettings.Values.CollectTicks) {
+    if (Subs.Settings.Values.CollectTicks) {
         chrome.runtime.sendMessage({Action: "EndTick", IsInit: isInit, Name: timerName, Time: $.now()});
     }
 }
@@ -525,7 +515,7 @@ function StoppTick(isInit, timerName) {
  */
 function DOMFilterSharedCircles()
 {
-    if (objSettings.Values.FilterSharedCircles) {
+    if (Subs.Settings.Values.FilterSharedCircles) {
         try {
             $('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
         } catch (ex) {
@@ -539,10 +529,10 @@ function DOMFilterSharedCircles()
  * Volltextfilter
  */
 function DOMFilterFreetext() {
-    if (objSettings.Values.Custom && objSettings.Values.Fulltext !== null && objSettings.Values.Fulltext !== "")
+    if (Subs.Settings.Values.Custom && Subs.Settings.Values.Fulltext !== null && Subs.Settings.Values.Fulltext !== "")
     {
         try {
-            var textArray = objSettings.Values.Fulltext.split(',');
+            var textArray = Subs.Settings.Values.Fulltext.split(',');
             $.each(textArray, function (i, fulltext)
             {
                 $('div.Xx.xJ:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
@@ -559,7 +549,7 @@ function DOMFilterFreetext() {
  */
 function DOMFilterImages() {
     try {
-        if (objSettings.Values.FilterImages || objSettings.Values.FilterLinks || objSettings.Values.FilterVideo)
+        if (Subs.Settings.Values.FilterImages || Subs.Settings.Values.FilterLinks || Subs.Settings.Values.FilterVideo)
         {
             $('.unhideImage').click(function () {
                 $(this).parent().find('.hidewrapper').show();
@@ -568,23 +558,23 @@ function DOMFilterImages() {
             });
         }
 
-        if (objSettings.Values.FilterVideo)
+        if (Subs.Settings.Values.FilterVideo)
         {
-            if (objSettings.Values.FilterMp4Only) {
+            if (Subs.Settings.Values.FilterMp4Only) {
                 $('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             } else {
 
                 $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             }
         }
-        if (objSettings.Values.FilterLinks)
+        if (Subs.Settings.Values.FilterLinks)
         {
             $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
             $('.sp.ej.A8Hhid').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
         }
-        if (objSettings.Values.FilterImages)
+        if (Subs.Settings.Values.FilterImages)
         {
-            if (objSettings.Values.FilterGifOnly)
+            if (Subs.Settings.Values.FilterGifOnly)
             {
                 $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
                 $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
@@ -600,7 +590,7 @@ function DOMFilterImages() {
 }
 
 function AddMuelltonne() {
-    if (objSettings.Values.Hashtag)
+    if (Subs.Settings.Values.Hashtag)
         $('.zZ.a0').each(function (index, value)
         {
             if ($(this).find('a').length <= 1)
@@ -615,14 +605,14 @@ function AddMuelltonne() {
  */
 function DOMFilterHashtags() {
     try {
-        if (objSettings.Values.Hashtag)
+        if (Subs.Settings.Values.Hashtag)
         {
             AddMuelltonne();
             // Einfügen von hinzufügen-Button
 
-            if (objSettings.Values.HashTags !== null && objSettings.Values.HashTags !== "")
+            if (Subs.Settings.Values.HashTags !== null && Subs.Settings.Values.HashTags !== "")
             {
-                var hashTagArray = objSettings.Values.HashTags.split(',');
+                var hashTagArray = Subs.Settings.Values.HashTags.split(',');
                 $.each(hashTagArray, function (i, hashTag)
                 {
                     if (hashTag.length > 1) {
@@ -641,58 +631,76 @@ function DOMFilterHashtags() {
 }
 
 function AddHashtagToList(newHashtag) {
-    objSettings.Values.HashTags += "," + newHashtag;
-    objSettings.Save("HashTags",objSettings.Values.HashTags);
+    Subs.Settings.Values.HashTags += "," + newHashtag;
+    Subs.Settings.Save("HashTags",Subs.Settings.Values.HashTags);
 
     ShowNotification("success", chrome.i18n.getMessage("HashtagFilteredTitle"), chrome.i18n.getMessage("HashtagFiltered").replace("_KEYWORD_", newHashtag));
 }
 
+function InitObject(condition,  object) {
+    if (condition) {
+        return new object;
+    }
+    return null;
+}
 
-/**
- * Einstellungen von Backgroundscript laden 
- */
+
+
+function InitObjects() {
+    Subs.Bookmarks=InitObject(Subs.Settings.Values.UseBookmarks,gpoBookmarks);
+    Subs.Autosave=InitObject(Subs.Settings.Values.UseAutoSave,gpoAutosave);
+    Subs.Flags=InitObject(Subs.Settings.Values.DisplayLang,gpoFlags);
+    Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
+}
+
 function PageLoad() {
         console.log('G+Filter: Google+ - Filter initialisiert');
-        objMeasure=new gpoMeasure("START", true);
+        InitObjects();
         
-        var wizard=JSON.parse(objSettings.Values.WizardMode);
+        Subs.Measure=new gpoMeasure("START", true);
+        
+        var wizard=JSON.parse(Subs.Settings.Values.WizardMode);
         if (wizard >= 0)
         {
-            objMeasure.Do("wizard",DrawWizardTile);
+            Subs.Measure.Do("wizard",DrawWizardTile);
         }
             
-        LoadGoogle();
-        CountColumns();
-        if (objSettings.Values.UseBookmarks) {
-            objBookmarks=new gpoBookmarks();
-            objBookmarks.Init();
+        if (Subs.Bookmarks!==null) {
+            Subs.Measure.Do("useBookmarks",function() {
+                Subs.Bookmarks.Init();
+            });
         }
-        if (objSettings.Values.ColorUsers)
+        if (Subs.Autosave!==null) {
+            Subs.Measure.Do("useAutoSave",function() {
+                Subs.Autosave.CleanupAutosave();
+                Subs.Autosave.Init();
+            });
+        }
+        
+        if (Subs.Settings.Values.ColorUsers)
         {
-            objMeasure.Do("ColorUsers",OptStartColors);
+            Subs.Measure.Do("ColorUsers",OptStartColors);
         }
-        if (objSettings.Values.DisplayTrophy)
+        if (Subs.Settings.Values.DisplayTrophy)
         {
             StartTick(false, "LoadTrophyUsers");
             OptStartTrophyDisplay();
             StoppTick(false, "LoadTrophyUsers");
         }
         DisplayHashtags();
-
-        if (objSettings.Values.UseAutoSave) {
-            objMeasure.Do("useAutoSave",function() {
-                objAutosave=new gpoAutosave();
-                objAutosave.CleanupAutosave();
-                objAutosave.Init();
-            });
+        
+         if (Subs.Lsr!==null) {
+            Subs.Measure.Do("markLSRPosts",function() {
+               Subs.Lsr.Init();
+           });
         }
-
-       
-        LoadLsrList();
         LoadAllQuickSharesG();
         GetAllCircles();
         DrawWidgets();
         StartFilter(); // Initial ausführen
+        
+        LoadGoogle();
+        CountColumns();
     
 }
 
@@ -754,11 +762,4 @@ function ClearNotification()
 {
     $("#gplusMessage").remove();
 }
-
-
-/**
- * 
- * Code von Marco Grätsch (Angepasst an Optimizer-Speicherung)
- * 
- */
 
