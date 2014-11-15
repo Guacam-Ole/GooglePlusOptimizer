@@ -300,7 +300,7 @@ gpoBookmarks.prototype = {
     },
     IsBookmarkPage:function() {
         // Für die ALTE Bookmarkseite. Irgendwann rauskicken!
-        return window.location.href.indexOf(searchString) >= 0;    
+        return window.location.href.indexOf(this.SearchString) >= 0;    
     },
     SaveBookmarks:function() {
         var obj=this;

@@ -8,8 +8,6 @@ var gpoClock=function() {
     
 };
 
-
-
 gpoClock.prototype = {
     constructor: gpoClock,
     Init: function () {        
