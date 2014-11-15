@@ -14,16 +14,10 @@
     width: 300px;
 }
 
-#slider-clock {
-    margin-left: 200px;
-}
 
 
-#slider-clock {
+.slider-clock {
     margin-left: 50px;
     margin-top: 3px;
 }
 
-#slider-clock span {
-
-}

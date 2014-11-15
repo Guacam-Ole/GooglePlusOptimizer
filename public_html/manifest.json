@@ -65,6 +65,7 @@
             },
     "web_accessible_resources": [
         "setup/images/*",
+        "setup/media/*",
         "setup/images/weather/150x150/*",
         "setup/images/weather/50x50/*",
         "setup/css/*",

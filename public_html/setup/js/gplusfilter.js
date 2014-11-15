@@ -23,6 +23,12 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
     };
 });
 
+function AllowDomChange() {
+    setTimeout(function () {
+        domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
+    }, objSettings.Values.Interval);
+}
+
 $(document).ready(function ()
 {
    
@@ -474,9 +480,7 @@ function StartFilter()
         WhatsHot();
     } catch (ex) {
     }
-    setTimeout(function () {
-        domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
-    }, objSettings.Values.Interval);
+    AllowDomChange();
     domChangeAllowed = false;
 }
 
