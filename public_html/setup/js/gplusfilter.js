@@ -10,6 +10,7 @@ var objClock;
 var objSettings;
 var objAutosave;
 var objBookmarks;
+var objMeasure;
 
 function IsDemo() {
     return  document.location.search.indexOf("demoMode") > 0;
@@ -33,16 +34,7 @@ $(document).ready(function ()
     else if (window.location.hostname === "plus.google.com")
     {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
-        if (IsDemo()) {
-            var button = $('<span role="button" id="optimizerTest" class="Cy" aria-pressed="false" tabindex="0"><a>Optimizer aktivieren</a></span>');
-            $('.Ima.Xic').prepend(button);
-            $('#optimizerTest').click(function () {
-                demoStart = !demoStart;
-                StartUpGoogleFilter();
-                return false;
-            });
-        }
-
+       
         InitSettings();
 
         $(document).on('click', '.unhideImage', function ()
@@ -143,28 +135,6 @@ function GetAllCircles()
     });
 }
 
-function StartUpGoogleFilter() {
-    if (!IsDemo() || demoStart) {
-       
-        LoadGoogle();
-        CountColumns();
-        if (objSettings.Values.UseBookmarks) {
-            objBookmarks=new gpoBookmarks();
-            objBookmarks.Init();
-        }
-        if (objSettings.Values.ColorUsers)
-        {
-            OptStartColors();
-        }
-        if (objSettings.Values.DisplayTrophy)
-        {
-            StartTick(false, "LoadTrophyUsers");
-            OptStartTrophyDisplay();
-            StoppTick(false, "LoadTrophyUsers");
-        }
-        DisplayHashtags();
-    }
-}
 
 
 function AddHeadWrapper(parent) {
@@ -213,13 +183,11 @@ function InitSettings() {
 function InitGoogle()
 {
     try {
-        //clock=objSettings.Values.StoppWatch;
-        //var interval = JSON.parse(localStorage.getItem("interval"));
         if (objSettings.Values.Interval === null || objSettings.Values.Interval< 10)
         {
             objSettings.Values.Interval = 500;
         }
-        LoadSettingsLive();
+        PageLoad();
         chrome.extension.sendMessage("show_page_action");
     } catch (ex) {
         console.log(ex);
@@ -231,9 +199,6 @@ function InitGoogle()
  */
 function LoadGoogle()
 {
-    console.log('G+Filter: Google+ - Filter initialisiert');
-
-
     var timeout = null;
     document.addEventListener("DOMSubtreeModified", function ()
     {
@@ -246,7 +211,7 @@ function LoadGoogle()
         }
         timeout = setTimeout(StartFilter, objSettings.Values.Interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
     }, false);
-    DrawWidgets();
+    
 }
 
 /**
@@ -682,34 +647,47 @@ function AddHashtagToList(newHashtag) {
 /**
  * Einstellungen von Backgroundscript laden 
  */
-function LoadSettingsLive()
-{
-    
-    
+function PageLoad() {
+        console.log('G+Filter: Google+ - Filter initialisiert');
+        objMeasure=new gpoMeasure("START", true);
         
-        ClearAllTicks();
-        StartUpGoogleFilter();
-
-        if (objSettings.Values.UseAutoSave) {
-            objAutosave=new gpoAutosave();
-            objAutosave.CleanupAutosave();
-            objAutosave.Init();
-        }
-
         var wizard=JSON.parse(objSettings.Values.WizardMode);
         if (wizard >= 0)
         {
-            DrawWizardTile();
+            objMeasure.Do("wizard",DrawWizardTile);
         }
-        StartTick(true, "LSRLoad");
+            
+        LoadGoogle();
+        CountColumns();
+        if (objSettings.Values.UseBookmarks) {
+            objBookmarks=new gpoBookmarks();
+            objBookmarks.Init();
+        }
+        if (objSettings.Values.ColorUsers)
+        {
+            objMeasure.Do("ColorUsers",OptStartColors);
+        }
+        if (objSettings.Values.DisplayTrophy)
+        {
+            StartTick(false, "LoadTrophyUsers");
+            OptStartTrophyDisplay();
+            StoppTick(false, "LoadTrophyUsers");
+        }
+        DisplayHashtags();
+
+        if (objSettings.Values.UseAutoSave) {
+            objMeasure.Do("useAutoSave",function() {
+                objAutosave=new gpoAutosave();
+                objAutosave.CleanupAutosave();
+                objAutosave.Init();
+            });
+        }
+
+       
         LoadLsrList();
-        StoppTick(true, "LSRLoad");
-        StartTick(true, "Quickshare");
         LoadAllQuickSharesG();
-        StoppTick(true, "Quickshare");
-        StartTick(true, "Circles");
         GetAllCircles();
-        StoppTick(true, "Circles");
+        DrawWidgets();
         StartFilter(); // Initial ausführen
     
 }
