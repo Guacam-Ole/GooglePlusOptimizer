@@ -13,7 +13,8 @@ var Subs={
     Bookmarks:null,
     Measure:null,
     Flags:null,
-    Lsr:null
+    Lsr:null,
+    Quickshare:null
 };
 
 function IsDemo() {
@@ -237,22 +238,6 @@ function DrawWidgets() {
     }
 }
 
-function LoadAllQuickSharesG()
-{
-    chrome.runtime.sendMessage(
-            {
-                Action: "LoadQS"
-            }, function (response)
-    {
-        quickShares = JSON.parse(response.Result);
-        if (quickShares !== null && quickShares.length > 0)
-        {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
-            InitQS();
-        }
-    });
-}
-
 /**
  * Spalten zählen
  */
@@ -304,14 +289,14 @@ function MoveHeaderIcon() {
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
-function StartFilter()
-{
+function StartFilter() {
 
-    if (quickShares !== null && quickShares.length > 0) {
-        StartTick(false, "Quickshare");
-        QSEvents();
-        StoppTick(false, "Quickshare");
+    if (Subs.Quickshare!==null) {
+        Subs.Measure.Do("QuickShares",function() {
+            Subs.Quickshare.Events();
+        });
     }
+    
     MoveHeaderIcon();
 
     if (!domChangeAllowed) {
@@ -418,8 +403,8 @@ function StartFilter()
     
     if (Subs.Lsr!==null) {
          Subs.Measure.Do("markLSRPosts",function() {
-            Subs.Lsr.Dom();
-        });
+             Subs.Lsr.Dom();
+         });
     }
 
     if (Subs.Settings.Values.DisplayTrophy)
@@ -449,10 +434,12 @@ function StartFilter()
         PaintEmoticons();
         StoppTick(false, "Emoticons");
     }
-    StartTick(false, "Quickshare Icons");
-    PaintQsIcons();
-    StoppTick(false, "Quickshare Icons");
-    StartTick(false, "Bookmark Icons");
+    
+    if (Subs.Quickshare!==null) {
+        Subs.Measure.Do("QuickShare",function() {
+            Subs.Quickshare.Dom();
+        });
+    }
     
     if (Subs.Bookmarks!==null) {
          Subs.Measure.Do("useBookmarks",function() {
@@ -651,6 +638,10 @@ function InitObjects() {
     Subs.Autosave=InitObject(Subs.Settings.Values.UseAutoSave,gpoAutosave);
     Subs.Flags=InitObject(Subs.Settings.Values.DisplayLang,gpoFlags);
     Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
+    var qs=Subs.Settings.Values.QuickShares;
+    Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
+    Subs.Quickshare.Shares=qs;
+
 }
 
 function PageLoad() {
@@ -662,7 +653,9 @@ function PageLoad() {
         var wizard=JSON.parse(Subs.Settings.Values.WizardMode);
         if (wizard >= 0)
         {
-            Subs.Measure.Do("wizard",DrawWizardTile);
+            Subs.Measure.Do("wizard",function() {
+                DrawWizardTile();
+            });
         }
             
         if (Subs.Bookmarks!==null) {
@@ -679,7 +672,9 @@ function PageLoad() {
         
         if (Subs.Settings.Values.ColorUsers)
         {
-            Subs.Measure.Do("ColorUsers",OptStartColors);
+            Subs.Measure.Do("ColorUsers",function() {
+                OptStartColors();
+            });
         }
         if (Subs.Settings.Values.DisplayTrophy)
         {
@@ -691,10 +686,16 @@ function PageLoad() {
         
          if (Subs.Lsr!==null) {
             Subs.Measure.Do("markLSRPosts",function() {
-               Subs.Lsr.Init();
-           });
+                Subs.Lsr.Init();
+            });
         }
-        LoadAllQuickSharesG();
+        
+        if (Subs.Quickshare!==null) {
+            Subs.Measure.Do("QuickShares",function() {
+                Subs.Quickshare.Init();
+            });
+        }
+        
         GetAllCircles();
         DrawWidgets();
         StartFilter(); // Initial ausführen
