@@ -108,6 +108,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 
+chrome.runtime.onMessage.addListener(
+    function(request,sender,sendResponse)  {
+        if (request.Action==="GetSetting") {
+            var returnvalue=localStorage.getItem(request.Name);
+            sendResponse({Result: returnvalue});
+        }
+    }
+);
+
 
 // Datenaustausch mit Background-jQuery-File
 chrome.runtime.onMessage.addListener(

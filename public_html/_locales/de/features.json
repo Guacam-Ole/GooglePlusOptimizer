@@ -50,14 +50,14 @@
     {   
         "Short": "custom",
         "Title": "Volltext-Filter",
-        "Description": "<p>Hierüber lässt sich jeder beliebige Text herausfiltern. Der Filter ignoriert Groß/Kleinschreibung.<br/> <br/></p><p><div><input id='fulltext' type='text' class='form-control tags' value='Hamburger Sportverein' style='display: none;'/></div></p> ",
+        "Description": "<p>Hierüber lässt sich jeder beliebige Text herausfiltern. Der Filter ignoriert Groß/Kleinschreibung.<br/> <br/></p><p><div><input type='text' class='form-control tags tokensText' data-role='tagsinput' value='Hamburger Sportverein' style='display: none;'/></div></p> ",
         "Image":"volltext.png",
         "Cost":2
     },
     {   
         "Short": "hashtag",
         "Title": "Hashtag-Filter",
-        "Description": "<p>Über den Hashtag-Filter können beliebige Artikel mit vorgegebenen Hashtags herausgefiltert werden.<br/> <sup>(Es ist egal, ob die Werte mit oder ohne \"#\" eingegeben werden)</sup><br/><br/></p><p><div><input id='hashtags' type='text' class='form-control tags' value='#catcontent,#katzencontent' style='display: none;'/></div></p>  ",
+        "Description": "<p>Über den Hashtag-Filter können beliebige Artikel mit vorgegebenen Hashtags herausgefiltert werden.<br/> <sup>(Es ist egal, ob die Werte mit oder ohne \"#\" eingegeben werden)</sup><br/><br/></p><p><div><input type='text' class='form-control tags tokensHashtags' data-default='neuer Hashtag' value='#catcontent,#katzencontent' style='display: none;'/></div></p>  ",
         "Image":"hash.png",
         "Cost":1
     },
