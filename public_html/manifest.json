@@ -26,7 +26,7 @@
                         "setup/js/ion.sound.js",
                         
                         "setup/js/user.js",
-                        "setup/js/trophydisplay.js",
+                        
                         "setup/js/wizard.js",
                         "setup/js/smilies.js",
                         "setup/js/quickshare.js",
@@ -39,6 +39,7 @@
                         "setup/js/gplus/bookmarks.js",
                         "setup/js/gplus/flags.js",
                         "setup/js/gplus/qs.js",
+                        "setup/js/gplus/trophy.js",
                         "setup/js/gplus/lsr.js"
                                                 
                         ]
