@@ -14,7 +14,8 @@ var Subs={
     Measure:null,
     Flags:null,
     Lsr:null,
-    Quickshare:null
+    Quickshare:null,
+    Trophy:null
 };
 
 function IsDemo() {
@@ -407,15 +408,11 @@ function StartFilter() {
          });
     }
 
-    if (Subs.Settings.Values.DisplayTrophy)
-    {
-        StartTick(false, "Trophies");
-        //OptStartTrophyDisplay();
-        DrawTrophies();
-        StoppTick(false, "Trophies");
-        StartTick(false, "Paint Trophy Icons");
-        PaintTrophyOverview();
-        StoppTick(false, "Paint Trophy Icons");
+    if (Subs.Trophy!==null) {
+        Subs.Measure.Do("displayTrophy",function() {
+            Subs.Trophy.Dom();
+        });
+        
     }
     if (Subs.Settings.Values.ColorUsers)
     {
@@ -638,9 +635,11 @@ function InitObjects() {
     Subs.Autosave=InitObject(Subs.Settings.Values.UseAutoSave,gpoAutosave);
     Subs.Flags=InitObject(Subs.Settings.Values.DisplayLang,gpoFlags);
     Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
+    Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy)
     var qs=Subs.Settings.Values.QuickShares;
     Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
     Subs.Quickshare.Shares=qs;
+    
 
 }
 
@@ -676,12 +675,13 @@ function PageLoad() {
                 OptStartColors();
             });
         }
-        if (Subs.Settings.Values.DisplayTrophy)
-        {
-            StartTick(false, "LoadTrophyUsers");
-            OptStartTrophyDisplay();
-            StoppTick(false, "LoadTrophyUsers");
+        
+        if (Subs.Trophy!==null) {
+            Subs.Measure.Do("displayTrophy",function() {
+                Subs.Trophy.Init();
+            });
         }
+
         DisplayHashtags();
         
          if (Subs.Lsr!==null) {
