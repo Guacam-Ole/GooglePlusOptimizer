@@ -15,7 +15,8 @@ var Subs={
     Flags:null,
     Lsr:null,
     Quickshare:null,
-    Trophy:null
+    Trophy:null,
+    Soccer:null
 };
 
 function IsDemo() {
@@ -212,7 +213,7 @@ function LoadGoogle() {
  * Widgets zeichnen
  */
 function DrawWidgets() {
-    try {
+  
         // Wetter checken:
         if (Subs.Settings.Values.Weather !== null )
         {
@@ -221,22 +222,25 @@ function DrawWidgets() {
             StartWeather();
         }
 
-       /* if (soccer !== null && soccer !== undefined)
-        {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
-            OptStartSoccer();
-            StartSoccer();
-        }*/
 
-        if (Subs.Settings.Values.StoppWatch !== null && Subs.Settings.Values.StoppWatch!== undefined)
+        if (Subs.Soccer!==null) 
         {
-            CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
-            Subs.Clock=new gpoClock();
-            Subs.Clock.Init();
+            Subs.Soccer.Settings=Subs.Settings.Values.Sport;
+            //Subs.Soccer.Settings=JSON.parse('[{"Position":"0","SportName":"Fussball","Sport":"1","League":"bl1","Season":"2013","LeagueName":"1. Fussball-Bundesliga 2013/2014"},{"Position":"-1","SportName":"Fussball","Sport":"null","League":"","Season":"","LeagueName":""},{"Position":"-1","SportName":"Fussball","Sport":"null","League":"","Season":"","LeagueName":""}]');
+            
+            Subs.Measure.Do("sportEnabled",function() {
+                Subs.Soccer.Init();
+            });
         }
-    } catch (ex) {
-        console.log(ex);
-    }
+        
+        if (Subs.Clock!==null) {
+            Subs.Measure.Do("stoppWatch",function() {
+                CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
+                Subs.Clock.Init();
+            });
+        }
+
+   
 }
 
 /**
@@ -382,12 +386,7 @@ function StartFilter() {
         $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
         StoppTick(false, "Persons");
     }
-    if (Subs.Settings.Values.StoppWatch !== null && Subs.Settings.Values.StoppWatch !== undefined) {
-
-        StartTick(false, "Watch");
-        Subs.Clock.PaintWatch();
-        StoppTick(false, "Watch");
-    }
+  
 
     StartTick(false, "Hashtag-Filter");
     DOMFilterHashtags();
@@ -401,6 +400,12 @@ function StartFilter() {
     StartTick(false, "Shared Circles");
     DOMFilterSharedCircles();
     StoppTick(false, "Shared Circles");
+    
+    if (Subs.Clock!==null) {
+         Subs.Measure.Do("stoppwatch",function() {
+             Subs.Clock.Dom();
+         });
+    }
     
     if (Subs.Lsr!==null) {
          Subs.Measure.Do("markLSRPosts",function() {
@@ -446,13 +451,19 @@ function StartFilter() {
         });
     }
     
-    StoppTick(false, "Bookmark Icons");
 
     if (Subs.Flags!==null) {
         Subs.Measure.Do("displayLang",function() {
             Subs.Flags.Dom();
         });
     }
+    
+    if (Subs.Soccer!==null) 
+        {
+            Subs.Measure.Do("sportEnabled",function() {
+                Subs.Soccer.Dom();
+            });
+        }
    
     AllowDomChange();
     domChangeAllowed = false;
@@ -635,7 +646,9 @@ function InitObjects() {
     Subs.Autosave=InitObject(Subs.Settings.Values.UseAutoSave,gpoAutosave);
     Subs.Flags=InitObject(Subs.Settings.Values.DisplayLang,gpoFlags);
     Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
-    Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy)
+    Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy);
+    Subs.Soccer=InitObject(true,gpoSport);
+    Subs.Clock=InitObject(Subs.Settings.Values.StoppWatch,gpoClock);
     var qs=Subs.Settings.Values.QuickShares;
     Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
     Subs.Quickshare.Shares=qs;
@@ -706,7 +719,7 @@ function PageLoad() {
 }
 
 /**
- * Widget-Block zeichnen
+ * Widget-Block zeichne
  * @param {int} position position der Spalte
  * @param {string} id Id des Blocks
  */
