@@ -26,6 +26,23 @@ chrome.runtime.onMessage.addListener(
         else if (request.Action==="DeleteTicks") {
              localStorage.removeItem("Measurements_"+request.Scope);
         }
+        else if (request.Action==="GetSoccerScores") {
+            var orderId=request.Day;
+            var smallCompleteUrl = "http://www.nocarrier.de/opendb.php?command=GetCurrentGroup&league=" + request.League;
+            $.getJSON(smallCompleteUrl, function(data) {
+                if (orderId===null) {
+                    orderId = data.groupOrderID;
+                }
+                var completeUrl = "http://www.nocarrier.de/opendb.php?command=GetResults&league=" + request.League + "&season=" + request.Season + "&orderId=" + orderId;
+                $.getJSON(completeUrl, function(inner) {
+                    var res=JSON.stringify(inner);
+                    sendResponse({Result: res});
+                    return true;
+                });
+                return true;
+            });
+            return true;
+        }
     }
 );
 

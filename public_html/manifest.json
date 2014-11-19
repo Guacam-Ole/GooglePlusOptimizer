@@ -40,7 +40,8 @@
                         "setup/js/gplus/flags.js",
                         "setup/js/gplus/qs.js",
                         "setup/js/gplus/trophy.js",
-                        "setup/js/gplus/lsr.js"
+                        "setup/js/gplus/lsr.js",
+                        "setup/js/gplus/sport.js"
                                                 
                         ]
                 }

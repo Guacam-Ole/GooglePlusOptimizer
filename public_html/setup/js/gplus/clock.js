@@ -45,6 +45,9 @@ gpoClock.prototype = {
         
         console.log("Clock started.");  
     },
+    Dom:function() {
+        this.PaintWatch();
+    },
     UpdateWatch:function() {
          try {
             var obj=this;
