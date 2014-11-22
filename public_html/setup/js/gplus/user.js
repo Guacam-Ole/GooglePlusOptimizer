@@ -13,6 +13,7 @@ gpoUser.prototype = {
     },
     Dom:function() {
         this.PaintForUser();        
+        
         this.PaintCurrentUserSettings();
     },
     OptStartColors:function() {
@@ -80,6 +81,14 @@ gpoUser.prototype = {
         return $('[guidedhelpid="profile_name"]').html();
     },
     PaintCurrentUserSettings:function(obj) {
+        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1)
+        {
+            return;
+        }
+        if ($(".colorUsers").length > 0 || $('[ guidedhelpid="profile_name"]').length === 0)
+        {
+            return;
+        }
         if (obj===undefined) {
             obj=this;
         }
