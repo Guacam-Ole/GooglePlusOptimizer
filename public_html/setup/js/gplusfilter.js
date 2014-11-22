@@ -18,7 +18,8 @@ var Subs={
     Trophy:null,
     Soccer:null,
     Emoticons:null,
-    User:null
+    User:null,
+    Weather:null
 };
 
 function IsDemo() {
@@ -87,10 +88,7 @@ $(document).ready(function ()
 });
 function DisplayHashtags()
 {
-    if (Subs.Settings.Values.DisplayQuickHashes) {
-
-        $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
-    }
+   
 }
 
 function SortByName(a, b) {
@@ -221,34 +219,26 @@ function LoadGoogle() {
  * Widgets zeichnen
  */
 function DrawWidgets() {
-  
-        // Wetter checken:
-        if (Subs.Settings.Values.Weather !== null )
-        {
-            $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
-            OptStartWeather();
-            StartWeather();
-        }
+    if (Subs.Weather !== null ) {
+        Subs.Weather.Settings=Subs.Settings.Values.Weather;
+         Subs.Measure.Do("weatherEnabled",function() {
+            Subs.Weather.Init();
+         });
+    }
 
+    if (Subs.Soccer!==null) {
+        Subs.Soccer.Settings=Subs.Settings.Values.Sport;
+        Subs.Measure.Do("sportEnabled",function() {
+            Subs.Soccer.Init();
+        });
+    }
 
-        if (Subs.Soccer!==null) 
-        {
-            Subs.Soccer.Settings=Subs.Settings.Values.Sport;
-            //Subs.Soccer.Settings=JSON.parse('[{"Position":"0","SportName":"Fussball","Sport":"1","League":"bl1","Season":"2013","LeagueName":"1. Fussball-Bundesliga 2013/2014"},{"Position":"-1","SportName":"Fussball","Sport":"null","League":"","Season":"","LeagueName":""},{"Position":"-1","SportName":"Fussball","Sport":"null","League":"","Season":"","LeagueName":""}]');
-            
-            Subs.Measure.Do("sportEnabled",function() {
-                Subs.Soccer.Init();
-            });
-        }
-        
-        if (Subs.Clock!==null) {
-            Subs.Measure.Do("stoppWatch",function() {
-                CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
-                Subs.Clock.Init();
-            });
-        }
-
-   
+    if (Subs.Clock!==null) {
+        Subs.Measure.Do("stoppWatch",function() {
+            CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
+            Subs.Clock.Init();
+        });
+    }
 }
 
 /**
@@ -345,28 +335,20 @@ function StartFilter() {
         if (Subs.Settings.Values.WhamWhamText)
         {
             $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (Subs.Settings.Values.WhamChristmasText)
         {
             $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
             $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.Xx.xJ:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (Subs.Settings.Values.WhamWhamLink)
         {
             $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("Wham")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("WHAM")').closest("[jsmodel='XNmfOc']").hide();
         }
         if (Subs.Settings.Values.WhamChristmasLink)
         {
             $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("last christmas")').closest("[jsmodel='XNmfOc']").hide();
             $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-            //$('.yx.Nf:contains("lastchristmas")').closest("[jsmodel='XNmfOc']").hide();
         }
         StoppTick(false, "Wham");
     }
@@ -651,10 +633,13 @@ function InitObjects() {
     Subs.Flags=InitObject(Subs.Settings.Values.DisplayLang,gpoFlags);
     Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
     Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy);
-    Subs.Soccer=InitObject(true,gpoSport);
+    Subs.Soccer=InitObject(Subs.Settings.Values.SportEnabled,gpoSport);
     Subs.Clock=InitObject(Subs.Settings.Values.StoppWatch,gpoClock);
     Subs.Emoticons=InitObject(Subs.Settings.Values.ShowEmoticons,gpoEmoticons);
     Subs.User=InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
+    Subs.Weather=InitObject(true,gpoWeather);    
+    //Subs.Weather=InitObject(Subs.Settings.Values.WeatherEnabled,gpoWeather);    
+    
     var qs=Subs.Settings.Values.QuickShares;
     Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
     Subs.Quickshare.Shares=qs;
@@ -699,7 +684,9 @@ function PageLoad() {
             });
         }
 
-        DisplayHashtags();
+         if (Subs.Settings.Values.DisplayQuickHashes) {
+            $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
+        }
         
          if (Subs.Lsr!==null) {
             Subs.Measure.Do("markLSRPosts",function() {

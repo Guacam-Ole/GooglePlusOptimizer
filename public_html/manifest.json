@@ -20,7 +20,7 @@
                         "setup/js/jquery-ui.min.js",
                         "setup/js/date.js",
              
-                        "setup/js/weather.js",
+                        
                         "setup/js/gplusfilter.js",
                         "setup/js/ion.sound.js",
                         
@@ -38,7 +38,8 @@
                         "setup/js/gplus/lsr.js",
                         "setup/js/gplus/sport.js",
                         "setup/js/gplus/smilies.js",
-                        "setup/js/gplus/user.js"
+                        "setup/js/gplus/user.js",
+                        "setup/js/gplus/weather.js"
                                                 
                         ]
                 }
