@@ -87,8 +87,10 @@ gpoSport.prototype = {
         this.Days[id] = day;
     },
     UpdateSoccer: function (id, league, season, day) {
+        
+        
         var obj = this;
-        console.log("fussi update");
+        
         var output = "";
         if (day === undefined) {
             day = null;
@@ -104,6 +106,8 @@ gpoSport.prototype = {
             Day: day
         }, function (response)
         {
+            console.log("fussi update");
+            domChangeAllowed=false;
             var data = JSON.parse(response.Result);
             var firstMatch;
             if (data !== null && data !== undefined && data.Matchdata.length > 0) {
@@ -213,6 +217,7 @@ gpoSport.prototype = {
             var sportbox = header + obj.Top + output + obj.Bottom + obj.Footer;
             $('#' + id).html(sportbox);
             obj.HideDetails();
+            AllowDomChange();
         });
     },
     CreateEvents: function () {
