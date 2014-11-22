@@ -86,12 +86,6 @@ function ShowTicks() {
             $('#messStart')[0].innerHTML = displayStart;
             $('#messDyn')[0].innerHTML = displayDyn;
             });
-
-
-
-
-            
-
         }
     } catch (e) {
         console.log(e);

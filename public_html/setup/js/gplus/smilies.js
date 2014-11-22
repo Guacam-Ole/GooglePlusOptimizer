@@ -1,13 +1,5 @@
-
-function OptStartEmoticons()
-{
- //   console.log("smilies loaded.");
-}
-
-
-
-function PaintEmoticons() {
-    var emoticons = '[{"img": "baby.gif","short": ":baby:"},'
+var gpoEmoticons=function() {
+    this.Emoticons= '[{"img": "baby.gif","short": ":baby:"},'
             + '{"img": "biggrin.png","short": ":D"},'
             + '{"img": "biggrin.png","short": ":-D"},'
             + '{"img": "cat.png","short": ":cat:"},'
@@ -54,15 +46,21 @@ function PaintEmoticons() {
             + '{"img": "arghs.png","short": ":shocked:"},'
             + '{"img": "arge.gif","short": ":mad:"},'
             + '{"img": "woot.png","short": "8o"}]';
+    
+};
 
-    var smilies = JSON.parse(emoticons);
+gpoEmoticons.prototype = {
+    constructor: gpoEmoticons,
+    Dom: function() {
+        this.PaintEmoticons();
+    },
+    PaintEmoticons:function() {
+        var obj=this;
+        var smilies = JSON.parse(obj.Emoticons);
 
- $('.Ct').each(function()
-    {
-        try {
+         $('.Ct').each(function() {
             var smilieCount=0;
-            for (var i in smilies)
-            {
+            for (var i in smilies) {
                 var smilie = smilies[i];
                 if ($(this).text().indexOf(" "+smilie.short) >= 0)
                 {
@@ -72,17 +70,9 @@ function PaintEmoticons() {
             }
             if (smilieCount>0) {
                 var oldHeight=$(this).parent().height();
-               // $(this).parent().height(oldHeight+40);
                 $(this).parent().css('max-height',(oldHeight+40)+'px');
                 
             }
-        } catch (ex) {
-            console.log(ex);
-        }
-    });
+        });
+    }
 }
-
-String.prototype.replaceAll = function(str1, str2, ignore)
-{
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
-};

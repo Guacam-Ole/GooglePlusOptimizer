@@ -16,7 +16,9 @@ var Subs={
     Lsr:null,
     Quickshare:null,
     Trophy:null,
-    Soccer:null
+    Soccer:null,
+    Emoticons:null,
+    User:null
 };
 
 function IsDemo() {
@@ -29,6 +31,12 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
     };
 });
+
+
+String.prototype.replaceAll = function(str1, str2, ignore)
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
+};
 
 function AllowDomChange() {
     setTimeout(function () {
@@ -419,23 +427,19 @@ function StartFilter() {
         });
         
     }
-    if (Subs.Settings.Values.ColorUsers)
-    {
-        StartTick(false, "Color Users");
-        PaintForUser();
-        PaintColorBlock();
-        StoppTick(false, "Color Users");
+     if (Subs.User!==null) {
+        Subs.Measure.Do("colorUser",function() {
+            Subs.User.Dom();
+        });
     }
 
-
-
-    if (Subs.Settings.Values.ShowEmoticons)
-    {
-        StartTick(false, "Emoticons");
-        OptStartEmoticons();
-        PaintEmoticons();
-        StoppTick(false, "Emoticons");
+    if (Subs.Emoticons!==null) {
+        Subs.Measure.Do("showEmoticons",function() {
+            Subs.Emoticons.Dom();
+        });
     }
+
+  
     
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShare",function() {
@@ -649,11 +653,11 @@ function InitObjects() {
     Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy);
     Subs.Soccer=InitObject(true,gpoSport);
     Subs.Clock=InitObject(Subs.Settings.Values.StoppWatch,gpoClock);
+    Subs.Emoticons=InitObject(Subs.Settings.Values.ShowEmoticons,gpoEmoticons);
+    Subs.User=InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
     var qs=Subs.Settings.Values.QuickShares;
     Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
     Subs.Quickshare.Shares=qs;
-    
-
 }
 
 function PageLoad() {
@@ -682,12 +686,12 @@ function PageLoad() {
             });
         }
         
-        if (Subs.Settings.Values.ColorUsers)
-        {
-            Subs.Measure.Do("ColorUsers",function() {
-                OptStartColors();
+        if (Subs.User!==null) {
+            Subs.Measure.Do("useAutoSave",function() {
+              Subs.User.Init();  
             });
         }
+
         
         if (Subs.Trophy!==null) {
             Subs.Measure.Do("displayTrophy",function() {

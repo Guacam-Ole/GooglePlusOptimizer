@@ -17,7 +17,6 @@
                     "matches": ["https://plus.google.com/*"],
                     "js": [
                         "setup/js/jquery-1.10.2.min.js",
-                        "setup/js/jquery.rc4.js",
                         "setup/js/jquery-ui.min.js",
                         "setup/js/date.js",
              
@@ -25,11 +24,7 @@
                         "setup/js/gplusfilter.js",
                         "setup/js/ion.sound.js",
                         
-                        "setup/js/user.js",
-                        
                         "setup/js/wizard.js",
-                        "setup/js/smilies.js",
-                        "setup/js/quickshare.js",
                         
                         
                         "setup/js/gplus/settings.js",
@@ -41,7 +36,9 @@
                         "setup/js/gplus/qs.js",
                         "setup/js/gplus/trophy.js",
                         "setup/js/gplus/lsr.js",
-                        "setup/js/gplus/sport.js"
+                        "setup/js/gplus/sport.js",
+                        "setup/js/gplus/smilies.js",
+                        "setup/js/gplus/user.js"
                                                 
                         ]
                 }
@@ -76,11 +73,7 @@
         "setup/de/wizimg/*",
         "setup/en/wizimg/*",
         "setup/en/wizardloader.html",
-        "setup/en/wizard.html",
-        "lsr-blacklist/domains.json"
-       
-
-        
+        "setup/en/wizard.html"
     ]
 }
 
