@@ -4,7 +4,7 @@
     "short_name": "G+Filter",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "2.6.2.10",
+    "version": "3.0",
     "author": "Ole Albers",
     "permissions": [
        

@@ -1,0 +1,4 @@
+.thumbnail.selected {
+    border: solid;
+    border-color: red;
+}
