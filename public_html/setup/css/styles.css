@@ -92,6 +92,8 @@ a:hover {
     clear:both;
     background:url(../images/menu_bg.png) no-repeat top left;
 }
+
+
 ul#navigation {
     margin:0px 0 0 25px; /*indent to line up with the logo*/
     padding:0px;

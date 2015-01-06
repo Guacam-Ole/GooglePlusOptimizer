@@ -114,7 +114,7 @@
         "Version": "2.2",
         "Short": "weatherEnabled",
         "Title": "Wettervorhersage",
-        "Description": "<div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div>",
+        "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div></div>",
         "Image":"wetter.png",
         "Cost":0
     },

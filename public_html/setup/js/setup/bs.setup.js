@@ -149,6 +149,8 @@ Setup.prototype = {
         return false;
     },
     ReplaceDataInTemplate: function (template, feature) {
+        
+        var obj=this;
         template.find('.featureName').text(feature.Title);
         template.find('.featureDescription').html(feature.Description);
         template.find('.btn.optimizer').attr('data-setting', feature.Short);
@@ -163,11 +165,27 @@ Setup.prototype = {
         }
         template.find('.loadHtml').each(function (index, value) {
             var filename = $(value).data("filename");
-            $(value).load(filename + ".html");
+            $(value).load(filename + ".html",function() {
+                  if (feature.Short==='weatherEnabled') {
+                    var $weatherDiv=$('.parentWeather');
+                    if ($weatherDiv.length>0) {
+                        obj.DisplayWidgetPosition($weatherDiv,obj.GetPosition("Weather"));
+                    }
+                }
+            });
         });
-
-
     },
+    GetPosition:function(localStorageName) {
+        var widget=localStorage.getItem(localStorageName);
+        if (widget!==undefined && widget!==null) {
+            var json=JSON.parse(widget);
+            if (json.length>0) {
+                return parseInt(json[0].Position);
+            }
+        }
+        return -1;   // fallback
+    },
+    
     GetFeatureDetails: function (featureName) {
         var foundFeatures = $.grep(this.Features, function (e) {
             return e.Short === featureName;
@@ -213,7 +231,14 @@ Setup.prototype = {
                         obj.CustomText($('.tokensText'));
                     }
                 }
+              
             });
+        }
+    },
+    DisplayWidgetPosition:function($parent, position) {
+        var columns=$parent.find('.thumbnail');
+        if (columns.length>position) {
+            $(columns[position]).addClass('selected');
         }
     },
     CustomText: function ($element) {
