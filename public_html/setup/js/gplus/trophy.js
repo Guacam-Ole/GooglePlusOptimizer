@@ -116,7 +116,7 @@ gpoTrophy.prototype= {
         var obj=this;
         var lastTrophyDownload=localStorage.getItem("lastTrophyDownload");
         var allTrophyUsers=localStorage.getItem("allTrophyUsers");
-        if (lastTrophyDownload===undefined || lastTrophyDownload===null  || Date.parse(CleanDate(lastTrophyDownload))<(1).days().ago() || allTrophyUsers==null || allTrophyUsers==undefined) {
+        if (lastTrophyDownload===undefined || lastTrophyDownload===null  || Date.parse(CleanDate(lastTrophyDownload))<(1).days().ago() || allTrophyUsers===null || allTrophyUsers===undefined || allTrophyUsers==="undefined") {
             chrome.runtime.sendMessage( {
                 Action: "getTrophyUsers"
             }, function(response) {

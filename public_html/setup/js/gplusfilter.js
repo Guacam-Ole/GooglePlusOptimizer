@@ -199,21 +199,48 @@ function InitGoogle() {
         Subs.Settings.Values.Interval = 500;
     }
     PageLoad();
+      
     chrome.extension.sendMessage("show_page_action");
+    
+    $('.Ypa').each(function(index, target) {
+        observer.observe(target, {
+            childList: true,
+            subtree:false,
+            characterData:false,
+            attributes:false        
+        });
+    });
+    
+    
 }
 
+var forEach = Array.prototype.forEach;
+
+var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.type==="childList" && mutation.target.classList.contains('Ypa')) {
+           forEach.call(mutation.addedNodes, function( addedNode ){
+                if (addedNode.classList!==undefined) {
+                    var jsModel=addedNode.attributes["jsmodel"];
+                    if (jsModel!==undefined && jsModel.value==="XNmfOc") {
+                        StartFilter(addedNode);
+                    }
+                }
+           });
+       }
+   });
+});
+        
+  
+
+
 function LoadGoogle() {
-    var timeout = null;
-    document.addEventListener("DOMSubtreeModified", function ()
-    {
-        // Beim Nachladen der Seite neu aktiv werden
-        if (timeout)
-        {
-            clearTimeout(timeout);
-        }
-        timeout = setTimeout(StartFilter, Subs.Settings.Values.Interval); // Ajax request (Scrollen: Alle halbe Sekunde checken)    
-    }, false);
+    
+    
+
 }
+// Yp yt Xa
+
 
 /**
  * Widgets zeichnen
@@ -289,11 +316,17 @@ function MoveHeaderIcon() {
     }
 }
 
+function HideOnContent(parent, element) {
+    if (element!==undefined && element.length>0) {
+        parent.hide();
+    }
+}
+
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
-function StartFilter() {
-
+function StartFilter(changedElements) {
+    
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShares",function() {
             Subs.Quickshare.Events();
@@ -304,11 +337,38 @@ function StartFilter() {
 
     if (!domChangeAllowed) {
         // Es wird bereits eine Anpassung durchgeführt
-        return;
+    //    return;
     }
   
     Subs.Measure=new gpoMeasure("DOM", true);
 
+
+    var $ce=$(changedElements);
+    
+    if (Subs.Settings.Values.Wham)
+    {
+        StartTick(false, "Wham");
+        if (Subs.Settings.Values.WHAMWhamText)
+        {
+            HideOnContent($ce,$ce.find('.Xx.xJ:Contains("wham")'));
+        }
+        if (Subs.Settings.Values.WHAMChristmasText)
+        {
+            HideOnContent($ce,$ce.find('.Xx.xJ:Contains("Last Christmas")'));
+            HideOnContent($ce,$ce.find('.Xx.xJ:Contains("LastChristmas")'));
+        }
+        if (Subs.Settings.Values.WHAMWhamLink)
+        {
+            HideOnContent($ce,$ce.find('.yx.Nf:Contains("wham")'));
+        }
+        if (Subs.Settings.Values.WHAMChristmasLink)
+        {
+            HideOnContent($ce,$ce.find('.yx.Nf:Contains("LastChristmas")'));
+            HideOnContent($ce,$ce.find('.yx.Nf:Contains("Last Christmas")'));
+        }
+        StoppTick(false, "Wham");
+    }
+    
 
     StartTick(false, "Hashtags");
     LoadHashTags();
@@ -320,60 +380,38 @@ function StartFilter() {
     if (Subs.Settings.Values.Plus)
     {
         StartTick(false, "Plus1");
-        $('.xv').closest("[jsmodel='XNmfOc']").hide();
+        HideOnContent($ce,$ce.find('.xv'));
         StoppTick(false, "Plus1");
     }
     if (Subs.Settings.Values.Yt)
     {
         StartTick(false, "Youtube");
-        $('.SR').closest("[jsmodel='XNmfOc']").hide();
+        HideOnContent($ce,$ce.find('.SR'));
         StoppTick(false, "Youtube");
     }
-    if (Subs.Settings.Values.Wham);
-    {
-        StartTick(false, "Wham");
-        if (Subs.Settings.Values.WhamWhamText)
-        {
-            $('.Xx.xJ:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        if (Subs.Settings.Values.WhamChristmasText)
-        {
-            $('.Xx.xJ:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.Xx.xJ:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        if (Subs.Settings.Values.WhamWhamLink)
-        {
-            $('.yx.Nf:Contains("wham")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        if (Subs.Settings.Values.WhamChristmasLink)
-        {
-            $('.yx.Nf:Contains("Last Christmas")').closest("[jsmodel='XNmfOc']").hide();
-            $('.yx.Nf:Contains("LastChristmas")').closest("[jsmodel='XNmfOc']").hide();
-        }
-        StoppTick(false, "Wham");
-    }
+    
 
     //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
 
     if (Subs.Settings.Values.Community)
     {
         StartTick(false, "Community");
-        $('[data-iid="sii2:112"]').hide();
-        $('[data-iid="sii2:116"]').hide();
+        HideOnContent($ce,$ce.find('[data-iid="sii2:112"]'));
+        HideOnContent($ce,$ce.find('[data-iid="sii2:116"]'));
         StoppTick(false, "Community");
     }
     if (Subs.Settings.Values.Birthday)
     {
         StartTick(false, "Birthday");
-        $('[data-iid="sii2:114"]').hide();
+        HideOnContent($ce,$ce.find('[data-iid="sii2:114"]'));
         StoppTick(false, "Birthday");
     }
     if (Subs.Settings.Values.Known)
     {
         StartTick(false, "Persons");
-        $('[data-iid="sii2:103"]').hide();
-        $('[data-iid="sii2:105"]').hide(); // Interesting Pages
-        $('[data-iid="sii2:106"]').hide(); // Mopre Recommendations
+        HideOnContent($ce,$ce.find('[data-iid="sii2:103"]'));
+        HideOnContent($ce,$ce.find('[data-iid="sii2:105"]'));
+        HideOnContent($ce,$ce.find('[data-iid="sii2:106"]'));
         StoppTick(false, "Persons");
     }
   
@@ -702,7 +740,7 @@ function PageLoad() {
         
         GetAllCircles();
         DrawWidgets();
-        StartFilter(); // Initial ausführen
+   //     StartFilter($('body')); // Initial ausführen
         
         LoadGoogle();
         CountColumns();
