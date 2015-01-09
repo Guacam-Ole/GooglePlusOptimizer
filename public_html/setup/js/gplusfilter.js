@@ -2,7 +2,7 @@ console.log('g+ - filter started');
 
 var columnCount;
 
-var domChangeAllowed = true;
+
 
 var domainBlacklist = [];
 
@@ -26,57 +26,33 @@ var Subs={
 
 var forEach = Array.prototype.forEach;
 
-var columnObserver = new MutationObserver(function (mutations) {
+var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation.type==="childList" ) {
            forEach.call(mutation.addedNodes, function( addedNode ){
                 if (addedNode.classList!==undefined) {
-                    var jsModel=addedNode.attributes["jsmodel"];
-                    if (jsModel!==undefined && jsModel.value==="XNmfOc") {
-                        StartFilter(addedNode);
+                    if (addedNode.classList.contains('PD')) {
+                        PaintBin(addedNode);
+                    } else {
+                        var jsModel=addedNode.attributes["jsmodel"];
+                        if (jsModel!==undefined && jsModel.value==="XNmfOc") {
+                            StartFilter(addedNode);
+                        } 
                     }
-                }
-           });
-       }
-   });
-   StartObservation();
-});
-
-var hashtagObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        if (mutation.type==="childList") {
-           forEach.call(mutation.addedNodes, function( addedNode ){
-                if (addedNode.classList!==undefined && addedNode.classList.contains('PD')) {
-                    PaintBin(addedNode);
+                    
                 }
            });
        }
    });
 });
 
-
-      
 function StartObservation() {
-    columnObserver.disconnect();
-    $('.Ypa').each(function(index, target) {
-        columnObserver.observe(target, {
-            childList: true,
-            subtree:false,
-            characterData:false,
-            attributes:false        
-        });
+    observer.observe(document, {
+        childList: true,
+        subtree:true,
+        characterData:false,
+        attributes:false        
     });
-    if (Subs.Settings.Values.Hashtag) {
-        hashtagObserver.disconnect();
-        $('.sda.je').each(function(index, target) {
-            hashtagObserver.observe(target, {
-                childList: true,
-                subtree:true,
-                characterData:false,
-                attributes:false        
-            });
-        });
-    }
 }
 
 
@@ -95,11 +71,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
 };
 
-function AllowDomChange() {
-    setTimeout(function () {
-        domChangeAllowed = true; // Nach x Sekunden Änderungen wieder erlauben
-    }, Subs.Settings.Values.Interval);
-}
+
 
 $(document).ready(function ()
 {
@@ -367,10 +339,6 @@ function StartFilter(changedElements) {
     
     MoveHeaderIcon();
 
-    if (!domChangeAllowed) {
-        // Es wird bereits eine Anpassung durchgeführt
-    //    return;
-    }
   
     Subs.Measure=new gpoMeasure("DOM", true);
 
@@ -401,13 +369,6 @@ function StartFilter(changedElements) {
         StoppTick(false, "Wham");
     }
     
-
-//    StartTick(false, "Hashtags");
-//    LoadHashTags();
-//    StoppTick(false, "Hashtags");
-    StartTick(false, "Hashtag-Delete");
-   // AddMuelltonne($ce);
-    StoppTick(false, "Hashtag-Delete");
 
     if (Subs.Settings.Values.Plus)
     {
@@ -449,18 +410,18 @@ function StartFilter(changedElements) {
   
 
     StartTick(false, "Hashtag-Filter");
-    DOMFilterHashtags();
+    DOMFilterHashtags($ce);
     StoppTick(false, "Hashtag-Filter");
     StartTick(false, "Images");
-    DOMFilterImages();
+    DOMFilterImages($ce);
     StoppTick(false, "Images");
     StartTick(false, "Fulltext");
-    DOMFilterFreetext();
+    DOMFilterFreetext($ce);
     StoppTick(false, "Fulltext");
     StartTick(false, "Shared Circles");
-    DOMFilterSharedCircles();
+    DOMFilterSharedCircles($ce);
     StoppTick(false, "Shared Circles");
-    
+    return;
     if (Subs.Clock!==null) {
          Subs.Measure.Do("stoppwatch",function() {
              Subs.Clock.Dom();
@@ -502,8 +463,8 @@ function StartFilter(changedElements) {
     if (Subs.Bookmarks!==null) {
          Subs.Measure.Do("useBookmarks",function() {
              Subs.Bookmarks.Dom();
-            Subs.Bookmarks.DisplayBookmarks();
-            Subs.Bookmarks.PaintStars();
+             Subs.Bookmarks.DisplayBookmarks();
+             Subs.Bookmarks.PaintStars();
         });
     }
     
@@ -520,9 +481,6 @@ function StartFilter(changedElements) {
                 Subs.Soccer.Dom();
             });
         }
-   
-    AllowDomChange();
-    domChangeAllowed = false;
 }
 
 
@@ -564,11 +522,11 @@ function StoppTick(isInit, timerName) {
 /**
  * Filter Shared Circles
  */
-function DOMFilterSharedCircles()
+function DOMFilterSharedCircles($ce)
 {
     if (Subs.Settings.Values.FilterSharedCircles) {
         try {
-            $('div.ki.ve').find('div.Wy').closest("div[jsmodel='XNmfOc']").hide();
+            HideOnContent($ce,$ce.find('div.ki.ve').find('div.Wy'));              
         } catch (ex) {
             console.log(ex);
         }
@@ -579,15 +537,15 @@ function DOMFilterSharedCircles()
 /**
  * Volltextfilter
  */
-function DOMFilterFreetext() {
+function DOMFilterFreetext($ce) {
     if (Subs.Settings.Values.Custom && Subs.Settings.Values.Fulltext !== null && Subs.Settings.Values.Fulltext !== "")
     {
         try {
             var textArray = Subs.Settings.Values.Fulltext.split(',');
             $.each(textArray, function (i, fulltext)
             {
-                $('div.Xx.xJ:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
-                $('div.Al.pf:Contains(' + fulltext + ')').closest("div[jsmodel='XNmfOc']").hide();
+                HideOnContent($ce,$ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
+                HideOnContent($ce,$ce.find('div.Al.pf:Contains(' + fulltext + ')'));
             });
         } catch (ex) {
             console.log(ex);
@@ -598,11 +556,11 @@ function DOMFilterFreetext() {
 /**
  * Bilder, Videos und Links ausblenden
  */
-function DOMFilterImages() {
+function DOMFilterImages($ce) {
     try {
         if (Subs.Settings.Values.FilterImages || Subs.Settings.Values.FilterLinks || Subs.Settings.Values.FilterVideo)
         {
-            $('.unhideImage').click(function () {
+            $ce.find('.unhideImage').click(function () {
                 $(this).parent().find('.hidewrapper').show();
                 $(this).remove();
                 return false;
@@ -612,25 +570,25 @@ function DOMFilterImages() {
         if (Subs.Settings.Values.FilterVideo)
         {
             if (Subs.Settings.Values.FilterMp4Only) {
-                $('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+                $ce.find('.sp.ej img[src$=".mp4"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             } else {
 
-                $('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
+                $ce.find('.sp.ej.bc.Ai').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayVideo") + "</a>");
             }
         }
         if (Subs.Settings.Values.FilterLinks)
         {
-            $('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
-            $('.sp.ej.A8Hhid').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
+            $ce.find('.sp.ej.Mt').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
+            $ce.find('.sp.ej.A8Hhid').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayLink") + "</a>");
         }
         if (Subs.Settings.Values.FilterImages)
         {
             if (Subs.Settings.Values.FilterGifOnly)
             {
-                $('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
-                $('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                $ce.find('.d-s.ob.Ks img[src$=".gif"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                $ce.find('.d-s.ob.Ks img[src$=".GIF"]').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
             } else {
-                $('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
+                $ce.find('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
             }
         }
 
@@ -653,27 +611,23 @@ function PaintBin(ce) {
 /**
  * Hashtags filtern
  */
-function DOMFilterHashtags() {
+function DOMFilterHashtags($ce) {
     try {
         if (Subs.Settings.Values.Hashtag)
         {
-           // AddMuelltonne();
             // Einfügen von hinzufügen-Button
-
             if (Subs.Settings.Values.HashTags !== null && Subs.Settings.Values.HashTags !== "")
             {
                 var hashTagArray = Subs.Settings.Values.HashTags.split(',');
                 $.each(hashTagArray, function (i, hashTag)
                 {
                     if (hashTag.length > 1) {
-                        $('.zda.Zg:Contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();    // Hashtags im Beitrag
-                        $('.ot-hashtag:Contains(' + hashTag + ')').closest("[jsmodel='XNmfOc']").hide();    // Hashtags in geteilten Beitrag
-                        $("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']").closest("[jsmodel='XNmfOc']").hide(); // Automatische Hashtags
+                        HideOnContent($ce,$ce.find('.zda.Zg:Contains(' + hashTag + ')'));
+                        HideOnContent($ce,$ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
+                        HideOnContent($ce,$ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
                     }
-
                 });
             }
-
         }
     } catch (ex) {
         console.log(ex);
