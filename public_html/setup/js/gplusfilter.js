@@ -22,9 +22,65 @@ var Subs={
     Weather:null
 };
 
-function IsDemo() {
-    return  document.location.search.indexOf("demoMode") > 0;
+
+
+var forEach = Array.prototype.forEach;
+
+var columnObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.type==="childList" ) {
+           forEach.call(mutation.addedNodes, function( addedNode ){
+                if (addedNode.classList!==undefined) {
+                    var jsModel=addedNode.attributes["jsmodel"];
+                    if (jsModel!==undefined && jsModel.value==="XNmfOc") {
+                        StartFilter(addedNode);
+                    }
+                }
+           });
+       }
+   });
+   StartObservation();
+});
+
+var hashtagObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.type==="childList") {
+           forEach.call(mutation.addedNodes, function( addedNode ){
+                if (addedNode.classList!==undefined && addedNode.classList.contains('PD')) {
+                    PaintBin(addedNode);
+                }
+           });
+       }
+   });
+});
+
+
+      
+function StartObservation() {
+    columnObserver.disconnect();
+    $('.Ypa').each(function(index, target) {
+        columnObserver.observe(target, {
+            childList: true,
+            subtree:false,
+            characterData:false,
+            attributes:false        
+        });
+    });
+    if (Subs.Settings.Values.Hashtag) {
+        hashtagObserver.disconnect();
+        $('.sda.je').each(function(index, target) {
+            hashtagObserver.observe(target, {
+                childList: true,
+                subtree:true,
+                characterData:false,
+                attributes:false        
+            });
+        });
+    }
 }
+
+
+
 
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
@@ -97,22 +153,22 @@ function SortByName(a, b) {
     return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
-function LoadHashTags()
-{
-    if (Subs.Settings.Values.DisplayQuickHashes ) {
-        var lasthashtag;
-        //if ($('#quickht')!==undefined) {
-        $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
-
-        var allLinks = $('a[href^="explore/"]').sort(SortByName);
-        allLinks.each(function (i, val) {
-            if (lasthashtag !== val.text.toLowerCase()) {
-                lasthashtag = val.text.toLowerCase();
-                $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
-            }
-        });
-    }
-}
+//function LoadHashTags()
+//{
+//    if (Subs.Settings.Values.DisplayQuickHashes ) {
+//        var lasthashtag;
+//        //if ($('#quickht')!==undefined) {
+//        $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
+//
+//        var allLinks = $('a[href^="explore/"]').sort(SortByName);
+//        allLinks.each(function (i, val) {
+//            if (lasthashtag !== val.text.toLowerCase()) {
+//                lasthashtag = val.text.toLowerCase();
+//                $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
+//            }
+//        });
+//    }
+//}
 
 function GetAllCircles()
 {
@@ -202,37 +258,13 @@ function InitGoogle() {
       
     chrome.extension.sendMessage("show_page_action");
     
-    $('.Ypa').each(function(index, target) {
-        observer.observe(target, {
-            childList: true,
-            subtree:false,
-            characterData:false,
-            attributes:false        
-        });
-    });
+   
     
     
 }
 
-var forEach = Array.prototype.forEach;
-
-var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        if (mutation.type==="childList" && mutation.target.classList.contains('Ypa')) {
-           forEach.call(mutation.addedNodes, function( addedNode ){
-                if (addedNode.classList!==undefined) {
-                    var jsModel=addedNode.attributes["jsmodel"];
-                    if (jsModel!==undefined && jsModel.value==="XNmfOc") {
-                        StartFilter(addedNode);
-                    }
-                }
-           });
-       }
-   });
-});
-        
   
-
+ 
 
 function LoadGoogle() {
     
@@ -326,7 +358,7 @@ function HideOnContent(parent, element) {
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter(changedElements) {
-    
+    var $ce=$(changedElements);
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShares",function() {
             Subs.Quickshare.Events();
@@ -343,7 +375,7 @@ function StartFilter(changedElements) {
     Subs.Measure=new gpoMeasure("DOM", true);
 
 
-    var $ce=$(changedElements);
+    
     
     if (Subs.Settings.Values.Wham)
     {
@@ -370,11 +402,11 @@ function StartFilter(changedElements) {
     }
     
 
-    StartTick(false, "Hashtags");
-    LoadHashTags();
-    StoppTick(false, "Hashtags");
+//    StartTick(false, "Hashtags");
+//    LoadHashTags();
+//    StoppTick(false, "Hashtags");
     StartTick(false, "Hashtag-Delete");
-    AddMuelltonne();
+   // AddMuelltonne($ce);
     StoppTick(false, "Hashtag-Delete");
 
     if (Subs.Settings.Values.Plus)
@@ -608,15 +640,14 @@ function DOMFilterImages() {
     }
 }
 
-function AddMuelltonne() {
-    if (Subs.Settings.Values.Hashtag)
-        $('.zZ.a0').each(function (index, value)
+function PaintBin(ce) {
+    $(ce).find('.zZ.a0').each(function (index, value)
+    {
+        if ($(this).find('a').length <= 1)
         {
-            if ($(this).find('a').length <= 1)
-            {
-                $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
-            }
-        });
+            $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
+        }
+    });
 }
 
 /**
@@ -626,7 +657,7 @@ function DOMFilterHashtags() {
     try {
         if (Subs.Settings.Values.Hashtag)
         {
-            AddMuelltonne();
+           // AddMuelltonne();
             // Einfügen von hinzufügen-Button
 
             if (Subs.Settings.Values.HashTags !== null && Subs.Settings.Values.HashTags !== "")
@@ -742,8 +773,8 @@ function PageLoad() {
         DrawWidgets();
    //     StartFilter($('body')); // Initial ausführen
         
-        LoadGoogle();
         CountColumns();
+        StartObservation();
     
 }
 
