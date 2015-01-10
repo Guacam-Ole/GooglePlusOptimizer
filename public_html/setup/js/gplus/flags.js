@@ -10,8 +10,8 @@ var gpoFlags=function() {
 gpoFlags.prototype = {
     constructor: gpoFlags,
     Init: function () {},
-    Dom:function()  {
-        if ($('.langSelect').length === 0) {
+    Dom:function($ce)  {
+        if ($ce.find('.langSelect').length === 0) {
             var obj=this;
             var languageSelector = "<span class='langSelect'>";
             languageSelector += "<a><img class='langOpen' src='" + chrome.extension.getURL('setup/images/icons/small/unknown.png') + "'/></a>";
@@ -22,13 +22,13 @@ gpoFlags.prototype = {
             });
 
             languageSelector += "</span></span>";
-            $('.Pzc').prepend($(languageSelector));
+            $ce.find('.Pzc').prepend($(languageSelector));
 
-            $('.langOpen').click(function () {
+            $ce.find('.langOpen').click(function () {
                 $(this).closest('.langSelect').find('.langAll').toggle();
                 return false;
             });
-            $('.langAll img').click(function () {
+            $ce.find('.langAll img').click(function () {
                 var thisImage = $(this).attr("src");
                 $(this).closest('.langSelect').find('.langOpen').attr("src", thisImage);
                 $(this).closest('.langSelect').find('.langAll').toggle();
@@ -46,7 +46,7 @@ gpoFlags.prototype = {
                 oldLang=oldLang.toLowerCase();
                 var selectedLang = $.grep(obj.Languages, function(e){ return e.short === oldLang; });
                 if(selectedLang.length>0) {
-                   $('.langOpen').attr("src", chrome.extension.getURL('setup/images/icons/small/flags/' +  selectedLang[0].img + '_24.png'));
+                   $ce.find('.langOpen').attr("src", chrome.extension.getURL('setup/images/icons/small/flags/' +  selectedLang[0].img + '_24.png'));
                 }
             }
         }

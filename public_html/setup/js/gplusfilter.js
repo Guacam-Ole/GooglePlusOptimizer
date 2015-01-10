@@ -337,14 +337,11 @@ function StartFilter(changedElements) {
         });
     }
     
-    MoveHeaderIcon();
+    MoveHeaderIcon();   // Prüfen wg. Performance!
 
-  
     Subs.Measure=new gpoMeasure("DOM", true);
 
-
-    
-    
+    /* WHAM */
     if (Subs.Settings.Values.Wham)
     {
         StartTick(false, "Wham");
@@ -369,7 +366,7 @@ function StartFilter(changedElements) {
         StoppTick(false, "Wham");
     }
     
-
+    /* Blöcke */
     if (Subs.Settings.Values.Plus)
     {
         StartTick(false, "Plus1");
@@ -382,10 +379,6 @@ function StartFilter(changedElements) {
         HideOnContent($ce,$ce.find('.SR'));
         StoppTick(false, "Youtube");
     }
-    
-
-    //var hinzu = "<span role=\"listitem\" class=\"g-h-f-za\" id=\":yi\" tabindex=\"-1\"><span class=\"g-h-f-za-yb\"><span class=\"g-h-f-m-wc g-h-f-m\"><div style=\"position: absolute; top: -1000px;\">Symbol Circle</div></span> <span class=\"g-h-f-za-B\">Lonely Circle</span>&nbsp;<div role=\"button\" aria-label=\"Lonely Circle entfernen\" tabindex=\"0\" class=\"g-h-f-m-bd-nb\"><span class=\"g-h-f-m g-h-f-m-bd\"></span></div></span></span>";
-
     if (Subs.Settings.Values.Community)
     {
         StartTick(false, "Community");
@@ -421,66 +414,62 @@ function StartFilter(changedElements) {
     StartTick(false, "Shared Circles");
     DOMFilterSharedCircles($ce);
     StoppTick(false, "Shared Circles");
-    return;
+    
     if (Subs.Clock!==null) {
          Subs.Measure.Do("stoppwatch",function() {
-             Subs.Clock.Dom();
+             Subs.Clock.Dom($ce);
          });
     }
     
     if (Subs.Lsr!==null) {
          Subs.Measure.Do("markLSRPosts",function() {
-             Subs.Lsr.Dom();
+             Subs.Lsr.Dom($ce);
          });
     }
 
     if (Subs.Trophy!==null) {
         Subs.Measure.Do("displayTrophy",function() {
-            Subs.Trophy.Dom();
+            Subs.Trophy.Dom($ce);   
         });
         
     }
      if (Subs.User!==null) {
         Subs.Measure.Do("colorUser",function() {
-            Subs.User.Dom();
+            Subs.User.Dom($ce); // TODO: ANzeige um Userbereich einzeln auslagern
         });
     }
 
     if (Subs.Emoticons!==null) {
         Subs.Measure.Do("showEmoticons",function() {
-            Subs.Emoticons.Dom();
+            Subs.Emoticons.Dom($ce);
         });
     }
 
-  
-    
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShare",function() {
-            Subs.Quickshare.Dom();
+            Subs.Quickshare.Dom($ce);
         });
     }
     
     if (Subs.Bookmarks!==null) {
          Subs.Measure.Do("useBookmarks",function() {
-             Subs.Bookmarks.Dom();
-             Subs.Bookmarks.DisplayBookmarks();
-             Subs.Bookmarks.PaintStars();
+             Subs.Bookmarks.Dom($ce);
+             Subs.Bookmarks.DisplayBookmarks($ce);
+             Subs.Bookmarks.PaintStars($ce);
         });
     }
     
-
     if (Subs.Flags!==null) {
         Subs.Measure.Do("displayLang",function() {
-            Subs.Flags.Dom();
+            Subs.Flags.Dom($ce);
         });
     }
     
-    if (Subs.Soccer!==null) 
-        {
-            Subs.Measure.Do("sportEnabled",function() {
-                Subs.Soccer.Dom();
-            });
-        }
+    if (Subs.Soccer!==null) {
+        Subs.Measure.Do("sportEnabled",function() {
+            Subs.Soccer.Dom($ce);
+        });
+    }
 }
 
 

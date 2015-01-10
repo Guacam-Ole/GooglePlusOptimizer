@@ -8,8 +8,8 @@ var gpoQuickShare=function(shares) {
 
 gpoQuickShare.prototype= {
     constructor: gpoQuickShare,
-    Dom:function() {
-        this.PaintIcons();
+    Dom:function($ce) {
+        this.PaintIcons($ce);
     },
     Init:function() {
         var obj=this;
@@ -111,10 +111,10 @@ gpoQuickShare.prototype= {
                 break;
         }
     },
-    PaintIcons:function() {
+    PaintIcons:function($ce) {
         var obj=this;
         if (obj.Shares!==null && obj.Shares.length > 0) {
-            $('[jsname="MxEsy"]:not(:has(.quickShare))>.Qg').each(function()
+            $ce.find('[jsname="MxEsy"]:not(:has(.quickShare))>.Qg').each(function()
             {
                 // normale
                 var iconHtml = "";
@@ -126,7 +126,7 @@ gpoQuickShare.prototype= {
                 $(this).before('<div class="quickShare">' + iconHtml + '<br/></div><div class="qscl"></div>');
             });
 
-            $('.yM.bD:not(:has(.quickShare))>.Qg').each(function()
+            $ce.find('.yM.bD:not(:has(.quickShare))>.Qg').each(function()
             {
                 // breite
                 var iconHtml = "";

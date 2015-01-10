@@ -45,18 +45,16 @@ gpoClock.prototype = {
         
         console.log("Clock started.");  
     },
-    Dom:function() {
-        this.PaintWatch();
+    Dom:function($ce) {
+        this.PaintWatch($ce);
     },
-    UpdateWatch:function() {
+    UpdateWatch:function($ce) {
          try {
             var obj=this;
             var minutes;
 
             var refreshId = setInterval(function()
             {
-                
-
                 if (!obj.HasStarted )
                 {
                     return;
@@ -67,8 +65,8 @@ gpoClock.prototype = {
                 
                 if (diff <=  0)
                 {
-                    $(".slider-clock").slider('value',0);
-                    $('.clockLabel').text("00:00");
+                    $ce.find(".slider-clock").slider('value',0);
+                    $ce.find('.clockLabel').text("00:00");
                     obj.PlayAlarm();
                     localStorage.removeItem("StopWatchTargetTime");
                     
@@ -92,10 +90,10 @@ gpoClock.prototype = {
                     if (seconds<10) {
                         lblSeconds="0"+lblSeconds;
                     }
-                    $('.clockLabel').text(lblMinutes+":"+lblSeconds);
+                    $ce.find('.clockLabel').text(lblMinutes+":"+lblSeconds);
                     if (minutes!==obj.Minutes) {
                         obj.Minutes=minutes;
-                        $(".slider-clock").slider('value',minutes+1);
+                        $ce.find(".slider-clock").slider('value',minutes+1);
                     }
                     domChangeAllowed = false;
                     AllowDomChange();
@@ -138,14 +136,14 @@ gpoClock.prototype = {
             console.log(ex);
         }  
     },
-    PaintWatch:function() {
+    PaintWatch:function($ce) {
         try {
             var obj=this;
-            if ($('.clock').length===0) {
-                  $('.ona.Fdb').prepend(obj.ClockObj);
-                  $('.clockLabel').text("00:00");
-                  $( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
-                  obj.UpdateWatch();
+            if ($ce.find('.clock').length===0) {
+                $ce.find('.ona.Fdb').prepend(obj.ClockObj);
+                $ce.find('.clockLabel').text("00:00");
+                $ce.find( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
+                obj.UpdateWatch($ce);
             }
         } catch (ex) {
            console.log(ex);

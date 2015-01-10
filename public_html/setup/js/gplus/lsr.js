@@ -7,8 +7,8 @@ gpoLsr.prototype = {
     Init:function() {
         this.LoadLsrList();
     }, 
-    Dom:function() {
-        this.MarkLinks();
+    Dom:function($ce) {
+        this.MarkLinks($ce);
     },
     LoadLsrList:function() {
         var obj=this;
@@ -25,7 +25,7 @@ gpoLsr.prototype = {
            obj.DomainBlacklist=JSON.parse(domainBlacklist); 
         }
     },
-    MarkLinks:function() {
+    MarkLinks:function($ce) {
         var obj=this;
         var mark = function($el) {
         $el.find('div[jsname="P3RoXc"]')
@@ -41,14 +41,14 @@ gpoLsr.prototype = {
         };
 
         // Hauptbeitrag:
-        $('div.Xx.xJ a').each(function(i, div) {
+        $ce.find('div.Xx.xJ a').each(function(i, div) {
             obj.DomainBlacklist.forEach(function(domain) {
                 if (div.href.indexOf(domain+"/") > -1 || div.href.substr(-1,1) === domain ) {
                     mark($(div).closest("div.Yp.yt.Xa"));
                 }
             });
         });
-        $('div.yx.Nf a').each(function(i, div) {
+        $ce.find('div.yx.Nf a').each(function(i, div) {
             obj.DomainBlacklist.forEach(function(domain) {
                 if (div.href.indexOf(domain+"/") > -1 || div.href.substr(-1,1) === domain ) {
                     mark($(div).closest("div.Yp.yt.Xa"));
@@ -57,7 +57,7 @@ gpoLsr.prototype = {
         });
 
         // Kommentare:
-         $('div.Ik.Wv a').each(function(i, div) {
+         $ce.find('div.Ik.Wv a').each(function(i, div) {
             obj.DomainBlacklist.forEach(function(domain) {
                 if (div.href.indexOf(domain+"/") > -1 || div.href.substr(-1,1) === domain ) {
                     markComment($(div).closest("div.Ik.Wv"));

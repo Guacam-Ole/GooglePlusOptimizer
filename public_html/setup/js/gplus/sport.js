@@ -37,8 +37,8 @@ gpoSport.prototype = {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/sport.css") + "' type='text/css' media='screen' />"));
         this.StartSoccer();
     },
-    Dom: function () {
-        this.Draw();
+    Dom: function ($ce) {
+        this.Draw($ce);
     },
     StartSoccer: function () {
         var obj = this;

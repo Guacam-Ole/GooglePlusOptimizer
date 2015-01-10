@@ -11,10 +11,10 @@ gpoUser.prototype = {
         this.OptStartColors();
         this.PaintColorBlock();
     },
-    Dom:function() {
-        this.PaintForUser();        
+    Dom:function($ce) {
+        this.PaintForUser($ce);        
         
-        this.PaintCurrentUserSettings();
+        this.PaintCurrentUserSettings($ce);
     },
     OptStartColors:function() {
         this.AllCssColors = this.GetCssColors();
@@ -44,12 +44,7 @@ gpoUser.prototype = {
         $('.userRemark').change(function() {
             obj.UpdateUserData();
         });
-        
-        //obj.PaintCurrentUserSettings();
-
-       //  setTimeout(obj.PaintCurrentUserSettings(obj), 5000); // 5 Sekunden warten
-
-    },PaintForUser:function() {
+    },PaintForUser:function($ce) {
         var obj=this;
         if (obj.AllUserSettings=== null || obj.AllUserSettings=== undefined) {
             return;
@@ -61,13 +56,13 @@ gpoUser.prototype = {
                 // Einfärben
                 var paintColor= $.grep(obj.AllCssColors, function(e){ return e.Color === currentUserSetting.Color; });
                 if (paintColor.length>0) {
-                    $('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
-                    $('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass(paintColor[0].CssClass);
+                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
+                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass(paintColor[0].CssClass);
                 }
             }
             if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
-                if ($('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').length > 0) {
-                    $('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function() {
+                if ($ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').length > 0) {
+                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function() {
                         AddHeadWrapper($(this));
                         if ($(this).html().indexOf('infoImg') === -1) {
                             $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
