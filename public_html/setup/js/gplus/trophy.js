@@ -22,9 +22,9 @@ gpoTrophy.prototype= {
         }, ".trophyImg"); //pass the element as an argument to .on
        
     },
-    Dom:function() {
+    Dom:function($ce) {
         this.About();
-        this.Stream();
+        this.Stream($ce);
     },
     Hover:function($trophy)  {
         this.Draw(true, $trophy, $trophy.attr("userid"));
@@ -128,13 +128,13 @@ gpoTrophy.prototype= {
             obj.AllUsers=JSON.parse(allTrophyUsers);
         }
     },
-    Stream:function() {
+    Stream:function($ce) {
         var obj=this;
         if (obj.AllUsers!==undefined && obj.AllUsers!==null && obj.AllUsers.length>0) {
             for (var i in obj.AllUsers) {
                 var currentUser=obj.AllUsers[i].id;
-                if ($('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0) {
-                    $('h3 [oid="' + currentUser + '"]').closest('.lea').each(function() {
+                if ($ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0) {
+                    $ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').each(function() {
                         AddHeadWrapper($(this));
                         if ($(this).html().indexOf('trophyImg') === -1)
                         {

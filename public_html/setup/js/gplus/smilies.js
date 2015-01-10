@@ -51,14 +51,14 @@ var gpoEmoticons=function() {
 
 gpoEmoticons.prototype = {
     constructor: gpoEmoticons,
-    Dom: function() {
-        this.PaintEmoticons();
+    Dom: function($ce) {
+        this.PaintEmoticons($ce);
     },
-    PaintEmoticons:function() {
+    PaintEmoticons:function($ce) {
         var obj=this;
         var smilies = JSON.parse(obj.Emoticons);
 
-         $('.Ct').each(function() {
+         $ce.find('.Ct').each(function() {
             var smilieCount=0;
             for (var i in smilies) {
                 var smilie = smilies[i];
@@ -75,4 +75,4 @@ gpoEmoticons.prototype = {
             }
         });
     }
-}
+};

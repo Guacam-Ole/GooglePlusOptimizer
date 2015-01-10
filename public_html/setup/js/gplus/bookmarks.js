@@ -35,9 +35,9 @@ gpoBookmarks.prototype = {
         obj.LoadBookmarkContent();
         obj.DisplayBookmarksHover();
     },
-    Dom:function() {
+    Dom:function($ce) {
         var obj=this;
-        if ($('.miniBookmark').length === 0)
+        if ($ce.find('.miniBookmark').length === 0)
         {
             $(document).on('click', '.miniBookmark', function()
             {
@@ -45,7 +45,7 @@ gpoBookmarks.prototype = {
             }); 
 
             var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-            $('.Pzc').prepend($(bookmarkIcon));
+            $ce.find('.Pzc').prepend($(bookmarkIcon));
         } 
     },
     CalcBookmarkFloat:function() {
