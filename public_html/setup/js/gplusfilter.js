@@ -326,6 +326,14 @@ function HideOnContent(parent, element) {
     }
 }
 
+function SingleMeasure(setting, measureTitle, functionName) {
+    if (setting!==null) {
+        Subs.Measure.Do(measureTitle,function() {
+            functionName();   
+        });
+    }
+}
+
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
@@ -401,19 +409,18 @@ function StartFilter(changedElements) {
         StoppTick(false, "Persons");
     }
   
-
-    StartTick(false, "Hashtag-Filter");
-    DOMFilterHashtags($ce);
-    StoppTick(false, "Hashtag-Filter");
-    StartTick(false, "Images");
-    DOMFilterImages($ce);
-    StoppTick(false, "Images");
-    StartTick(false, "Fulltext");
-    DOMFilterFreetext($ce);
-    StoppTick(false, "Fulltext");
-    StartTick(false, "Shared Circles");
-    DOMFilterSharedCircles($ce);
-    StoppTick(false, "Shared Circles");
+    SingleMeasure(true, "Hashtag-Filter", function() {
+        DOMFilterHashtags($ce);        
+    });
+    SingleMeasure(true, "Images", function() {
+        DOMFilterImages($ce);        
+    });
+    SingleMeasure(true, "Fulltext", function() {
+        DOMFilterFreetext($ce);        
+    });
+    SingleMeasure(true, "Shared Circles", function() {
+        DOMFilterSharedCircles($ce);        
+    });
     
     if (Subs.Clock!==null) {
          Subs.Measure.Do("stoppwatch",function() {
@@ -421,55 +428,39 @@ function StartFilter(changedElements) {
          });
     }
     
-    if (Subs.Lsr!==null) {
-         Subs.Measure.Do("markLSRPosts",function() {
-             Subs.Lsr.Dom($ce);
-         });
-    }
-
-    if (Subs.Trophy!==null) {
-        Subs.Measure.Do("displayTrophy",function() {
-            Subs.Trophy.Dom($ce);   
-        });
-        
-    }
-     if (Subs.User!==null) {
-        Subs.Measure.Do("colorUser",function() {
-            Subs.User.Dom($ce); // TODO: ANzeige um Userbereich einzeln auslagern
-        });
-    }
-
-    if (Subs.Emoticons!==null) {
-        Subs.Measure.Do("showEmoticons",function() {
-            Subs.Emoticons.Dom($ce);
-        });
-    }
-
-    if (Subs.Quickshare!==null) {
-        Subs.Measure.Do("QuickShare",function() {
-            Subs.Quickshare.Dom($ce);
-        });
-    }
+    SingleMeasure(Subs.Lsr, "measureTitle", function() {
+        Subs.Lsr.Dom($ce);
+    });
     
-    if (Subs.Bookmarks!==null) {
-         Subs.Measure.Do("useBookmarks",function() {
-             Subs.Bookmarks.Dom($ce);
-             Subs.Bookmarks.DisplayBookmarks($ce);
-             Subs.Bookmarks.PaintStars($ce);
-        });
-    }
+    SingleMeasure(Subs.Trophy, "displayTrophy", function() {
+        Subs.Trophy.Dom($ce);
+    });
     
-    if (Subs.Flags!==null) {
-        Subs.Measure.Do("displayLang",function() {
-            Subs.Flags.Dom($ce);
-        });
-    }
+    SingleMeasure(Subs.User, "colorUser", function() {
+        Subs.User.Dom($ce);
+    });
     
-    if (Subs.Soccer!==null) {
-        Subs.Measure.Do("sportEnabled",function() {
-            Subs.Soccer.Dom($ce);
-        });
-    }
+    SingleMeasure(Subs.Emoticons, "showEmoticons", function() {
+        Subs.Emoticons.Dom($ce);
+    });
+    
+    SingleMeasure(Subs.Quickshare, "QuickShare", function() {
+        Subs.Quickshare.Dom($ce);
+    });
+    
+    SingleMeasure(Subs.Bookmarks, "useBookmarks", function() {
+        Subs.Bookmarks.Dom($ce);
+        Subs.Bookmarks.DisplayBookmarks($ce);
+        Subs.Bookmarks.PaintStars($ce);
+    });
+    
+    SingleMeasure(Subs.Flags, "displayLang", function() {
+        Subs.Flags.Dom($ce);
+    });
+    
+    SingleMeasure(Subs.Soccer, "sportEnabled", function() {
+        Subs.Soccer.Dom($ce);
+    });
 }
 
 
