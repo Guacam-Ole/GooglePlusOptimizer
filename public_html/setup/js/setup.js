@@ -500,9 +500,6 @@ function LoadExtended()
 function LoadSetup()
 {
     try {
-      
-        
-        
         console.log('G+Filter: Einstellungsseite');
         var manifest = chrome.runtime.getManifest();
         $('#version').html("Version " + manifest.version);

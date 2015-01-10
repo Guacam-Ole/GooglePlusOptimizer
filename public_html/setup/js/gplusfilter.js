@@ -728,6 +728,11 @@ function PageLoad() {
    //     StartFilter($('body')); // Initial ausführen
         
         CountColumns();
+        
+        $('[jsmodel="XNmfOc"]').each(function(index,value) {
+            StartFilter(value);
+        });
+        
         StartObservation();
     
 }
