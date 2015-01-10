@@ -326,6 +326,14 @@ function HideOnContent(parent, element) {
     }
 }
 
+function SingleMeasureBool(setting, measureTitle, funcitonName) {
+    if (setting===true) {
+        Subs.Measure.Do(measureTitle,function() {
+            functionName();   
+        });
+    }
+}
+
 function SingleMeasure(setting, measureTitle, functionName) {
     if (setting!==null) {
         Subs.Measure.Do(measureTitle,function() {
@@ -339,6 +347,8 @@ function SingleMeasure(setting, measureTitle, functionName) {
  */
 function StartFilter(changedElements) {
     var $ce=$(changedElements);
+    Subs.Measure=new gpoMeasure("DOM", true);
+    
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShares",function() {
             Subs.Quickshare.Events();
@@ -347,12 +357,8 @@ function StartFilter(changedElements) {
     
     MoveHeaderIcon();   // Prüfen wg. Performance!
 
-    Subs.Measure=new gpoMeasure("DOM", true);
-
     /* WHAM */
-    if (Subs.Settings.Values.Wham)
-    {
-        StartTick(false, "Wham");
+    SingleMeasureBool(Subs.Settings.Values.Wham, "Wham",function() {
         if (Subs.Settings.Values.WHAMWhamText)
         {
             HideOnContent($ce,$ce.find('.Xx.xJ:Contains("wham")'));
@@ -371,102 +377,76 @@ function StartFilter(changedElements) {
             HideOnContent($ce,$ce.find('.yx.Nf:Contains("LastChristmas")'));
             HideOnContent($ce,$ce.find('.yx.Nf:Contains("Last Christmas")'));
         }
-        StoppTick(false, "Wham");
-    }
+    });
     
     /* Blöcke */
-    if (Subs.Settings.Values.Plus)
-    {
-        StartTick(false, "Plus1");
+    SingleMeasureBool(Subs.Settings.Values.Plus, "Plus1",function() {
         HideOnContent($ce,$ce.find('.xv'));
-        StoppTick(false, "Plus1");
-    }
-    if (Subs.Settings.Values.Yt)
-    {
-        StartTick(false, "Youtube");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Yt, "Youtube",function() {
         HideOnContent($ce,$ce.find('.SR'));
-        StoppTick(false, "Youtube");
-    }
-    if (Subs.Settings.Values.Community)
-    {
-        StartTick(false, "Community");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Community, "Community",function() {
         HideOnContent($ce,$ce.find('[data-iid="sii2:112"]'));
         HideOnContent($ce,$ce.find('[data-iid="sii2:116"]'));
-        StoppTick(false, "Community");
-    }
-    if (Subs.Settings.Values.Birthday)
-    {
-        StartTick(false, "Birthday");
+    });   
+    SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday",function() {
         HideOnContent($ce,$ce.find('[data-iid="sii2:114"]'));
-        StoppTick(false, "Birthday");
-    }
-    if (Subs.Settings.Values.Known)
-    {
-        StartTick(false, "Persons");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Known, "Persons",function() {
         HideOnContent($ce,$ce.find('[data-iid="sii2:103"]'));
         HideOnContent($ce,$ce.find('[data-iid="sii2:105"]'));
         HideOnContent($ce,$ce.find('[data-iid="sii2:106"]'));
-        StoppTick(false, "Persons");
-    }
+    });
   
-    SingleMeasure(true, "Hashtag-Filter", function() {
+    SingleMeasureBool(Subs.Settings.Values.Hashtag, "Hashtag-Filter", function() {
         DOMFilterHashtags($ce);        
     });
-    SingleMeasure(true, "Images", function() {
+    SingleMeasureBool((Subs.Settings.Values.FilterImages || Subs.Settings.Values.FilterLinks || Subs.Settings.Values.FilterVideo), "Images", function() {
         DOMFilterImages($ce);        
     });
-    SingleMeasure(true, "Fulltext", function() {
+    SingleMeasureBool((Subs.Settings.Values.Custom && Subs.Settings.Values.Fulltext !== null && Subs.Settings.Values.Fulltext !== ""), "Fulltext", function() {
         DOMFilterFreetext($ce);        
     });
-    SingleMeasure(true, "Shared Circles", function() {
-        DOMFilterSharedCircles($ce);        
+    SingleMeasureBool(Subs.Settings.Values.FilterSharedCircles, "Shared Circles", function() {
+        HideOnContent($ce,$ce.find('div.ki.ve').find('div.Wy'));
     });
     
-    if (Subs.Clock!==null) {
-         Subs.Measure.Do("stoppwatch",function() {
-             Subs.Clock.Dom($ce);
-         });
-    }
+    /* Widgets */
+    SingleMeasure(Subs.Clock, "stoppwatch", function() {
+        Subs.Clock.Dom($ce);
+    });
+    SingleMeasure(Subs.Soccer, "sportEnabled", function() {
+        Subs.Soccer.Dom($ce);
+    });
     
+    /* Erweiterungen */
     SingleMeasure(Subs.Lsr, "measureTitle", function() {
         Subs.Lsr.Dom($ce);
     });
-    
     SingleMeasure(Subs.Trophy, "displayTrophy", function() {
         Subs.Trophy.Dom($ce);
     });
-    
     SingleMeasure(Subs.User, "colorUser", function() {
         Subs.User.Dom($ce);
     });
-    
     SingleMeasure(Subs.Emoticons, "showEmoticons", function() {
         Subs.Emoticons.Dom($ce);
     });
-    
     SingleMeasure(Subs.Quickshare, "QuickShare", function() {
         Subs.Quickshare.Dom($ce);
     });
-    
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function() {
         Subs.Bookmarks.Dom($ce);
         Subs.Bookmarks.DisplayBookmarks($ce);
         Subs.Bookmarks.PaintStars($ce);
     });
-    
     SingleMeasure(Subs.Flags, "displayLang", function() {
         Subs.Flags.Dom($ce);
     });
-    
-    SingleMeasure(Subs.Soccer, "sportEnabled", function() {
-        Subs.Soccer.Dom($ce);
-    });
 }
 
-
-
-function getUrlParameter(sParam)
-{
+function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
     for (var i = 0; i < sURLVariables.length; i++) 
@@ -479,57 +459,19 @@ function getUrlParameter(sParam)
     }
 }  
 
-
-
-function ClearAllTicks() {
-    if (Subs.Settings.Values.CollectTicks) {
-        chrome.runtime.sendMessage({Action: "ClearTicks"});
-    }
-}
-
-function StartTick(isInit, timerName) {
-    if (Subs.Settings.Values.CollectTicks) {
-        chrome.runtime.sendMessage({Action: "AddTick", IsInit: isInit, Name: timerName, Time: $.now()});
-    }
-}
-
-function StoppTick(isInit, timerName) {
-    if (Subs.Settings.Values.CollectTicks) {
-        chrome.runtime.sendMessage({Action: "EndTick", IsInit: isInit, Name: timerName, Time: $.now()});
-    }
-}
-
-/**
- * Filter Shared Circles
- */
-function DOMFilterSharedCircles($ce)
-{
-    if (Subs.Settings.Values.FilterSharedCircles) {
-        try {
-            HideOnContent($ce,$ce.find('div.ki.ve').find('div.Wy'));              
-        } catch (ex) {
-            console.log(ex);
-        }
-    }
-}
-
-
 /**
  * Volltextfilter
  */
 function DOMFilterFreetext($ce) {
-    if (Subs.Settings.Values.Custom && Subs.Settings.Values.Fulltext !== null && Subs.Settings.Values.Fulltext !== "")
-    {
-        try {
-            var textArray = Subs.Settings.Values.Fulltext.split(',');
-            $.each(textArray, function (i, fulltext)
-            {
-                HideOnContent($ce,$ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
-                HideOnContent($ce,$ce.find('div.Al.pf:Contains(' + fulltext + ')'));
-            });
-        } catch (ex) {
-            console.log(ex);
-        }
+    try {
+        var textArray = Subs.Settings.Values.Fulltext.split(',');
+        $.each(textArray, function (i, fulltext)
+        {
+            HideOnContent($ce,$ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
+            HideOnContent($ce,$ce.find('div.Al.pf:Contains(' + fulltext + ')'));
+        });
+    } catch (ex) {
+        console.log(ex);
     }
 }
 
@@ -538,14 +480,11 @@ function DOMFilterFreetext($ce) {
  */
 function DOMFilterImages($ce) {
     try {
-        if (Subs.Settings.Values.FilterImages || Subs.Settings.Values.FilterLinks || Subs.Settings.Values.FilterVideo)
-        {
-            $ce.find('.unhideImage').click(function () {
-                $(this).parent().find('.hidewrapper').show();
-                $(this).remove();
-                return false;
-            });
-        }
+        $ce.find('.unhideImage').click(function () {
+            $(this).parent().find('.hidewrapper').show();
+            $(this).remove();
+            return false;
+        });
 
         if (Subs.Settings.Values.FilterVideo)
         {
@@ -593,21 +532,18 @@ function PaintBin(ce) {
  */
 function DOMFilterHashtags($ce) {
     try {
-        if (Subs.Settings.Values.Hashtag)
+        // Einfügen von hinzufügen-Button
+        if (Subs.Settings.Values.HashTags !== null && Subs.Settings.Values.HashTags !== "")
         {
-            // Einfügen von hinzufügen-Button
-            if (Subs.Settings.Values.HashTags !== null && Subs.Settings.Values.HashTags !== "")
+            var hashTagArray = Subs.Settings.Values.HashTags.split(',');
+            $.each(hashTagArray, function (i, hashTag)
             {
-                var hashTagArray = Subs.Settings.Values.HashTags.split(',');
-                $.each(hashTagArray, function (i, hashTag)
-                {
-                    if (hashTag.length > 1) {
-                        HideOnContent($ce,$ce.find('.zda.Zg:Contains(' + hashTag + ')'));
-                        HideOnContent($ce,$ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
-                        HideOnContent($ce,$ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
-                    }
-                });
-            }
+                if (hashTag.length > 1) {
+                    HideOnContent($ce,$ce.find('.zda.Zg:Contains(' + hashTag + ')'));
+                    HideOnContent($ce,$ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
+                    HideOnContent($ce,$ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
+                }
+            });
         }
     } catch (ex) {
         console.log(ex);
@@ -655,66 +591,51 @@ function PageLoad() {
         Subs.Measure=new gpoMeasure("START", true);
         
         var wizard=JSON.parse(Subs.Settings.Values.WizardMode);
-        if (wizard >= 0)
-        {
-            Subs.Measure.Do("wizard",function() {
-                DrawWizardTile();
-            });
-        }
-            
-        if (Subs.Bookmarks!==null) {
-            Subs.Measure.Do("useBookmarks",function() {
-                Subs.Bookmarks.Init();
-            });
-        }
-        if (Subs.Autosave!==null) {
-            Subs.Measure.Do("useAutoSave",function() {
-                Subs.Autosave.CleanupAutosave();
-                Subs.Autosave.Init();
-            });
-        }
         
-        if (Subs.User!==null) {
-            Subs.Measure.Do("useAutoSave",function() {
+        
+        SingleMeasureBool(wizard>=0, "wizard", function() {
+            DrawWizardTile();        
+        });
+        
+        SingleMeasure(Subs.Bookmarks, "useBookmarks", function() {
+            Subs.Bookmarks.Init();        
+        });
+
+        SingleMeasure(Subs.Autosave, "useAutoSave", function() {
+            Subs.Autosave.CleanupAutosave();
+            Subs.Autosave.Init();
+        });
+        
+        SingleMeasure(Subs.User, "colorUser", function() {
               Subs.User.Init();  
-            });
-        }
-
+        });
         
-        if (Subs.Trophy!==null) {
-            Subs.Measure.Do("displayTrophy",function() {
-                Subs.Trophy.Init();
-            });
-        }
-
-         if (Subs.Settings.Values.DisplayQuickHashes) {
+        SingleMeasure(Subs.Trophy, "displayTrophy", function() {
+            Subs.Trophy.Init();
+        });
+        
+        SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function() {
             $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
-        }
+        });
         
-         if (Subs.Lsr!==null) {
-            Subs.Measure.Do("markLSRPosts",function() {
-                Subs.Lsr.Init();
-            });
-        }
-        
-        if (Subs.Quickshare!==null) {
-            Subs.Measure.Do("QuickShares",function() {
-                Subs.Quickshare.Init();
-            });
-        }
+        SingleMeasureBool(Subs.Lsr, "markLSRPosts", function() {
+             Subs.Lsr.Init();
+        });
+                
+        SingleMeasureBool(Subs.Quickshare, "QuickShares", function() {
+             Subs.Quickshare.Init();
+        });
         
         GetAllCircles();
         DrawWidgets();
-   //     StartFilter($('body')); // Initial ausführen
-        
         CountColumns();
         
+        // Initial Mutation Observer simulieren:
         $('[jsmodel="XNmfOc"]').each(function(index,value) {
             StartFilter(value);
         });
         
         StartObservation();
-    
 }
 
 /**

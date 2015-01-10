@@ -130,6 +130,12 @@ Setup.prototype = {
             obj.MenuToggle($(this));
             return false;
         });
+        $(document).on('click', '.ticketLink', function ()
+        {
+            obj.GetSingleTicket($(this).attr('ticketid'),$(this).closest('div'));
+            return false;
+        });
+        
 
         $(document).on('click', '.btn.optimizer', function ()
         {
@@ -162,6 +168,8 @@ Setup.prototype = {
         if (feature.Cost !== undefined) {
             var costClass = ".cost" + feature.Cost;
             template.find('.costSelector').find(costClass).html('<i class="fa fa-check"></i>');
+        } else {
+            template.find('.cost').hide();
         }
         template.find('.loadHtml').each(function (index, value) {
             var filename = $(value).data("filename");
@@ -184,6 +192,31 @@ Setup.prototype = {
             }
         }
         return -1;   // fallback
+    },
+    GetTickets:function(topic, $target)  {
+        var template="<tr><td><a class='ticketLink' ticketid='__ID__'>__NUMBER__</a></td><td>__CREATED__</td><td>__SUBJECT__</td><td>__STATE__</td><td>__CHANGED__</td></tr>";
+        
+        $.getJSON( "http://ole.enif.uberspace.de/osTicket/jsontickets.php?output=json&id="+topic, function( data ) {
+            var output="<table class='ticketTable'><thead><tr><th>Nummer</th><th>Erstellt</th><th>Thema</th><th>Status</th><th>bearbeitet</th></tr></thead>";
+            $.each( data, function( key, val ) {
+                output+=template.replace("__ID__",val.ticket_id).replace("__NUMBER__",val.number)
+                        .replace("__CREATED__",val.created).replace("__SUBJECT__",val.subject)
+                        .replace("__STATE__",val.state).replace("__CHANGED__",val.updated);
+            });
+            output+="</table><div class='ticketDetails'></div>";
+            $target.html(output);
+        });  
+    },
+    GetSingleTicket:function(id, $parent) {
+        var template="<div class='singleTicketPost'><span class='date'>__DATE__</span><span class='username'>__USER__</span><div class='body'>__BODY__</div></div>";
+        $.getJSON( "http://ole.enif.uberspace.de/osTicket/jsonticketsdetails.php?id="+id, function( data ) {
+            var output="";
+            $.each( data, function( key, val ) {
+                output+=template.replace("__USER__",val.poster).replace("__DATE__",val.created).replace("__BODY__",val.body);
+            });            
+            $parent.find('.ticketDetails').html(output);
+            $parent.find('.ticketDetails').toggle();
+        });  
     },
     
     GetFeatureDetails: function (featureName) {
@@ -209,6 +242,12 @@ Setup.prototype = {
             divFeature.load("bs.custom.html", function () {
                 obj.ReplaceDataInTemplate(divFeature, currentFeature);
                 $('.features').append(divFeature);
+                if (featureName==='bugs') {
+                    obj.GetTickets(1,$('.tickets'));
+                }
+                if (featureName==='featurerequests') {
+                    obj.GetTickets(2,$('.featurerequests'));
+                }
             });
         } else {
             divFeature.load("bs.feature.html", function () {
@@ -225,13 +264,13 @@ Setup.prototype = {
                         obj.HashTag($('.tokensHashtags'));
                     }
                 }
+                
                 if (featureName === 'custom') {
                     if ($('.tokensText').length > 0) {
                         $('.tokensText').val(localStorage.getItem("fulltext"));
                         obj.CustomText($('.tokensText'));
                     }
                 }
-              
             });
         }
     },
@@ -248,12 +287,10 @@ Setup.prototype = {
             defaultText: obj.Browser.GetMessageFromSetup('Setup_newFilter'),
             'onAddTag': function ()
             {
-                // alert('SAY MY NAME!');
                 obj.SaveSetting("fulltext", $element.val());
             },
             'onRemoveTag': function ()
             {
-                // alert('YOUR DAMN RIGHT!');
                 obj.SaveSetting("fulltext", $element.val());
             }
         });
