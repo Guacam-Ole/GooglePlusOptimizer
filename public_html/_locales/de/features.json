@@ -208,6 +208,28 @@
         "Cost":1
     },
     
+    {   
+        "Version": "3.0",
+        "Short": "bugs",
+        "TextOnly":true,
+        "Title": "Bugs",
+        "Description": "<p>Hier können Bugreports eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='tickets'></div></p>"
+    },
+     {   
+        "Version": "3.0",
+        "Short": "featurerequests",
+        "TextOnly":true,
+        "Title": "Verbesserungsvorschläge",
+        "Description": "<p>Hier können Verbesserungsvorschläge eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='featurerequests'></div></p>"
+    },
+     {   
+        "Version": "3.0",
+        "Short": "newticket",
+        "TextOnly":true,
+        "Title": "Neues Ticket erstellen",
+        "Description": "<p>Bug melden oder Feature anfragen.<br/><b>Hinweis:</b>Die E-Mail wird nur benötigt, wenn Du per E-Mail Updates über Änderungen erhalten möchtest. Sonst trag einfach eine Phantasie-Mail ein.<br/><br/><a href='https://ole.enif.uberspace.de/osTicket/open.php'>Ticket eröffnen</a></p>"
+    },
+    
     
     {
         "remark":  "-----MUSS IMMER GANZ UNTEN STEHEN!-------" ,
