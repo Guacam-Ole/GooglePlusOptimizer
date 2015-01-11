@@ -28,13 +28,11 @@ gpoClock.prototype = {
         
         
         $(document).ready(function() {
-            try {
+       
                
                 obj.HasStarted = false;
-                obj.PaintWatch();
-            } catch (ex) {
-                console.log(ex);
-            }
+               // obj.PaintWatch(document);
+           
         });
         // Nach einem Reload schauen, ob evtl. noch ein alter Timer gespeichert ist:
         var oldValue=localStorage.getItem("StopWatchTargetTime");
@@ -137,17 +135,16 @@ gpoClock.prototype = {
         }  
     },
     PaintWatch:function($ce) {
-        try {
+        
             var obj=this;
+            
             if ($ce.find('.clock').length===0) {
                 $ce.find('.ona.Fdb').prepend(obj.ClockObj);
                 $ce.find('.clockLabel').text("00:00");
                 $ce.find( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
                 obj.UpdateWatch($ce);
             }
-        } catch (ex) {
-           console.log(ex);
-        }    
+         
     }
 };
 

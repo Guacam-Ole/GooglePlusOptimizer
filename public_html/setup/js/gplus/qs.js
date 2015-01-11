@@ -13,7 +13,7 @@ gpoQuickShare.prototype= {
     },
     Init:function() {
         var obj=this;
-        if (obj.Shares !== null && obj.Shares.length > 0)
+       // if (obj.Shares !== null && obj.Shares.length > 0)
         {
             $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/qs.css") + "' type='text/css' media='screen' />"));
         }

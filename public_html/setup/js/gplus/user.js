@@ -196,7 +196,7 @@ gpoUser.prototype = {
             Action: "LoadUsers"
         }, function(response) {
             obj.AllUserSettings= JSON.parse(response.AllUserSettings);
-            obj.PaintForUser();
+           // obj.PaintForUser(document);
             //obj.PaintColorBlock();            
         });
     },HexToR:function(h) {
