@@ -114,7 +114,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     
     if (request.Action==="getTrophyUsers") {
         var users;
-        var file="http://www.appschleppen.com/php/getusers.php?version=1.0";
+        var file="http://www.trophies.at/php/getusers.php?version=1.0";
          $.ajax({
             url: file,
             dataType: 'json',
@@ -126,7 +126,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({Result: users});
     } else if (request.Action==="getTrophyDescriptions") {
         var trophynames;
-        var file="http://www.appschleppen.com/js/trophy."+request.Language+".json";
+        var file="http://www.trophies.at/js/trophy."+request.Language+".json";
         $.ajax({
             url: file,
             dataType: 'json',
@@ -138,7 +138,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({Result: trophynames});
     } else if (request.Action==="getTrophiesForUser") {
         var trophies;
-        var file="http://www.appschleppen.com/php/loadtrophies.php?version=1.0&userId="+request.UserId;
+        var file="http://www.trophies.at/php/loadtrophies.php?version=1.0&userId="+request.UserId;
         $.ajax({
             url: file,
             dataType: 'json',
