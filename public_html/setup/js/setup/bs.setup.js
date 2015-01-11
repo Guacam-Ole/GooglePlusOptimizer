@@ -135,16 +135,121 @@ Setup.prototype = {
             obj.GetSingleTicket($(this).attr('ticketid'),$(this).closest('div'));
             return false;
         });
+        $(document).on('click', '#chkFilterGif', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("filterGifOnly","false");
+            } else {
+                localStorage.setItem("filterGifOnly","true");
+            }
+        });
+        $(document).on('click', '#chkFilterMp4', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("filterMp4Only","false");
+            } else {
+                localStorage.setItem("filterMp4Only","true");
+            }
+        });
         
+        $(document).on('click','.thumbnail',function() {
+            $(this).closest('.rowColumns').find('.thumbnail').each(function(index,value){
+               $(this).removeClass('selected');
+            });
+            $(this).addClass('selected');
+            if ($(this).closest('.parentWeather').length>0) {
+                obj.SaveWeather($(this).closest('.singleFeature'),obj);
+            }
+        });
 
         $(document).on('click', '.btn.optimizer', function ()
         {
             if ($(this).hasClass("active")) {
                 $(this).find('i').removeClass("fa-check").addClass("fa-times");
+                var setting=$(this).attr('data-setting');
+                if (setting==='weatherEnabled') {
+                    obj.SaveWeather($(this).closest('.singleFeature'),obj);
+                } else {
+                   localStorage.setItem(setting,"false");
+                }
             } else {
                 $(this).find('i').removeClass("fa-times").addClass("fa-check");
+                var setting=$(this).attr('data-setting');
+                if (setting==='weatherEnabled') {
+                    obj.SaveWeather($(this).closest('.singleFeature'),obj);
+                } else {
+                   localStorage.setItem(setting,"true");
+                }
             }
         });
+        
+        $(document).on('change', '.citySelect select', function () { 
+            $(this).closest('.weatherSelection').find('.cityId').val($(this).val());
+            obj.SaveWeather($(this).closest('.singleFeature'),obj);
+        });
+        
+        $(document).on('click', '.weatherSelection a', function () {
+        try {
+            var weather = $(this);
+            var weatherInput = $('.cityName');
+            var weatherCombo = $('.citySelect select');
+            weatherCombo.children().remove();
+            var query = "select woeid, country,name, postal from geo.places where text=\"" + weatherInput.val() + "\"";
+            var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=json';
+            console.log("API:" + api);
+            var firstEntry=true;
+            $.getJSON(api, function(data) {
+                for (var i in data.query.results.place)
+                {
+                    var place = data.query.results.place[i];
+                    var plz = place.postal;
+                    if (plz === null || plz === undefined)
+                    {
+                        plz = "";
+                    } else {
+                        plz = plz.content;
+                        if (plz === null || plz === undefined)
+                        {
+                            plz = "";
+                        }
+                    }
+                    var entry = plz + " " + place.name + ", " + place.country.content;
+                    var id = place.woeid;
+                    if (firstEntry) {
+                         $('.weatherSelection').find('.cityId').val(id);
+                        firstEntry=false;
+                        obj.SaveWeather($('.singleFeature'),obj);
+                    }
+                    weatherCombo.append("<option value='" + id + "'>" + entry + "</option>");
+                }
+            });
+            $('.citySelect').fadeIn();
+            return false;
+        } catch (ex) {
+            console.log(ex);
+        }
+    });
+        
+        
+    },
+    SaveWeather:function($parent,obj) {
+        var isChecked=$parent.find('.btn.optimizer').hasClass('active');
+        var column=obj.GetColumn($parent);
+        var cityName=$parent.find('.weatherSelection .cityName').val();
+        var id=$parent.find('.weatherSelection .cityId').val();
+        var weather = {Position: column, Id: id, Text: cityName, Enabled:isChecked};
+        localStorage.setItem("weatherWidget",JSON.stringify(weather));
+    },
+    GetColumn:function($parent) {
+        var count=0;
+        var selectedColumn=0;
+        $parent.find('.rowColumns .thumbnail').each(function(index,value) {
+            if ($(this).hasClass('selected')) {
+                selectedColumn=count;
+            }
+            count++;
+        });
+        return selectedColumn;
     },
     DisplayFeatures: function (features) {
         var obj = this;

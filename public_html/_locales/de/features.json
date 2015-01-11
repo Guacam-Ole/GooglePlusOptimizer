@@ -114,7 +114,7 @@
         "Version": "2.2",
         "Short": "weatherEnabled",
         "Title": "Wettervorhersage",
-        "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div></div>",
+        "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>Ort:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'><a>Ort suchen</a><div class='citySelect'><select><option>jjjj</option></select></div></div>",
         "Image":"wetter.png",
         "Cost":0
     },

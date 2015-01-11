@@ -45,5 +45,31 @@
 }
 
 .singleTicketPost .body {
-clear: both;
+    clear: both;
+}
+
+.weatherSelection {
+    clear: both;
+    float: left;
+    margin-left: 20px;
+}
+
+.weatherSelection input[type="text"] {
+    width: 300px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.weatherSelection span {
+    width: 50px;
+    float: left;
+}
+
+.citySelect {
+    margin-left: 70px;
+    display:none;
+}
+
+.citySelect select {
+    width: 300px;
 }

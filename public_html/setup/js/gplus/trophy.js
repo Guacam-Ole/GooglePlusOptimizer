@@ -104,7 +104,7 @@ gpoTrophy.prototype= {
                    + "</div>{{ITSME}}</div>";
 
         if (ItsMe()) {
-            itsmeblock="<div class='moredetails'><a href='http://www.appschleppen.com/index."+chrome.i18n.getMessage("lang")+".php#collect'>"+chrome.i18n.getMessage("letsgo")+"</div>";
+            itsmeblock="<div class='moredetails'><a href='http://www.trophies.at/index."+chrome.i18n.getMessage("lang")+".php#collect'>"+chrome.i18n.getMessage("letsgo")+"</div>";
             noTrophiesYet=chrome.i18n.getMessage("youhavenotrophies");
         } else {
             noTrophiesYet=GetUserName()+" "+chrome.i18n.getMessage("hasnotrophies");
@@ -219,7 +219,7 @@ gpoTrophy.prototype= {
                     + goldHtml
                     + silverHtml
                     + bronzeHtml
-                    + "</div><div class='moredetails'><a href='http://www.appschleppen.com/index."+chrome.i18n.getMessage("lang")+".php?userId="+currentUserId+"'>" + chrome.i18n.getMessage("moredetails") + "</a></div></div>";
+                    + "</div><div class='moredetails'><a href='http://www.trophies.at/index."+chrome.i18n.getMessage("lang")+".php?userId="+currentUserId+"'>" + chrome.i18n.getMessage("moredetails") + "</a></div></div>";
             if (toTheTop) {
                 $(parent).prepend(html);
             } else {
