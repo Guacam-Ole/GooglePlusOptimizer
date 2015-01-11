@@ -11,7 +11,7 @@ gpoSettings.prototype = {
     Init: function () {  
         var obj=this;
         // Alle Optionen hinzufügen
-        obj.AllSettings.push(new gpoSetting("StoppWatch"));
+        obj.AllSettings.push(new gpoSetting("stoppwatch"));
         obj.AllSettings.push(new gpoSetting("Schniedel"));
         obj.AllSettings.push(new gpoSetting("Wutz"));
         obj.AllSettings.push(new gpoSetting("plus1"));
@@ -51,6 +51,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("weatherEnabled"));
         obj.AllSettings.push(new gpoSetting("Sport"));
         obj.AllSettings.push(new gpoSetting("QuickShares"));
+        obj.AllSettings.push(new gpoSetting("weatherWidget"));
     },
     Load:function(ret) {
         var obj=this;

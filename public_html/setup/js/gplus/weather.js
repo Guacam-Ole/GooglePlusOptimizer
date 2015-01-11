@@ -46,14 +46,12 @@ gpoWeather.prototype = {
         var obj=this;
         obj.Blocks= new Array();
         var doPing=false;
-        for (var i in obj.Settings) {
-            var setting = obj.Settings[i];
-            if (setting.Position >= 0) {
-                doPing=true;
-                obj.Blocks.push(setting.Id);
-                CreateBlock(parseInt(setting.Position) + 1, "wetter" + setting.Id);
-            }
+        if (obj.Settings.Position >= 0) {
+            doPing=true;
+            obj.Blocks.push(obj.Settings.Id);
+            CreateBlock(parseInt(obj.Settings.Position) + 1, "wetter" + obj.Settings.Id);
         }
+        
         if (doPing) {
             obj.Ping();
         }
