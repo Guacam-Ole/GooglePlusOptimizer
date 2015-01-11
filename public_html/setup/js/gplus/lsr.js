@@ -26,6 +26,9 @@ gpoLsr.prototype = {
         }
     },
     MarkLinks:function($ce) {
+        if (this.DomainBlacklist===undefined) {
+            return;
+        }
         var obj=this;
         var mark = function($el) {
         $el.find('div[jsname="P3RoXc"]')

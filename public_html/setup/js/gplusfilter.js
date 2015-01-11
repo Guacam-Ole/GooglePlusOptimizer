@@ -326,7 +326,7 @@ function HideOnContent(parent, element) {
     }
 }
 
-function SingleMeasureBool(setting, measureTitle, funcitonName) {
+function SingleMeasureBool(setting, measureTitle, functionName) {
     if (setting===true) {
         Subs.Measure.Do(measureTitle,function() {
             functionName();   
@@ -618,11 +618,11 @@ function PageLoad() {
             $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
         });
         
-        SingleMeasureBool(Subs.Lsr, "markLSRPosts", function() {
+        SingleMeasure(Subs.Lsr, "markLSRPosts", function() {
              Subs.Lsr.Init();
         });
                 
-        SingleMeasureBool(Subs.Quickshare, "QuickShares", function() {
+        SingleMeasure(Subs.Quickshare, "QuickShares", function() {
              Subs.Quickshare.Init();
         });
         
