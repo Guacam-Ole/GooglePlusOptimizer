@@ -46,7 +46,7 @@ gpoClock.prototype = {
     Dom:function($ce) {
         this.PaintWatch($ce);
     },
-    UpdateWatch:function($ce) {
+    UpdateWatch:function() {
          try {
             var obj=this;
             var minutes;
@@ -63,8 +63,8 @@ gpoClock.prototype = {
                 
                 if (diff <=  0)
                 {
-                    $ce.find(".slider-clock").slider('value',0);
-                    $ce.find('.clockLabel').text("00:00");
+                    $(".slider-clock").slider('value',0);
+                    $('.clockLabel').text("00:00");
                     obj.PlayAlarm();
                     localStorage.removeItem("StopWatchTargetTime");
                     
@@ -88,10 +88,10 @@ gpoClock.prototype = {
                     if (seconds<10) {
                         lblSeconds="0"+lblSeconds;
                     }
-                    $ce.find('.clockLabel').text(lblMinutes+":"+lblSeconds);
+                    $('.clockLabel').text(lblMinutes+":"+lblSeconds);
                     if (minutes!==obj.Minutes) {
                         obj.Minutes=minutes;
-                        $ce.find(".slider-clock").slider('value',minutes+1);
+                        $(".slider-clock").slider('value',minutes+1);
                     }
                     domChangeAllowed = false;
                     AllowDomChange();
@@ -134,15 +134,15 @@ gpoClock.prototype = {
             console.log(ex);
         }  
     },
-    PaintWatch:function($ce) {
+    PaintWatch:function() {
         
             var obj=this;
             
-            if ($ce.find('.clock').length===0) {
-                $ce.find('.ona.Fdb').prepend(obj.ClockObj);
-                $ce.find('.clockLabel').text("00:00");
-                $ce.find( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
-                obj.UpdateWatch($ce);
+            if ($('.clock').length===0) {
+                $('.ona.Fdb').prepend(obj.ClockObj);
+                $('.clockLabel').text("00:00");
+                $( ".slider-clock" ).slider({value: 0,min: 0,max: 60 });
+                obj.UpdateWatch();
             }
          
     }

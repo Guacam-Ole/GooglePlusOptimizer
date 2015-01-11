@@ -250,9 +250,11 @@ function LoadGoogle() {
  * Widgets zeichnen
  */
 function DrawWidgets() {
+    
+    
     if (Subs.Weather !== null ) {
-        Subs.Weather.Settings=Subs.Settings.Values.Weather;
          Subs.Measure.Do("weatherEnabled",function() {
+            Subs.Weather.Settings=Subs.Settings.Values.WeatherWidget;
             Subs.Weather.Init();
          });
     }
@@ -265,8 +267,8 @@ function DrawWidgets() {
     }
 
     if (Subs.Clock!==null) {
-        Subs.Measure.Do("stoppWatch",function() {
-            CreateBlock(JSON.parse(Subs.Settings.Values.StoppWatch) + 1, "clock");
+        Subs.Measure.Do("stoppwatch",function() {
+            CreateBlock(JSON.parse(Subs.Settings.Values.Stoppwatch) + 1, "clock");
             Subs.Clock.Init();
         });
     }
@@ -573,10 +575,16 @@ function InitObjects() {
     Subs.Lsr=InitObject(Subs.Settings.Values.MarkLSRPosts,gpoLsr);
     Subs.Trophy=InitObject(Subs.Settings.Values.DisplayTrophy,gpoTrophy);
     Subs.Soccer=InitObject(Subs.Settings.Values.SportEnabled,gpoSport);
-    Subs.Clock=InitObject(Subs.Settings.Values.StoppWatch,gpoClock);
+    Subs.Clock=InitObject(Subs.Settings.Values.Stoppwatch,gpoClock);
     Subs.Emoticons=InitObject(Subs.Settings.Values.ShowEmoticons,gpoEmoticons);
     Subs.User=InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
-    Subs.Weather=InitObject(true,gpoWeather);    
+    var weatherSettings=Subs.Settings.Values.WeatherWidget;
+    if (weatherSettings!==undefined && weatherSettings!==null) {
+        //weatherSettings=JSON.parse(weatherSettings);
+        Subs.Weather=InitObject(weatherSettings.Enabled,gpoWeather);
+        gpoWeather.Settings=weatherSettings;
+    }
+    
     //Subs.Weather=InitObject(Subs.Settings.Values.WeatherEnabled,gpoWeather);    
     
     var qs=Subs.Settings.Values.QuickShares;
