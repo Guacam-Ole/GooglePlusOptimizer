@@ -227,7 +227,7 @@
         "Short": "newticket",
         "TextOnly":true,
         "Title": "Neues Ticket erstellen",
-        "Description": "<p>Bug melden oder Feature anfragen.<br/><b>Hinweis:</b>Die E-Mail wird nur benötigt, wenn Du per E-Mail Updates über Änderungen erhalten möchtest. Sonst trag einfach eine Phantasie-Mail ein.<br/><br/><a href='https://ole.enif.uberspace.de/osTicket/open.php'>Ticket eröffnen</a></p>"
+        "Description": "<p>Bug melden oder Feature anfragen.<br/><a id='showTicketCreation'>Ticket eröffnen</a></p><div><div class='loadHtml' data-filename='bs.ticket'></div>"
     },
     
     

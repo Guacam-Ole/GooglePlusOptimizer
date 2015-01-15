@@ -130,6 +130,25 @@ Setup.prototype = {
             obj.MenuToggle($(this));
             return false;
         });
+        $(document).on('click', '.sendTicketNow', function ()
+        {
+            obj.AddTicket($('#ticketUser').val(),$('#ticketSubject').val(),$('#ticketContent').val(),$('#ticketType').val());
+            $('.addNewTicket').fadeOut();
+            return false;
+        });
+        
+        $(document).on('click', '.abortTicket', function ()
+        {
+            $('.addNewTicket').fadeOut();
+            return false;
+        });
+        
+        $(document).on('click', '#showTicketCreation', function ()
+        {
+            $('.addNewTicket').fadeIn();
+            return false;
+        });
+        
         $(document).on('click', '.ticketLink', function ()
         {
             obj.GetSingleTicket($(this).attr('ticketid'),$(this).closest('div'));
@@ -340,6 +359,12 @@ Setup.prototype = {
             });
             output+="</table><div class='ticketDetails'></div>";
             $target.html(output);
+        });  
+    },
+    AddTicket:function(username, subject, content, type) {
+        $.getJSON( "http://ole.enif.uberspace.de/osTicket/CreateTicket.php?user="+encodeURIComponent(username)+"&subject="+encodeURIComponent(subject)+"&content="+encodeURIComponent(content)+"&type="+encodeURIComponent(type), function( data ) {
+          var $success=JSON.parse(data)  ;
+          
         });  
     },
     GetSingleTicket:function(id, $parent) {

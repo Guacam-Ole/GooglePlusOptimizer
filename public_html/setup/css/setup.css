@@ -73,3 +73,78 @@
 .citySelect select {
     width: 300px;
 }
+
+.addNewTicket div {
+    padding-top: 2px;
+}
+
+.addNewTicket {
+    position: absolute;
+    top: 50px;
+    background: #3D3D3D;
+    left: 120px;
+    width: 540px;
+    height: 440px;
+    padding: 20px;
+    color: #d9d9d9;
+    display:none;
+    
+}
+
+input#ticketUser {
+    width: 500px;
+    color: black;
+}
+
+.buttonYo {
+    padding-top: 0px !important;
+}
+
+.buttonYo {
+    float: right;
+}
+
+.addNewTicket a {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D9D9D9;
+    color: #d9d9d9;
+    width: 120px;
+    float: left;
+}
+
+.addNewTicket a:hover {
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    color: white;
+    width: 120px;
+    float: left;
+}
+
+
+.addNewTicket .caption {
+    width: 200px;    
+}
+
+
+
+.addNewTicket select#ticketType {
+    width: 500px;
+    color: black;
+}
+
+.addNewTicket input#ticketSubject {
+    width: 500px;
+    color: black;
+}
+
+.addNewTicket textarea#ticketContent {
+    width: 500px;
+    height: 200px;
+    color: black;
+}
+
+.buttonYo a {
+    margin-left: 20px;
+}
