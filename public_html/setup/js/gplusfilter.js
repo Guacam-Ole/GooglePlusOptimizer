@@ -33,15 +33,17 @@ var observer = new MutationObserver(function (mutations) {
                 if (addedNode.classList!==undefined) {
                     if (addedNode.classList.contains('PD')) {
                         PaintBin(addedNode);
+                    } else if (addedNode.classList.contains('nja')) {
+                        FilterBlocks(addedNode);
                     } else {
                         var jsModel=addedNode.attributes["jsmodel"];
                         if (jsModel!==undefined && jsModel.value==="XNmfOc") {
                             StartFilter(addedNode);
                         } 
-                    }
-                    
+                    }                    
                 }
            });
+           ShowWidgets();
        }
    });
 });
@@ -125,22 +127,6 @@ function SortByName(a, b) {
     return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
-//function LoadHashTags()
-//{
-//    if (Subs.Settings.Values.DisplayQuickHashes ) {
-//        var lasthashtag;
-//        //if ($('#quickht')!==undefined) {
-//        $('#quickht')[0].innerHTML = "Quick-Hashtags:<br/>";
-//
-//        var allLinks = $('a[href^="explore/"]').sort(SortByName);
-//        allLinks.each(function (i, val) {
-//            if (lasthashtag !== val.text.toLowerCase()) {
-//                lasthashtag = val.text.toLowerCase();
-//                $('#quickht').append('<a href="' + val.href + '">' + val.text + '</a><br/>');
-//            }
-//        });
-//    }
-//}
 
 function GetAllCircles()
 {
@@ -229,19 +215,12 @@ function InitGoogle() {
     PageLoad();
       
     chrome.extension.sendMessage("show_page_action");
-    
-   
-    
+      
     
 }
 
-  
- 
-
 function LoadGoogle() {
     
-    
-
 }
 // Yp yt Xa
 
@@ -344,6 +323,37 @@ function SingleMeasure(setting, measureTitle, functionName) {
     }
 }
 
+function FilterBlocks(changedElements) {
+    var $ce=$(changedElements);
+    Subs.Measure=new gpoMeasure("DOM", true);
+    SingleMeasureBool(Subs.Settings.Values.Community, "Community",function() {
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:112"]'));
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:116"]'));
+    });   
+    SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday",function() {
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:114"]'));
+    });
+    SingleMeasureBool(Subs.Settings.Values.Known, "Persons",function() {
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:103"]'));
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:105"]'));
+        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:106"]'));
+    });
+}
+
+function ShowWidgets() {
+  /* Widgets */
+    SingleMeasure(Subs.Clock, "stoppwatch", function() {
+        Subs.Clock.Dom();
+    });
+    SingleMeasure(Subs.Soccer, "sportEnabled", function() {
+        Subs.Soccer.Dom();
+    });
+    SingleMeasure(Subs.Flags, "displayLang", function() {
+        Subs.Flags.Dom();
+    });
+    
+}
+
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
@@ -353,7 +363,7 @@ function StartFilter(changedElements) {
     
     if (Subs.Quickshare!==null) {
         Subs.Measure.Do("QuickShares",function() {
-            Subs.Quickshare.Events();
+            Subs.Quickshare.Events();   // TODO: prüfen!
         });
     }
     
@@ -388,18 +398,7 @@ function StartFilter(changedElements) {
     SingleMeasureBool(Subs.Settings.Values.Yt, "Youtube",function() {
         HideOnContent($ce,$ce.find('.SR'));
     });
-    SingleMeasureBool(Subs.Settings.Values.Community, "Community",function() {
-        HideOnContent($ce,$ce.find('[data-iid="sii2:112"]'));
-        HideOnContent($ce,$ce.find('[data-iid="sii2:116"]'));
-    });   
-    SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday",function() {
-        HideOnContent($ce,$ce.find('[data-iid="sii2:114"]'));
-    });
-    SingleMeasureBool(Subs.Settings.Values.Known, "Persons",function() {
-        HideOnContent($ce,$ce.find('[data-iid="sii2:103"]'));
-        HideOnContent($ce,$ce.find('[data-iid="sii2:105"]'));
-        HideOnContent($ce,$ce.find('[data-iid="sii2:106"]'));
-    });
+    
   
     SingleMeasureBool(Subs.Settings.Values.Hashtag, "Hashtag-Filter", function() {
         DOMFilterHashtags($ce);        
@@ -414,13 +413,7 @@ function StartFilter(changedElements) {
         HideOnContent($ce,$ce.find('div.ki.ve').find('div.Wy'));
     });
     
-    /* Widgets */
-    SingleMeasure(Subs.Clock, "stoppwatch", function() {
-        Subs.Clock.Dom($ce);
-    });
-    SingleMeasure(Subs.Soccer, "sportEnabled", function() {
-        Subs.Soccer.Dom($ce);
-    });
+   
     
     /* Erweiterungen */
     SingleMeasure(Subs.Lsr, "measureTitle", function() {
@@ -443,9 +436,7 @@ function StartFilter(changedElements) {
         Subs.Bookmarks.DisplayBookmarks($ce);
         Subs.Bookmarks.PaintStars($ce);
     });
-    SingleMeasure(Subs.Flags, "displayLang", function() {
-        Subs.Flags.Dom($ce);
-    });
+    
 }
 
 function getUrlParameter(sParam) {
@@ -641,6 +632,9 @@ function PageLoad() {
         // Initial Mutation Observer simulieren:
         $('[jsmodel="XNmfOc"]').each(function(index,value) {
             StartFilter(value);
+        });
+        $('.nja').each(function(index,value){
+            FilterBlocks(value);
         });
         
         StartObservation();
