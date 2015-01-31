@@ -178,6 +178,7 @@ function AddHeadWrapper(parent) {
  * Wizard-Kachel zeichnen
  */
 function DrawWizardTile() {
+    return;
     try {
         var lang = chrome.i18n.getMessage("lang");
         if (NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
@@ -322,21 +323,26 @@ function SingleMeasure(setting, measureTitle, functionName) {
         });
     }
 }
+function HideOnAttr(parent, attr, value) {
+    if (parent.attr(attr)===value) {
+        parent.hide();
+    }
+}
 
 function FilterBlocks(changedElements) {
     var $ce=$(changedElements);
     Subs.Measure=new gpoMeasure("DOM", true);
     SingleMeasureBool(Subs.Settings.Values.Community, "Community",function() {
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:112"]'));
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:116"]'));
+        HideOnAttr($ce,'data-iid','sii2:112');
+        HideOnAttr($ce,'data-iid','sii2:116');
     });   
     SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday",function() {
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:114"]'));
+        HideOnAttr($ce,'data-iid','sii2:114');
     });
     SingleMeasureBool(Subs.Settings.Values.Known, "Persons",function() {
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:103"]'));
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:105"]'));
-        HideOnContent($ce,$ce.parent().find('[data-iid="sii2:106"]'));
+        HideOnAttr($ce,'data-iid','sii2:103');
+        HideOnAttr($ce,'data-iid','sii2:105');
+        HideOnAttr($ce,'data-iid','sii2:106');
     });
 }
 

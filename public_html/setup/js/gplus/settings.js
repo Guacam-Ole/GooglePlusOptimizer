@@ -74,9 +74,19 @@ gpoSettings.prototype = {
             if (strValue==="undefined") {
                 strValue=null;
             }
-            if (strValue!==null && strValue!=="true" && strValue!=="false" && strValue.indexOf("[")!==0 && strValue.indexOf("{")!==0) {
-                strValue="\""+strValue+"\"";
+            var putBrackets=true;
+            if (strValue===null || strValue===undefined || !isNaN(strValue)|| strValue==="true" || strValue==="false") {
+                // Kein String
+                putBrackets=false;
+            } else if (strValue.indexOf("[")===0 || strValue.indexOf("{")===0) {
+                // JSON-Objekt
+                putBrackets=false;
             }
+            if (putBrackets) {
+                    strValue="\""+strValue+"\"";
+            }
+            
+            
             var strName=value.Name.substring(0,1).toUpperCase()+value.Name.substring(1);
             json+="\""+strName+"\":"+strValue+",";
         });
