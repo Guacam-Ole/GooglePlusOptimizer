@@ -52,6 +52,8 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("Sport"));
         obj.AllSettings.push(new gpoSetting("QuickShares"));
         obj.AllSettings.push(new gpoSetting("weatherWidget"));
+        obj.AllSettings.push(new gpoSetting("enableQs"));
+        obj.AllSettings.push(new gpoSetting("UserCols"));   
     },
     Load:function(ret) {
         var obj=this;

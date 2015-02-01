@@ -72,7 +72,7 @@ gpoWeather.prototype = {
         }   
     },
     GetImage:function(code,big) {
-         var prefix = chrome.extension.getURL("./setup/images/weather/" + (big ? "150x150" : "50x50"));
+         var prefix = imageHost+"weather/"+ (big ? "150x150" : "50x50");
         var fname;
         switch (JSON.parse(code))
         {

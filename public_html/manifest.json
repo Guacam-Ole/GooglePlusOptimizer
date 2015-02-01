@@ -16,10 +16,10 @@
             [{
                     "matches": ["https://plus.google.com/*"],
                     "js": [
-                        "setup/js/jquery-1.10.2.min.js",
-                        "setup/js/jquery-ui.min.js",
-                        "setup/js/date.js",
-                        "setup/js/ion.sound.js",
+                        "setup/js/lib/jquery-1.10.2.min.js",
+                        "setup/js/lib/jquery-ui.min.js",
+                        "setup/js/lib/date.js",
+                        "setup/js/lib/ion.sound.js",
                         "setup/js/wizard.js",
                         "setup/js/gplus/settings.js",
                         "setup/js/gplus/measure.js",
@@ -44,7 +44,7 @@
     "options_page": "setup/redirect.html",
     "background":
             {
-                "scripts": ["setup/js/jquery-1.10.2.min.js","filter.js"],
+                "scripts": ["setup/js/lib/jquery-1.10.2.min.js","filter.js"],
                 "persistent": false
             },
     "icons":

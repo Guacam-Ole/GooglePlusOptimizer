@@ -207,14 +207,14 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("UserCols", request.ParameterValue);
                 sendResponse({Result: "Settings Saved."});
             }
-            else if (request.Action === "LoadUsers")
-            {
-                var userSettings = localStorage.getItem("UserCols");
-                sendResponse({
-                    AllUserSettings: userSettings,
-                    Result: "Settings loaded."
-                });
-            }
+//            else if (request.Action === "LoadUsers")
+//            {
+//                var userSettings = localStorage.getItem("UserCols");
+//                sendResponse({
+//                    AllUserSettings: userSettings,
+//                    Result: "Settings loaded."
+//                });
+//            }
             
             else if (request.Action === "LoadTicks")
             {

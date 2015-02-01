@@ -8,18 +8,17 @@ var gpoUser=function() {
 gpoUser.prototype = {
     constructor: gpoUser,
     Init:function() {
-        this.OptStartColors();
-        this.PaintColorBlock();
+        this.OptStartColors();                    
     },
     Dom:function($ce) {
+        this.PaintColorBlock();
         this.PaintForUser($ce);        
-        
-        this.PaintCurrentUserSettings($ce);
+        this.PaintCurrentUserSettings();
     },
     OptStartColors:function() {
         this.AllCssColors = this.GetCssColors();
-        this.GetAllUserSettings();
-        console.log("Color loaded.");
+        //this.GetAllUserSettings();
+        console.log("GPO: Usercolors loaded.");
     },
     PaintColorBlock:function() {
         var obj=this;
@@ -35,7 +34,10 @@ gpoUser.prototype = {
         var userName = obj.GetUserName();
         var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
-        $('[guidedhelpid="profile_name"]').parent().append(colorBlock + userInfo.replace('__USER__', userName));
+        var $completeBlock=$(colorBlock + userInfo.replace('__USER__', userName));
+        obj.PaintCurrentUserSettings($completeBlock);
+        
+        $('[guidedhelpid="profile_name"]').parent().append($completeBlock);
         $('.colClick').click(function() {
             obj.RemoveSelection();
             $(this).append("✓");
@@ -75,28 +77,30 @@ gpoUser.prototype = {
     GetUserName:function() {
         return $('[guidedhelpid="profile_name"]').html();
     },
-    PaintCurrentUserSettings:function(obj) {
+    PaintCurrentUserSettings:function($ce) {
+        var obj=this;
+        if ($ce===undefined) {
+            $ce=$(document);
+        }
         if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1)
         {
             return;
         }
-        if ($(".colorUsers").length > 0 || $('[ guidedhelpid="profile_name"]').length === 0)
+        if ( $('[ guidedhelpid="profile_name"]').length === 0)
         {
             return;
         }
-        if (obj===undefined) {
-            obj=this;
-        }
-        var currentUserSettings = obj.GetCurrentUserSettings() || null;
+        
+        var currentUserSettings = this.GetCurrentUserSettings() || null;
         if (currentUserSettings === null) {
             return; // Noch keine Einstellungen
         }
 
         var usrText = currentUserSettings.Text;
-        $('.userRemark').val(usrText);
+        $ce.find('.userRemark').val(usrText);
         var usrColor = currentUserSettings.Color;
 
-        $('.colorUsers td').each(function() {
+        $ce.find('.colorUsers td').each(function() {
             var color = $(this).css("background-color");
             if (color === usrColor) {
                 obj.RemoveSelection();
@@ -151,7 +155,8 @@ gpoUser.prototype = {
         var currentSettingsObject = obj.GetSettingsObject(-1, remark, color);
         allUserSettings.push(currentSettingsObject);
         obj.SaveAllUserSettings(allUserSettings);
-    },RemoveUserSettigns:function(i) {
+    }
+    ,RemoveUserSettigns:function(i) {
         var obj=this;
         var allUserSettings = obj.AllUserSettings;
         allUserSettings.splice(i, 1);
@@ -189,16 +194,20 @@ gpoUser.prototype = {
                 obj.UpdateUserSettings(currentUserSettings.I, userRemark, selectedColor);
             }
         }
-    },
-    GetAllUserSettings:function() {
-        var obj=this;
-        chrome.runtime.sendMessage({
-            Action: "LoadUsers"
-        }, function(response) {
-            obj.AllUserSettings= JSON.parse(response.AllUserSettings);
-           // obj.PaintForUser(document);
-            //obj.PaintColorBlock();            
-        });
+//    },
+//    GetAllUserSettings:function() {
+//        var obj=this;
+//        chrome.runtime.sendMessage({
+//            Action: "LoadUsers"
+//        }, function(response) {
+//            obj.AllUserSettings= JSON.parse(response.AllUserSettings);   
+//            $('[role="article"]').each(function(index,value) {
+//                obj.PaintForUser($(value));    // Nach dem Laden der Einstellungen Initial ausführen
+//            });
+//            obj.PaintColorBlock();
+//            
+//            //obj.PaintColorBlock();            
+//        });
     },HexToR:function(h) {
         var obj=this;
         return parseInt((obj.CutHex(h)).substring(0, 2), 16);

@@ -1,7 +1,7 @@
 console.log('g+ - filter started');
 
 var columnCount;
-
+var imageHost="http://files.oles-cloud.de/optimizer/";
 
 
 var domainBlacklist = [];
@@ -398,7 +398,7 @@ function StartFilter(changedElements) {
     });
     
     /* Blöcke */
-    SingleMeasureBool(Subs.Settings.Values.Plus, "Plus1",function() {
+    SingleMeasureBool(Subs.Settings.Values.Plus1, "Plus1",function() {
         HideOnContent($ce,$ce.find('.xv'));
     });
     SingleMeasureBool(Subs.Settings.Values.Yt, "Youtube",function() {
@@ -575,6 +575,9 @@ function InitObjects() {
     Subs.Clock=InitObject(Subs.Settings.Values.Stoppwatch,gpoClock);
     Subs.Emoticons=InitObject(Subs.Settings.Values.ShowEmoticons,gpoEmoticons);
     Subs.User=InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
+    if (Subs.User!==null) {
+        Subs.User.AllUserSettings=Subs.Settings.Values.UserCols;
+    }
     var weatherSettings=Subs.Settings.Values.WeatherWidget;
     if (weatherSettings!==undefined && weatherSettings!==null) {
         //weatherSettings=JSON.parse(weatherSettings);
@@ -585,8 +588,11 @@ function InitObjects() {
     //Subs.Weather=InitObject(Subs.Settings.Values.WeatherEnabled,gpoWeather);    
     
     var qs=Subs.Settings.Values.QuickShares;
-    Subs.Quickshare=InitObject((qs!==null && qs.length>0),gpoQuickShare);
-    Subs.Quickshare.Shares=qs;
+    var qsEnabled=Subs.Settings.Values.EnableQs;
+    Subs.Quickshare=InitObject((qsEnabled && qs!==null && qs.length>0),gpoQuickShare);
+    if (Subs.Quickshare!==null) {
+        Subs.Quickshare.Shares=qs;
+    }
 }
 
 function PageLoad() {
