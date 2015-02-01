@@ -35,13 +35,25 @@ var observer = new MutationObserver(function (mutations) {
                         PaintBin(addedNode);
                     } else if (addedNode.classList.contains('nja')) {
                         FilterBlocks(addedNode);
-                    } else {
+                    } else if (addedNode.classList.contains('URaP8')) {
+                        DoQuickshare(addedNode, 1);
+                    } 
+                    //g-h-f-N-N
+                   else {
                         var jsModel=addedNode.attributes["jsmodel"];
                         if (jsModel!==undefined && jsModel.value==="XNmfOc") {
                             StartFilter(addedNode);
                         } 
                     }                    
                 }
+           });
+           forEach.call(mutation.removedNodes,function(removedNode){
+               if (removedNode.classList!==undefined) {
+                   if (removedNode.classList.contains("YB")) {
+                       // private Beiträge, Warnmeldung
+                       DoQuickshare(removedNode,1);
+                   }
+               }
            });
            ShowWidgets();
        }
@@ -326,6 +338,12 @@ function SingleMeasure(setting, measureTitle, functionName) {
 function HideOnAttr(parent, attr, value) {
     if (parent.attr(attr)===value) {
         parent.hide();
+    }
+}
+
+function DoQuickshare(changedElements, step) {
+    if (Subs.Quickshare!==null) {
+        Subs.Quickshare.Events(changedElements, step);
     }
 }
 
