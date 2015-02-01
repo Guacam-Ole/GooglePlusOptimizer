@@ -142,7 +142,6 @@ function SortByName(a, b) {
 
 function GetAllCircles()
 {
-
     // Kreise auslesen
     $('script').each(function () {
         try {
