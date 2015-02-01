@@ -148,3 +148,144 @@ input#ticketUser {
 .buttonYo a {
     margin-left: 20px;
 }
+
+.qsCircle {
+    background: #4285f4;
+    background: -webkit-gradient(linear,left top,left bottom,from(#4285f4),to(#4285f4));
+    border: 1px solid #4285f4;
+    border-radius: 15px;
+    display: inline-block;
+    -webkit-border-radius: 15px;
+    color: #fff;
+    height: 28px;
+    margin: 2px;
+    outline: none;
+    padding: 0 1px;
+    vertical-align: middle;
+    cursor: default;
+    white-space: nowrap;
+    font: normal 13px Roboto,arial,sans-serif;
+    
+    max-height: 310px;
+    overflow-y: auto;
+    
+    -webkit-box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04);
+    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04); 
+    overflow: hidden;
+}
+
+
+
+.qsCircle .innerCircle {
+    padding: 4px 10px 6px 5px;
+}
+
+.qsCircle.green {
+    background: #67ae3f;
+    background: -webkit-gradient(linear,left top,left bottom,from(#77bb4e),to(#57a02f));
+    border: 1px solid #3f980e;
+}
+
+.qsCircleText {
+    vertical-align: middle;    
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    word-wrap: normal;
+    padding-top: 6px;
+}
+
+.qsCircleWorld {
+    
+    background: no-repeat url(../images/icons/googleicons.png) -17px -594px;
+}
+
+.qsCircleMany {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -796px;
+}
+.qsCircleSingle {
+    
+    //background: no-repeat url(https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=16);
+    background: no-repeat url(../images/icons/googleicons.png) -17px -488px;
+}
+
+.qsCirclePerson {
+    
+    //background: no-repeat url(https://lh6.googleusercontent.com/-F-0xs9WEtPY/AAAAAAAAAAI/AAAAAAAAwx4/_QM87q2oUO4/photo.jpg?sz=32);
+    background: no-repeat url(../images/icons/googleuser.png);
+    opacity: .7;
+    float: left;
+    width: 32px;
+    margin-left: 0px;
+    margin-top: -2px;
+    height: 30px;
+    border: 0px solid #4285f4 !important;  
+}
+.qsCircleWorld, .qsCircleMany, .qsCircleSingle {
+    opacity: .7;
+    float: left;
+    width: 17px;
+    margin-left: 7px;
+    margin-top: 5px;
+    height: 16px;
+}
+
+.qsCircleRemove {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -285px;
+    opacity: .7;
+    float: right;
+    width: 17px;
+    margin-right: 7px;
+    margin-top: 5px;
+    height: 16px;
+}
+
+.qsCircles {
+    border: gray;
+    border-width: 1px;
+    border-style: dotted;
+    min-height: 42px;
+    margin-right: 10px;
+}
+.selectedQS {
+    width: 600px;
+    background: rgb(229, 229, 229);
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.qsText {
+    height: 20px;
+    font-weight: bold;
+}
+.qsRight {
+    margin-left: 85px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.qsImage {
+    float: left;
+    width: 64px;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    height: 64px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+input.qsAddCirlce {
+    width: 200px;
+    padding-left: 10px;
+    margin-top: 5px;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background: white;
+    height: 20px;
+    border-color: gray;
+    border-width: 1px;
+}
