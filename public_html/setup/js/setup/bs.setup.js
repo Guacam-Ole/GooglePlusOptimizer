@@ -1,4 +1,5 @@
 var setup;
+var imageHost="http://files.oles-cloud.de/optimizer/";
 
 $(document).ready(function ()
 {
@@ -162,6 +163,8 @@ Setup.prototype = {
                 localStorage.setItem("filterGifOnly","true");
             }
         });
+        
+        
         $(document).on('click', '#chkFilterMp4', function ()
         {
             if ($($(this)[0]).hasClass("active")) {
@@ -170,6 +173,44 @@ Setup.prototype = {
                 localStorage.setItem("filterMp4Only","true");
             }
         });
+        
+        $(document).on('click', '#chkWhamText', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("WHAMWhamText","false");
+            } else {
+                localStorage.setItem("WHAMWhamText","true");
+            }
+        });
+        
+        $(document).on('click', '#chkWhamUrl', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("WHAMWhamUrl","false");
+            } else {
+                localStorage.setItem("WHAMWhamUrl","true");
+            }
+        });
+        $(document).on('click', '#chkChristmasText', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("WHAMChristmasText","false");
+            } else {
+                localStorage.setItem("WHAMChristmasText","true");
+            }
+        });
+        $(document).on('click', '#chkChristmasUrl', function ()
+        {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("WHAMChristmasUrl","false");
+            } else {
+                localStorage.setItem("WHAMChristmasUrl","true");
+            }
+        });
+        
+        
+        
+        
         
         $(document).on('click','.thumbnail',function() {
             $(this).closest('.rowColumns').find('.thumbnail').each(function(index,value){
@@ -187,7 +228,7 @@ Setup.prototype = {
                 $(this).find('i').removeClass("fa-check").addClass("fa-times");
                 var setting=$(this).attr('data-setting');
                 if (setting==='weatherEnabled') {
-                    obj.SaveWeather($(this).closest('.singleFeature'),obj);
+                    obj.SaveWeather($(this).closest('.singleFeature'),obj,true);
                 } else {
                    localStorage.setItem(setting,"false");
                 }
@@ -195,7 +236,7 @@ Setup.prototype = {
                 $(this).find('i').removeClass("fa-times").addClass("fa-check");
                 var setting=$(this).attr('data-setting');
                 if (setting==='weatherEnabled') {
-                    obj.SaveWeather($(this).closest('.singleFeature'),obj);
+                    obj.SaveWeather($(this).closest('.singleFeature'),obj,true);
                 } else {
                    localStorage.setItem(setting,"true");
                 }
@@ -204,7 +245,12 @@ Setup.prototype = {
         
         $(document).on('change', '.citySelect select', function () { 
             $(this).closest('.weatherSelection').find('.cityId').val($(this).val());
+            $(this).closest('.weatherSelection').find('.cityName').val($(this).select()[0].selectedOptions[0].text);
+            $(this).fadeOut();
+            $('.cityName').fadeIn();
+            
             obj.SaveWeather($(this).closest('.singleFeature'),obj);
+            
         });
         
         $(document).on('click', '.weatherSelection a', function () {
@@ -217,6 +263,7 @@ Setup.prototype = {
             var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=json';
             console.log("API:" + api);
             var firstEntry=true;
+            
             $.getJSON(api, function(data) {
                 for (var i in data.query.results.place)
                 {
@@ -236,13 +283,19 @@ Setup.prototype = {
                     var id = place.woeid;
                     if (firstEntry) {
                          $('.weatherSelection').find('.cityId').val(id);
+                         $('.weatherSelection').find('.cityName').val(entry);
                         firstEntry=false;
                         obj.SaveWeather($('.singleFeature'),obj);
                     }
                     weatherCombo.append("<option value='" + id + "'>" + entry + "</option>");
                 }
+                if (!firstEntry) {
+                    $('.citySelect').fadeIn();
+                    $('.cityName').fadeOut();
+                }
             });
-            $('.citySelect').fadeIn();
+            
+           
             return false;
         } catch (ex) {
             console.log(ex);
@@ -251,8 +304,9 @@ Setup.prototype = {
         
         
     },
-    SaveWeather:function($parent,obj) {
-        var isChecked=!$parent.find('.btn.optimizer').hasClass('active');
+    SaveWeather:function($parent,obj,isBox) {
+        isBox=isBox||false;
+        var isChecked=$parent.find('.btn.optimizer').hasClass('active')!==isBox;
         var column=obj.GetColumn($parent);
         var cityName=$parent.find('.weatherSelection .cityName').val();
         var id=$parent.find('.weatherSelection .cityId').val();
@@ -314,7 +368,7 @@ Setup.prototype = {
         template.find('.featureDescription').html(feature.Description);
         template.find('.btn.optimizer').attr('data-setting', feature.Short);
         if (feature.Image !== undefined) {
-            template.find('.examplePicture').attr("src", "./wizimg/" + feature.Image);
+            template.find('.examplePicture').attr("src", imageHost+"wizard/"+ this.CurrentLang +"/"+ feature.Image);
         } else {
             template.find('.examplePicture').remove();
         }

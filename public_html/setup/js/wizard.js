@@ -64,6 +64,7 @@ function NewWizardOptionsExist(lastwizard) {
  */
 function InitWizard(version)
 {
+    return;
     try {
         if (wizardInitialized === true) {
             return;

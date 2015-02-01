@@ -31,16 +31,19 @@ gpoTrophy.prototype= {
     },
     About:function() {
         var obj=this;
-        $(document).ready(function() {
-            if (window.location.pathname.indexOf("/about") > 0) {
-                if ($('.trophyDisplay').length > 0) {
-                    // schon gezeichnet
-                    return;
-                } else {
-                    obj.Draw(false, null, GetCurrentUserId());
-                }
-            }
-        });
+        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
+            return;
+        }            
+        if ($('.trophyDisplay').length > 0) {
+            // schon gezeichnet
+            return;
+        } else {
+            obj.Draw(false, null, obj.GetCurrentUserId());
+        }
+    },
+    GetCurrentUserId:function() {
+        var dirtyId = $('[role=tablist]').attr("id");
+        return dirtyId.split('-')[0];
     },
     Draw:function(hover, $trophy, userId) {
         var obj=this;
@@ -89,6 +92,7 @@ gpoTrophy.prototype= {
         return $('[guidedhelpid="profile_viewas_button"]').length>0;
     },
     RenderEmpty:function() {
+        
         if ($('.trophyDisplay').length > 0) {
             // schon gezeichnet
             return;
@@ -103,14 +107,17 @@ gpoTrophy.prototype= {
                    + "{{NOTROPHY}}"
                    + "</div>{{ITSME}}</div>";
 
-        if (ItsMe()) {
+        if (this.ItsMe()) {
             itsmeblock="<div class='moredetails'><a href='http://www.trophies.at/index."+chrome.i18n.getMessage("lang")+".php#collect'>"+chrome.i18n.getMessage("letsgo")+"</div>";
             noTrophiesYet=chrome.i18n.getMessage("youhavenotrophies");
         } else {
-            noTrophiesYet=GetUserName()+" "+chrome.i18n.getMessage("hasnotrophies");
+            noTrophiesYet=this.GetUserName()+" "+chrome.i18n.getMessage("hasnotrophies");
         }
         html=html.replace("{{ITSME}}",itsmeblock).replace("{{NOTROPHY}}",noTrophiesYet);
         $('.Ypa.jw.am:first').prepend(html);
+    },
+    GetUserName:function() {
+        return $('[guidedhelpid="profile_name"]').html();
     },
     GetUsers:function() {
         var obj=this;
