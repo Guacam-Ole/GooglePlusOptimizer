@@ -6,6 +6,8 @@ var gpoQuickShare=function(shares) {
     this.Step=-1;
 };
 
+
+
 gpoQuickShare.prototype= {
     constructor: gpoQuickShare,
     Dom:function($ce) {
@@ -50,65 +52,47 @@ gpoQuickShare.prototype= {
         });
         chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(kreise)});
     },
-    Events:function(){
+    Events:function(changedElements, step){
+        if (this.Step<1) { // gar kein QS
+            return;
+        }
         var obj=this;
-        switch (obj.Step)
-        {
-            case 0:
-                obj.Step++;
-                break;
-            case 1:
-                // Standard-auswahl beim teilen löschen
-                if (obj.Link.closest('[role="article"]').parent() !== null)
-                {
-                    obj.Link.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function()
-                    {
-                        $(this).click();
-                    });
 
-                    obj.Step++;
-                }
-                break;
-            case 2:
-                // Kreisauswahl öffnen
-                if (obj.Link.closest('[role="article"]').parent() !== null)
-                {
-                    if (obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0)
-                    {
-                        obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
-                        obj.Step++;
-                    }
-                }
-                break;
-            case 3:
-                // Kreise auswählen
-                if (obj.Link.closest('[role="article"]').parent() !== null)
-                {
-                    var lastCircle = obj.Circles.pop();
-                    $('.d-A').each(function()
-                    {
-                        if ($(this).text().indexOf(lastCircle) === 1) {
-                            $(this).click();
-
+        // Standard-auswahl beim teilen löschen
+        if (obj.Link.closest('[role="article"]').parent() !== null) {
+            obj.Link.closest('[role="article"]').parent().find('.g-h-f-m-bd-nb').each(function() {
+                // Alle Kreise entfernen
+                $(this).click();                    
+            });
+            console.log("GPO->QS: Vorhandene Kreise entfernt");
+            OpenTimer=setTimeout(function() {
+                if (obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0) {
+                    obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
+                    console.log("GPO->QS: Kreisauswahl geöffnet");
+                    SelectTime=setTimeout(function() {
+                        while (obj.Circles.length>0)  {
+                            var lastCircle = obj.Circles.pop();
+                            $('.d-A').each(function() {
+                                if ($(this).text().indexOf(lastCircle) === 1) {
+                                    $(this).click();
+                                }
+                            });
                         }
-                    });
-
-                    if (obj.Circles.length === 0) {
-                        obj.Step++;
-                    }
+                        console.log("GPO->QS: Kreise geklickt");
+                        FinalTime=setTimeout(function() {
+                             obj.Link.closest('[role="article"]').parent().find('[role="listbox"]').hide();
+                            if (obj.AsBookmark) {
+                                obj.Link.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
+                            } else {
+                                obj.Link.closest('[role="article"]').parent().find('[role="textbox"]').focus();
+                            }
+                            obj.Link.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
+                            obj.Step=-1;
+                            console.log("GPO->QS: Fertig");
+                        }, 1000);
+                    },1000);
                 }
-                break;
-            case 4:
-                // Alle Kreise ausgewählt, Letzte Schritte
-                obj.Link.closest('[role="article"]').parent().find('[role="listbox"]').hide();
-                if (obj.AsBookmark) {
-                    obj.Link.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
-                } else {
-                    obj.Link.closest('[role="article"]').parent().find('[role="textbox"]').focus();
-                }
-                obj.Link.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
-                obj.Step = -1;
-                break;
+            }, 1000);                      
         }
     },
     PaintIcons:function($ce) {
@@ -121,6 +105,13 @@ gpoQuickShare.prototype= {
 
                 for (var i in obj.Shares) {
                     var qs = obj.Shares[i];
+                    
+                    // Übergangsweise: Alte Icons ersetzen:
+                    if (qs.Image.indexOf('chrome-extension')>=0) {
+                        var smallPos=qs.Image.indexOf('/small');
+                        qs.Image=imageHost+"quickshare/"+qs.Image.substring(smallPos+7);
+                    }
+                    
                     iconHtml = iconHtml + '<div><img isBookmark="' + qs.BookMarkMode + '" circles="' + qs.Circles + '" class="quickShareImg" src="' + qs.Image.replace("enabled", "disabled") + '" title="' + qs.Circles + '"/></div>';
                 }
                 $(this).before('<div class="quickShare">' + iconHtml + '<br/></div><div class="qscl"></div>');
@@ -141,10 +132,12 @@ gpoQuickShare.prototype= {
     },
     StartClick:function(container) {
         this.Link = container;
+        //container.attr("circles","Hamburg,Nette Leute,Firmen");
         this.Circles= container.attr("circles").split(',');
+        
         this.AsBookmark= JSON.parse(container.attr("isBookmark"));
         this.Link.closest('[role="article"]').find('.Dg.Ut').click();
-        this.Step=1;
+        this.Step=1;        
     }
 };
 
