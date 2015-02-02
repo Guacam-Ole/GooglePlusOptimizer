@@ -239,6 +239,18 @@ input#ticketUser {
     margin-right: 7px;
     margin-top: 5px;
     height: 16px;
+    cursor: pointer;
+}
+
+.qsClose {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -285px;
+    opacity: .7;
+    float: right;
+    width: 17px;
+    margin-right: 7px;
+    margin-top: -5px;
+    height: 16px;
+    cursor: pointer;
 }
 
 .qsCircles {
@@ -288,4 +300,52 @@ input.qsAddCirlce {
     height: 20px;
     border-color: gray;
     border-width: 1px;
+}
+
+.qsIconCategory span {
+    font-size: 16pt;
+    float: left;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #d05454;
+    margin-bottom: 1px;
+    border-width: 1px;
+    color: white;
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+}
+
+.qsSelectIcon {
+    width: 420px;
+    height: 300px;
+    background: lightgrey;
+    border-style: solid;
+    border-width: 1px;
+    top: 20px;
+    overflow-y: auto;
+    left: 200px;
+    position: absolute;
+    overflow-x: hidden;
+    padding: 5px 5px 5px 5px;
+}
+
+.qsIconCategoryIcons {
+    display: none;
+    float: left;
+    border-style: dashed;
+    border-color: #d05454;
+    border-width: 2px;
+    margin-bottom: 5px;
+    margin-top: -1px;
+    margin-left: 50px;
+    margin-right: -5px;
+}
+
+.qsIconCategoryIcons img {
+    cursor: pointer;
+    margin: 2px;
 }
