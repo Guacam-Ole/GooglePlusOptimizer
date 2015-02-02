@@ -15,6 +15,13 @@ document.addEventListener("DOMSubtreeModified", function ()
     }
 });
 
+
+   $(document).on('click', '.qsIconCategory', function () {
+       $(this).find('.qsIconCategoryIcons').toggle();
+        return false;
+    });
+
+
 var Setup = function () {
 
     this.CurrentLang = this.GetLangFromUrl();
