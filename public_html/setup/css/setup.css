@@ -331,6 +331,7 @@ input.qsAddCirlce {
     position: absolute;
     overflow-x: hidden;
     padding: 5px 5px 5px 5px;
+    display: none;
 }
 
 .qsIconCategoryIcons {
@@ -348,4 +349,11 @@ input.qsAddCirlce {
 .qsIconCategoryIcons img {
     cursor: pointer;
     margin: 2px;
+}
+
+.addnewQs {
+    width: 600px;
+    margin-top: 5px;
+    border-width: 1px;
+    text-align: center;
 }
