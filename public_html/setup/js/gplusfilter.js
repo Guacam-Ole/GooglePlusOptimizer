@@ -37,14 +37,14 @@ var observer = new MutationObserver(function (mutations) {
                         FilterBlocks(addedNode);
                     } else if (addedNode.classList.contains('URaP8')) {
                         DoQuickshare(addedNode, 1);
-                    } 
+                    }
                     //g-h-f-N-N
                    else {
                         var jsModel=addedNode.attributes["jsmodel"];
                         if (jsModel!==undefined && jsModel.value==="XNmfOc") {
                             StartFilter(addedNode);
                         } 
-                    }                    
+                   }
                 }
            });
            forEach.call(mutation.removedNodes,function(removedNode){
@@ -162,7 +162,7 @@ function GetAllCircles()
                 {
                     cstr = cstr.replace(",,", ",null,");
                 }
-                ;
+
                 var allCircles = $.parseJSON(cstr);
                 if (allCircles.length === 1)
                 {
@@ -174,7 +174,7 @@ function GetAllCircles()
                         }
                     }
                 }
-                chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(newCircles)});
+                chrome.runtime.sendMessage({Action: "SaveCircles", Circles: allCircles});
             }
         } catch (ex) {
         }
@@ -348,6 +348,17 @@ function HideOnAttr(parent, attr, value) {
 function DoQuickshare(changedElements, step) {
     if (Subs.Quickshare!==null) {
         Subs.Quickshare.Events(changedElements, step);
+    }
+
+    // Communities speichern:
+    var $ce=$(changedElements);
+    if ($ce.find('.g-h-f-m-Fj-E').length>0) {
+        var communities=[];
+        $ce.find('.g-h-f-m-Fj-E').each(function(index, data) {
+            var block=$(data);
+            communities.push(block.text());
+        });
+        chrome.runtime.sendMessage({Action: "SaveCircles", Communities: communities });
     }
 }
 
