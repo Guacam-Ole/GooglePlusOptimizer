@@ -48,20 +48,33 @@ $(document).on('input','.qsAddCircle',function() {
 
 
 function GetSelectableElements(preselection) {
-    var allCircles=localStorage["QS.AllCircles"];
-    var allCommunities=localStorage["QS.Communities"];  // Geht nur im Communities-Fenster
-    var public=localStorage["Circles.Public"];
+    var allCircles=JSON.parse(localStorage["QS.AllCircles"]);
+    var allElements="<div class='qsDrilldown'>";
     if (preselection.length>0) {
-        $.get("https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q="+preselection, function (data) {
-            if (data.length>1) {
-                data[1].forEach(function(searchResults) {
-                    var name=searchResults[0];
-                    console.log(name);
-                });
+        if (allCircles.Public.indexOf(preselection)>=0) {
+           allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsPublic").replace("__CIRCLE__",allCircles.Public);
+        }
+        if (allCircles.MyCircles.indexOf(preselection)>=0) {
+            allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsMyCircles").replace("__CIRCLE__",allCircles.MyCircles);
+        }
+        if (allCircles.ExtendedCircles.indexOf(preselection)>=0) {
+            allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsExtendedCircles").replace("__CIRCLE__",allCircles.ExtendedCircles);
+        }
+        allCircles.Circles.forEach(function(circle){
+            if (circle.indexOf(preselection)>=0) {
+                allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsCircle").replace("__CIRCLE__",circle);
             }
         });
+        allCircles.Communities.forEach(function(community){
+            if (community.indexOf(preselection)>=0) {
+                allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsCircle").replace("__CIRCLE__",community);
+            }
+        });
+        allElements+="</div>";
     }
 }
+
+
 
 
 // google search: https://plus.google.com/complete/search?client=es-sharebox-search&tok=eQeF-jhW-wp1ypw3NXtO0w&authuser=0&xhr=t&q=ne
@@ -136,3 +149,4 @@ function OpenIconSelection() {
 
 var folderTemplate='<div class="qsIconCategory"><span>__CATEGORY__</span><div class="qsIconCategoryIcons">__ICONS__</div></div>';
 var singleImageTemplate='<img src="__PATH__/__FILE__"/>';
+var drillDownElementTemplate='<div class="qsSelectCircleElement __ICONCLASS_">__CIRCLE__</div>';
