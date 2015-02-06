@@ -67,6 +67,11 @@ function StartObservation() {
         characterData:false,
         attributes:false        
     });
+
+    var preselection="ole";
+    $.get("https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q="+preselection, function (data) {
+        console.log(data);
+    });
 }
 
 

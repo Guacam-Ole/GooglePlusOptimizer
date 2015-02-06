@@ -303,13 +303,13 @@ input.qsAddCirlce {
 }
 
 .qsIconCategory span {
-    font-size: 16pt;
+    font-size: 12pt;
     float: left;
     width: 100%;
     padding-left: 20px;
     padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     background-color: #d05454;
     margin-bottom: 1px;
     border-width: 1px;
@@ -317,6 +317,7 @@ input.qsAddCirlce {
     border-style: solid;
     border-color: black;
     cursor: pointer;
+    font-family: Helvetica;
 }
 
 .qsSelectIcon {

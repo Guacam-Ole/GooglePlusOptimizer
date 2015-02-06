@@ -3,6 +3,9 @@
  */
 var imageHost="http://files.oles-cloud.de/optimizer/";
 var mouseOffset;
+var selectedBlock;
+var completeIconList;
+var allFolders;
 
 $(document).on('click', '.qsIconCategory', function () {
     $(this).find('.qsIconCategoryIcons').toggle();
@@ -15,11 +18,54 @@ $(document).on('click','.qsClose',function() {
 });
 
 $(document).on('click','.qsImage img',function() {
+    selectedBlock=$(this).closest('.selectedQS');
     mouseOffset=$(this).offset();
     OpenIconSelection();
     return false;
 });
 
+
+
+$(document).on('click', '.qsIconCategoryIcons img', function () {
+    var bigImage=$(this).attr("src");
+    var smallImage=bigImage.replace("/big/","/small/");
+    if (selectedBlock!==null && selectedBlock!==undefined) {
+        selectedBlock.find('.qsImage img').attr("src",bigImage);
+    }
+
+    $('.qsSelectIcon').fadeOut();
+    return false;
+});
+
+$(document).on('input','.qsAddCircle',function() {
+    GetSelectableElements($(this).val());
+});
+
+
+
+
+
+
+
+function GetSelectableElements(preselection) {
+    var allCircles=localStorage["QS.AllCircles"];
+    var allCommunities=localStorage["QS.Communities"];  // Geht nur im Communities-Fenster
+    var public=localStorage["Circles.Public"];
+    if (preselection.length>0) {
+        $.get("https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q="+preselection, function (data) {
+            if (data.length>1) {
+                data[1].forEach(function(searchResults) {
+                    var name=searchResults[0];
+                    console.log(name);
+                });
+            }
+        });
+    }
+}
+
+
+// google search: https://plus.google.com/complete/search?client=es-sharebox-search&tok=eQeF-jhW-wp1ypw3NXtO0w&authuser=0&xhr=t&q=ne
+// https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q=ne
 
 
 function GetAllFolders() {
@@ -53,8 +99,7 @@ function GetIconListForFolder(folderData, redirect) {
     });
 }
 
-var completeIconList;
-var allFolders;
+
 
 function GetNextFolder(folder) {
     if (allFolders.length === 0) {
@@ -69,20 +114,23 @@ function GetNextFolder(folder) {
 
 
 function DisplayIcons() {
-    $('.qsSelectIcon').css('left',mouseOffset.left);
-    $('.qsSelectIcon').css('top',mouseOffset.top);
+    $('.qsSelectIcon').css('left',mouseOffset.left+120);
+    $('.qsSelectIcon').css('top',mouseOffset.top)+20;
 
     $('.qsSelectIcon').append($(completeIconList));
     $('.qsSelectIcon').fadeIn();
-
 }
 
 function OpenIconSelection() {
     $('.qsSelectIcon').empty();
-    allFolders = GetAllFolders();
-    if (allFolders.length > 0) {
-        completeIconList = "";
-        GetNextFolder();
+    if (completeIconList==undefined) {
+        allFolders = GetAllFolders();
+        if (allFolders.length > 0) {
+            completeIconList = "";
+            GetNextFolder();
+        }
+    } else {
+        DisplayIcons();
     }
 }
 
