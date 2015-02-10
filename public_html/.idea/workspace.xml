@@ -4,7 +4,6 @@
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filter.js" afterPath="$PROJECT_DIR$/filter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/qsTest.js" afterPath="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="public_html.iws" />
@@ -71,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/filter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34228188" vertical-offset="612" max-vertical-offset="5916">
-              <caret line="54" column="82" selection-start-line="54" selection-start-column="82" selection-end-line="54" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6052">
+              <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -83,20 +82,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.793103" vertical-offset="5768" max-vertical-offset="12784">
-              <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.43309858" vertical-offset="294" max-vertical-offset="12852">
+              <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
               <folding>
-                <marker date="1423249716970" expanded="true" signature="15720:15732" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="16009:16021" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="16349:16361" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="16612:16624" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="17026:17038" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="17308:17320" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="17594:17606" placeholder="..." />
-                <marker date="1423249716970" expanded="true" signature="17995:18004" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="15766:15778" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="16055:16067" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="16395:16407" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="16658:16670" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="17072:17084" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="17354:17366" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="17640:17652" placeholder="..." />
+                <marker date="1423600003704" expanded="true" signature="18041:18050" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -105,8 +104,8 @@
       <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2006" max-vertical-offset="2312">
-              <caret line="118" column="37" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="806" max-vertical-offset="2312">
+              <caret line="79" column="32" selection-start-line="79" selection-start-column="32" selection-end-line="79" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -139,8 +138,8 @@
         <option value="$PROJECT_DIR$/setup/css/setup.css" />
         <option value="$PROJECT_DIR$/setup/de/qsTest.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
-        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
         <option value="$PROJECT_DIR$/filter.js" />
+        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
       </list>
     </option>
   </component>
@@ -198,7 +197,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -295,6 +293,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,10 +329,14 @@
       <ConfigurationWrapper RunnerId="debuggableProgram" />
       <method />
     </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -341,10 +344,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -407,12 +406,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -465,6 +464,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2635">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5916">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5768" max-vertical-offset="12784">
+          <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
+          <folding>
+            <marker date="1423600003704" expanded="true" signature="15766:15778" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16055:16067" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16395:16407" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16658:16670" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17072:17084" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17354:17366" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17640:17652" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="18041:18050" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2006" max-vertical-offset="2312">
+          <caret line="118" column="37" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_locales/de/icons.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="400" max-vertical-offset="2210">
+          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4988" max-vertical-offset="6205">
+          <caret line="319" column="27" selection-start-line="319" selection-start-column="27" selection-end-line="319" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3837" max-vertical-offset="11186">
+          <caret line="240" column="16" selection-start-line="240" selection-start-column="16" selection-end-line="240" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2397">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
@@ -488,14 +564,14 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="12597">
           <caret line="73" column="7" selection-start-line="71" selection-start-column="3" selection-end-line="73" selection-end-column="7" />
           <folding>
-            <marker date="1423249716970" expanded="true" signature="15720:15732" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16009:16021" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16349:16361" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16612:16624" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17026:17038" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17308:17320" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17594:17606" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17995:18004" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="15766:15778" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16055:16067" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16395:16407" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16658:16670" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17072:17084" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17354:17366" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17640:17652" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="18041:18050" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -590,14 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2312">
-          <caret line="118" column="37" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2635">
@@ -608,29 +676,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+    <entry file="file://$PROJECT_DIR$/filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.793103" vertical-offset="5768" max-vertical-offset="12784">
-          <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6052">
+          <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
           <folding>
-            <marker date="1423249716970" expanded="true" signature="15720:15732" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16009:16021" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16349:16361" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="16612:16624" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17026:17038" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17308:17320" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17594:17606" placeholder="..." />
-            <marker date="1423249716970" expanded="true" signature="17995:18004" placeholder="..." />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/filter.js">
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34228188" vertical-offset="612" max-vertical-offset="5916">
-          <caret line="54" column="82" selection-start-line="54" selection-start-column="82" selection-end-line="54" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="806" max-vertical-offset="2312">
+          <caret line="79" column="32" selection-start-line="79" selection-start-column="32" selection-end-line="79" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43309858" vertical-offset="294" max-vertical-offset="12852">
+          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1423600003704" expanded="true" signature="15766:15778" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16055:16067" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16395:16407" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="16658:16670" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17072:17084" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17354:17366" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="17640:17652" placeholder="..." />
+            <marker date="1423600003704" expanded="true" signature="18041:18050" placeholder="..." />
           </folding>
         </state>
       </provider>
