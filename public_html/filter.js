@@ -45,12 +45,20 @@ chrome.runtime.onMessage.addListener(
         }
 
         else if (request.Action === "SaveCircles") {
-            var circleSettings=JSON.parse(localStorage.getItem("QS.AllCircles"));
+            var ls=localStorage.getItem("QS.AllCircles");
+            if (ls===undefined || ls===null||ls==="undefined") {
+                ls=JSON.stringify({});
+            }
+            var circleSettings=JSON.parse(ls);
             circleSettings.Circles=request.Circles;
             localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
         }
         else if (request.Action==="SaveCommunities") {
-            var circleSettings = JSON.parse(localStorage.getItem("QS.AllCircles"));
+            var ls=localStorage.getItem("QS.AllCircles");
+            if (ls===undefined || ls===null||ls==="undefined") {
+                ls=JSON.stringify({});
+            }
+            var circleSettings = JSON.parse(ls);
             circleSettings.Communities = request.Communities;
             localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
         }

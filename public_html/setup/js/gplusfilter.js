@@ -37,7 +37,7 @@ var observer = new MutationObserver(function (mutations) {
                         FilterBlocks(addedNode);
                     } else if (addedNode.classList.contains('URaP8')) {
                         DoQuickshare(addedNode, 1);
-                    }
+                    } 
                     //g-h-f-N-N
                    else {
                         var jsModel=addedNode.attributes["jsmodel"];
@@ -97,6 +97,9 @@ $(document).ready(function ()
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
         LoadSetup();
+    }
+    else if (window.location.href.indexOf("plus.google.com/communities")>=0) {
+        SaveCommunities();
     }
     else if (window.location.hostname === "plus.google.com")
     {
@@ -174,7 +177,7 @@ function GetAllCircles()
                         }
                     }
                 }
-                chrome.runtime.sendMessage({Action: "SaveCircles", Circles: allCircles});
+                chrome.runtime.sendMessage({Action: "SaveCircles", Circles: newCircles});
             }
         } catch (ex) {
         }
@@ -345,21 +348,22 @@ function HideOnAttr(parent, attr, value) {
     }
 }
 
+function SaveCommunities(changedElements) {
+    // Communities speichern:
+    var communities=[];
+    $('.UYd').find('.JUKJAb').each(function(index,value){
+        communities.push($(value).find('.ATc').text());
+    });
+
+    chrome.runtime.sendMessage({Action: "SaveCommunities", Communities: communities });
+}
+
 function DoQuickshare(changedElements, step) {
     if (Subs.Quickshare!==null) {
         Subs.Quickshare.Events(changedElements, step);
     }
 
-    // Communities speichern:
-    var $ce=$(changedElements);
-    if ($ce.find('.g-h-f-m-Fj-E').length>0) {
-        var communities=[];
-        $ce.find('.g-h-f-m-Fj-E').each(function(index, data) {
-            var block=$(data);
-            communities.push(block.text());
-        });
-        chrome.runtime.sendMessage({Action: "SaveCircles", Communities: communities });
-    }
+
 }
 
 function FilterBlocks(changedElements) {
