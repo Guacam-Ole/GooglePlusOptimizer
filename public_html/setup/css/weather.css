@@ -1,58 +1,56 @@
-     .weatherWrapper {
-            color: #262626;  
-            //width: 420px;
+.weatherWrapper {
+    color: #262626;
+/ / width : 420 px;
 
-        }
-        .weatherWrapper .weatherTitle 
-        {
-            font-size: 1.5em;            
-        }
-        .weatherWrapper .weatherDate 
-        {
-            font-size: 0.7em;   
-            color: #999;
+}
 
-        }
-        .weatherWrapper .weatherTemp
-        {
-            font-size: 3em;
-            text-align: center;
-        }
-        .weatherWrapper .weatherKind 
-        {
-            color: #999;
-            text-align: center;
-        }
-        .weatherWrapper .weatherImageBig
-        {
-            width: 200px;
-            padding-top: 10px;
-            float: left;
-        }
+.weatherWrapper .weatherTitle {
+    font-size: 1.5em;
+}
 
-        .forecastDay, .forecastType
-        {
-            font-size: 0.7em;  
-            color: #999;
-        }
-        .forecastTemp
-        {
-            font-size: 1em;
-            color: #999;
-        }
-        .weatherForecast
-        {
-            float:left;
-            text-align: center;
-            width: 20%;
-        }
+.weatherWrapper .weatherDate {
+    font-size: 0.7em;
+    color: #999;
 
+}
 
-        .clear {
-            clear: both;
-            display: block;
-            overflow: hidden;
-            visibility: hidden;
-            width: 0;
-            height: 0;
-        }
+.weatherWrapper .weatherTemp {
+    font-size: 3em;
+    text-align: center;
+}
+
+.weatherWrapper .weatherKind {
+    color: #999;
+    text-align: center;
+}
+
+.weatherWrapper .weatherImageBig {
+    width: 200px;
+    padding-top: 10px;
+    float: left;
+}
+
+.forecastDay, .forecastType {
+    font-size: 0.7em;
+    color: #999;
+}
+
+.forecastTemp {
+    font-size: 1em;
+    color: #999;
+}
+
+.weatherForecast {
+    float: left;
+    text-align: center;
+    width: 20%;
+}
+
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}

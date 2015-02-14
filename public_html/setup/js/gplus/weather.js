@@ -1,81 +1,78 @@
-var gpoWeather=function() {
+var gpoWeather = function () {
     this.Interval;
-    this.Blocks=new Array();
+    this.Blocks = new Array();
     this.Settings;
     this.ForecastHtml =
-            "<div class=\"weatherForecast\">"
-            + "<div><span class=\"forecastDay\">__DAY__</span>"
-            + "<div>"
-            + "<div class=\"forecastImage\"><img src=\"__IMG__\" /></div>"
-            + "<div class=\"forecastTemp\">__TEMP__</div>"
-            + "<div class=\"clear\"></div>"
-            + "</div>"
-            + "<span class=\"forecastType\">__KIND__</span>"
-            + "</div>"
-            + "<div class=\"clear\"> </div>"
-            + "</div>";
+        "<div class=\"weatherForecast\">"
+        + "<div><span class=\"forecastDay\">__DAY__</span>"
+        + "<div>"
+        + "<div class=\"forecastImage\"><img src=\"__IMG__\" /></div>"
+        + "<div class=\"forecastTemp\">__TEMP__</div>"
+        + "<div class=\"clear\"></div>"
+        + "</div>"
+        + "<span class=\"forecastType\">__KIND__</span>"
+        + "</div>"
+        + "<div class=\"clear\"> </div>"
+        + "</div>";
     this.HtmlTop =
-            "<div class=\"Ee fP Ue\" role=\"article\" style=\"height:380px\">"
-            + "<div class=\"weatherWrapper\">"
-            + "<div class=\"weatherDate\">__DATE__</div>"
-            + "<div class=\"weatherTitle\">__CITY__</div>"
-            + "<div>"
-            + "<div class=\"weatherImageBig\"><img src=\"__IMG__\" /></div>"
-            + "<div class =\"weatherValuesBig\">"
-            + "<div class=\"weatherKind\">__TODAY__</div>"
-            + "<div class =\"weatherTemp\">__TEMP__</div>"
-            + "<div class=\"weatherKind\" >__KIND__</div>"
-            + "</div>"
-            + "<div class =\"clear\"></div>"
-            + "<hr class =\"grau\" >"
-            + "</div>";
+        "<div class=\"Ee fP Ue\" role=\"article\" style=\"height:380px\">"
+        + "<div class=\"weatherWrapper\">"
+        + "<div class=\"weatherDate\">__DATE__</div>"
+        + "<div class=\"weatherTitle\">__CITY__</div>"
+        + "<div>"
+        + "<div class=\"weatherImageBig\"><img src=\"__IMG__\" /></div>"
+        + "<div class =\"weatherValuesBig\">"
+        + "<div class=\"weatherKind\">__TODAY__</div>"
+        + "<div class =\"weatherTemp\">__TEMP__</div>"
+        + "<div class=\"weatherKind\" >__KIND__</div>"
+        + "</div>"
+        + "<div class =\"clear\"></div>"
+        + "<hr class =\"grau\" >"
+        + "</div>";
 
     this.HtmlBottom = "</div></div>";
 
 };
 
 
-
 gpoWeather.prototype = {
     constructor: gpoWeather,
-    Init:function() {
+    Init: function () {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/weather.css") + "' type='text/css' media='screen' />"));
         this.Start();
     },
-    Start:function() {
-        var obj=this;
-        obj.Blocks= new Array();
-        var doPing=false;
+    Start: function () {
+        var obj = this;
+        obj.Blocks = new Array();
+        var doPing = false;
         if (obj.Settings.Position >= 0) {
-            doPing=true;
+            doPing = true;
             obj.Blocks.push(obj.Settings.Id);
             CreateBlock(parseInt(obj.Settings.Position) + 1, "wetter" + obj.Settings.Id);
         }
-        
+
         if (doPing) {
             obj.Ping();
         }
     },
-    Ping:function() {
-        var obj=this;
-         if (obj.Blocks === null || obj.Blocks=== undefined) {
+    Ping: function () {
+        var obj = this;
+        if (obj.Blocks === null || obj.Blocks === undefined) {
             return;
         }
         for (var i in obj.Blocks) {
             obj.UpdateWeather("wetter" + obj.Blocks[i], obj.Blocks[i]);
         }
-        if (obj.Interval=== null || obj.Interval === undefined)
-        {
-            obj.Interval = setInterval(function() {
+        if (obj.Interval === null || obj.Interval === undefined) {
+            obj.Interval = setInterval(function () {
                 obj.Ping();
             }, 300000);
-        }   
+        }
     },
-    GetImage:function(code,big) {
-         var prefix = imageHost+"weather/"+ (big ? "150x150" : "50x50");
+    GetImage: function (code, big) {
+        var prefix = imageHost + "weather/" + (big ? "150x150" : "50x50");
         var fname;
-        switch (JSON.parse(code))
-        {
+        switch (JSON.parse(code)) {
             case 0:
             case 1:
             case 2:
@@ -170,8 +167,8 @@ gpoWeather.prototype = {
         }
         return prefix + "/" + fname + ".png";
     },
-    ForeCast:function(forecast, unit) {
-       var obj=this;
+    ForeCast: function (forecast, unit) {
+        var obj = this;
         var forImage = obj.GetImage(forecast.code, false);
         return obj.ForecastHtml
             .replace("__IMG__", forImage)
@@ -179,27 +176,27 @@ gpoWeather.prototype = {
             .replace("__TEMP__", forecast.low + " - " + forecast.high + " °" + unit)
             .replace("__KIND__", forecast.text);
     },
-    UpdateWeather:function(id,woeid) {
-        var obj=this;
+    UpdateWeather: function (id, woeid) {
+        var obj = this;
         var now = new Date();
-       // var queryType = 'woeid'; //options.woeid ? 'woeid' : 'location';
+        // var queryType = 'woeid'; //options.woeid ? 'woeid' : 'location';
 
         var query = "select * from weather.forecast where woeid in (" + woeid + ") and u='c'";
         var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&rnd=' + now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + '&format=json';
 
-        $.getJSON(api, function(data) {
+        $.getJSON(api, function (data) {
             var item = data.query.results.channel.item;
             var location = data.query.results.channel.location;
             var units = data.query.results.channel.units;
             var bigImage = obj.GetImage(item.condition.code, true);
 
             var weatherblock = obj.HtmlTop
-                    .replace("__IMG__", bigImage)
-                    .replace("__TEMP__", item.condition.temp + " °" + units.temperature)
-                    .replace("__DATE__", now.toUTCString())
-                    .replace("__CITY__", location.city + ", " + location.country)
-                    .replace("__TODAY__", chrome.i18n.getMessage("weatherNow"))
-                    .replace("__KIND__", item.condition.text);
+                .replace("__IMG__", bigImage)
+                .replace("__TEMP__", item.condition.temp + " °" + units.temperature)
+                .replace("__DATE__", now.toUTCString())
+                .replace("__CITY__", location.city + ", " + location.country)
+                .replace("__TODAY__", chrome.i18n.getMessage("weatherNow"))
+                .replace("__KIND__", item.condition.text);
 
             var forecast = "";
             forecast += obj.ForeCast(item.forecast[0], units.temperature);

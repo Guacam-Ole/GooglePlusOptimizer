@@ -8,12 +8,10 @@ var allPages;
 var wizardInitialized = false;
 
 function OptStartWizard() {
-    $(".make-switch").on('switch-change', function(e, data)
-    {
+    $(".make-switch").on('switch-change', function (e, data) {
         // console.log("switched class");
     });
-    $(".make-switch").on('switch-change', function(e, data)
-    {
+    $(".make-switch").on('switch-change', function (e, data) {
         //console.log("switched class");
     });
 }
@@ -28,10 +26,11 @@ function NewWizardOptionsExist(lastwizard) {
         if (window.location.search.indexOf("displayWizard") > 0) {
             lastwizard = "0";
             chrome.runtime.sendMessage(
-                    {
-                        Action: "SaveWizardVersion",
-                        ParameterValue: "0"}, function(response) {
-            });
+                {
+                    Action: "SaveWizardVersion",
+                    ParameterValue: "0"
+                }, function (response) {
+                });
             return false;
         }
         lastwizard = lastwizard || "0";
@@ -62,8 +61,7 @@ function NewWizardOptionsExist(lastwizard) {
  * @param {string} version Version des letzten Aufrufs
  * @returns {undefined}
  */
-function InitWizard(version)
-{
+function InitWizard(version) {
     return;
     try {
         if (wizardInitialized === true) {
@@ -73,12 +71,13 @@ function InitWizard(version)
         wizardInitialized = true;
         var manifest = chrome.runtime.getManifest();
         chrome.runtime.sendMessage(
-                {
-                    Action: "SaveWizardVersion",
-                    ParameterValue: manifest.version}, function(response) {
-        });
+            {
+                Action: "SaveWizardVersion",
+                ParameterValue: manifest.version
+            }, function (response) {
+            });
         $('.make-switch').bootstrapSwitch();
-        $('#nextSetting').click(function() {
+        $('#nextSetting').click(function () {
             if (currentStepId !== allPages[allPages.length - 1]) {
                 var pos = allPages.indexOf(currentStepId);
 
@@ -87,7 +86,7 @@ function InitWizard(version)
             }
             return false;
         });
-        $('#prevSetting').click(function() {
+        $('#prevSetting').click(function () {
             if (currentStepId !== allPages[0]) {
                 var pos = allPages.indexOf(currentStepId);
                 $('#wr').find('.content').appendTo($('#' + currentStepId));
@@ -97,7 +96,7 @@ function InitWizard(version)
         });
 
 
-        $('#reloadPage').click(function() {
+        $('#reloadPage').click(function () {
             window.location.reload(true);
         });
         version = version || "0";
@@ -137,10 +136,9 @@ function InitWizard(version)
         FillWeatherData();
         DisplayStep(allPages[0], 0, 0);
         handleTagsInput();
-        $('#spam1').attr('src',chrome.extension.getURL("setup/images/alster.png"));
+        $('#spam1').attr('src', chrome.extension.getURL("setup/images/alster.png"));
         $('.spam').fadeIn();
-        
-        
+
 
         $('#robbe').attr('src', chrome.extension.getURL("setup/images/progress.gif"));
         WizSwitchEvents();
@@ -153,8 +151,7 @@ function InitWizard(version)
  * Wettereisntellungen suchen
  */
 function FillWeatherData() {
-    $('.searchWeather').click(function()
-    {
+    $('.searchWeather').click(function () {
         try {
             var weather = $(this);
             var weatherCombo = weather.closest('.tableWeather').find('select.weatherType');
@@ -163,19 +160,15 @@ function FillWeatherData() {
             var query = "select woeid, country,name, postal from geo.places where text=\"" + weatherInput.val() + "\"";
             var api = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=json';
             console.log("API:" + api);
-            $.getJSON(api, function(data)
-            {
-                for (var i in data.query.results.place)
-                {
+            $.getJSON(api, function (data) {
+                for (var i in data.query.results.place) {
                     var place = data.query.results.place[i];
                     var plz = place.postal;
-                    if (plz === null || plz === undefined)
-                    {
+                    if (plz === null || plz === undefined) {
                         plz = "";
                     } else {
                         plz = plz.content;
-                        if (plz === null || plz === undefined)
-                        {
+                        if (plz === null || plz === undefined) {
                             plz = "";
                         }
                     }
@@ -220,7 +213,7 @@ function LoadWizardSettings() {
     LoadCheckBox(filterSharedCircles, "#chkWizCircle");
     LoadCheckBox(showTrophies, "#chkTrophies");
     LoadCheckBox(showLang, "#chkLang");
-    
+
 
     propsFulltext = propsFulltext || "";
     if (propsFulltext === null) {
@@ -236,50 +229,41 @@ function LoadWizardSettings() {
  * Einstellungen für Sportwidget
  * @returns {Boolean}
  */
-function FillSportData()
-{
+function FillSportData() {
     try {
         //GetAllSports
         $completeUrl = "http://www.nocarrier.de/opendb.php?command=GetAllSports";
-        $.getJSON($completeUrl, function(data)
-        {
+        $.getJSON($completeUrl, function (data) {
             $('select.sportType').children().remove();
             $('select.sportType').append("<option value='null'>(bitte wählen)</option>");
-            for (var i in data.Sport)
-            {
+            for (var i in data.Sport) {
                 var id = data.Sport[i].sportsID;
                 var name = data.Sport[i].sportsName;
                 $('select.sportType').append("<option value='" + id + "'>" + name + "</option>");
             }
         });
-        $('select.sportType').change(function()
-        {
+        $('select.sportType').change(function () {
             var sport = $(this);
             var leagueCombo = sport.closest('.tableSport').find('select.sportLeague');
             $completeUrl = "http://www.nocarrier.de/opendb.php?command=GetLeagues&sport=" + $(this).val();
-            $.getJSON($completeUrl, function(data)
-            {
+            $.getJSON($completeUrl, function (data) {
                 leagueCombo.children().remove();
                 var dictLeagues = {};
                 var leagueNames = new Array();
                 now = new Date();
-                for (var i in data.League)
-                {
+                for (var i in data.League) {
                     var id = data.League[i].leagueShortcut;
                     var name = data.League[i].leagueName;
                     var league = JSON.parse(data.League[i].leagueSaison);
                     var savedYear = dictLeagues[id];
-                    if (league === now.getFullYear() || league === now.getFullYear() - 1)
-                    {
-                        if (savedYear === null || savedYear === undefined || savedYear < league)
-                        {
+                    if (league === now.getFullYear() || league === now.getFullYear() - 1) {
+                        if (savedYear === null || savedYear === undefined || savedYear < league) {
                             dictLeagues[id] = league;
                             leagueNames[id] = name;
                         }
                     }
                 }
-                for (var id in dictLeagues)
-                {
+                for (var id in dictLeagues) {
                     leagueCombo.append("<option value='" + id + "|" + dictLeagues[id] + "'>" + leagueNames[id] + "</option>");
                 }
             });
@@ -297,29 +281,25 @@ function FillSportData()
 function LoadWidgetData() {
 
     try {
-        if (columnCount === null || columnCount === undefined)
-        {
+        if (columnCount === null || columnCount === undefined) {
             columnCount = 3;
         } else {
             columnCount = JSON.parse(columnCount);
         }
 
-        if ($('.sportPosition').length > 0)
-        {
+        if ($('.sportPosition').length > 0) {
             $('.sportPosition').empty();
             $('.weatherPosition').empty();
             $('.clockPos').empty();
             $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.sportPosition');
             $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.weatherPosition');
             $("<option/>").val(-1).text(chrome.i18n.getMessage("WidgetHide")).appendTo('.clockPos');
-            if (columnCount === 1)
-            {
+            if (columnCount === 1) {
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.sportPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.weatherPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetShow")).appendTo('.clockPos');
             }
-            else if (columnCount === 2)
-            {
+            else if (columnCount === 2) {
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
@@ -327,8 +307,7 @@ function LoadWidgetData() {
                 $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.weatherPosition');
                 $("<option/>").val(1).text(chrome.i18n.getMessage("WidgetRight")).appendTo('.clockPos');
 
-            } else
-            {
+            } else {
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.sportPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.weatherPosition');
                 $("<option/>").val(0).text(chrome.i18n.getMessage("WidgetLeft")).appendTo('.clockPos');
@@ -349,11 +328,9 @@ function LoadWidgetData() {
 /**
  * Wetter Wetter Wetter
  */
-function LoadWeather()
-{
+function LoadWeather() {
     var weatherSetting = JSON.parse(wetter);
-    for (var i in weatherSetting)
-    {
+    for (var i in weatherSetting) {
         try {
             if (JSON.parse(i) === 0) {
                 var u = parseInt(i) + 1;
@@ -372,13 +349,11 @@ function LoadWeather()
 }
 
 /**
- * Sportdaten 
+ * Sportdaten
  */
-function LoadSport()
-{
+function LoadSport() {
     var sportSetting = JSON.parse(soccer);
-    for (var i in sportSetting)
-    {
+    for (var i in sportSetting) {
         try {
             if (JSON.parse(i) === 0) {
                 var u = parseInt(i) + 1;
@@ -431,11 +406,10 @@ function CollectSteps(category, version) {
     var allSteps = [];
     var minVersion = GetVersionLong(version);
 
-    $('.wizardContainer').each(function() {
+    $('.wizardContainer').each(function () {
         var container = $(this);
         if (container.find('.category').text() === category &&
-                GetVersionLong(container.find('.version').text()) >= minVersion)
-        {
+            GetVersionLong(container.find('.version').text()) >= minVersion) {
             allSteps.push(container.attr('id'));
         }
     });
@@ -447,8 +421,7 @@ function CollectSteps(category, version) {
  * Switch-Events
  */
 function WizSwitchEvents() {
-    $(".make-switch").on('switch-change', function(e, data)
-    {
+    $(".make-switch").on('switch-change', function (e, data) {
         var id = $(this).attr("id");
         switch (id) {
             case "chkWizPlus1":
@@ -512,27 +485,23 @@ function WizSwitchEvents() {
                 displayBookmarks = data.value;
                 break;
             case "chkWizLSR":
-                markLSRPosts=data.value;
+                markLSRPosts = data.value;
                 break;
             case "chkWizCircle":
-                filterSharedCircles=data.value;
+                filterSharedCircles = data.value;
                 break;
             case "chkTrophies":
-                showTrophies=data.value;
+                showTrophies = data.value;
                 break;
             case "chkLang":
-                showLang=data.value;
-                break;                
-                
-                
-    
+                showLang = data.value;
+                break;
 
 
         }
     });
 
-    $('#clockPos').change(function()
-    {
+    $('#clockPos').change(function () {
         clock = $("#clockPos").val();
     });
     SaveWizardSportSettings();
@@ -543,10 +512,8 @@ function WizSwitchEvents() {
  * Wettereinstellungen speichern
  * @returns {undefined}
  */
-function SaveWizardWeatherSettings()
-{
-    $('#weather1Ort').change(function()
-    {
+function SaveWizardWeatherSettings() {
+    $('#weather1Ort').change(function () {
         try {
             var weatherSetting = JSON.parse(wetter || null);
 
@@ -576,8 +543,7 @@ function SaveWizardWeatherSettings()
  * Sporteinstellungen speichern
  */
 function SaveWizardSportSettings() {
-    $('#cmbLeague1').change(function()
-    {
+    $('#cmbLeague1').change(function () {
         try {
             var sportSetting = JSON.parse(soccer || null);
 
@@ -585,8 +551,7 @@ function SaveWizardSportSettings() {
             var sport1League = $('#cmbLeague1').val();
             var sport1Sport = $('#sport1Sport').val();
             var sport1Pos = $('#sport1Pos').val();
-            if (sport1League === "null" || sport1League === undefined || sport1League === "")
-            {
+            if (sport1League === "null" || sport1League === undefined || sport1League === "") {
                 sport1League = "|";
             }
 
@@ -594,7 +559,14 @@ function SaveWizardSportSettings() {
             var sport1League = sport1League.split("|")[0];
             var sport1LeagueName = $('#cmbLeague1 option:selected').text();
             var sport1SportName = $('#sport1Sport option:selected').text();
-            var sport1 = {Position: sport1Pos, SportName: sport1SportName, Sport: sport1Sport, League: sport1League, Season: sport1Season, LeagueName: sport1LeagueName};
+            var sport1 = {
+                Position: sport1Pos,
+                SportName: sport1SportName,
+                Sport: sport1Sport,
+                League: sport1League,
+                Season: sport1Season,
+                LeagueName: sport1LeagueName
+            };
             soccerA = new Array();
             soccerA.push(sport1);
             if (sportSetting !== null && sportSetting.length === 3) {
@@ -615,47 +587,46 @@ function SaveWizardSportSettings() {
 /**
  * Wizardeinstellungen speichern
  */
-function SaveWizardSettings()
-{
-    
-    
+function SaveWizardSettings() {
+
+
     filterWham = whamWhamText || whamWhamLink || whamChristmasText || whamChristmasLink;
-    
+
 
     chrome.runtime.sendMessage(
-            {
-                Action: "SaveAll",
-                plus1: filterPlus1,
-                yt: filterYouTube,
-                wham: filterWham,
-                hashtag: filterHashTag,
-                custom: filterCustom,
-                community: filterCommunity,
-                birthday: filterBirthday,
-                markLSRPosts: markLSRPosts,
-                filterSharedCircles: filterSharedCircles,
-                known: filterPersons,
-                fulltext: propsFulltext,
-                WHAMWhamText: whamWhamText,
-                WHAMWhamUrl: whamWhamLink,
-                WHAMChristmasText: whamChristmasText,
-                WHAMChristmasUrl: whamChristmasLink,
-                StoppWatch: clock,
-                Sport: soccer,
-                Weather: wetter,
-                colorUsers: colorUsers,
-                filterImages: filterImages,
-                filterVideo: filterVideo,
-                filterGifOnly: filterGifOnly,
-                filterMp4Only: filterMp4Only,
-                displayTrophy: showTrophies,
-                filterLinks: filterLinks,
-                showEmoticons: showEmoticons,
-                UseAutoSave: autoSave,
-                UseBookmarks: displayBookmarks,
-                DisplayLang: showLang
-            }, function(response) {
-    }
+        {
+            Action: "SaveAll",
+            plus1: filterPlus1,
+            yt: filterYouTube,
+            wham: filterWham,
+            hashtag: filterHashTag,
+            custom: filterCustom,
+            community: filterCommunity,
+            birthday: filterBirthday,
+            markLSRPosts: markLSRPosts,
+            filterSharedCircles: filterSharedCircles,
+            known: filterPersons,
+            fulltext: propsFulltext,
+            WHAMWhamText: whamWhamText,
+            WHAMWhamUrl: whamWhamLink,
+            WHAMChristmasText: whamChristmasText,
+            WHAMChristmasUrl: whamChristmasLink,
+            StoppWatch: clock,
+            Sport: soccer,
+            Weather: wetter,
+            colorUsers: colorUsers,
+            filterImages: filterImages,
+            filterVideo: filterVideo,
+            filterGifOnly: filterGifOnly,
+            filterMp4Only: filterMp4Only,
+            displayTrophy: showTrophies,
+            filterLinks: filterLinks,
+            showEmoticons: showEmoticons,
+            UseAutoSave: autoSave,
+            UseBookmarks: displayBookmarks,
+            DisplayLang: showLang
+        }, function (response) {
+        }
     );
 }
 
@@ -715,25 +686,21 @@ function DisplayStep(id, current, max) {
 /**
  * Tags eingeben und entfernen (Volltextfilter)
  */
-function handleTagsInput()
-{
-    if (!jQuery().tagsInput)
-    {
+function handleTagsInput() {
+    if (!jQuery().tagsInput) {
         return;
     }
     $('#fulltext').tagsInput(
-            {
-                width: 'auto',
-                'onAddTag': function()
-                {
-                    propsFulltext = $('#fulltext').val();
-                },
-                'onRemoveTag': function()
-                {
-                    // alert('YOUR DAMN RIGHT!');
-                    propsFulltext = $('#fulltext').val();
-                }
-            });
+        {
+            width: 'auto',
+            'onAddTag': function () {
+                propsFulltext = $('#fulltext').val();
+            },
+            'onRemoveTag': function () {
+                // alert('YOUR DAMN RIGHT!');
+                propsFulltext = $('#fulltext').val();
+            }
+        });
 }
 
 
@@ -742,8 +709,7 @@ function handleTagsInput()
  * @param {string} property Zu ladende Property
  * @param {string} boxName id der Checkbox
  */
-function LoadCheckBox(property, boxName)
-{
+function LoadCheckBox(property, boxName) {
 
     $(boxName).bootstrapSwitch('setState', JSON.parse(property));
 
@@ -751,11 +717,10 @@ function LoadCheckBox(property, boxName)
 
 /**
  * Checkboxeinstellung speichern
- * 
+ *
  * @param {string} propertyName Zu speichernde Property
  * @param {string} newValue Wert
  */
-function SaveCheckBox(propertyName, newValue)
-{
+function SaveCheckBox(propertyName, newValue) {
     localStorage.setItem(propertyName, newValue);
 }

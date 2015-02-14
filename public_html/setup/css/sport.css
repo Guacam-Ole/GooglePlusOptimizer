@@ -1,79 +1,76 @@
-.goalLeft 
-{
-    clear:both; 
-    float:left;
+.goalLeft {
+    clear: both;
+    float: left;
 }
 
-.goalRight
-{
-    clear:both;
-    float:right;
+.goalRight {
+    clear: both;
+    float: right;
 }
-.goals 
-{
+
+.goals {
     margin-left: 1em;
     margin-right: 1em;
 }
-#NeuesVomSpocht div.arrow 
-{ 
-    background:transparent url(setup/images/arrows.png) no-repeat scroll 0px -16px; 
-    width:16px; 
-    height:16px; 
-    display:block;
-}
-#NeuesVomSpocht div.up 
-{ 
-    background-position:0px 0px;
+
+#NeuesVomSpocht div.arrow {
+    background: transparent url(setup/images/arrows.png) no-repeat scroll 0px -16px;
+    width: 16px;
+    height: 16px;
+    display: block;
 }
 
-.goalImage
-{
-    display:block; 
-    width:22px;          
+#NeuesVomSpocht div.up {
+    background-position: 0px 0px;
 }
-.goalMin
-{
-    width:25px;
+
+.goalImage {
+    display: block;
+    width: 22px;
 }
-.goalResult
-{
-    width:50px;
-    display:block; 
+
+.goalMin {
+    width: 25px;
+}
+
+.goalResult {
+    width: 50px;
+    display: block;
     text-align: center;
 }
-.goalLeft .goalImage
-{
-    float:left;
-}
-.goalRight .goalImage 
-{
-    float:right;
-    text-align: right;
-}
-.goalLeft .goalResult 
-{
+
+.goalLeft .goalImage {
     float: left;
 }
-.goalRight .goalResult 
-{
+
+.goalRight .goalImage {
+    float: right;
+    text-align: right;
+}
+
+.goalLeft .goalResult {
+    float: left;
+}
+
+.goalRight .goalResult {
     float: right;
 }
-.goalRight .player 
-{                
-    float:right;
+
+.goalRight .player {
+    float: right;
     text-align: right;
 }
-.goalRight .goalMin
-{                
-    float:right;
+
+.goalRight .goalMin {
+    float: right;
     text-align: right;
 }
-.goalLeft .goalMin
-{                
-    float:left;
+
+.goalLeft .goalMin {
+    float: left;
 }
-.NeuesVomSpocht img 
-{
+
+.NeuesVomSpocht img {
     width: 20px;
     height: 20px;
     vertical-align: top;

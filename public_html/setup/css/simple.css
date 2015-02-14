@@ -8,14 +8,13 @@ and open the template in the editor.
     Author     : Tomato
 */
 
-
 #quickht {
-    position:absolute;
-    left:5px;
-    top:120px;
-    background:white;
+    position: absolute;
+    left: 5px;
+    top: 120px;
+    background: white;
     padding: 5px;
-    overflow:scroll;
+    overflow: scroll;
 }
 
 .langSelect {
@@ -25,11 +24,11 @@ and open the template in the editor.
 .langOpen {
     margin-left: 10px;
     margin-right: 30px;
-    margin-bottom: 8px;    
+    margin-bottom: 8px;
 }
 
 .InfoUsrTop {
-    float:right;
+    float: right;
     margin-top: -15px;
     margin-right: 5px;
 }

@@ -5,120 +5,279 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <link href="../css/setup.css" rel="stylesheet" type="text/css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/setup/qsTest.js" language="javascript"></script>
-    </head>
-    <body>      
-	<div class="selectedQS">
-            <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/business/reception.png"/></div>
-            <div class="qsRight">
-                <div class="qsClose">&nbsp;</div>
-                <div class="qsText">Kollegen</div>
-                <div class="qsCircles">                    
-                    
-                    <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Kollegen</span><span class="qsCircleRemove"></span></span></span>
-                    <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span class="qsCircleText">Schantall</span><span class="qsCircleRemove"></span></span></span>
-                    <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span class="qsCircleText">Bämmelah</span><span class="qsCircleRemove"></span></span></span>
-                    <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-                </div>
-            </div>
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <link href="../css/setup.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/setup/qsTest.js" language="javascript"></script>
+</head>
+<body>
+<div class="selectedQS">
+    <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/business/reception.png"/></div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Kollegen</div>
+        <div class="qsCircles">
+
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Kollegen</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span
+                    class="qsCircleText">Schantall</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span
+                    class="qsCircleText">Bämmelah</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
         </div>
-        <div class="selectedQS">
-            <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/communication/smile_in_love.png"/></div>
-            <div class="qsRight">
-                <div class="qsClose">&nbsp;</div>
-                <div class="qsText">Schnuckis</div>
-                <div class="qsCircles">
-                    <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"><img src="https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=1"/></span><span class="qsCircleText">Schantall</span><span class="qsCircleRemove"></span></span></span>
-                    <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span class="qsCircleText">Bämmelah</span><span class="qsCircleRemove"></span></span></span>
-                    <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-                </div>
-            </div>
-        </div>
-        <div class="selectedQS">
-            <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/communication/public_chat.png"/></div>
-            <div class="qsRight">
-                <div class="qsClose">&nbsp;</div>
-                <div class="qsText">Alle</div>
-                <div class="qsCircles">
-                    <span class="qsCircle green"><span class="innerCircle"><span class="qsCircleWorld">&nbsp;</span><span class="qsCircleText">Öffentlich</span><span class="qsCircleRemove"></span></span></span>                  
-                    <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-                </div>
-            </div>
-        </div>
-        <div class="selectedQS">
-          <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/business/demographic.png"/></div>
-          <div class="qsRight">
-              <div class="qsClose">&nbsp;</div>
-              <div class="qsText">Erweitert</div>
-              <div class="qsCircles">                   
-                  <span class="qsCircle green"><span class="innerCircle"><span class="qsCircleMany"></span><span class="qsCircleText">Erweitert</span><span class="qsCircleRemove"></span></span></span>
-                  <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-              </div>
-          </div>
-        </div>
-        <div class="selectedQS">
-          <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/flags/Germany.png"/></div>
-          <div class="qsRight">
-              <div class="qsClose">&nbsp;</div>
-              <div class="qsText">Deutsch</div>
-              <div class="qsCircles">                   
-                  <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Hamburg</span><span class="qsCircleRemove"></span></span></span>                
-                  <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Freunde</span><span class="qsCircleRemove"></span></span></span>                
-                  <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Familie</span><span class="qsCircleRemove"></span></span></span>                
-                  <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Bombenleger</span><span class="qsCircleRemove"></span></span></span>                
-                  <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Nette Leute</span><span class="qsCircleRemove"></span></span></span>                
-                  <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-              </div>
-          </div>
-        </div>
-        <div class="selectedQS">
-          <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/flags/United_Kingdom.png"/></div>
-          <div class="qsRight">
-              <div class="qsClose">&nbsp;</div>
-              <div class="qsText">Englisch</div>
-              <div class="qsCircles">                   
-                <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">Europeans</span><span class="qsCircleRemove"></span></span></span>
-                <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span class="qsCircleText">US</span><span class="qsCircleRemove"></span></span></span>                
-                <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
-              </div>
-          </div>
-        </div>
-    <div class="addnewQs">
-        <button> Quickshare hinzufügen</button>
     </div>
-
-        
-        <div class="qsSelectIcon">
-            <div class="qsIconCategory"><span>Accounting</span>
-                <div class="qsIconCategoryIcons">
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                </div>
-            </div>
-            <div class="qsIconCategory"><span>Fahnen</span>
-                <div class="qsIconCategoryIcons">
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                    <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
-                </div>
-            </div>
+</div>
+<div class="selectedQS">
+    <div class="qsImage"><img
+            src="http://files.oles-cloud.de/optimizer/quickshare/big/communication/smile_in_love.png"/></div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Schnuckis</div>
+        <div class="qsCircles">
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"><img
+                    src="https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=1"/></span><span
+                    class="qsCircleText">Schantall</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCirclePerson"></span><span
+                    class="qsCircleText">Bämmelah</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
         </div>
+    </div>
+</div>
+<div class="selectedQS">
+    <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/communication/public_chat.png"/>
+    </div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Alle</div>
+        <div class="qsCircles">
+            <span class="qsCircle green"><span class="innerCircle"><span class="qsCircleWorld">&nbsp;</span><span
+                    class="qsCircleText">Öffentlich</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
+        </div>
+    </div>
+</div>
+<div class="selectedQS">
+    <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/business/demographic.png"/></div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Erweitert</div>
+        <div class="qsCircles">
+            <span class="qsCircle green"><span class="innerCircle"><span class="qsCircleMany"></span><span
+                    class="qsCircleText">Erweitert</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
+        </div>
+    </div>
+</div>
+<div class="selectedQS">
+    <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/flags/Germany.png"/></div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Deutsch</div>
+        <div class="qsCircles">
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Hamburg</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Freunde</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Familie</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Bombenleger</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Nette Leute</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
+        </div>
+    </div>
+</div>
+<div class="selectedQS">
+    <div class="qsImage"><img src="http://files.oles-cloud.de/optimizer/quickshare/big/flags/United_Kingdom.png"/></div>
+    <div class="qsRight">
+        <div class="qsClose">&nbsp;</div>
+        <div class="qsText">Englisch</div>
+        <div class="qsCircles">
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">Europeans</span><span class="qsCircleRemove"></span></span></span>
+            <span class="qsCircle blue"><span class="innerCircle"><span class="qsCircleSingle"></span><span
+                    class="qsCircleText">US</span><span class="qsCircleRemove"></span></span></span>
+            <input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle">
+        </div>
+    </div>
+</div>
+<div class="addnewQs">
+    <button> Quickshare hinzufügen</button>
+</div>
 
-    </body>
+
+<div class="qsSelectIcon">
+    <div class="qsIconCategory"><span>Accounting</span>
+
+        <div class="qsIconCategoryIcons">
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+        </div>
+    </div>
+    <div class="qsIconCategory"><span>Fahnen</span>
+
+        <div class="qsIconCategoryIcons">
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+            <img src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/><img
+                src="http://files.oles-cloud.de/optimizer/quickshare/big/networking/box.png"/>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
   

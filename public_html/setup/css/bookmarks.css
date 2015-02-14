@@ -8,17 +8,13 @@ and open the template in the editor.
     Author     : Tomato
 */
 
-
-
-.addBookmark 
-{
+.addBookmark {
     float: left;
     margin-right: 5px;
     margin-left: -5px;
 }
 
-.miniBookmark img
-{
+.miniBookmark img {
     height: 24px;
     margin-right: 50px;
     margin-bottom: 11px;
@@ -38,9 +34,10 @@ and open the template in the editor.
 }
 
 .littleBookmarkImage {
-    float:left;
+    float: left;
     width: 90px;
 }
+
 .littleBookmarkImage img {
     width: 80px;
     height: 80px;
@@ -49,6 +46,7 @@ and open the template in the editor.
 .littleBookmarkContent {
     padding-top: 4px;
 }
+
 .BookmarksHover {
     display: none;
     background: #E5E5E5;
@@ -64,6 +62,7 @@ and open the template in the editor.
     cursor: pointer;
     border-style: groove;
 }
+
 .showBmBig {
     text-align: center;
     margin-bottom: 7px;

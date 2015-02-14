@@ -97,7 +97,8 @@
             } else {
                 try {
                     $sound.currentTime = 0;
-                } catch (e) {}
+                } catch (e) {
+                }
                 $sound.play();
             }
 
@@ -115,7 +116,8 @@
         $sound.pause();
         try {
             $sound.currentTime = 0;
-        } catch (e) {}
+        } catch (e) {
+        }
     };
 
 
@@ -128,7 +130,8 @@
 
         try {
             sounds[name].src = "";
-        } catch (e) {}
+        } catch (e) {
+        }
         sounds[name] = null;
     };
 
@@ -170,9 +173,12 @@
             sounds[settings.sounds[i]] = null;
         }
         soundsNum = 0;
-        $.ionSound.play = function () {};
-        $.ionSound.stop = function () {};
-        $.ionSound.kill = function () {};
+        $.ionSound.play = function () {
+        };
+        $.ionSound.stop = function () {
+        };
+        $.ionSound.kill = function () {
+        };
     };
 
 }(jQuery));

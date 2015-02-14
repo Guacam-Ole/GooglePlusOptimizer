@@ -10,10 +10,11 @@
 }
 
 .ticketDetails {
-    display:none;
-    width:400px;
-   
+    display: none;
+    width: 400px;
+
 }
+
 .ticketTable td {
     padding-left: 3px;
 }
@@ -24,7 +25,7 @@
 
 .singleTicketPost {
     background: lightgrey;
-    
+
     float: left;
     padding-top: 2px;
     margin-top: 4px;
@@ -67,7 +68,7 @@
 
 .citySelect {
     margin-left: 70px;
-    display:none;
+    display: none;
 }
 
 .citySelect select {
@@ -87,8 +88,8 @@
     height: 440px;
     padding: 20px;
     color: #d9d9d9;
-    display:none;
-    
+    display: none;
+
 }
 
 input#ticketUser {
@@ -122,12 +123,9 @@ input#ticketUser {
     float: left;
 }
 
-
 .addNewTicket .caption {
-    width: 200px;    
+    width: 200px;
 }
-
-
 
 .addNewTicket select#ticketType {
     width: 500px;
@@ -151,7 +149,7 @@ input#ticketUser {
 
 .qsCircle {
     background: #4285f4;
-    background: -webkit-gradient(linear,left top,left bottom,from(#4285f4),to(#4285f4));
+    background: -webkit-gradient(linear, left top, left bottom, from(#4285f4), to(#4285f4));
     border: 1px solid #4285f4;
     border-radius: 15px;
     display: inline-block;
@@ -164,17 +162,15 @@ input#ticketUser {
     vertical-align: middle;
     cursor: default;
     white-space: nowrap;
-    font: normal 13px Roboto,arial,sans-serif;
-    
+    font: normal 13px Roboto, arial, sans-serif;
+
     max-height: 310px;
     overflow-y: auto;
-    
-    -webkit-box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04);
-    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04); 
+
+    -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, .04);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, .04);
     overflow: hidden;
 }
-
-
 
 .qsCircle .innerCircle {
     padding: 4px 10px 6px 5px;
@@ -182,12 +178,12 @@ input#ticketUser {
 
 .qsCircle.green {
     background: #67ae3f;
-    background: -webkit-gradient(linear,left top,left bottom,from(#77bb4e),to(#57a02f));
+    background: -webkit-gradient(linear, left top, left bottom, from(#77bb4e), to(#57a02f));
     border: 1px solid #3f980e;
 }
 
 .qsCircleText {
-    vertical-align: middle;    
+    vertical-align: middle;
     max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -197,22 +193,23 @@ input#ticketUser {
 }
 
 .qsCircleWorld {
-    
+
     background: no-repeat url(../images/icons/googleicons.png) -17px -594px;
 }
 
 .qsCircleMany {
     background: no-repeat url(../images/icons/googleicons.png) -17px -796px;
 }
+
 .qsCircleSingle {
-    
-    //background: no-repeat url(https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=16);
+
+/ / background : no-repeat url(https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=16);
     background: no-repeat url(../images/icons/googleicons.png) -17px -488px;
 }
 
 .qsCirclePerson {
-    
-    //background: no-repeat url(https://lh6.googleusercontent.com/-F-0xs9WEtPY/AAAAAAAAAAI/AAAAAAAAwx4/_QM87q2oUO4/photo.jpg?sz=32);
+
+/ / background : no-repeat url(https://lh6.googleusercontent.com/-F-0xs9WEtPY/AAAAAAAAAAI/AAAAAAAAwx4/_QM87q2oUO4/photo.jpg?sz=32);
     background: no-repeat url(../images/icons/googleuser.png);
     opacity: .7;
     float: left;
@@ -220,8 +217,9 @@ input#ticketUser {
     margin-left: 0px;
     margin-top: -2px;
     height: 30px;
-    border: 0px solid #4285f4 !important;  
+    border: 0px solid #4285f4 !important;
 }
+
 .qsCircleWorld, .qsCircleMany, .qsCircleSingle {
     opacity: .7;
     float: left;
@@ -260,6 +258,7 @@ input#ticketUser {
     min-height: 42px;
     margin-right: 10px;
 }
+
 .selectedQS {
     width: 600px;
     background: rgb(229, 229, 229);
@@ -272,11 +271,13 @@ input#ticketUser {
     height: 20px;
     font-weight: bold;
 }
+
 .qsRight {
     margin-left: 85px;
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
 .qsImage {
     float: left;
     width: 64px;
@@ -377,7 +378,7 @@ input.qsAddCircle {
     z-index: 33;
 }
 
-.qsSingleCircle, .qsCommunity, .qsPublic, .qsMyCircles, .qsExtendedCircles  {
+.qsSingleCircle, .qsCommunity, .qsPublic, .qsMyCircles, .qsExtendedCircles {
     opacity: .7;
     float: left;
     width: 20px;
@@ -401,8 +402,6 @@ input.qsAddCircle {
     background: no-repeat url(../images/icons/googleicons.png) -21px -25px;
 }
 
-
-
 .qsCommunity {
     background: no-repeat url(../images/icons/googleicons.png) -17px -475px;
 }
@@ -412,11 +411,10 @@ input.qsAddCircle {
     font-size: 12px;
 }
 
-.qsSelectCircleElement :hover{
-    background:lightgray;
+.qsSelectCircleElement :hover {
+    background: lightgray;
     cursor: pointer;
 }
-
 
 .qsSelectCircleElement .inner {
     vertical-align: middle;
