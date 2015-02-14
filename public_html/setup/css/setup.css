@@ -289,7 +289,7 @@ input#ticketUser {
     margin-top: 10px;
 }
 
-input.qsAddCirlce {
+input.qsAddCircle {
     width: 200px;
     padding-left: 10px;
     margin-top: 5px;
@@ -357,4 +357,82 @@ input.qsAddCirlce {
     margin-top: 5px;
     border-width: 1px;
     text-align: center;
+}
+
+.circleNames span {
+    width: 200px;
+    float: left;
+}
+
+.qsDrilldown {
+    position: absolute;
+    width: 200px;
+    background: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    height: 200px;
+    overflow-y: auto;
+    padding-left: 10px;
+    z-index: 33;
+}
+
+.qsSingleCircle, .qsCommunity, .qsPublic, .qsMyCircles, .qsExtendedCircles  {
+    opacity: .7;
+    float: left;
+    width: 20px;
+    margin-top: 2px;
+    height: 13px;
+}
+
+.qsPublic {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -719px;
+}
+
+.qsMyCircles {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -25px;
+}
+
+.qsExtendedCircles {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -535px;
+}
+
+.qsSingleCircle {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -25px;
+}
+
+
+
+.qsCommunity {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -475px;
+}
+
+.qsSelectCircleElement {
+    height: 20px;
+    font-size: 12px;
+}
+
+.qsSelectCircleElement :hover{
+    background:lightgray;
+    cursor: pointer;
+}
+
+
+.qsSelectCircleElement .inner {
+    vertical-align: middle;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    word-wrap: normal;
+    float: left;
+    width: 158px;
+    height: 20px;
+}
+
+.grayLine {
+    height: 1px;
+    border-bottom: solid gray 1px;
+    margin-bottom: 4px;
+    width: 177px;
 }

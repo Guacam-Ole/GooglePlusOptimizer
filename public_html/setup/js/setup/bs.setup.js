@@ -89,7 +89,8 @@ Setup.prototype = {
                 var allModules = $(value).data("modules").split(",");
                 $.each(allModules, function (indexModule, valueModule) {
                     var currentFeature = obj.GetFeatureDetails(valueModule);
-                    if (currentFeature.TextOnly !== true) {
+                    currentFeature.Type=currentFeature.Type||"Feature";
+                    if (currentFeature.Type==="Feature") {
                         if (localStorage.getItem(valueModule) === true || localStorage.getItem(valueModule) === "true") {
                             anyEnabled = true;
                         } else {
@@ -117,6 +118,22 @@ Setup.prototype = {
             modules += sm.data("modules");
         }
         this.DisplayFeatures(modules);
+    },
+    GetCircles:function() {
+        var obj=this;
+        var ls=localStorage.getItem("QS.AllCircles");
+        if (ls===undefined || ls===null||ls==="undefined") {
+            ls=JSON.stringify({});
+        }
+        var circles=JSON.parse(ls);
+        circles.Public=circles.Public||obj.Browser.GetMessageFromSetup('Circles_Public');
+        circles.MyCircles=circles.MyCircles||obj.Browser.GetMessageFromSetup('Circles_Private');
+        circles.ExtendedCircles=circles.ExtendedCircles||obj.Browser.GetMessageFromSetup('Circles_Extended');
+
+        return circles;
+    },
+    SaveCircles:function(circleObj) {
+        localStorage.setItem("QS.AllCircles",JSON.stringify(circleObj));
     },
     UIActions: function () {
         var obj = this;
@@ -167,6 +184,8 @@ Setup.prototype = {
                 localStorage.setItem("filterGifOnly","true");
             }
         });
+
+
         
         
         $(document).on('click', '#chkFilterMp4', function ()
@@ -254,7 +273,22 @@ Setup.prototype = {
             $('.cityName').fadeIn();
             
             obj.SaveWeather($(this).closest('.singleFeature'),obj);
-            
+        });
+
+        $(document).on('change', '#cnPublic', function () {
+            var allCircles=obj.GetCircles();
+            allCircles.Public=$(this).val();
+            obj.SaveCircles(allCircles);
+        });
+        $(document).on('change', '#cnPrivate', function () {
+            var allCircles=obj.GetCircles();
+            allCircles.MyCircles=$(this).val();
+            obj.SaveCircles(allCircles);
+        });
+        $(document).on('change', '#cnExtended', function () {
+            var allCircles=obj.GetCircles();
+            allCircles.ExtendedCircles=$(this).val();
+            obj.SaveCircles(allCircles);
         });
         
         $(document).on('click', '.weatherSelection a', function () {
@@ -374,7 +408,7 @@ Setup.prototype = {
         if (feature.Image !== undefined) {
             template.find('.examplePicture').attr("src", imageHost+"wizard/"+ this.CurrentLang +"/"+ feature.Image);
         } else {
-            template.find('.examplePicture').remove();
+            template.find('.featurePic').remove();
         }
         if (feature.Cost !== undefined) {
             var costClass = ".cost" + feature.Cost;
@@ -456,7 +490,9 @@ Setup.prototype = {
 
         var divFeature = $("<div></div>");
         divFeature.find('.featureName').text(currentFeature.Title);
-        if (currentFeature.TextOnly === true) {
+
+        switch (currentFeature.Type||"Feature") {
+            case "TextOnly":
             divFeature.load("bs.custom.html", function () {
                 obj.ReplaceDataInTemplate(divFeature, currentFeature);
                 $('.features').append(divFeature);
@@ -467,10 +503,13 @@ Setup.prototype = {
                     obj.GetTickets(2,$('.featurerequests'));
                 }
             });
-        } else {
+                break;
+            case "Feature":
             divFeature.load("bs.feature.html", function () {
                 obj.ReplaceDataInTemplate(divFeature, currentFeature);
-                if (obj.FeatureEnabled(featureName)) {
+                if (currentFeature.DisableButton===true) {
+                    divFeature.find('btn.optimizer').hide();
+                } else if (obj.FeatureEnabled(featureName)) {
                     divFeature.find('.btn.optimizer').addClass("active");
                     divFeature.find('.btn.optimizer').find('i').removeClass("fa-times").addClass("fa-check");
                 }
@@ -492,6 +531,13 @@ Setup.prototype = {
                 
                 
             });
+                break;
+            case "NoFeature":
+                divFeature.load("bs.nofeature.html", function () {
+                    obj.ReplaceDataInTemplate(divFeature, currentFeature);
+                    $('.features').append(divFeature);
+                });
+                break;
         }
     },
     CustomText: function ($element) {
