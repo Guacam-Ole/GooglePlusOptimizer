@@ -37,7 +37,7 @@ var observer = new MutationObserver(function (mutations) {
                         FilterBlocks(addedNode);
                     } else if (addedNode.classList.contains('URaP8')) {
                         DoQuickshare(addedNode, 1);
-                    } 
+                    }
                     //g-h-f-N-N
                    else {
                         var jsModel=addedNode.attributes["jsmodel"];

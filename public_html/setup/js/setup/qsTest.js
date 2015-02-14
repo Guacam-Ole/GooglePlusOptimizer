@@ -38,40 +38,64 @@ $(document).on('click', '.qsIconCategoryIcons img', function () {
 });
 
 $(document).on('input','.qsAddCircle',function() {
-    GetSelectableElements($(this).val());
+    GetSelectableElements($(this),$(this).val().toLowerCase());
+});
+
+$(document).on('click','.qsAddCircle',function() {
+    GetSelectableElements($(this),$(this).val().toLowerCase());
 });
 
 
 
 
 
-
-
-function GetSelectableElements(preselection) {
+function GetSelectableElements(element,preselection) {
+    $('.qsDrilldown').remove();
     var allCircles=JSON.parse(localStorage["QS.AllCircles"]);
-    var allElements="<div class='qsDrilldown'>";
-    if (preselection.length>0) {
-        if (allCircles.Public.indexOf(preselection)>=0) {
-           allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsPublic").replace("__CIRCLE__",allCircles.Public);
-        }
-        if (allCircles.MyCircles.indexOf(preselection)>=0) {
-            allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsMyCircles").replace("__CIRCLE__",allCircles.MyCircles);
-        }
-        if (allCircles.ExtendedCircles.indexOf(preselection)>=0) {
-            allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsExtendedCircles").replace("__CIRCLE__",allCircles.ExtendedCircles);
-        }
-        allCircles.Circles.forEach(function(circle){
-            if (circle.indexOf(preselection)>=0) {
-                allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsCircle").replace("__CIRCLE__",circle);
+    var allElements="<div class='qsDrilldown' style='left: "+element.offset().left+"px; top:"+(element.offset().top+23)+"px;'>";
+  //  if (preselection.length>0) {
+
+    allCircles.Public=allCircles.Public||obj.Browser.GetMessageFromSetup('Circles_Public');
+    allCircles.MyCircles=allCircles.MyCircles||obj.Browser.GetMessageFromSetup('Circles_Private');
+    allCircles.ExtendedCircles=allCircles.ExtendedCircles||obj.Browser.GetMessageFromSetup('Circles_Extended');
+
+            if (preselection===undefined || allCircles.Public.toLowerCase().indexOf(preselection) >= 0) {
+                allElements += drillDownElementTemplate.replace("__ICONCLASS__", "qsPublic").replace("__CIRCLE__", allCircles.Public);
             }
-        });
-        allCircles.Communities.forEach(function(community){
-            if (community.indexOf(preselection)>=0) {
-                allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsCircle").replace("__CIRCLE__",community);
+            if (preselection===undefined ||allCircles.MyCircles.toLowerCase().indexOf(preselection) >= 0) {
+                allElements += drillDownElementTemplate.replace("__ICONCLASS__", "qsMyCircles").replace("__CIRCLE__", allCircles.MyCircles);
             }
-        });
+            if (preselection===undefined ||allCircles.ExtendedCircles.toLowerCase().indexOf(preselection)>=0) {
+                allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsExtendedCircles").replace("__CIRCLE__",allCircles.ExtendedCircles);
+            }
+        if (allCircles.Circles!==undefined) {
+            allCircles.Circles.forEach(function(circle){
+                if (preselection===undefined ||circle.toLowerCase().indexOf(preselection)>=0) {
+                    allElements+=drillDownElementTemplate.replace("__ICONCLASS__","qsSingleCircle").replace("__CIRCLE__",circle).replace("__TITLE__",circle);
+                }
+            });
+        }
+        if (allCircles.Communities!==undefined) {
+            allCircles.Communities.forEach(function (community) {
+                if (preselection===undefined ||community.toLowerCase().indexOf(preselection) >= 0) {
+                    allElements += drillDownElementTemplate.replace("__ICONCLASS__", "qsCommunity").replace("__CIRCLE__", community).replace("__TITLE__",community);
+                }
+            });
+        }
         allElements+="</div>";
+    var objElements=$(allElements);
+    if (objElements.find('.qsSingleCircle').length>0 && (objElements.find('.qsPublic').length>0 || objElements.find('.qsMyCircles'.length>0) || objElements.find('.qsExtendedCircles').length>0)) {
+        objElements.find('.qsSingleCircle').first().closest('.qsSelectCircleElement').before("<div class='grayLine'></div>");
     }
+
+    if (objElements.find('.qsCommunity').length>0 && (objElements.find('.qsSingleCircle').length>0 || objElements.find('.qsPublic').length>0 || objElements.find('.qsMyCircles'.length>0) || objElements.find('.qsExtendedCircles').length>0)) {
+        objElements.find('.qsCommunity').first().closest('.qsSelectCircleElement').before("<div class='grayLine'></div>");
+    }
+
+
+        element.after(objElements);
+
+   // }
 }
 
 
@@ -149,4 +173,4 @@ function OpenIconSelection() {
 
 var folderTemplate='<div class="qsIconCategory"><span>__CATEGORY__</span><div class="qsIconCategoryIcons">__ICONS__</div></div>';
 var singleImageTemplate='<img src="__PATH__/__FILE__"/>';
-var drillDownElementTemplate='<div class="qsSelectCircleElement __ICONCLASS_">__CIRCLE__</div>';
+var drillDownElementTemplate='<div class="qsSelectCircleElement"><span class="__ICONCLASS__"></span><span title="__TITLE__" class="inner">__CIRCLE__</span></div>';

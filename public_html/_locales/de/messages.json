@@ -241,5 +241,17 @@
     "Setup_newFilter":
     {
         "message": "Neuer Filter"
-    }
+    },
+    "Circles_Public":
+    {
+      "message": "Öffentlich"
+    },
+  "Circles_Private":
+  {
+    "message": "Meine Kreise"
+  },
+  "Circles_Extended":
+  {
+    "message": "Erweiterte Kreise"
+  }
 }
