@@ -1,9 +1,10 @@
-var gpoAutosave = function () {};
+var gpoAutosave = function () {
+};
 
 gpoAutosave.prototype = {
     constructor: gpoAutosave,
-    
-    CleanupAutosave:function() {
+
+    CleanupAutosave: function () {
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             if (key.indexOf("autosave.") === 0) {
@@ -17,10 +18,8 @@ gpoAutosave.prototype = {
         }
     },
     Init: function () {
-        $(document).on('focus', '[role="textbox"]', function ()
-        {
-            if ($(this).closest('.Kf').length === 0 && $(this).text().length === 0)
-            {
+        $(document).on('focus', '[role="textbox"]', function () {
+            if ($(this).closest('.Kf').length === 0 && $(this).text().length === 0) {
                 var id = $(this).closest('[jsmodel="mrYqlc"]').attr("id");
                 var storageName = 'autosave.' + id;
                 var autoSave = JSON.parse(localStorage.getItem(storageName));
@@ -37,24 +36,21 @@ gpoAutosave.prototype = {
             });
         });
 
-        $(document).on('input', '[role="textbox"]', function ()
-        {
-            if ($(this).closest('.Pf').length > 0)
-            {
-                // Kommentar
-                var id = $(this).closest('[jsmodel="mrYqlc"]').attr("id");
-                var storageName = 'autosave.' + id;
+        $(document).on('input', '[role="textbox"]', function () {
+                if ($(this).closest('.Pf').length > 0) {
+                    // Kommentar
+                    var id = $(this).closest('[jsmodel="mrYqlc"]').attr("id");
+                    var storageName = 'autosave.' + id;
 
-                if ($(this).text().length > 3)
-                {
-                    // Autosave
-                    var autoSave = {id: id, date: Date(), content: $(this).text()};
-                    localStorage.setItem(storageName, JSON.stringify(autoSave));
-                } else if ($(this).text().length === 0) {
-                    // Laden, falls AutoSave vorhanden:
+                    if ($(this).text().length > 3) {
+                        // Autosave
+                        var autoSave = {id: id, date: Date(), content: $(this).text()};
+                        localStorage.setItem(storageName, JSON.stringify(autoSave));
+                    } else if ($(this).text().length === 0) {
+                        // Laden, falls AutoSave vorhanden:
+                    }
                 }
             }
-        }
         );
         console.log("Autosave loaded.");
     }

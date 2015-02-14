@@ -1,13 +1,13 @@
 /**
-Core script to handle the entire theme and core functions
-**/
+ Core script to handle the entire theme and core functions
+ **/
 var QuickSidebar = function () {
 
     // Handles quick sidebar toggler
     var handleQuickSidebarToggler = function () {
         // quick sidebar toggler
         $('.top-menu .dropdown-quick-sidebar-toggler a, .page-quick-sidebar-toggler').click(function (e) {
-            $('body').toggleClass('page-quick-sidebar-open'); 
+            $('body').toggleClass('page-quick-sidebar-open');
         });
     };
 
@@ -58,10 +58,10 @@ var QuickSidebar = function () {
                 return;
             }
 
-            var preparePost = function(dir, time, name, avatar, message) {
+            var preparePost = function (dir, time, name, avatar, message) {
                 var tpl = '';
-                tpl += '<div class="post '+ dir +'">';
-                tpl += '<img class="avatar" alt="" src="' + Layout.getLayoutImgPath() + avatar +'.jpg"/>';
+                tpl += '<div class="post ' + dir + '">';
+                tpl += '<img class="avatar" alt="" src="' + Layout.getLayoutImgPath() + avatar + '.jpg"/>';
                 tpl += '<div class="message">';
                 tpl += '<span class="arrow"></span>';
                 tpl += '<a href="#" class="name">Bob Nilson</a>&nbsp;';
@@ -81,14 +81,14 @@ var QuickSidebar = function () {
             message = $(message);
             chatContainer.append(message);
 
-            var getLastPostPos = function() {
+            var getLastPostPos = function () {
                 var height = 0;
-                chatContainer.find(".post").each(function() {
+                chatContainer.find(".post").each(function () {
                     height = height + $(this).outerHeight();
                 });
 
                 return height;
-            };           
+            };
 
             chatContainer.slimScroll({
                 scrollTo: getLastPostPos()
@@ -97,7 +97,7 @@ var QuickSidebar = function () {
             input.val("");
 
             // simulate reply
-            setTimeout(function(){
+            setTimeout(function () {
                 var time = new Date();
                 var message = preparePost('in', (time.getHours() + ':' + time.getMinutes()), "Ella Wong", 'avatar2', 'Lorem ipsum doloriam nibh...');
                 message = $(message);

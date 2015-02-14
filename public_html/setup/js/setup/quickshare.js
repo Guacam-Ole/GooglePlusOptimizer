@@ -1,18 +1,18 @@
-var gpoQuickShareDisplay=function() {
-   // this.AllCirlces;
+var gpoQuickShareDisplay = function () {
+    // this.AllCirlces;
 };
 
 
 gpoQuickShareDisplay.prototype = {
     constructor: gpoQuickShare,
-    GetAllImages:function() {
-        $.ajaxSetup( { "async": false } );    
-        var result=$.getJSON( "../../_locales/de/icons.json");
-        $.ajaxSetup( { "async": true } )    ;
+    GetAllImages: function () {
+        $.ajaxSetup({"async": false});
+        var result = $.getJSON("../../_locales/de/icons.json");
+        $.ajaxSetup({"async": true});
         return JSON.parse(result.responseText);
     },
-    GetAllDirectories:function() {
-        var obj=this;
+    GetAllDirectories: function () {
+        var obj = this;
         var directories = [];
         var allImages = obj.GetAllImages();
         for (var i in allImages) {
@@ -23,7 +23,7 @@ gpoQuickShareDisplay.prototype = {
         }
         return directories;
     },
-    GetImagesFromDirectory:function(directory) {
+    GetImagesFromDirectory: function (directory) {
         var dirImages = [];
         var allImages = this.GetAllImages();
         for (var i in allImages) {
@@ -33,20 +33,21 @@ gpoQuickShareDisplay.prototype = {
         }
         return dirImages;
     },
-    GetQuickShareInfo:function() {
+    GetQuickShareInfo: function () {
         chrome.runtime.sendMessage({
-            Action: "LoadCircles"}, 
-            function(response) {
+                Action: "LoadCircles"
+            },
+            function (response) {
                 allCircles = response.Result;
                 allCircles.sort();
                 $('#circleCount').text(allCircles.length);
             }
         );
     },
-    AddQuickShareRow:function() {
-        var obj=this;
+    AddQuickShareRow: function () {
+        var obj = this;
         var alreadyExistingRows = $('#allShare').find('.iconSelectCategory').length;
-        var singleRow = $('<div class="iconSelectCategory imgSelSize" rowId="' + alreadyExistingRows + '"><button type="button" class="removeDD btn btn-default btn-lg"><span class="fa fa-cut"></span></button><a class="QuickShareIconSelect"><img class="mainImage" src="../images/icons/small/unknown.png" title="'+chrome.i18n.getMessage("selectIcon")+'"/></a><div class="category"/><a class="selectCircle">+ '+chrome.i18n.getMessage("selectCircle")+'</a><hr class="clear" /></div>');
+        var singleRow = $('<div class="iconSelectCategory imgSelSize" rowId="' + alreadyExistingRows + '"><button type="button" class="removeDD btn btn-default btn-lg"><span class="fa fa-cut"></span></button><a class="QuickShareIconSelect"><img class="mainImage" src="../images/icons/small/unknown.png" title="' + chrome.i18n.getMessage("selectIcon") + '"/></a><div class="category"/><a class="selectCircle">+ ' + chrome.i18n.getMessage("selectCircle") + '</a><hr class="clear" /></div>');
         var allDirs = obj.GetAllDirectories();
         allDirs.sort();
         for (var i in allDirs) {
@@ -63,39 +64,39 @@ gpoQuickShareDisplay.prototype = {
             singleRow.find('.category').append(directoryDiv);
         }
         singleRow.append($('<div class="inputDD inputDD' + alreadyExistingRows + '"><input type="text" class="form-control typeahead tags" value="Hamburger Sportverein" style="display: none;"/></div>'));
-        singleRow.append('<input class="chkBookmark" type="checkbox">'+chrome.i18n.getMessage("BookmarkMode")+'</input> '+chrome.i18n.getMessage("sharedImmediatly")+'<br/><br/>');
+        singleRow.append('<input class="chkBookmark" type="checkbox">' + chrome.i18n.getMessage("BookmarkMode") + '</input> ' + chrome.i18n.getMessage("sharedImmediatly") + '<br/><br/>');
         $('#allShare').append(singleRow);
         obj.AddQuickShareEvents();
 
-        $('.inputDD' + alreadyExistingRows).tagsInput( {
+        $('.inputDD' + alreadyExistingRows).tagsInput({
             'autocomplete_url': ' ',
             'autocomplete': {
                 'source': allCircles
             },
             width: 'auto',
-            'onAddTag': function() {
+            'onAddTag': function () {
                 SaveAllQuickShares();
             },
-            'onRemoveTag': function() {
+            'onRemoveTag': function () {
                 SaveAllQuickShares();
             }
         });
     },
-    InitQSEvents:function() {
-        $('#closeCirclesExplanation').click(function() {
+    InitQSEvents: function () {
+        $('#closeCirclesExplanation').click(function () {
             $('.circlesExplanation').fadeOut();
         });
 
-        $('#displayCirclesExplanation').click(function() {
+        $('#displayCirclesExplanation').click(function () {
             $('.circlesExplanation').fadeIn();
         });
 
-        $('#recalcCircles').click(function() {
+        $('#recalcCircles').click(function () {
             $('.circlesLoaded').fadeIn();
         });
     },
-    GetSingleQuickShareData:function(qsBlock) {
-        if (qsBlock.html() === undefined || qsBlock.html()==="") {
+    GetSingleQuickShareData: function (qsBlock) {
+        if (qsBlock.html() === undefined || qsBlock.html() === "") {
             return null;
         }
         var singleQuickShare = new Object();
@@ -110,10 +111,10 @@ gpoQuickShareDisplay.prototype = {
             return singleQuickShare;
         }
     },
-    SaveAllQuickShares:function() {
-        var obj=this;
+    SaveAllQuickShares: function () {
+        var obj = this;
         var allQS = [];
-        $('.iconSelectCategory').each(function() {
+        $('.iconSelectCategory').each(function () {
             var singleQS = obj.GetSingleQuickShareData($(this));
             if (singleQS !== null) {
                 allQS.push(singleQS);
@@ -122,12 +123,12 @@ gpoQuickShareDisplay.prototype = {
 
         chrome.runtime.sendMessage({Action: "SaveQS", QuickShares: JSON.stringify(allQS)});
     },
-    LoadAllQuickShares:function() {
-        var obj=this;
+    LoadAllQuickShares: function () {
+        var obj = this;
         var allQS = [];
-        chrome.runtime.sendMessage( {
+        chrome.runtime.sendMessage({
             Action: "LoadQS"
-        }, function(response) {
+        }, function (response) {
             allQS = JSON.parse(response.Result);
             $('#allShare').find('.iconSelectCategory').empty();
             for (var i in allQS) {
@@ -140,8 +141,8 @@ gpoQuickShareDisplay.prototype = {
                 qsBlock.find('.inputDD').importTags(oneItem.Circles);
             }
         });
-    },AddQuickShareEvents:function() {
-        var obj=this;
+    }, AddQuickShareEvents: function () {
+        var obj = this;
         $('.QuickShareIconSelect').off('click');
         $('.QuickShareCategorySelect').off('click');
         $('.QuickShareImageSelect').off('click');
@@ -150,7 +151,7 @@ gpoQuickShareDisplay.prototype = {
         $('.chkBookmark').off('click');
 
 
-        $('.selectCircle').click(function() {
+        $('.selectCircle').click(function () {
             $('.listAllCircles').fadeToggle();
             if ($('.listAllCircles').is(":visible")) {
                 $('.listAllCircles').children().empty();
@@ -161,7 +162,7 @@ gpoQuickShareDisplay.prototype = {
                 $('.listAllCircles').appendTo($(this));
             }
             $('.selectSingleCircle').off('click');
-            $('.selectSingleCircle').click(function() {
+            $('.selectSingleCircle').click(function () {
                 var circleName = $(this).text();
                 console.log(circleName + " clicked");
                 var input = $(this).closest('.iconSelectCategory').find('.inputDD');
@@ -171,21 +172,18 @@ gpoQuickShareDisplay.prototype = {
                 return false;
             });
         });
-        $('.chkBookmark').click(function() {
+        $('.chkBookmark').click(function () {
             obj.SaveAllQuickShares();
         });
 
-        $('.QuickShareIconSelect').click(function()
-        {
+        $('.QuickShareIconSelect').click(function () {
             $(this).parent().find('.categoryHeader').fadeToggle();
         });
-        $('.QuickShareCategorySelect').click(function()
-        {
+        $('.QuickShareCategorySelect').click(function () {
             $(this).parent().find('.categoryDetails').fadeToggle();
         });
 
-        $('.QuickShareImageSelect').click(function()
-        {
+        $('.QuickShareImageSelect').click(function () {
             var imageId = $(this).attr("imageId");
             var imageName = $(this).find('img').attr("src");
 
@@ -198,7 +196,7 @@ gpoQuickShareDisplay.prototype = {
             return false;
         });
 
-        $('.removeDD').click(function() {
+        $('.removeDD').click(function () {
             $(this).closest('.iconSelectCategory').empty();
             obj.SaveAllQuickShares();
             return false;

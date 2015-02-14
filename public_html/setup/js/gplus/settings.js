@@ -1,15 +1,13 @@
-
-var gpoSettings=function() 
-{
+var gpoSettings = function () {
     this.Values;
-    this.AllSettings=[];
-    this.ReadCount=0;    
+    this.AllSettings = [];
+    this.ReadCount = 0;
 };
 
 gpoSettings.prototype = {
     constructor: gpoSettings,
-    Init: function () {  
-        var obj=this;
+    Init: function () {
+        var obj = this;
         // Alle Optionen hinzufügen
         obj.AllSettings.push(new gpoSetting("stoppwatch"));
         obj.AllSettings.push(new gpoSetting("Schniedel"));
@@ -45,60 +43,60 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("markLSRPosts"));
         obj.AllSettings.push(new gpoSetting("CollectTicks"));
         obj.AllSettings.push(new gpoSetting("displayQuickHashes"));
-        obj.AllSettings.push(new gpoSetting("WizardMode",1));
-        obj.AllSettings.push(new gpoSetting("interval",500));
+        obj.AllSettings.push(new gpoSetting("WizardMode", 1));
+        obj.AllSettings.push(new gpoSetting("interval", 500));
         obj.AllSettings.push(new gpoSetting("sportEnabled"));
         obj.AllSettings.push(new gpoSetting("weatherEnabled"));
         obj.AllSettings.push(new gpoSetting("Sport"));
         obj.AllSettings.push(new gpoSetting("QuickShares"));
         obj.AllSettings.push(new gpoSetting("weatherWidget"));
         obj.AllSettings.push(new gpoSetting("enableQs"));
-        obj.AllSettings.push(new gpoSetting("UserCols"));   
+        obj.AllSettings.push(new gpoSetting("UserCols"));
     },
-    Load:function(ret) {
-        var obj=this;
-        
+    Load: function (ret) {
+        var obj = this;
+
         // Alle Optionen lesen
-        $.each(obj.AllSettings,function(index,value) {
-            value.Get(function() {
+        $.each(obj.AllSettings, function (index, value) {
+            value.Get(function () {
                 obj.ReadCount++;
-                if (obj.ReadCount===obj.AllSettings.length) {
+                if (obj.ReadCount === obj.AllSettings.length) {
                     obj.Convert(ret);
                 }
             });
         });
     },
-    Convert:function(ret) {
-        var obj=this;
-        var json="";
-        $.each(obj.AllSettings, function(index,value) {
-            var strValue=value.Value;
-            if (strValue==="undefined") {
-                strValue=null;
+    Convert: function (ret) {
+        var obj = this;
+        var json = "";
+        $.each(obj.AllSettings, function (index, value) {
+            var strValue = value.Value;
+            if (strValue === "undefined") {
+                strValue = null;
             }
-            var putBrackets=true;
-            if (strValue===null || strValue===undefined || !isNaN(strValue)|| strValue==="true" || strValue==="false") {
+            var putBrackets = true;
+            if (strValue === null || strValue === undefined || !isNaN(strValue) || strValue === "true" || strValue === "false") {
                 // Kein String
-                putBrackets=false;
-            } else if (strValue.indexOf("[")===0 || strValue.indexOf("{")===0) {
+                putBrackets = false;
+            } else if (strValue.indexOf("[") === 0 || strValue.indexOf("{") === 0) {
                 // JSON-Objekt
-                putBrackets=false;
+                putBrackets = false;
             }
             if (putBrackets) {
-                    strValue="\""+strValue+"\"";
+                strValue = "\"" + strValue + "\"";
             }
-            
-            
-            var strName=value.Name.substring(0,1).toUpperCase()+value.Name.substring(1);
-            json+="\""+strName+"\":"+strValue+",";
+
+
+            var strName = value.Name.substring(0, 1).toUpperCase() + value.Name.substring(1);
+            json += "\"" + strName + "\":" + strValue + ",";
         });
-        json=json.substr(0,json.length-1) ;
-        obj.Values=$.parseJSON("{"+json+"}");
-        
+        json = json.substr(0, json.length - 1);
+        obj.Values = $.parseJSON("{" + json + "}");
+
         ret();
     },
-    Get:function(key) {
-        var obj=this;
+    Get: function (key) {
+        var obj = this;
         var foundSetting = $.grep(obj.AllSettings, function (e) {
             return e.Name === key;
         });
@@ -106,24 +104,23 @@ gpoSettings.prototype = {
     }
 };
 
-var gpoSetting=function(settingname, defaultValue) {
-    this.Name=settingname;
+var gpoSetting = function (settingname, defaultValue) {
+    this.Name = settingname;
     this.Value;
-    this.DefaultValue=defaultValue;
+    this.DefaultValue = defaultValue;
 };
 
-gpoSetting.prototype= {
+gpoSetting.prototype = {
     costructor: gpoSetting,
-    Get:function(ret) {
-        var obj=this;
-        chrome.runtime.sendMessage( {
+    Get: function (ret) {
+        var obj = this;
+        chrome.runtime.sendMessage({
             Action: "GetSetting",
             Name: obj.Name
-        }, function (response)
-        {
-            obj.Value=response.Result; 
-            if (obj.DefaultValue!==undefined && (obj.Value===undefined || obj.Value===null)) {
-                obj.Value=obj.DefaultValue;
+        }, function (response) {
+            obj.Value = response.Result;
+            if (obj.DefaultValue !== undefined && (obj.Value === undefined || obj.Value === null)) {
+                obj.Value = obj.DefaultValue;
             }
             ret();
         });

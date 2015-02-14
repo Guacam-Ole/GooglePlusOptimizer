@@ -1,4 +1,4 @@
-var gpoUser=function() {
+var gpoUser = function () {
     this.UserColorTimeout;
     this.AllCssColors;
     this.AllUserSettings;
@@ -7,64 +7,64 @@ var gpoUser=function() {
 
 gpoUser.prototype = {
     constructor: gpoUser,
-    Init:function() {
-        this.OptStartColors();                    
+    Init: function () {
+        this.OptStartColors();
     },
-    Dom:function($ce) {
+    Dom: function ($ce) {
         this.PaintColorBlock();
-        this.PaintForUser($ce);        
+        this.PaintForUser($ce);
         this.PaintCurrentUserSettings();
     },
-    OptStartColors:function() {
+    OptStartColors: function () {
         this.AllCssColors = this.GetCssColors();
         //this.GetAllUserSettings();
         console.log("GPO: Usercolors loaded.");
     },
-    PaintColorBlock:function() {
-        var obj=this;
-        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1)
-        {
+    PaintColorBlock: function () {
+        var obj = this;
+        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
             return;
         }
-        if ($(".colorUsers").length > 0 || $('[ guidedhelpid="profile_name"]').length === 0)
-        {
+        if ($(".colorUsers").length > 0 || $('[ guidedhelpid="profile_name"]').length === 0) {
             return;
         }
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
         var userName = obj.GetUserName();
         var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
-        var $completeBlock=$(colorBlock + userInfo.replace('__USER__', userName));
+        var $completeBlock = $(colorBlock + userInfo.replace('__USER__', userName));
         obj.PaintCurrentUserSettings($completeBlock);
-        
+
         $('[guidedhelpid="profile_name"]').parent().append($completeBlock);
-        $('.colClick').click(function() {
+        $('.colClick').click(function () {
             obj.RemoveSelection();
             $(this).append("✓");
             obj.UpdateUserData();
         });
-        $('.userRemark').change(function() {
+        $('.userRemark').change(function () {
             obj.UpdateUserData();
         });
-    },PaintForUser:function($ce) {
-        var obj=this;
-        if (obj.AllUserSettings=== null || obj.AllUserSettings=== undefined) {
+    }, PaintForUser: function ($ce) {
+        var obj = this;
+        if (obj.AllUserSettings === null || obj.AllUserSettings === undefined) {
             return;
         }
 
         for (var i in obj.AllUserSettings) {
-            var currentUserSetting=obj.AllUserSettings[i];
+            var currentUserSetting = obj.AllUserSettings[i];
             if (currentUserSetting.Color !== "rgb(0, 0, 0)" && currentUserSetting.Color !== "rgba(0, 0, 0, 0)") {
                 // Einfärben
-                var paintColor= $.grep(obj.AllCssColors, function(e){ return e.Color === currentUserSetting.Color; });
-                if (paintColor.length>0) {
+                var paintColor = $.grep(obj.AllCssColors, function (e) {
+                    return e.Color === currentUserSetting.Color;
+                });
+                if (paintColor.length > 0) {
                     $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
                     $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass(paintColor[0].CssClass);
                 }
             }
             if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
                 if ($ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').length > 0) {
-                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function() {
+                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function () {
                         AddHeadWrapper($(this));
                         if ($(this).html().indexOf('infoImg') === -1) {
                             $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
@@ -74,23 +74,21 @@ gpoUser.prototype = {
             }
         }
     },
-    GetUserName:function() {
+    GetUserName: function () {
         return $('[guidedhelpid="profile_name"]').html();
     },
-    PaintCurrentUserSettings:function($ce) {
-        var obj=this;
-        if ($ce===undefined) {
-            $ce=$(document);
+    PaintCurrentUserSettings: function ($ce) {
+        var obj = this;
+        if ($ce === undefined) {
+            $ce = $(document);
         }
-        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1)
-        {
+        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
             return;
         }
-        if ( $('[ guidedhelpid="profile_name"]').length === 0)
-        {
+        if ($('[ guidedhelpid="profile_name"]').length === 0) {
             return;
         }
-        
+
         var currentUserSettings = this.GetCurrentUserSettings() || null;
         if (currentUserSettings === null) {
             return; // Noch keine Einstellungen
@@ -100,7 +98,7 @@ gpoUser.prototype = {
         $ce.find('.userRemark').val(usrText);
         var usrColor = currentUserSettings.Color;
 
-        $ce.find('.colorUsers td').each(function() {
+        $ce.find('.colorUsers td').each(function () {
             var color = $(this).css("background-color");
             if (color === usrColor) {
                 obj.RemoveSelection();
@@ -108,21 +106,20 @@ gpoUser.prototype = {
             }
         });
     },
-    GetCurrentUserId:function() {
+    GetCurrentUserId: function () {
         var dirtyId = $('[role=tablist]').attr("id");
         return dirtyId.split('-')[0];
     },
-    RemoveSelection:function () {
-        $('.colorUsers td').each(function() {
+    RemoveSelection: function () {
+        $('.colorUsers td').each(function () {
             $(this).html("");
         });
     },
-    GetCurrentUserSettings:function() {
-        var obj=this;
+    GetCurrentUserSettings: function () {
+        var obj = this;
         var currentUserId = obj.GetCurrentUserId();
         var userSettings = obj.AllUserSettings;
-        if (userSettings === null || userSettings === undefined)
-        {
+        if (userSettings === null || userSettings === undefined) {
             return null;
         }
         for (var i in userSettings) {
@@ -132,13 +129,13 @@ gpoUser.prototype = {
             }
         }
     },
-    SaveAllUserSettings:function(allUserSettings) {
-        chrome.runtime.sendMessage( {
-                Action: "SaveUsers", ParameterValue: JSON.stringify(allUserSettings)
-            });
+    SaveAllUserSettings: function (allUserSettings) {
+        chrome.runtime.sendMessage({
+            Action: "SaveUsers", ParameterValue: JSON.stringify(allUserSettings)
+        });
     },
-    GetSettingsObject:function(i, remark, color) {
-        var obj=this;
+    GetSettingsObject: function (i, remark, color) {
+        var obj = this;
         var currentSettingObject = new Object();
         currentSettingObject.I = i;
         currentSettingObject.Text = remark;
@@ -146,8 +143,8 @@ gpoUser.prototype = {
         currentSettingObject.UserId = obj.GetCurrentUserId();
         return currentSettingObject;
     },
-    AddUserSettings:function(remark, color) {
-        var obj=this;
+    AddUserSettings: function (remark, color) {
+        var obj = this;
         var allUserSettings = obj.AllUserSettings;
         if (allUserSettings === null || allUserSettings === undefined) {
             allUserSettings = [];
@@ -156,26 +153,26 @@ gpoUser.prototype = {
         allUserSettings.push(currentSettingsObject);
         obj.SaveAllUserSettings(allUserSettings);
     }
-    ,RemoveUserSettigns:function(i) {
-        var obj=this;
+    , RemoveUserSettigns: function (i) {
+        var obj = this;
         var allUserSettings = obj.AllUserSettings;
         allUserSettings.splice(i, 1);
         obj.SaveAllUserSettings(allUserSettings);
     },
-    UpdateUserSettings:function(i, remark, color) {
-        var obj=this;
+    UpdateUserSettings: function (i, remark, color) {
+        var obj = this;
         var allUserSettings = obj.AllUserSettings;
         var currentSettingsObject = obj.GetSettingsObject(i, remark, color);
         allUserSettings[i] = currentSettingsObject;
         obj.SaveAllUserSettings(allUserSettings);
     },
-    UpdateUserData:function() {
-        var obj=this;
+    UpdateUserData: function () {
+        var obj = this;
         var userRemark = $('.userRemark').val();
         var selectedColor;
         var removeData = (($('.usrWhite').val() === '✓') && userRemark.trim() === "");
 
-        $('.colorUsers td').each(function() {
+        $('.colorUsers td').each(function () {
             if ($(this).html() === "✓") {
                 selectedColor = $(this).css("background-color");
             }
@@ -208,27 +205,27 @@ gpoUser.prototype = {
 //            
 //            //obj.PaintColorBlock();            
 //        });
-    },HexToR:function(h) {
-        var obj=this;
+    }, HexToR: function (h) {
+        var obj = this;
         return parseInt((obj.CutHex(h)).substring(0, 2), 16);
-    },HexToG:function(h) {
-        var obj=this;
+    }, HexToG: function (h) {
+        var obj = this;
         return parseInt((obj.CutHex(h)).substring(2, 4), 16);
-    },HexToB:function(h) {
-        var obj=this;
+    }, HexToB: function (h) {
+        var obj = this;
         return parseInt((obj.CutHex(h)).substring(4, 6), 16);
-    },CutHex:function(h) {
-        var obj=this;
+    }, CutHex: function (h) {
+        var obj = this;
         return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
-    },HexToRGB:function(hex) {
-        var obj=this;
+    }, HexToRGB: function (hex) {
+        var obj = this;
         var r = obj.HexToR(hex);
         var g = obj.HexToG(hex);
         var b = obj.HexToB(hex);
         return [r, g, b];
     },
-    GetCssColors:function() {
-        var obj=this;
+    GetCssColors: function () {
+        var obj = this;
         var colors = [];
         colors.push(obj.AddToCssColor("76a7fa", "Mqc"));
         colors.push(obj.AddToCssColor("fbcb43", "Jqc"));
@@ -238,8 +235,8 @@ gpoUser.prototype = {
         colors.push(obj.AddToCssColor("bc5679", "CVb"));
         return colors;
     },
-    AddToCssColor:function(name, cssclass) {
-        var obj=this;
+    AddToCssColor: function (name, cssclass) {
+        var obj = this;
         var col = obj.HexToRGB(name);
         var colorData = new Object();
         colorData.Name = name;

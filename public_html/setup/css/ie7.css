@@ -2,23 +2,26 @@
 /* CSS Document to fix a few minor bugs in ie7 */
 
 #search_box_container .button {
-	margin:13px 10px 0 0;
+    margin: 13px 10px 0 0;
 }
 
 ul#navigation a {
-	padding:13px 13px 10px 13px; /*space around and inbetween the buttons, top, right, bottom, left*/
+    padding: 13px 13px 10px 13px; /*space around and inbetween the buttons, top, right, bottom, left*/
 }
 
 body {
-	line-height:1.4em; /* vertical spacing between your lines of text*/
+    line-height: 1.4em; /* vertical spacing between your lines of text*/
 }
+
 .tooltip {
-	background-image:url(../images/tool_tip_large.gif) !important;
+    background-image: url(../images/tool_tip_large.gif) !important;
 }
-.keep_in{
-	padding-top:3px;
+
+.keep_in {
+    padding-top: 3px;
 }
+
 #call_back_submit input {
-	margin:70px 5px 0 0;
-	float:right;
+    margin: 70px 5px 0 0;
+    float: right;
 }

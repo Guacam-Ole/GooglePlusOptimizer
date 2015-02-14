@@ -1,122 +1,183 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Google+ Filter</title>
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
-        <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css' />
-        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/lib/jquery.tools.min.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/lib/jquery.tagsinput.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/lib/jquery.ui.widget.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/lib/jquery.ui.accordion.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/lib/jquery.knob.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
-        <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Google+ Filter</title>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'/>
+    <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/lib/jquery.tools.min.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/lib/jquery.tagsinput.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/lib/jquery.ui.widget.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/lib/jquery.ui.accordion.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/lib/jquery.knob.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
+    <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
 
 
-    </head>
+</head>
 
 
-    <body>
-        <div id="bg_top">
-            <div id="wrapper">
-                <div id="header"><div id="logo"><h1>Optimizer for Google+</h1></div></div>
-                <!--end header-->
-                <div id="menu">
-                    <ul id="navigation">
-                        <li><a href="index.html">Welcome</a></li>
-                        <li><a href="settings.html">Filter</a> </li>
-                        <li><a href="erweitert.html">Settings</a> </li>
-                        <li><a href="widgets.html" class="active">Widgets</a> </li>
-                        <li><a href="additions.html">Features</a> </li>
-                        <li><a href="help.html">Help</a></li>
-                        <li><a target="_blank" href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=en&gl=EN">Rate plugin (Thanks!) </a></li>
-                    </ul>
-                </div>
-                <!--end menu-->
-                <div id="content">
-                    <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background" /></div>
-                    <!-- the shadow border down left/right -->
-                    <div id="content_border">
-                        <!-- the gradient from top to bottom -->
-                        <div id="content_bg">
-                            <!-- the optional line down the middle of the content area -->
-                            <!-- end line down the middle -->
-                            <div id="content_seperator">
-                                <div id="left_column">
-                                    <div id="proposal" onclick="location.href = '#';" style="cursor:pointer;">
-                                        <div class="text">
-                                            <h3 id="title">Google+-Filter</h3>
-                                            <p><div id="version">i dont fucking know</div></p>
-                                            <p><b>Author:</b> <a href="https://plus.google.com/+OleAlbers/about">Ole Albers</a></p>
-                                            <p><b>Additional Authors:</b> <a href="https://plus.google.com/+MarcoGr%C3%A4tsch/about">Marco Grätsch</a></p>
-                                        </div>
-                                        <div class="icon"><img src="../images/icon_proposal.png" alt="Proposal" width="42" height="42" border="0"></div>
-                                    </div>
-                                    <!--end proposal-->
-                                    <div id="clients">
-                                        <h3>Is there any pro-version?</h3>
-                                        <p><br/>Nope. There is no pro-version and there will never be one.</p>									
-                                        <p>All features remain free for ever.<br/><br/></p>
-                                        <p>If you want to support this project, feel free to donate any fee you want through paypal or send us a flattr. This helps us developing even more features.<br/><br/>Thanks for that :)</p>
-                                        <p>
-                                            <br/><div id="flattr"><center><a href="https://flattr.com/submit/auto?user_id=T0mat0&url=http://goo.gl/nDe4om&title=Google%2B%20Filter" target="_blank"><img src="../images/flattr.png" /></a></center></div><br/><br/>
-                                        </p>
-                                        <p>
-                                            <div id="paypal">
-                                                <center>
-                                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                                        <input type="hidden" name="cmd" value="_s-xclick"/>
-                                                        <input type="hidden" name="hosted_button_id" value="4UK2CU9NJWAAG"/>
-                                                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
-                                                        <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1"/>
-                                                    </form>
-                                                </center> 
-                                            </div>
-                                        </p>
-                                    </div>
-                                    <!--end clients-->
+<body>
+<div id="bg_top">
+    <div id="wrapper">
+        <div id="header">
+            <div id="logo"><h1>Optimizer for Google+</h1></div>
+        </div>
+        <!--end header-->
+        <div id="menu">
+            <ul id="navigation">
+                <li><a href="index.html">Welcome</a></li>
+                <li><a href="settings.html">Filter</a></li>
+                <li><a href="erweitert.html">Settings</a></li>
+                <li><a href="widgets.html" class="active">Widgets</a></li>
+                <li><a href="additions.html">Features</a></li>
+                <li><a href="help.html">Help</a></li>
+                <li><a target="_blank"
+                       href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=en&gl=EN">Rate
+                    plugin (Thanks!) </a></li>
+            </ul>
+        </div>
+        <!--end menu-->
+        <div id="content">
+            <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background"/></div>
+            <!-- the shadow border down left/right -->
+            <div id="content_border">
+                <!-- the gradient from top to bottom -->
+                <div id="content_bg">
+                    <!-- the optional line down the middle of the content area -->
+                    <!-- end line down the middle -->
+                    <div id="content_seperator">
+                        <div id="left_column">
+                            <div id="proposal" onclick="location.href = '#';" style="cursor:pointer;">
+                                <div class="text">
+                                    <h3 id="title">Google+-Filter</h3>
+
+                                    <p>
+
+                                    <div id="version">i dont fucking know</div>
+                                    </p>
+                                    <p><b>Author:</b> <a href="https://plus.google.com/+OleAlbers/about">Ole Albers</a>
+                                    </p>
+
+                                    <p><b>Additional Authors:</b> <a
+                                            href="https://plus.google.com/+MarcoGr%C3%A4tsch/about">Marco Grätsch</a>
+                                    </p>
                                 </div>
-                                <!--end left_column-->
-                                <div id="right_column">
-                                    <h1>Welcome to the Google+ - Optimizer</h1>
-                                    <p>The purpose of this optimizer is to remove unwanted content and to add additional features to your Google+ - stream. To achieve this you can deactivate single Google+ - features or just remove specific content.</p>
-                                    <p>Enable or disable the single features with the help of the <a href="settings.html">filters</a>. To get more into detail use the <a href="erweitert.html">settings</a> to modify advanced filter settings.</p>
-                                    <p>Additional features can be added in the <a href="widgets.html">widgets</a> area. To get more into detail use the <a href="erweitert.html">settings</a> to modify advanced filter settings.</p>
-                                    <p>If there is any problem or question: Maybe the <a href="help.html">help</a> might be of help... :)</p>
-
-                                    <h2>More Informationen:</h2>
-                                    <p><a href="https://plus.google.com/u/0/communities/109839149408899563786">International Supportcommunity</a> Get help from the community</p>
-                                    <p><a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#bug">Bugs</a> Found an error? Tell us, please!</p>
-                                    <p><a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#feature">Feature requests</a> You miss a feature? Again: Tell us</p>
-                                    <h2>Images</h2>
-                                    <p>The Images from the chrome webstore and the icon of this extension were made by <a href="https://plus.google.com/u/0/+IngoDingerKreativstapler/about">Ingo Dinger</a> (<a href="www.kreativstapler.de">www.kreativstapler.de</a>)</p>
-                                    <img src="../images/optimizer_setup.jpg"/>
-                                </div>
-                                <!--end right_column-->
-                                <hr class="clear">
-                                    <!--hr makes sure the bottom of the box stays at the bottom-->
+                                <div class="icon"><img src="../images/icon_proposal.png" alt="Proposal" width="42"
+                                                       height="42" border="0"></div>
                             </div>
+                            <!--end proposal-->
+                            <div id="clients">
+                                <h3>Is there any pro-version?</h3>
+
+                                <p><br/>Nope. There is no pro-version and there will never be one.</p>
+
+                                <p>All features remain free for ever.<br/><br/></p>
+
+                                <p>If you want to support this project, feel free to donate any fee you want through
+                                    paypal or send us a flattr. This helps us developing even more features.<br/><br/>Thanks
+                                    for that :)</p>
+
+                                <p>
+                                    <br/>
+
+                                <div id="flattr">
+                                    <center><a
+                                            href="https://flattr.com/submit/auto?user_id=T0mat0&url=http://goo.gl/nDe4om&title=Google%2B%20Filter"
+                                            target="_blank"><img src="../images/flattr.png"/></a></center>
+                                </div>
+                                <br/><br/>
+                                </p>
+                                <p>
+
+                                <div id="paypal">
+                                    <center>
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+                                              target="_top">
+                                            <input type="hidden" name="cmd" value="_s-xclick"/>
+                                            <input type="hidden" name="hosted_button_id" value="4UK2CU9NJWAAG"/>
+                                            <input type="image"
+                                                   src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                                                   border="0" name="submit"
+                                                   alt="PayPal - The safer, easier way to pay online!"/>
+                                            <img alt="" border="0"
+                                                 src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1"
+                                                 height="1"/>
+                                        </form>
+                                    </center>
+                                </div>
+                                </p>
+                            </div>
+                            <!--end clients-->
                         </div>
-                        <!-- end the gradient from top to bottom -->
+                        <!--end left_column-->
+                        <div id="right_column">
+                            <h1>Welcome to the Google+ - Optimizer</h1>
+
+                            <p>The purpose of this optimizer is to remove unwanted content and to add additional
+                                features to your Google+ - stream. To achieve this you can deactivate single Google+ -
+                                features or just remove specific content.</p>
+
+                            <p>Enable or disable the single features with the help of the <a href="settings.html">filters</a>.
+                                To get more into detail use the <a href="erweitert.html">settings</a> to modify advanced
+                                filter settings.</p>
+
+                            <p>Additional features can be added in the <a href="widgets.html">widgets</a> area. To get
+                                more into detail use the <a href="erweitert.html">settings</a> to modify advanced filter
+                                settings.</p>
+
+                            <p>If there is any problem or question: Maybe the <a href="help.html">help</a> might be of
+                                help... :)</p>
+
+                            <h2>More Informationen:</h2>
+
+                            <p><a href="https://plus.google.com/u/0/communities/109839149408899563786">International
+                                Supportcommunity</a> Get help from the community</p>
+
+                            <p>
+                                <a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#bug">Bugs</a>
+                                Found an error? Tell us, please!</p>
+
+                            <p>
+                                <a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#feature">Feature
+                                    requests</a> You miss a feature? Again: Tell us</p>
+
+                            <h2>Images</h2>
+
+                            <p>The Images from the chrome webstore and the icon of this extension were made by <a
+                                    href="https://plus.google.com/u/0/+IngoDingerKreativstapler/about">Ingo Dinger</a> (<a
+                                    href="www.kreativstapler.de">www.kreativstapler.de</a>)</p>
+                            <img src="../images/optimizer_setup.jpg"/>
+                        </div>
+                        <!--end right_column-->
+                        <hr class="clear">
+                        <!--hr makes sure the bottom of the box stays at the bottom-->
                     </div>
-                    <!-- end the shadow border down left/right -->
-                    <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background" /></div>
                 </div>
-                <!-- end content wrap -->
-                <div id="footer">
-                    <a href="help.html#license">Licences and sources</a>
-                    <div class="right">
-                        <ul>
-                            <li class="keep_in"> contact:</li>
-                            <li><a href="https://plus.google.com/u/0/communities/111606711991143283422" title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community" width="25" height="25" border="0" /></a></li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- end the gradient from top to bottom -->
+            </div>
+            <!-- end the shadow border down left/right -->
+            <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background"/>
             </div>
         </div>
-    </body>
+        <!-- end content wrap -->
+        <div id="footer">
+            <a href="help.html#license">Licences and sources</a>
+
+            <div class="right">
+                <ul>
+                    <li class="keep_in"> contact:</li>
+                    <li><a href="https://plus.google.com/u/0/communities/111606711991143283422"
+                           title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community"
+                                                          width="25" height="25" border="0"/></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

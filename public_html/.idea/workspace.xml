@@ -2,16 +2,104 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/de/bs.circleNames.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/de/bs.nofeature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/FileSaver.js" afterPath="$PROJECT_DIR$/setup/js/setup/FileSaver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/additions.html" afterPath="$PROJECT_DIR$/setup/en/additions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/autosave.js" afterPath="$PROJECT_DIR$/setup/js/gplus/autosave.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/bookmarks.css" afterPath="$PROJECT_DIR$/setup/css/bookmarks.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" afterPath="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bootstrap-hover-dropdown.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/bootstrap-hover-dropdown.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/bootstrap-switch-metro.css" afterPath="$PROJECT_DIR$/setup/css/bootstrap-switch-metro.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/bootstrap-switch.css" afterPath="$PROJECT_DIR$/setup/css/bootstrap-switch.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bootstrap-switch.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/bootstrap-switch.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/setup/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bootstrap.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" afterPath="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.custom.html" afterPath="$PROJECT_DIR$/setup/de/bs.custom.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.feature.html" afterPath="$PROJECT_DIR$/setup/de/bs.feature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.filterimages.html" afterPath="$PROJECT_DIR$/setup/de/bs.filterimages.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.filterlinks.html" afterPath="$PROJECT_DIR$/setup/de/bs.filterlinks.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.filtervideo.html" afterPath="$PROJECT_DIR$/setup/de/bs.filtervideo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.header.html" afterPath="$PROJECT_DIR$/setup/de/bs.header.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.navigation.html" afterPath="$PROJECT_DIR$/setup/de/bs.navigation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.nofeature.html" afterPath="$PROJECT_DIR$/setup/de/bs.nofeature.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_locales/de/features.json" afterPath="$PROJECT_DIR$/_locales/de/features.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.ticket.html" afterPath="$PROJECT_DIR$/setup/de/bs.ticket.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.welcome.html" afterPath="$PROJECT_DIR$/setup/de/bs.welcome.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.wetter.html" afterPath="$PROJECT_DIR$/setup/de/bs.wetter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.wham.html" afterPath="$PROJECT_DIR$/setup/de/bs.wham.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.widget.html" afterPath="$PROJECT_DIR$/setup/de/bs.widget.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/clock.css" afterPath="$PROJECT_DIR$/setup/css/clock.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/clock.js" afterPath="$PROJECT_DIR$/setup/js/gplus/clock.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/global/css/components.css" afterPath="$PROJECT_DIR$/setup/metronic/global/css/components.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/admin/layout/css/custom.css" afterPath="$PROJECT_DIR$/setup/metronic/admin/layout/css/custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/date.js" afterPath="$PROJECT_DIR$/setup/js/lib/date.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/del/ddslick.js" afterPath="$PROJECT_DIR$/setup/js/setup/del/ddslick.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/admin/layout/css/default.css" afterPath="$PROJECT_DIR$/setup/metronic/admin/layout/css/default.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/erasedata.html" afterPath="$PROJECT_DIR$/setup/de/erasedata.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/erweitert.html" afterPath="$PROJECT_DIR$/setup/en/erweitert.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/flags.js" afterPath="$PROJECT_DIR$/setup/js/gplus/flags.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/setup/css/font-awesome.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_locales/de/messages.json" afterPath="$PROJECT_DIR$/_locales/de/messages.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/help.html" afterPath="$PROJECT_DIR$/setup/en/help.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/ie7.css" afterPath="$PROJECT_DIR$/setup/css/ie7.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/ie8.css" afterPath="$PROJECT_DIR$/setup/css/ie8.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/import-export.js" afterPath="$PROJECT_DIR$/setup/js/setup/import-export.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/index.html" afterPath="$PROJECT_DIR$/setup/de/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/index.html" afterPath="$PROJECT_DIR$/setup/en/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/ion.sound.js" afterPath="$PROJECT_DIR$/setup/js/lib/ion.sound.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/jquery-1.10.2.min.js" afterPath="$PROJECT_DIR$/setup/js/lib/jquery-1.10.2.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/jquery-ui.min.css" afterPath="$PROJECT_DIR$/setup/css/jquery-ui.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/jquery-ui.min.js" afterPath="$PROJECT_DIR$/setup/js/lib/jquery-ui.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/jquery.blockui.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/jquery.blockui.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/jquery.knob.js" afterPath="$PROJECT_DIR$/setup/js/setup/jquery.knob.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/jquery.rc4.js" afterPath="$PROJECT_DIR$/setup/js/lib/jquery.rc4.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/del/jquery.slimscroll.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/del/jquery.slimscroll.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/jquery.tagsinput.js" afterPath="$PROJECT_DIR$/setup/js/setup/jquery.tagsinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/jquery.tools.min.js" afterPath="$PROJECT_DIR$/setup/js/setup/jquery.tools.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/del/jquery.ui.accordion.js" afterPath="$PROJECT_DIR$/setup/js/setup/del/jquery.ui.accordion.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/lib/jquery.ui.widget.js" afterPath="$PROJECT_DIR$/setup/js/lib/jquery.ui.widget.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/admin/layout/css/layout.css" afterPath="$PROJECT_DIR$/setup/metronic/admin/layout/css/layout.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/layout.js" afterPath="$PROJECT_DIR$/setup/js/setup/layout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/lsr.js" afterPath="$PROJECT_DIR$/setup/js/gplus/lsr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/measure.html" afterPath="$PROJECT_DIR$/setup/en/measure.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/measure.js" afterPath="$PROJECT_DIR$/setup/js/gplus/measure.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/metronic.js" afterPath="$PROJECT_DIR$/setup/metronic/metronic.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/global/scripts/metronic.js" afterPath="$PROJECT_DIR$/setup/metronic/global/scripts/metronic.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/metronic/global/css/plugins.css" afterPath="$PROJECT_DIR$/setup/metronic/global/css/plugins.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/qs.css" afterPath="$PROJECT_DIR$/setup/css/qs.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/qs.js" afterPath="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/qsTest.html" afterPath="$PROJECT_DIR$/setup/de/qsTest.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/qsTest.js" afterPath="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/quick-sidebar.js" afterPath="$PROJECT_DIR$/setup/js/setup/quick-sidebar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/quickshare.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/redirect.html" afterPath="$PROJECT_DIR$/setup/redirect.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/redirect.js" afterPath="$PROJECT_DIR$/setup/js/setup/redirect.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/settings.html" afterPath="$PROJECT_DIR$/setup/en/settings.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/settings.js" afterPath="$PROJECT_DIR$/setup/js/gplus/settings.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/setup.css" afterPath="$PROJECT_DIR$/setup/css/setup.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup.kill.js" afterPath="$PROJECT_DIR$/setup/js/setup.kill.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/simple-line-icons.min.css" afterPath="$PROJECT_DIR$/setup/css/simple-line-icons.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/simple.css" afterPath="$PROJECT_DIR$/setup/css/simple.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/del/slimScroll.jquery.json" afterPath="$PROJECT_DIR$/setup/js/setup/del/slimScroll.jquery.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/smilies.js" afterPath="$PROJECT_DIR$/setup/js/gplus/smilies.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/sport.css" afterPath="$PROJECT_DIR$/setup/css/sport.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/sport.js" afterPath="$PROJECT_DIR$/setup/js/gplus/sport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/styles.killme.css" afterPath="$PROJECT_DIR$/setup/css/styles.killme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/toastr.min.css" afterPath="$PROJECT_DIR$/setup/css/toastr.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/trophy.css" afterPath="$PROJECT_DIR$/setup/css/trophy.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/trophy.js" afterPath="$PROJECT_DIR$/setup/js/gplus/trophy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/user.css" afterPath="$PROJECT_DIR$/setup/css/user.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/user.js" afterPath="$PROJECT_DIR$/setup/js/gplus/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/weather.css" afterPath="$PROJECT_DIR$/setup/css/weather.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/weather.js" afterPath="$PROJECT_DIR$/setup/js/gplus/weather.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/widgets.html" afterPath="$PROJECT_DIR$/setup/en/widgets.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/wiz.finish.html" afterPath="$PROJECT_DIR$/setup/de/wiz.finish.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/wizard.css" afterPath="$PROJECT_DIR$/setup/css/wizard.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/wizard.html" afterPath="$PROJECT_DIR$/setup/de/wizard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/wizard.html" afterPath="$PROJECT_DIR$/setup/en/wizard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/wizard.js" afterPath="$PROJECT_DIR$/setup/js/wizard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/wizardloader.html" afterPath="$PROJECT_DIR$/setup/de/wizardloader.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/wizardloader.html" afterPath="$PROJECT_DIR$/setup/en/wizardloader.html" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,8 +126,8 @@
       <file leaf-file-name="setup.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6845" max-vertical-offset="7531">
-              <caret line="416" column="19" selection-start-line="416" selection-start-column="19" selection-end-line="416" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="6845" max-vertical-offset="7497">
+              <caret line="415" column="19" selection-start-line="415" selection-start-column="19" selection-end-line="415" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -48,8 +136,8 @@
       <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.75862" vertical-offset="1372" max-vertical-offset="11968">
-              <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1372" max-vertical-offset="11373">
+              <caret line="135" column="35" selection-start-line="135" selection-start-column="35" selection-end-line="135" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -58,7 +146,7 @@
       <file leaf-file-name="messages.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_locales/de/messages.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.5" vertical-offset="3907" max-vertical-offset="4454">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3907" max-vertical-offset="4454">
               <caret line="252" column="19" selection-start-line="252" selection-start-column="3" selection-end-line="252" selection-end-column="19" />
               <folding />
             </state>
@@ -68,8 +156,8 @@
       <file leaf-file-name="browser.chrome.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.034483" vertical-offset="34" max-vertical-offset="595">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+              <caret line="12" column="24" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -78,7 +166,7 @@
       <file leaf-file-name="bs.feature.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/de/bs.feature.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="782">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -88,7 +176,7 @@
       <file leaf-file-name="bs.nofeature.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/de/bs.nofeature.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="357">
+            <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="357">
               <caret line="12" column="30" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
               <folding />
             </state>
@@ -108,12 +196,9 @@
       <file leaf-file-name="qsTest.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06095238" vertical-offset="614" max-vertical-offset="3043">
-              <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#43#0" expanded="false" />
-                <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="0.39348078" vertical-offset="104" max-vertical-offset="2958">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,7 +206,7 @@
       <file leaf-file-name="bs.circleNames.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/de/bs.circleNames.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="170">
+            <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
               <caret line="3" column="69" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="69" />
               <folding />
             </state>
@@ -131,7 +216,7 @@
       <file leaf-file-name="features.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6181817" vertical-offset="3779" max-vertical-offset="4301">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3779" max-vertical-offset="4301">
               <caret line="234" column="21" selection-start-line="234" selection-start-column="12" selection-end-line="234" selection-end-column="21" />
               <folding />
             </state>
@@ -249,118 +334,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gplus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="_locales" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -411,6 +384,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="979" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FullScreen" value="false" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJavaScript 1.5" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -425,10 +400,14 @@
       <ConfigurationWrapper RunnerId="debuggableProgram" />
       <method />
     </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -436,10 +415,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -492,22 +467,22 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3381535" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33777776" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18215416" sideWeight="0.49912128" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4110629" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18020834" sideWeight="0.50087875" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4110629" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -534,6 +509,54 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.feature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.nofeature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="357">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="5950">
+          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="51" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3043">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.circleNames.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
+          <caret line="3" column="69" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3779" max-vertical-offset="4301">
+          <caret line="234" column="21" selection-start-line="234" selection-start-column="12" selection-end-line="234" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="400" max-vertical-offset="2210">
@@ -562,10 +585,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2635">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -573,9 +593,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="6052">
           <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -583,16 +601,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12852">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -608,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -640,10 +648,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2635">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -651,9 +656,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5916">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -661,16 +664,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5768" max-vertical-offset="12784">
           <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
-          <folding>
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -686,7 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -718,10 +711,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2397">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -729,9 +719,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1326" max-vertical-offset="8364">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -739,16 +727,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="12597">
           <caret line="73" column="7" selection-start-line="71" selection-start-column="3" selection-end-line="73" selection-end-column="7" />
-          <folding>
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -764,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,10 +774,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="683" max-vertical-offset="1581">
           <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -807,7 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -815,7 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,16 +812,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="294" max-vertical-offset="12852">
           <caret line="33" column="61" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
-          <folding>
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423600325678" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -878,7 +842,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6181817" vertical-offset="3779" max-vertical-offset="4301">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3779" max-vertical-offset="4301">
           <caret line="234" column="21" selection-start-line="234" selection-start-column="12" selection-end-line="234" selection-end-column="21" />
           <folding />
         </state>
@@ -894,7 +858,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.nofeature.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="357">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="357">
           <caret line="12" column="30" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
           <folding />
         </state>
@@ -902,7 +866,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.circleNames.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="170">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
           <caret line="3" column="69" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="69" />
           <folding />
         </state>
@@ -910,15 +874,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.034483" vertical-offset="34" max-vertical-offset="595">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_locales/de/messages.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.5" vertical-offset="3907" max-vertical-offset="4454">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3907" max-vertical-offset="4454">
           <caret line="252" column="19" selection-start-line="252" selection-start-column="3" selection-end-line="252" selection-end-column="19" />
           <folding />
         </state>
@@ -926,28 +890,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.75862" vertical-offset="1372" max-vertical-offset="11968">
-          <caret line="140" column="35" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1372" max-vertical-offset="11373">
+          <caret line="135" column="35" selection-start-line="135" selection-start-column="35" selection-end-line="135" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6845" max-vertical-offset="7531">
-          <caret line="416" column="19" selection-start-line="416" selection-start-column="19" selection-end-line="416" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="6845" max-vertical-offset="7497">
+          <caret line="415" column="19" selection-start-line="415" selection-start-column="19" selection-end-line="415" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06095238" vertical-offset="614" max-vertical-offset="3043">
-          <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-            <marker date="1423944093900" expanded="true" signature="1401:1407" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.39348078" vertical-offset="104" max-vertical-offset="2958">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
