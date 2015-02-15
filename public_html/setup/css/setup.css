@@ -265,6 +265,7 @@ input#ticketUser {
     margin-top: 5px;
     border-style: solid;
     border-width: 1px;
+    min-height: 90px;
 }
 
 .qsText {
@@ -433,4 +434,8 @@ input.qsAddCircle {
     border-bottom: solid gray 1px;
     margin-bottom: 4px;
     width: 177px;
+}
+
+.qsIconCategoryIcons :hover {
+    background: white;
 }
