@@ -190,5 +190,8 @@
   },
   "Circles_Extended": {
     "message": "Erweiterte Kreise"
+  },
+  "QuickShare_Folders": {
+    "message": "[{\"file\":\"accounting\",\"text\":\"Buchhaltung\"},{\"file\":\"business\",\"text\":\"Business\"},{\"file\":\"communication\",\"text\":\"Kommunikation\"},{\"file\":\"construction\",\"text\":\"Auf dem Bau\"},{\"file\":\"education\",\"text\":\"Schule\"},{\"file\":\"electrical\",\"text\":\"Elektrische Geräte\"},{\"file\":\"flags\",\"text\":\"Fahnen\"},{\"file\":\"gadgets\",\"text\":\"Gadgets\"},{\"file\":\"jobs\",\"text\":\"Jobs\"},{\"file\":\"networking\",\"text\":\"Netzwerk\"},{\"file\":\"transport\",\"text\":\"Transport\"}]"
   }
 }
