@@ -6,27 +6,12 @@ var mouseOffset;
 var selectedBlock;
 var completeIconList;
 var allFolders;
-
-
+this.Browser = new Browser();
+this.Browser.LoadMessagesForSetup();
 
 $(document).ready(function(){
     LoadQs();
 });
-
-
-
-
-/*
-$('.selectedQS').click(function(event) {
-        if(!$(event.target).closest('.qsDrilldown').length && !$(event.target).closest('.qsSelectIcon').length) {
-            if ($('.qsDrilldown') !== undefined) {
-                $('.qsDrilldown').remove();
-            }
-            if ($('.qsSelectIcon') !== undefined) {
-                $('.qsSelectIcon').hide();
-            }
-        }
-});*/
 
 $(document).on('click', '.qsIconCategory', function () {
     $(this).find('.qsIconCategoryIcons').toggle();
@@ -34,12 +19,23 @@ $(document).on('click', '.qsIconCategory', function () {
 });
 
 $(document).on('click', '.qsClose', function () {
+    DeleteQs($(this));
     $(this).closest('.selectedQS').remove();
+
+    return false;
+});
+
+$(document).on('click', '.qsSelectCircleElement .inner', function () {
+    AddElementToQs($(this));
+    return false;
+});
+
+$(document).on('click', '.qsCircleRemove', function () {
+    RemoveElementFromQs($(this));
     return false;
 });
 
 $(document).on('click', '.qsImage img', function () {
-
     if ($('.qsSelectIcon').is(":hidden") )  {
         selectedBlock = $(this).closest('.selectedQS');
         mouseOffset = $(this).offset();
@@ -52,13 +48,18 @@ $(document).on('click', '.qsImage img', function () {
     return false;
 });
 
-
 $(document).on('click', '.qsIconCategoryIcons img', function () {
+    var id=selectedBlock.closest('.selectedQS').find('.qsId').val();
     var bigImage = $(this).attr("src");
     var smallImage = bigImage.replace("/big/", "/small/");
     if (selectedBlock !== null && selectedBlock !== undefined) {
         selectedBlock.find('.qsImage img').attr("src", bigImage);
     }
+
+    var lsqs=localStorage['QuickShares'];
+    var qs=JSON.parse(lsqs);
+    qs[id].Image=smallImage;
+    localStorage.setItem('QuickShares',JSON.stringify(qs));
 
     $('.qsSelectIcon').fadeOut();
     return false;
@@ -88,12 +89,44 @@ function IsForbidden(forbiddenElements, element) {
     return $.inArray(element, forbiddenElements)>-1;
 }
 
-function AddElementToQs(element) {
-    var elementName=element.val();
+function AddElementToQs( element) {
+    var wrapper=element.closest('.selectedQS');
+    var id=wrapper.find('.qsId').val();
+    var lsqs=localStorage['QuickShares'];
+    var qs=JSON.parse(lsqs);
+    var elementName=element.text();
+    qs[id].Circles+=(","+elementName);
+    localStorage["QuickShares"]=JSON.stringify(qs);
+    ReloadQs(element.closest(wrapper));
 }
 
-function RemoveElementToQs(element) {
-    var elementName=element.val();
+function DeleteQs(element) {
+    var id=parseInt(element.closest('.selectedQS').find('.qsId').val());
+    for (var i=1000; i>id; i--) {
+        var idElement= element.closest('.existingQS').find('.qsId[value="'+i+'"] ');
+        if (idElement.length>0) {
+            idElement.val(i-1);
+        }
+    }
+    var lsqs=localStorage['QuickShares'];
+    var qs=JSON.parse(lsqs);
+    qs.splice(id, 1)
+    localStorage.setItem("QuickShares",JSON.stringify(qs));
+}
+
+function RemoveElementFromQs(element) {
+    var wrapper=element.closest('.selectedQS');
+    var id=wrapper.find('.qsId').val();
+    var lsqs = localStorage['QuickShares'];
+    var qs = JSON.parse(lsqs);
+    var elementName = element.parent().find('.qsCircleText').text();
+    if (qs[id].Circles.indexOf(elementName) === 0) {
+        qs[id].Circles=qs[id].Circles.replace(elementName + ",", "");
+    } else {
+        qs[id].Circles=qs[id].Circles.replace("," + elementName, "");
+    }
+    localStorage["QuickShares"]=JSON.stringify(qs);
+    ReloadQs(element.closest(wrapper));
 }
 
 /**
@@ -126,7 +159,7 @@ function GetSingleQsCircles(qsSetting) {
             if (allCircles.Communities!==undefined) {
                 allCircles.Communities.forEach(function ( communityValue) {
                     if (communityValue.toLowerCase()===value.toLowerCase()) {
-                        type="qsCommunity";
+                        type="qsCircleCommunity";
                     }
                 });
             }
@@ -138,38 +171,52 @@ function GetSingleQsCircles(qsSetting) {
     return retHtml;
 }
 
-function LoadSingleQs(qsSetting) {
+function ReloadQs(parent) {
+    var id=parent.find('.qsId').val();
+    var lsqs=localStorage['QuickShares'];
+    var qs=JSON.parse(lsqs);
+    var setting=qs[id];
+
+    parent.html($(LoadSingleQs(setting,id)).html());
+}
+
+function LoadSingleQs(qsSetting, counter) {
 
     var image=qsSetting.Image;
     if (image.indexOf("chrome-extension")>=0) {
         image=imageHost+"quickshare/small/communication/warnings.png";
     }
+    var title=qsSetting.Title;
+    if (title===undefined) {
+        title="QuickShare "+(parseInt(counter)+1);
+    }
 
-    var html=qsTemplate.replace("__IMAGE__",image.replace("/small/","/big/"));
+    var html=qsTemplate.replace("__IMAGE__",image.replace("/small/","/big/")).replace("__INDEX__",counter).replace("__TITLE__",title);
     return html.replace("__CIRCLES__",GetSingleQsCircles(qsSetting));
 }
 
-
 function LoadQs() {
+    var counter=0;
     var lsqs=localStorage['QuickShares'];
     if (lsqs!==undefined) {
         var qs=JSON.parse(lsqs);
 
         qs.forEach(function(value) {
-            $('.existingQS').append(LoadSingleQs(value));
+            $('.existingQS').append(LoadSingleQs(value, counter));
+            counter++;
         });
-
     }
 }
 
-    function GetAllCircles() {
-        var allCircles = JSON.parse(localStorage["QS.AllCircles"]);
-        allCircles.Public = allCircles.Public || obj.Browser.GetMessageFromSetup('Circles_Public');
-        allCircles.MyCircles = allCircles.MyCircles || obj.Browser.GetMessageFromSetup('Circles_Private');
-        allCircles.ExtendedCircles = allCircles.ExtendedCircles || obj.Browser.GetMessageFromSetup('Circles_Extended');
+function GetAllCircles() {
+    var obj=this;
+    var allCircles = JSON.parse(localStorage["QS.AllCircles"]);
+    allCircles.Public = allCircles.Public || obj.Browser.GetMessageFromSetup('Circles_Public');
+    allCircles.MyCircles = allCircles.MyCircles || obj.Browser.GetMessageFromSetup('Circles_Private');
+    allCircles.ExtendedCircles = allCircles.ExtendedCircles || obj.Browser.GetMessageFromSetup('Circles_Extended');
 
-        return allCircles;
-    }
+    return allCircles;
+}
 
 function GetSelectableElements(element, preselection) {
     if ($('.qsDrilldown').length>0) {
@@ -224,31 +271,11 @@ function GetSelectableElements(element, preselection) {
         objElements.find('.qsCommunity').first().closest('.qsSelectCircleElement').before("<div class='grayLine'></div>");
     }
 
-
     element.after(objElements);
-
-    // }
 }
 
-
-// google search: https://plus.google.com/complete/search?client=es-sharebox-search&tok=eQeF-jhW-wp1ypw3NXtO0w&authuser=0&xhr=t&q=ne
-// https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q=ne
-
-
 function GetAllFolders() {
-    return [
-        {"file": "accounting", "text": "Buchhaltung"},
-        {"file": "business", "text": "Business"},
-        {"file": "communication", "text": "Kommunikation"},
-        {"file": "construction", "text": "Auf dem Bau"},
-        {"file": "education", "text": "Schule"},
-        {"file": "electrical", "text": "Elektrische Geräte"},
-        {"file": "flags", "text": "Fahnen"},
-        {"file": "gadgets", "text": "Gadgets"},
-        {"file": "jobs", "text": "Jobs"},
-        {"file": "networking", "text": "Netzwerk"},
-        {"file": "transport", "text": "Transport"}
-    ];
+    return JSON.parse(this.Browser.GetMessageFromSetup('QuickShare_Folders'));
 }
 
 function GetIconListForFolder(folderData, redirect) {
@@ -266,7 +293,6 @@ function GetIconListForFolder(folderData, redirect) {
     });
 }
 
-
 function GetNextFolder(oldPic, folder) {
     if (allFolders.length === 0) {
         DisplayIcons(oldPic);
@@ -277,7 +303,6 @@ function GetNextFolder(oldPic, folder) {
         });
     }
 }
-
 
 function DisplayIcons(oldPic) {
     $('.qsSelectIcon').css('left', mouseOffset.left + 120);
@@ -305,5 +330,5 @@ var folderTemplate = '<div class="qsIconCategory"><span>__CATEGORY__</span><div 
 var singleImageTemplate = '<img src="__PATH__/__FILE__"/>';
 var drillDownElementTemplate = '<div class="qsSelectCircleElement"><span class="__ICONCLASS__"></span><span title="__TITLE__" class="inner">__CIRCLE__</span></div>';
 
-var qsTemplate='<div class="selectedQS"><div class="qsImage"><img src="__IMAGE__"/></div><div class="qsRight">__CIRCLES__<input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle"></div></div>';
+var qsTemplate='<div class="selectedQS"><input type="hidden" class="qsId" value="__INDEX__" > <div class="qsImage"><img src="__IMAGE__"/></div><div class="qsRight"><div class="qsClose">&nbsp;</div><div class="qsText">__TITLE__</div><div class="qsCircles">__CIRCLES__<input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle"></div></div></div>';
 var circleTemplate='<span class="qsCircle __COLOR__"><span class="innerCircle"><span class="__CLASS__"></span><span class="qsCircleText">__NAME__</span><span class="qsCircleRemove"></span></span></span>';

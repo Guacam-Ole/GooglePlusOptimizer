@@ -202,14 +202,15 @@ input#ticketUser {
 }
 
 .qsCircleSingle {
-
-/ / background : no-repeat url(https://lh4.googleusercontent.com/-JWDTmx-Jp0E/AAAAAAAAAAI/AAAAAAAAAAA/Wu9I6zRtE1Q/s30-c-k-no/photo.jpg?sz=16);
     background: no-repeat url(../images/icons/googleicons.png) -17px -488px;
 }
 
-.qsCirclePerson {
+.qsCircleCommunity {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -441px;
+}
 
-/ / background : no-repeat url(https://lh6.googleusercontent.com/-F-0xs9WEtPY/AAAAAAAAAAI/AAAAAAAAwx4/_QM87q2oUO4/photo.jpg?sz=32);
+
+.qsCirclePerson {
     background: no-repeat url(../images/icons/googleuser.png);
     opacity: .7;
     float: left;
@@ -220,7 +221,7 @@ input#ticketUser {
     border: 0px solid #4285f4 !important;
 }
 
-.qsCircleWorld, .qsCircleMany, .qsCircleSingle {
+.qsCircleWorld, .qsCircleMany, .qsCircleSingle, .qsCircleCommunity {
     opacity: .7;
     float: left;
     width: 17px;
