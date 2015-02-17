@@ -1,7 +1,7 @@
 /**
  * Created by Tomato on 04.02.2015.
  */
-var imageHost = "http://files.oles-cloud.de/optimizer/";
+var imageHost = "https://files.oles-cloud.de/optimizer/";
 var mouseOffset;
 var selectedBlock;
 var completeIconList;
@@ -17,6 +17,25 @@ $(document).on('click', '.qsIconCategory', function () {
     $(this).find('.qsIconCategoryIcons').toggle();
     return false;
 });
+
+$(document).on('click', '.addNewQs a', function () {
+    var lsqs=localStorage['QuickShares'];
+    if (lsqs!==undefined) {
+        var qs = JSON.parse(lsqs);
+    } else {
+        qs=[];
+    }
+    var singleQsElement={};
+    singleQsElement.Image=imageHost+"quickshare/small/communication/warnings.png";
+    singleQsElement.Circles="";
+    qs.push (singleQsElement);
+    localStorage.setItem("QuickShares",JSON.stringify(qs));
+    LoadQs();
+
+    return false;
+});
+
+
 
 $(document).on('click', '.qsClose', function () {
     DeleteQs($(this));
@@ -110,7 +129,7 @@ function DeleteQs(element) {
     }
     var lsqs=localStorage['QuickShares'];
     var qs=JSON.parse(lsqs);
-    qs.splice(id, 1)
+    qs.splice(id, 1);
     localStorage.setItem("QuickShares",JSON.stringify(qs));
 }
 
@@ -136,37 +155,40 @@ function GetSingleQsCircles(qsSetting) {
     var retHtml="";
     var allCircles = GetAllCircles();
     qsSetting.Circles.split(",").forEach(function(value) {
-        // Farben und Icons:
-        var color="blue";
-        var type="qsCirclePerson";
-        if (value.toLowerCase()==allCircles.Public.toLowerCase()) {
-            color="green";
-            type="qsCircleWorld";
-        } else if (value.toLowerCase()==allCircles.MyCircles.toLowerCase()) {
-            color="green";
-            type="qsCircleSingle";
-        } else if (value.toLowerCase()==allCircles.ExtendedCircles.toLowerCase()) {
-            color="green";
-            type="qsCircleMany";
-        } else {
-            if (allCircles.Circles!==undefined) {
-                allCircles.Circles.forEach(function ( circleValue) {
-                    if (circleValue.toLowerCase()===value.toLowerCase()) {
-                        type="qsCircleSingle";
-                    }
-                });
-            }
-            if (allCircles.Communities!==undefined) {
-                allCircles.Communities.forEach(function ( communityValue) {
-                    if (communityValue.toLowerCase()===value.toLowerCase()) {
-                        type="qsCircleCommunity";
-                    }
-                });
-            }
-        }
+        if (value.length>0) {
 
-        // Basteln des Tags
-        retHtml+=circleTemplate.replace("__CLASS__",type).replace("__COLOR__",color).replace("__NAME__",value);
+            // Farben und Icons:
+            var color = "blue";
+            var type = "qsCirclePerson";
+            if (value.toLowerCase() == allCircles.Public.toLowerCase()) {
+                color = "green";
+                type = "qsCircleWorld";
+            } else if (value.toLowerCase() == allCircles.MyCircles.toLowerCase()) {
+                color = "green";
+                type = "qsCircleSingle";
+            } else if (value.toLowerCase() == allCircles.ExtendedCircles.toLowerCase()) {
+                color = "green";
+                type = "qsCircleMany";
+            } else {
+                if (allCircles.Circles !== undefined) {
+                    allCircles.Circles.forEach(function (circleValue) {
+                        if (circleValue.toLowerCase() === value.toLowerCase()) {
+                            type = "qsCircleSingle";
+                        }
+                    });
+                }
+                if (allCircles.Communities !== undefined) {
+                    allCircles.Communities.forEach(function (communityValue) {
+                        if (communityValue.toLowerCase() === value.toLowerCase()) {
+                            type = "qsCircleCommunity";
+                        }
+                    });
+                }
+            }
+
+            // Basteln des Tags
+            retHtml += circleTemplate.replace("__CLASS__", type).replace("__COLOR__", color).replace("__NAME__", value);
+        }
     });
     return retHtml;
 }
@@ -181,7 +203,6 @@ function ReloadQs(parent) {
 }
 
 function LoadSingleQs(qsSetting, counter) {
-
     var image=qsSetting.Image;
     if (image.indexOf("chrome-extension")>=0) {
         image=imageHost+"quickshare/small/communication/warnings.png";
@@ -200,7 +221,7 @@ function LoadQs() {
     var lsqs=localStorage['QuickShares'];
     if (lsqs!==undefined) {
         var qs=JSON.parse(lsqs);
-
+        $('.existingQS').empty();
         qs.forEach(function(value) {
             $('.existingQS').append(LoadSingleQs(value, counter));
             counter++;
