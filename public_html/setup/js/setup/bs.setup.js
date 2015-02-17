@@ -375,7 +375,6 @@ Setup.prototype = {
         }
     },
     ReplaceDataInTemplate: function (template, feature) {
-
         var obj = this;
         template.find('.featureName').text(feature.Title);
         template.find('.featureDescription').html(feature.Description);
@@ -384,6 +383,7 @@ Setup.prototype = {
             template.find('.examplePicture').attr("src", imageHost + "wizard/" + this.CurrentLang + "/" + feature.Image);
         } else {
             template.find('.featurePic').remove();
+            template.find('.examplePicture').remove();
         }
         if (feature.Cost !== undefined) {
             var costClass = ".cost" + feature.Cost;

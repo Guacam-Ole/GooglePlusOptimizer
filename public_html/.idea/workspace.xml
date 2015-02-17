@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/qsTest.html" afterPath="$PROJECT_DIR$/setup/de/qsTest.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/qsTest.js" afterPath="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="11373">
-              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.35301206" vertical-offset="6252" max-vertical-offset="11373">
+              <caret line="385" column="54" selection-start-line="385" selection-start-column="54" selection-end-line="385" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -110,10 +108,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qsTest.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="qsTest.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4219858" vertical-offset="0" max-vertical-offset="846">
+            <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="629">
               <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
               <folding />
             </state>
@@ -150,11 +148,11 @@
         <option value="$PROJECT_DIR$/setup/de/bs.featureNoCheckbox.html" />
         <option value="$PROJECT_DIR$/_locales/de/features.json" />
         <option value="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
-        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
         <option value="$PROJECT_DIR$/_locales/de/messages.json" />
         <option value="$PROJECT_DIR$/setup/css/setup.css" />
         <option value="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
         <option value="$PROJECT_DIR$/setup/de/qsTest.html" />
+        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
       </list>
     </option>
   </component>
@@ -844,14 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="11373">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
@@ -894,8 +884,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4219858" vertical-offset="0" max-vertical-offset="846">
+        <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="629">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35301206" vertical-offset="6252" max-vertical-offset="11373">
+          <caret line="385" column="54" selection-start-line="385" selection-start-column="54" selection-end-line="385" selection-end-column="54" />
           <folding />
         </state>
       </provider>
