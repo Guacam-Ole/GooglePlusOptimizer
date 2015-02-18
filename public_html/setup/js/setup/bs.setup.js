@@ -1,10 +1,12 @@
 var setup;
-var imageHost = "http://files.oles-cloud.de/optimizer/";
+var setupQs;
+var imageHost = "https://files.oles-cloud.de/optimizer/";
 
 $(document).ready(function () {
     InitMetronic();
     setup = new Setup();
     setup.HandleTagsInput();
+    //setupQs=new SetupQuickshare();
 });
 
 document.addEventListener("DOMSubtreeModified", function () {
@@ -394,12 +396,14 @@ Setup.prototype = {
         template.find('.loadHtml').each(function (index, value) {
             var filename = $(value).data("filename");
             $(value).load(filename + ".html", function () {
-                if (feature.Short === 'weatherEnabled') {
+                if (feature.Short === 'weatherEnabled')  {
                     var $weatherDiv = $('.parentWeather');
                     if ($weatherDiv.length > 0 && $weatherDiv.find('.rowColumns').length > 0) {
                         obj.LoadWeather();
                         // obj.DisplayWidgetPosition($weatherDiv,obj.GetPosition("Weather"));
                     }
+                } else if (feature.Short==='enableQs') {
+                    setupQs.LoadQs();
                 }
             });
         });

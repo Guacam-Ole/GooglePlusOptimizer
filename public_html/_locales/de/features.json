@@ -113,7 +113,7 @@
     "Version": "2.2",
     "Short": "weatherEnabled",
     "Title": "Wettervorhersage",
-    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>Ort:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'><a>Ort suchen</a><div class='citySelect'><select><option>jjjj</option></select></div></div>",
+    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>Ort:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'> <a href='' class='btn  green '>Ort suchen <i class='m-icon-swapright m-icon-white'></i></a>  <div class='citySelect'><select><option>jjjj</option></select></div></div>",
     "Image": "wetter.png",
     "Cost": 0
   },
@@ -177,7 +177,7 @@
     "Version": "2.4",
     "Short": "enableQs",
     "Title": "Quickshare",
-    "Description": "Quickshare erlaubt es Beiträge mit häufig genutzten Kreisen mit einem einfachen Klick zu teilen. ",
+    "Description": "<div class='loadHtml' data-filename='bs.quickshare'></div>",
     "Image": "qs.png",
     "Cost": 1
   },
@@ -224,7 +224,7 @@
     "Short": "newticket",
     "Type": "TextOnly",
     "Title": "Neues Ticket erstellen",
-    "Description": "<p>Bug melden oder Feature anfragen.<br/><a id='showTicketCreation'>Ticket eröffnen</a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
+    "Description": "<p>Bug melden oder Feature anfragen.<br/>  <a id='showTicketCreation' class='btn  green'>Ticket eröffnen <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
   },
   {
     "Version": "3.0",
@@ -233,6 +233,10 @@
     "Title": "Standardbezeichner",
     "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner vomn Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
   },
+
+
+
+
   {
     "remark": "-----MUSS IMMER GANZ UNTEN STEHEN!-------",
     "Version": "1.0",

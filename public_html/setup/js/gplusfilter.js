@@ -1,7 +1,7 @@
 console.log('g+ - filter started');
 
 var columnCount;
-var imageHost = "http://files.oles-cloud.de/optimizer/";
+var imageHost = "https://files.oles-cloud.de/optimizer/";
 
 
 var domainBlacklist = [];
