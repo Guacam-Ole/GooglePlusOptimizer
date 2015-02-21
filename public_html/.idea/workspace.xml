@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/flags.js" afterPath="$PROJECT_DIR$/setup/js/gplus/flags.js" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,16 +26,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="features.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.846154" vertical-offset="3636" max-vertical-offset="4199">
-              <caret line="232" column="68" selection-start-line="232" selection-start-column="68" selection-end-line="232" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -68,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.088288285" vertical-offset="10066" max-vertical-offset="12189">
-              <caret line="595" column="18" selection-start-line="595" selection-start-column="18" selection-end-line="595" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12189">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <marker date="1424547980551" expanded="true" signature="15586:15598" placeholder="..." />
                 <marker date="1424547980551" expanded="true" signature="15875:15887" placeholder="..." />
@@ -83,6 +73,16 @@
                 <marker date="1424547980551" expanded="true" signature="17432:17444" placeholder="..." />
                 <marker date="1424547980551" expanded="true" signature="17821:17830" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flags.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup/js/gplus/flags.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8080986" vertical-offset="714" max-vertical-offset="1343">
+              <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -181,6 +181,7 @@
         <option value="$PROJECT_DIR$/setup/js/setup/import-export.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/clock.js" />
         <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
+        <option value="$PROJECT_DIR$/setup/js/gplus/flags.js" />
       </list>
     </option>
   </component>
@@ -330,6 +331,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="setup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gplus" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -500,7 +523,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -569,14 +592,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2635">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/filter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5916">
@@ -885,14 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="6409">
-          <caret line="37" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.0" vertical-offset="1942" max-vertical-offset="2822">
@@ -957,8 +964,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.088288285" vertical-offset="10066" max-vertical-offset="12189">
-          <caret line="595" column="18" selection-start-line="595" selection-start-column="18" selection-end-line="595" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12189">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <marker date="1424547980551" expanded="true" signature="15586:15598" placeholder="..." />
             <marker date="1424547980551" expanded="true" signature="15875:15887" placeholder="..." />
@@ -969,6 +976,22 @@
             <marker date="1424547980551" expanded="true" signature="17432:17444" placeholder="..." />
             <marker date="1424547980551" expanded="true" signature="17821:17830" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="6409">
+          <caret line="37" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/flags.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8080986" vertical-offset="714" max-vertical-offset="1343">
+          <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>

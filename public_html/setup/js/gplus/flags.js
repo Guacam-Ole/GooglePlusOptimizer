@@ -61,13 +61,13 @@ gpoFlags.prototype = {
                     return e.short === oldLang;
                 });
                 if (selectedLang.length > 0) {
-                    $('.langOpen').attr("src", chrome.extension.getURL('setup/images/icons/small/flags/' + selectedLang[0].img + '_24.png'));
+                    $('.langOpen').attr("src", imageHost+ 'flags/' + selectedLang[0].img + '_24.png');
                 }
             }
         }
     },
     GetLangImage: function (short, img) {
-        return '<a><img data-short="' + short + '" title="' + img + '" src="' + chrome.extension.getURL('setup/images/icons/small/flags/' + img + '_24.png') + '"/></a>';
+        return '<a><img data-short="' + short + '" title="' + img + '" src="' + imageHost+'flags/' + img + '_24.png"/></a>';
     }
 };
 
