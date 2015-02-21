@@ -1,6 +1,0 @@
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\bin\Debug\dir2json.exe.config
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\bin\Debug\dir2json.exe
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\bin\Debug\dir2json.pdb
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\obj\Debug\dir2json.csprojResolveAssemblyReference.cache
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\obj\Debug\dir2json.exe
-D:\Dox\g+Optimizer\g+Optimizer\dir2json\dir2json\dir2json\obj\Debug\dir2json.pdb
