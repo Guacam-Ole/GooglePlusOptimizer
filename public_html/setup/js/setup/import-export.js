@@ -57,7 +57,7 @@ function importConfig(config) {
 }
 
 
-$(document).ready(function () {
+//$(document).ready(function () {
     var loadHandler = function (ev) {
             var content = ev.target.result;
             if (content.length > 0) {
@@ -81,7 +81,7 @@ $(document).ready(function () {
 
         importHandler = function (ev1) {
             try {
-                var file = ev1.currentTarget.files[0];
+                var file = ev1.files[0];
                 if (file) {
                     var reader = new FileReader();
                     reader.readAsText(file, 'UTF-8');
@@ -92,10 +92,19 @@ $(document).ready(function () {
             }
         };
 
-    $('#exportConfig').click(exportHandler);
-    $('#importConfig').click(function (ev) {
+    $(document).on('click', '#exportConfig', function () {
+        exportHandler();
+    });
+
+    $(document).on('click', '#importConfig', function (ev) {
         ev.stopImmediatePropagation();
         $('#importConfigFile').click();
     });
-    $('#importConfigFile').change(importHandler);
-});
+
+    $(document).on('change', '#importConfigFile', function () {
+        importHandler(this);
+    });
+
+
+//});
+
