@@ -5,7 +5,7 @@ var gpoClock = function () {
     this.ClockObj = null;
     this.Minutes;
     this.TargetTime;
-
+    //var imageHost = "https://files.oles-cloud.de/optimizer/";
 };
 
 gpoClock.prototype = {
@@ -102,7 +102,7 @@ gpoClock.prototype = {
         try {
             $.ionSound({
                 sounds: ["hamster"],
-                path: chrome.extension.getURL("./setup/media/"),
+                path: imageHost+("media/"),
                 multiPlay: true,
                 volume: "1.0"
             });
