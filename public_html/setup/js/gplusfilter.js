@@ -66,14 +66,7 @@ function StartObservation() {
         characterData: false,
         attributes: false
     });
-/*
-    var preselection = "ole";
-    $.get("https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q=" + preselection, function (data) {
-        console.log(data);
-    });
-    */
 }
-
 
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
@@ -600,60 +593,66 @@ function InitObjects() {
 }
 
 function PageLoad() {
-    console.log('G+Filter: Google+ - Filter initialisiert');
     InitObjects();
-
-    Subs.Measure = new gpoMeasure("START", true);
-
-    var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
+    window.setTimeout(function() {
 
 
-    SingleMeasureBool(wizard >= 0, "wizard", function () {
-        DrawWizardTile();
-    });
 
-    SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
-        Subs.Bookmarks.Init();
-    });
+        Subs.Measure = new gpoMeasure("START", true);
 
-    SingleMeasure(Subs.Autosave, "useAutoSave", function () {
-        Subs.Autosave.CleanupAutosave();
-        Subs.Autosave.Init();
-    });
+        var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
 
-    SingleMeasure(Subs.User, "colorUser", function () {
-        Subs.User.Init();
-    });
 
-    SingleMeasure(Subs.Trophy, "displayTrophy", function () {
-        Subs.Trophy.Init();
-    });
+        SingleMeasureBool(wizard >= 0, "wizard", function () {
+            DrawWizardTile();
+        });
 
-    SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function () {
-        $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
-    });
+        SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
+            Subs.Bookmarks.Init();
+        });
 
-    SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
-        Subs.Lsr.Init();
-    });
+        SingleMeasure(Subs.Autosave, "useAutoSave", function () {
+            Subs.Autosave.CleanupAutosave();
+            Subs.Autosave.Init();
+        });
 
-    SingleMeasure(Subs.Quickshare, "QuickShares", function () {
-        Subs.Quickshare.Init();
-    });
+        SingleMeasure(Subs.User, "colorUser", function () {
+            Subs.User.Init();
+        });
 
-    GetAllCircles();
-    DrawWidgets();
-    CountColumns();
+        SingleMeasure(Subs.Trophy, "displayTrophy", function () {
+            Subs.Trophy.Init();
+        });
 
-    // Initial Mutation Observer simulieren:
-    $('[jsmodel="XNmfOc"]').each(function (index, value) {
-        StartFilter(value);
-    });
-    $('.nja').each(function (index, value) {
-        FilterBlocks(value);
-    });
+        SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function () {
+            $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
+        });
 
-    StartObservation();
+        SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
+            Subs.Lsr.Init();
+        });
+
+        SingleMeasure(Subs.Quickshare, "QuickShares", function () {
+            Subs.Quickshare.Init();
+        });
+
+        GetAllCircles();
+        DrawWidgets();
+        CountColumns();
+
+        // Initial Mutation Observer simulieren:
+        $('[jsmodel="XNmfOc"]').each(function (index, value) {
+            StartFilter(value);
+        });
+        $('.nja').each(function (index, value) {
+            FilterBlocks(value);
+        });
+
+        StartObservation();
+        console.log('G+Filter: Google+ - Filter initialisiert');
+    },1000);
+
+
 }
 
 /**

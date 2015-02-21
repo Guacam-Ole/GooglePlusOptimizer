@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/qs.js" afterPath="$PROJECT_DIR$/setup/js/gplus/qs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,17 +71,17 @@
       <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42522523" vertical-offset="1651" max-vertical-offset="12206">
-              <caret line="111" column="57" selection-start-line="111" selection-start-column="57" selection-end-line="111" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.088288285" vertical-offset="10066" max-vertical-offset="12189">
+              <caret line="595" column="18" selection-start-line="595" selection-start-column="18" selection-end-line="595" selection-end-column="18" />
               <folding>
-                <marker date="1424547593937" expanded="true" signature="15794:15806" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="16083:16095" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="16415:16427" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="16678:16690" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="17072:17084" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="17354:17366" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="17640:17652" placeholder="..." />
-                <marker date="1424547593937" expanded="true" signature="18029:18038" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="15586:15598" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="15875:15887" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="16207:16219" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="16470:16482" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="16864:16876" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="17146:17158" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="17432:17444" placeholder="..." />
+                <marker date="1424547980551" expanded="true" signature="17821:17830" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -503,7 +500,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -880,14 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.license.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="10" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.846154" vertical-offset="3636" max-vertical-offset="4199">
@@ -958,19 +947,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.license.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="10" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42522523" vertical-offset="1651" max-vertical-offset="12206">
-          <caret line="111" column="57" selection-start-line="111" selection-start-column="57" selection-end-line="111" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.088288285" vertical-offset="10066" max-vertical-offset="12189">
+          <caret line="595" column="18" selection-start-line="595" selection-start-column="18" selection-end-line="595" selection-end-column="18" />
           <folding>
-            <marker date="1424547593937" expanded="true" signature="15794:15806" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="16083:16095" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="16415:16427" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="16678:16690" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="17072:17084" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="17354:17366" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="17640:17652" placeholder="..." />
-            <marker date="1424547593937" expanded="true" signature="18029:18038" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="15586:15598" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="15875:15887" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="16207:16219" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="16470:16482" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="16864:16876" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="17146:17158" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="17432:17444" placeholder="..." />
+            <marker date="1424547980551" expanded="true" signature="17821:17830" placeholder="..." />
           </folding>
         </state>
       </provider>
