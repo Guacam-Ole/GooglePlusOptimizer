@@ -128,7 +128,7 @@ gpoQuickShare.prototype = {
         //container.attr("circles","Hamburg,Nette Leute,Firmen");
         this.Circles = container.attr("circles").split(',');
 
-        this.AsBookmark = JSON.parse(container.attr("isBookmark"));
+        this.AsBookmark = false; //JSON.parse(container.attr("isBookmark"));
         this.Link.closest('[role="article"]').find('.Dg.Ut').click();
         this.Step = 1;
     }

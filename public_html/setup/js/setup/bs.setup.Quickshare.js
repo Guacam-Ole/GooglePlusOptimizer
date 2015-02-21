@@ -1,6 +1,6 @@
 /**
  * Created by Tomato on 18.02.2015.
- */
+  */
 var setupQs;
 
 

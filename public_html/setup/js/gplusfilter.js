@@ -66,11 +66,12 @@ function StartObservation() {
         characterData: false,
         attributes: false
     });
-
+/*
     var preselection = "ole";
     $.get("https://plus.google.com/complete/search?client=es-sharebox-search&authuser=0&xhr=t&q=" + preselection, function (data) {
         console.log(data);
     });
+    */
 }
 
 
@@ -92,7 +93,7 @@ $(document).ready(function () {
     {
         LoadSetup();
     }
-    else if (window.location.href.indexOf("plus.google.com/communities") >= 0) {
+    else if (window.location.href.indexOf("/communities") > 0) {
         SaveCommunities();
     }
     else if (window.location.hostname === "plus.google.com") {
@@ -326,9 +327,15 @@ function HideOnAttr(parent, attr, value) {
 }
 
 function SaveCommunities(changedElements) {
-    // Communities speichern:
+    // Beigetretene Communities:
     var communities = [];
     $('.UYd').find('.JUKJAb').each(function (index, value) {
+        communities.push($(value).find('.ATc').text());
+    });
+
+    // Eigene Communities:
+    var communities = [];
+    $('.VYd').find('.RbAFad').each(function (index, value) {
         communities.push($(value).find('.ATc').text());
     });
 
