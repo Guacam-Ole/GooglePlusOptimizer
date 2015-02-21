@@ -1,7 +1,6 @@
 [
   {
     "remark": "---------MUSS IMMER GANZ OBEN STEHEN!----------",
-    "Version": "1.0",
     "Short": "welcomeWizard",
     "Image": "welcome.png",
     "Title": "Willkommen beim Google+ Optimizer Wizard",
@@ -197,42 +196,44 @@
     "Image": "lang.png",
     "Cost": 0
   },
-
   {
-    "Version": "3.0",
     "Short": "bugs",
     "Type": "TextOnly",
     "Title": "Bugs",
     "Description": "<p>Hier können Bugreports eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='tickets'></div></p>"
   },
   {
-    "Version": "3.0",
     "Short": "featurerequests",
     "Type": "TextOnly",
     "Title": "Verbesserungsvorschläge",
     "Description": "<p>Hier können Verbesserungsvorschläge eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='featurerequests'></div></p>"
   },
   {
-    "Version": "3.0",
     "Short": "newticket",
     "Type": "TextOnly",
     "Title": "Neues Ticket erstellen",
     "Description": "<p>Bug melden oder Feature anfragen.<br/>  <a id='showTicketCreation' class='btn  green'>Ticket eröffnen <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
   },
   {
-    "Version": "3.0",
     "Short": "defaultCircles",
     "Type": "NoFeature",
     "Title": "Standardbezeichner",
     "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner vomn Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
   },
-
-
-
-
+  {
+    "Short": "license",
+    "Type": "NoFeature",
+    "Title": "Lizenzen und Quellen",
+    "Description": "<div class='loadHtml' data-filename='bs.license'></div>"
+  },
+  {
+    "Short": "loadsave",
+    "Type": "NoFeature",
+    "Title": "Konfiguration sichern und wiederherstellenn",
+    "Description": "<div class='loadHtml' data-filename='bs.loadsave'></div>"
+  },
   {
     "remark": "-----MUSS IMMER GANZ UNTEN STEHEN!-------",
-    "Version": "1.0",
     "Short": "finishWizard",
     "Image": "lasthelp.png",
     "Title": "Konfiguration abgeschlossen",
