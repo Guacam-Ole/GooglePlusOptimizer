@@ -197,14 +197,7 @@
     "Image": "lang.png",
     "Cost": 0
   },
-  {
-    "Version": "2.6.3",
-    "Short": "displayQuickHashes",
-    "Title": "Quick-Hashtags",
-    "Description": "Es werden sämtliche Hashtags aufgelistet, die im aktuellen Stream verwendet wurden. ",
-    "Image": "hash.png",
-    "Cost": 1
-  },
+
   {
     "Version": "3.0",
     "Short": "bugs",
