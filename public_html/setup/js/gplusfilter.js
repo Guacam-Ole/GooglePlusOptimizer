@@ -54,9 +54,11 @@ var observer = new MutationObserver(function (mutations) {
                     }
                 }
             });
-            ShowWidgets();
+
         }
     });
+    ShowWidgets();
+    MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
 });
 
 function StartObservation() {
@@ -387,7 +389,7 @@ function StartFilter(changedElements) {
         });
     }
 
-    MoveHeaderIcon();   // Prüfen wg. Performance!
+   // MoveHeaderIcon();   // Prüfen wg. Performance!
 
     /* WHAM */
     SingleMeasureBool(Subs.Settings.Values.Wham, "Wham", function () {
@@ -448,7 +450,7 @@ function StartFilter(changedElements) {
     });
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.Dom($ce);
-        Subs.Bookmarks.DisplayBookmarks($ce);
+      //  Subs.Bookmarks.DisplayBookmarks($ce);
         Subs.Bookmarks.PaintStars($ce);
     });
 
