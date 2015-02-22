@@ -31,9 +31,14 @@ gpoBookmarks.prototype = {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
         obj.LoadBookmarkList();
         obj.LoadBookmarkContent();
+        obj.PaintFloatingIcon($(document));
         obj.DisplayBookmarksHover();
+
     },
     Dom: function ($ce) {
+       //this.PaintFloatingIcon($ce);
+    },
+    PaintFloatingIcon:function($ce) {
         var obj = this;
         if ($ce.find('.miniBookmark').length === 0) {
             $(document).on('click', '.miniBookmark', function () {
