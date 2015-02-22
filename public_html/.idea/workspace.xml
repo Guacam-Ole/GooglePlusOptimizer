@@ -2,7 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\arrows.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\bg_grey_gradient.jpg" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\bg_tile.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\bg_top_gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\bg_white_lights.jpg" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\box_bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\buttons_tile.jpg" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\clockbottom.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\clocktop.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\footer_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\icon_calender.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\icon_cart.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\icon_checked.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\icon_document.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\icon_proposal.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\logo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\main_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\main_bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\main_dot.jpg" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\main_top.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\menu_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\menu_divider.gif" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\startnext_logo_green.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\tool_tip_large.gif" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\images\tool_tip_large.png" afterPath="" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +50,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bookmarks.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bookmarks.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/gplus/bookmarks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3448275" vertical-offset="5860" max-vertical-offset="6460">
-              <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.8060837" vertical-offset="5271" max-vertical-offset="6460">
+              <caret line="335" column="25" selection-start-line="335" selection-start-column="12" selection-end-line="335" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -55,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1394">
-              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+            <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="1394">
+              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -448,7 +472,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -874,14 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/bookmarks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3448275" vertical-offset="5860" max-vertical-offset="6460">
-          <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.551724" vertical-offset="726" max-vertical-offset="12223">
@@ -901,8 +917,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1394">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="1394">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/bookmarks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8060837" vertical-offset="5271" max-vertical-offset="6460">
+          <caret line="335" column="25" selection-start-line="335" selection-start-column="12" selection-end-line="335" selection-end-column="25" />
           <folding />
         </state>
       </provider>
