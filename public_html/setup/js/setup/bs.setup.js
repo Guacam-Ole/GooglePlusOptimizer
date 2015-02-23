@@ -165,7 +165,7 @@ Setup.prototype = {
         });
 
         $(document).on('click', '.ticketLink', function () {
-            obj.GetSingleTicket($(this).attr('ticketid'), $(this).closest('div'));
+            obj.GetSingleTicket($(this).attr('ticketid'), $(this));
             return false;
         });
         $(document).on('click', '#chkFilterGif', function () {
@@ -419,14 +419,21 @@ Setup.prototype = {
         return -1;   // fallback
     },
     GetTickets: function (topic, $target) {
-        var template = "<tr><td><a class='ticketLink' ticketid='__ID__'>__NUMBER__</a></td><td>__CREATED__</td><td>__SUBJECT__</td><td>__STATE__</td><td>__CHANGED__</td></tr>";
+        var template = "<tr><td><a class='ticketLink' ticketid='__ID__' data-body='__BODY__'>__NUMBER__</a></td><td>__CREATED__</td><td>__SUBJECT__</td><td>__STATE__</td><td>__CHANGED__</td></tr>";
 
-        $.getJSON("http://ole.enif.uberspace.de/osTicket/jsontickets.php?output=json&id=" + topic, function (data) {
+        $.getJSON("https://files.oles-cloud.de/Github/listIssues.php?state=open&labels=" + topic, function (data) {
             var output = "<table class='ticketTable'><thead><tr><th>Nummer</th><th>Erstellt</th><th>Thema</th><th>Status</th><th>bearbeitet</th></tr></thead>";
             $.each(data, function (key, val) {
-                output += template.replace("__ID__", val.ticket_id).replace("__NUMBER__", val.number)
-                    .replace("__CREATED__", val.created).replace("__SUBJECT__", val.subject)
-                    .replace("__STATE__", val.state).replace("__CHANGED__", val.updated);
+                var dateCreated=new Date(Date.parse(val.Created));
+                var dateChanged=new Date(Date.parse(val.Updated));
+                var dcrString=dateCreated.getDate()+"."+(dateCreated.getMonth()+1)+"."+dateCreated.getFullYear()+" "+dateCreated.getHours()+":"+("0" + dateCreated.getMinutes()).substr(-2)
+                var dchString=dateChanged.getDate()+"."+(dateChanged.getMonth()+1)+"."+dateChanged.getFullYear()+" "+dateChanged.getHours()+":"+("0" + dateChanged.getMinutes()).substr(-2);
+
+                output += template.replace("__ID__", val.Number).replace("__NUMBER__", val.Number)
+                    .replace("__CREATED__", dcrString).replace("__SUBJECT__", val.Title)
+                    .replace("__STATE__", val.State).replace("__CHANGED__", dchString)
+                    .replace("__BODY__", val.Body)
+                ;
             });
             output += "</table><div class='ticketDetails'></div>";
             $target.html(output);
@@ -439,14 +446,19 @@ Setup.prototype = {
         });
     },
     GetSingleTicket: function (id, $parent) {
-        var template = "<div class='singleTicketPost'><span class='date'>__DATE__</span><span class='username'>__USER__</span><div class='body'>__BODY__</div></div>";
-        $.getJSON("http://ole.enif.uberspace.de/osTicket/jsonticketsdetails.php?id=" + id, function (data) {
-            var output = "";
+        if ($parent.closest('table').find('.singleTicketPost').length>0) {
+            $parent.closest('table').find('.singleTicketPost').remove();
+            return;
+        }
+
+        var template = "<tr class='singleTicketPost' ><td>&nbsp;</td><td><span class='date'>__DATE__</span></td> <td colspan='2'><div><span class='username'>__USER__</span><div class='body'>__BODY__</div></div></td><td>&nbsp;</td> </tr>";
+        $.getJSON("https://files.oles-cloud.de/Github/listIssue.php?number=" + id, function (data) {
+            var output = template.replace("__USER__", "").replace("__DATE__", $parent.closest("tr").find('td')[1].innerText).replace("__BODY__", $parent.closest("tr").find('a').data("body"));
             $.each(data, function (key, val) {
-                output += template.replace("__USER__", val.poster).replace("__DATE__", val.created).replace("__BODY__", val.body);
+                output += template.replace("__USER__", val.UserName).replace("__DATE__", val.Created).replace("__BODY__", val.Body);
             });
-            $parent.find('.ticketDetails').html(output);
-            $parent.find('.ticketDetails').toggle();
+            $parent.closest('tr').after(output);
+
         });
     },
 
@@ -476,10 +488,10 @@ Setup.prototype = {
                     obj.ReplaceDataInTemplate(divFeature, currentFeature);
                     $('.features').append(divFeature);
                     if (featureName === 'bugs') {
-                        obj.GetTickets(1, $('.tickets'));
+                        obj.GetTickets('bug', $('.tickets'));
                     }
                     if (featureName === 'featurerequests') {
-                        obj.GetTickets(2, $('.featurerequests'));
+                        obj.GetTickets('enhancement', $('.featurerequests'));
                     }
                 });
                 break;

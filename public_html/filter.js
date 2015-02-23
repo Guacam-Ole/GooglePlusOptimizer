@@ -1,11 +1,3 @@
-/*
- * File:    filter.js
- * Packet:  G+ Optimizer
- * Author:  Ole Albers
- * 
- * Hauptsächlich "Hintergrundoperationen" zum Lesen und Schreiben von Einstellungen
- */
-
 
 chrome.runtime.onMessage.addListener(
     function(request,sender,sendResponse)  {
@@ -65,36 +57,6 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-
- 
-
-
-
-// Null-Wert in Boolean umwandeln
-function BoolNotNull(anyvalue)
-{
-    if (anyvalue === null || anyvalue === "undefined")
-    {
-        return "false";
-    }
-    else
-    {
-        return anyvalue;
-    }
-}
-
-function BoolNotNullReverse(anyvalue)
-{
-    if (anyvalue === null || anyvalue === "undefined")
-    {
-        return "true";
-    }
-    else
-    {
-        return anyvalue;
-    }
-}
-
 function GetToken()
 {
     chrome.identity.getAuthToken({'interactive': true}, function(token)
@@ -108,24 +70,12 @@ function GetToken()
     }
 }
 
-// String-Bool in echtes Bool wandeln
-function GetBool(originalValue)
-{
-    try
-    {
-        return JSON.parse(originalValue);
-    } catch (ex)
-    {
-        console.log(ex);
-    }
-}
 
 // Icon in der Adressleiste von Chrome anzeigen
 chrome.extension.onMessage.addListener(function(request, sender) {
     if (request === "show_page_action") {
         chrome.pageAction.show(sender.tab.id);
     }
-
 });
 
 // Trophies
@@ -226,15 +176,7 @@ chrome.runtime.onMessage.addListener(
                 localStorage.setItem("UserCols", request.ParameterValue);
                 sendResponse({Result: "Settings Saved."});
             }
-//            else if (request.Action === "LoadUsers")
-//            {
-//                var userSettings = localStorage.getItem("UserCols");
-//                sendResponse({
-//                    AllUserSettings: userSettings,
-//                    Result: "Settings loaded."
-//                });
-//            }
-            
+
             else if (request.Action === "LoadTicks")
             {
                 var ticks = localStorage.getItem("Ticks");
