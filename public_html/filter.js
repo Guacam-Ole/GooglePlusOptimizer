@@ -18,6 +18,9 @@ chrome.runtime.onMessage.addListener(
         else if (request.Action==="DeleteTicks") {
              localStorage.removeItem("Measurements_"+request.Scope);
         }
+        else if (request.Action==="SaveUserName") {
+            localStorage["UserName"]=request.ParameterValue;
+        }
         else if (request.Action==="GetSoccerScores") {
             var orderId=request.Day;
             var smallCompleteUrl = "http://www.nocarrier.de/opendb.php?command=GetCurrentGroup&league=" + request.League;

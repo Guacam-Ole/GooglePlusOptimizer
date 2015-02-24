@@ -160,6 +160,10 @@ Setup.prototype = {
         });
 
         $(document).on('click', '#showTicketCreation', function () {
+            if (localStorage.getItem("UserName")!==undefined) {
+                $('#ticketUser').val(localStorage.getItem("UserName"));
+                $('#ticketUser').prop('readonly', true);
+            }
             $('.addNewTicket').fadeIn();
             return false;
         });
@@ -440,9 +444,10 @@ Setup.prototype = {
         });
     },
     AddTicket: function (username, subject, content, type) {
-        $.getJSON("http://ole.enif.uberspace.de/osTicket/CreateTicket.php?user=" + encodeURIComponent(username) + "&subject=" + encodeURIComponent(subject) + "&content=" + encodeURIComponent(content) + "&type=" + encodeURIComponent(type), function (data) {
-            var $success = JSON.parse(data);
-
+        var obj=this;
+        $.get("https://files.oles-cloud.de/Github/createissue.php?user=" + encodeURIComponent(username) + "&title=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(content) + "&label=" + encodeURIComponent(type), function () {
+            obj.GetTickets('bug', $('.tickets'));
+            obj.GetTickets('enhancement', $('.featurerequests'));
         });
     },
     GetSingleTicket: function (id, $parent) {

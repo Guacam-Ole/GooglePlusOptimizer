@@ -592,6 +592,10 @@ function InitObjects() {
     if (Subs.Quickshare !== null) {
         Subs.Quickshare.Shares = qs;
     }
+
+    if ($('.gb_sa').length>0) {
+        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_sa').text()});
+    }
 }
 
 function PageLoad() {
