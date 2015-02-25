@@ -76,8 +76,10 @@ gpoSettings.prototype = {
             }
             var putBrackets = true;
             if (strValue === null || strValue === undefined || !isNaN(strValue) || strValue === "true" || strValue === "false") {
-                // Kein String
-                putBrackets = false;
+                if (strValue!=="") {
+                    // Kein String
+                    putBrackets = false;
+                }
             } else if (strValue.indexOf("[") === 0 || strValue.indexOf("{") === 0) {
                 // JSON-Objekt
                 putBrackets = false;
