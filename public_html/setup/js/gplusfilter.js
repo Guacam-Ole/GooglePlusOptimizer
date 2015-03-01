@@ -70,6 +70,8 @@ function StartObservation() {
     });
 }
 
+StartObservation();
+
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
     return function (elem) {
@@ -600,7 +602,7 @@ function InitObjects() {
 
 function PageLoad() {
     InitObjects();
-    window.setTimeout(function() {
+
 
 
 
@@ -646,19 +648,26 @@ function PageLoad() {
         DrawWidgets();
         CountColumns();
 
-        // Initial Mutation Observer simulieren:
-        $('[jsmodel="XNmfOc"]').each(function (index, value) {
-            StartFilter(value);
-        });
-        $('.nja').each(function (index, value) {
-            FilterBlocks(value);
-        });
-
-        StartObservation();
-        console.log('G+Filter: Google+ - Filter initialisiert');
+    window.setTimeout(function() {
+        TripleInit();
     },1000);
+    window.setTimeout(function() {
+        TripleInit();
+    },5000);
+    window.setTimeout(function() {
+        TripleInit();
+    },10000);
+    console.log('G+Filter: Google+ - Filter initialisiert');
+}
 
-
+function TripleInit() {
+    // Initial Mutation Observer simulieren:
+    $('[jsmodel="XNmfOc"]').each(function (index, value) {
+        StartFilter(value);
+    });
+    $('.nja').each(function (index, value) {
+        FilterBlocks(value);
+    });
 }
 
 /**

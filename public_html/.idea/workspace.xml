@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/settings.js" afterPath="$PROJECT_DIR$/setup/js/gplus/settings.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="public_html.iws" />
@@ -89,30 +89,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6684" max-vertical-offset="12291">
-              <caret line="359" column="29" selection-start-line="359" selection-start-column="29" selection-end-line="359" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.51686746" vertical-offset="10655" max-vertical-offset="12444">
+              <caret line="652" column="0" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
               <folding>
-                <marker date="1424812950837" expanded="true" signature="15689:15701" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="15978:15990" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="16310:16322" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="16573:16585" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="16967:16979" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="17249:17261" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="17535:17547" placeholder="..." />
-                <marker date="1424812950837" expanded="true" signature="17924:17933" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="15710:15722" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="15999:16011" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="16331:16343" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="16594:16606" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="16988:17000" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="17270:17282" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="17556:17568" placeholder="..." />
+                <marker date="1425240453890" expanded="true" signature="17945:17954" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45412844" vertical-offset="981" max-vertical-offset="2295">
-              <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="2295">
+              <caret line="72" column="15" selection-start-line="72" selection-start-column="15" selection-end-line="72" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -177,11 +177,11 @@
         <option value="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/setup/css/setup.css" />
-        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
         <option value="$PROJECT_DIR$/filter.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.ticket.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/settings.js" />
+        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
       </list>
     </option>
   </component>
@@ -404,10 +404,14 @@
       <ConfigurationWrapper RunnerId="debuggableProgram" />
       <method />
     </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -415,10 +419,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -479,14 +479,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33777776" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4110629" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -505,9 +505,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177028" sideWeight="0.49912128" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -888,28 +888,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6684" max-vertical-offset="12291">
-          <caret line="359" column="29" selection-start-line="359" selection-start-column="29" selection-end-line="359" selection-end-column="29" />
-          <folding>
-            <marker date="1424812950837" expanded="true" signature="15689:15701" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="15978:15990" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="16310:16322" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="16573:16585" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="16967:16979" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="17249:17261" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="17535:17547" placeholder="..." />
-            <marker date="1424812950837" expanded="true" signature="17924:17933" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="2295">
+          <caret line="72" column="15" selection-start-line="72" selection-start-column="15" selection-end-line="72" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
+    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45412844" vertical-offset="981" max-vertical-offset="2295">
-          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-          <folding />
+        <state vertical-scroll-proportion="0.51686746" vertical-offset="10655" max-vertical-offset="12444">
+          <caret line="652" column="0" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+          <folding>
+            <marker date="1425240453890" expanded="true" signature="15710:15722" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="15999:16011" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="16331:16343" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="16594:16606" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="16988:17000" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="17270:17282" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="17556:17568" placeholder="..." />
+            <marker date="1425240453890" expanded="true" signature="17945:17954" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
