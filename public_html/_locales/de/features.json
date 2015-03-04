@@ -218,7 +218,7 @@
     "Short": "defaultCircles",
     "Type": "NoFeature",
     "Title": "Standardbezeichner",
-    "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner vomn Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
+    "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner von Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
   },
   {
     "Short": "license",
