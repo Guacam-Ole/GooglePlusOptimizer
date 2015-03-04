@@ -595,8 +595,8 @@ function InitObjects() {
         Subs.Quickshare.Shares = qs;
     }
 
-    if ($('.gb_sa').length>0) {
-        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_sa').text()});
+    if ($('.gb_ua').length>0) {
+        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').text()});
     }
 }
 
@@ -647,6 +647,8 @@ function PageLoad() {
         GetAllCircles();
         DrawWidgets();
         CountColumns();
+
+    // TODO: Dies ist nur ein WORKAROUND! Warum der MutationObserver da nicht immer will, ist noch zu prüfen!
 
     window.setTimeout(function() {
         TripleInit();
