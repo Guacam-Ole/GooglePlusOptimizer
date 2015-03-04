@@ -4,7 +4,7 @@
     "short_name": "G+Filter_PREVIEW",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "3.0.0.5",
+    "version": "3.0.0.6",
     "author": "Ole Albers",
     "permissions": [
        
@@ -14,6 +14,7 @@
     ],
     "content_scripts":
             [{
+                    "run_at":"document_start",
                     "matches": ["https://plus.google.com/*"],
                     "js": [
                         "setup/js/lib/jquery-1.10.2.min.js",

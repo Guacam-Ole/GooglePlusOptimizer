@@ -31,17 +31,23 @@ var observer = new MutationObserver(function (mutations) {
             forEach.call(mutation.addedNodes, function (addedNode) {
                 if (addedNode.classList !== undefined) {
                     if (addedNode.classList.contains('PD')) {
+                        //console.log("DOM PD:"+addedNode.classList);
                         PaintBin(addedNode);
                     } else if (addedNode.classList.contains('nja')) {
+                        //console.log("DOM NJA:"+addedNode.classList);
                         FilterBlocks(addedNode);
                     } else if (addedNode.classList.contains('URaP8')) {
+                        //console.log("DOM URA:"+addedNode.classList);
                         DoQuickshare(addedNode, 1);
                     }
                     //g-h-f-N-N
                     else {
                         var jsModel = addedNode.attributes["jsmodel"];
                         if (jsModel !== undefined && jsModel.value === "XNmfOc") {
+                            //console.log("DOM JS:"+addedNode.classList);
                             StartFilter(addedNode);
+                        } else {
+                            //console.log("DOM IGNORED:"+addedNode.classList);
                         }
                     }
                 }
@@ -70,7 +76,7 @@ function StartObservation() {
     });
 }
 
-StartObservation();
+
 
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
@@ -598,6 +604,7 @@ function InitObjects() {
     if ($('.gb_ua').length>0) {
         chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').text()});
     }
+    StartObservation();
 }
 
 function PageLoad() {
@@ -648,17 +655,11 @@ function PageLoad() {
         DrawWidgets();
         CountColumns();
 
-    // TODO: Dies ist nur ein WORKAROUND! Warum der MutationObserver da nicht immer will, ist noch zu prüfen!
+        // TODO: Dies ist nur ein WORKAROUND! Warum der MutationObserver da nicht immer will, ist noch zu prüfen!
+    TripleInit();
 
-    window.setTimeout(function() {
-        TripleInit();
-    },1000);
-    window.setTimeout(function() {
-        TripleInit();
-    },5000);
-    window.setTimeout(function() {
-        TripleInit();
-    },10000);
+
+
     console.log('G+Filter: Google+ - Filter initialisiert');
 }
 
