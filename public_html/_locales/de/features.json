@@ -221,6 +221,13 @@
     "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner von Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
   },
   {
+    "Short":"wizardMode",
+    "Type":"NoFeature",
+    "Title":"Wizard",
+    "Description":"<p>Der Wizard hilft, neue Features nach Updates zu konfigurieren. Wenn er erneut auftauchen soll, oder auch ganz deaktiviert, kannst Du dies hier einstellen.</p><div class='loadHtml' data-filename='bs.wizard'></div>"
+  },
+
+  {
     "Short": "license",
     "Type": "NoFeature",
     "Title": "Lizenzen und Quellen",
