@@ -37,7 +37,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("displayTrophy"));
         obj.AllSettings.push(new gpoSetting("displayLang"));
         obj.AllSettings.push(new gpoSetting("showEmoticons"));
-        obj.AllSettings.push(new gpoSetting("lastWizard"));
+        obj.AllSettings.push(new gpoSetting("lastWizard",undefined,true));
         obj.AllSettings.push(new gpoSetting("useBookmarks"));
         obj.AllSettings.push(new gpoSetting("useAutoSave"));
         obj.AllSettings.push(new gpoSetting("markLSRPosts"));
@@ -84,7 +84,7 @@ gpoSettings.prototype = {
                 // JSON-Objekt
                 putBrackets = false;
             }
-            if (putBrackets) {
+            if (value.DontParse || putBrackets) {
                 strValue = "\"" + strValue + "\"";
             }
 
@@ -106,10 +106,11 @@ gpoSettings.prototype = {
     }
 };
 
-var gpoSetting = function (settingname, defaultValue) {
+var gpoSetting = function (settingname, defaultValue, dontParse) {
     this.Name = settingname;
     this.Value;
     this.DefaultValue = defaultValue;
+    this.DontParse=dontParse===true;
 };
 
 gpoSetting.prototype = {

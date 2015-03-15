@@ -1,5 +1,5 @@
 console.log('g+ - filter started');
-
+this.Browser = new Browser();
 var columnCount;
 var imageHost = "https://files.oles-cloud.de/optimizer/";
 
@@ -182,20 +182,24 @@ function AddHeadWrapper(parent) {
  * Wizard-Kachel zeichnen
  */
 function DrawWizardTile() {
-    return;
+    //return;
     try {
+        var wizard=new gpoWizard();
+
+
         var lang = chrome.i18n.getMessage("lang");
-        if (NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
+        wizard.CurrentLang=lang;
+        if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
             $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
                 $('#wizardStart').click(function () {
-                    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
-                    $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
+                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var wizz = $('<div id="loadhere">&nbsp;</div>');
                     $('body').prepend(wizz);
-                    $('#loadhere').load(chrome.extension.getURL("setup/" + lang + "/wizard.html"), function () {
-                        InitWizard(Subs.Settings.Values.LastWizard);
+                    $('#loadhere').load(Browser.GetExtensionFile("setup/" + lang + "/wizard.html"), function () {
+                        wizard.InitWizard(Subs.Settings.Values.LastWizard);
                         console.log('Wizard loaded');
                     });
                 });

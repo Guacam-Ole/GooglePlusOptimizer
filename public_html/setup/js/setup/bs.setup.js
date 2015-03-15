@@ -259,6 +259,16 @@ Setup.prototype = {
             obj.SaveWeather($(this).closest('.singleFeature'), obj);
         });
 
+        $(document).on('click','.wizardEnabled',function() {
+            obj.SaveWizard(1);
+        });
+        $(document).on('click','.wizardDisabled',function() {
+            obj.SaveWizard(-1);
+        });
+        $(document).on('click','.wizardReset',function() {
+            obj.SaveWizard(0,"1.0");
+        });
+
         $(document).on('change', '#cnPublic', function () {
             var allCircles = obj.GetCircles();
             allCircles.Public = $(this).val();
@@ -331,6 +341,12 @@ Setup.prototype = {
         var id = $parent.find('.weatherSelection .cityId').val();
         var weather = {Position: column, Id: id, Text: cityName, Enabled: isChecked};
         localStorage.setItem("weatherWidget", JSON.stringify(weather));
+    },
+    SaveWizard:function (wizardMode, wizardVersion) {
+        localStorage.setItem("WizardMode",wizardMode);
+        if (wizardVersion!==undefined) {
+            localStorage.setItem("lastWizard",wizardVersion);
+        }
     },
     GetColumn: function ($parent) {
         var count = 0;
@@ -408,6 +424,34 @@ Setup.prototype = {
                     }
                 } else if (feature.Short==='enableQs') {
                     setupQs.LoadQs();
+                } else if (feature.Short==='wizardMode') {
+                    var wizardVersion=localStorage.getItem("lastWizard");
+                    var wizardMode = localStorage.getItem("WizardMode") || 1;
+                    if (wizardMode === null) {
+                        wizardMode = 1;
+                    } else {
+                        wizardMode = JSON.parse(wizardMode);
+                    }
+
+                    if (wizardMode===1 && wizardVersion==="1.0") {
+                        wizardMode=0;
+                    }
+
+                    switch (wizardMode) {
+                        case 1:
+                            // Default = bei neuen Features
+                            $('.wizardEnabled').addClass("active");
+                            break;
+                        case -1:
+                            // Disabled
+                            $('.wizardDisabled').addClass("active");
+                            break;
+                        case 0:
+                            // Reset
+                            $('.wizardReset').addClass("active");
+                            break;
+                    }
+
                 }
             });
         });

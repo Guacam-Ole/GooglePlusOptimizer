@@ -35,6 +35,7 @@
                         "setup/js/gplus/smilies.js",
                         "setup/js/gplus/user.js",
                         "setup/js/gplus/weather.js",
+                        "setup/js/gplus/browser.chrome.js",
                         
                         "setup/js/gplusfilter.js"
                         ]
@@ -70,7 +71,8 @@
         "setup/de/wizimg/*",
         "setup/en/wizimg/*",
         "setup/en/wizardloader.html",
-        "setup/en/wizard.html"
+        "setup/en/wizard.html",
+        "_locales/*"
     ],
   "content_security_policy": "script-src 'self'  https://files.oles-cloud.de; object-src 'self'"
 }

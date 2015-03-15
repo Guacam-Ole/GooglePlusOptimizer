@@ -24,5 +24,8 @@ Browser.prototype = {
         if (obj.Messages !== null && obj.Messages[id] !== undefined) {
             return obj.Messages[id].message;
         }
+    },
+    GetExtensionFile:function(filename) {
+        return chrome.extension.getURL(filename);
     }
 };
