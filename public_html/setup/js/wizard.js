@@ -3,6 +3,7 @@ var gpoWizard = function () {
     this.CurrentStepId;
     this.WizardInitialized = false;
     this.CurrentLang;
+    this.ImgPrefix;
 };
 
 
@@ -22,6 +23,7 @@ gpoWizard.prototype = {
             }
             var oldVersion = this.GetVersionLong(lastwizard);
             var newVersion = this.GetVersionLong(manifest.version);
+
 
             if (newVersion - oldVersion < 100) {
                 // Nur bugfixes, keine Features
@@ -51,25 +53,20 @@ gpoWizard.prototype = {
                 });
            // $('.make-switch').bootstrapSwitch();
             $('#nextSetting').click(function () {
-                if (obj.CurrentStepId !== allPages[allPages.length - 1]) {
-                    var pos = allPages.indexOf(obj.CurrentStepId);
-
-                    $('#wr').find('.content').appendTo($('#' + currentStepId));
-                    DisplayStep(allPages[pos + 1], pos + 1, allPages.length - 2);
-                }
+                obj.CurrentStepId++;
+                obj.DisplayFeature(obj.CurrentStepId);
                 return false;
             });
             $('#prevSetting').click(function () {
-                if (obj.CurrentStepId !== allPages[0]) {
-                    var pos = allPages.indexOf(obj.CurrentStepId);
-                    $('#wr').find('.content').appendTo($('#' + obj.CurrentStepId));
-                    DisplayStep(allPages[pos - 1], pos - 1, allPages.length - 2);
-                }
+                obj.CurrentStepId--;
+                obj.DisplayFeature(obj.CurrentStepId);
                 return false;
             });
 
+            this.ImgPrefix=imageHost +"wizard/"+ obj.CurrentLang + "/";
 
-            $('#reloadPage').click(function () {
+
+                $('#reloadPage').click(function () {
                 window.location.reload(true);
             });
             version = version || "0";
@@ -79,15 +76,6 @@ gpoWizard.prototype = {
 
             obj.CollectSteps(version);
 
-            allPages = [];
-            allPages.push('welcomeWizard');
-
-
-            for (var i in allSettings) {
-                allPages.push(allSettings[i]);
-            }
-
-            allPages.push('finishWizard');
             var divWidth = $('.container').width();
             var spamWidth = $('.spam').width();
 
@@ -164,61 +152,46 @@ gpoWizard.prototype = {
         });
     },
     PaintWizard:function() {
-        console.log("Horido!");
+        this.CurrentStepId=0;
+
+        this.DisplayFeature();
     },
     SwitchEvents:function() {
         $(".make-switch").on('switch-change', function (e, data) {
             var id = $(this).attr("id");
-
-
         });
-
     },
-    DisplayStep:function(id, current, max) {
-        try {
-            current = current || 0;
-            max = max || 0;
-
-            $('#prevSetting').removeClass('wizActive wizInactive');
-            $('#nextSetting').removeClass('wizActive wizInactive');
-
-            if (id === allPages[0]) {
-                // erste Seite
-                $('#nextSetting').addClass("wizActive");
-                $('#prevSetting').addClass("wizInactive");
-            } else if (id === allPages[allPages.length - 1]) {
-                // letzte Seite:
-                $('#nextSetting').addClass("wizInactive");
-                $('#prevSetting').addClass("wizActive");
-                SaveWizardSettings();
-            } else {
-                $('#nextSetting').addClass("wizActive");
-                $('#prevSetting').addClass("wizActive");
-            }
-            var container = $('#' + id);
-            currentStepId = id;
-
-            var wizVersion = container.find('.version').text();
-            var wizImage = container.find('.image').text();
-            var wizCategory = container.find('.category').text();
-            var wizHeader = container.find('.heading').text();
-
-            var lang = chrome.i18n.getMessage("lang");
-            $('.wizardImage img').attr('src', chrome.extension.getURL("setup/" + lang + "/wizimg/" + wizImage));
-            $('.wizardRight h3').text(wizHeader);
-            $('#wr').empty();
-
-            container.find('.content').appendTo('#wr');
-            if (wizCategory === "Other") {
-                $('.imgTitle').hide();
-                $('#wizardSubtitle').text("");
-            } else {
-                $('.imgTitle').show();
-                $('#wizardSubtitle').text(wizCategory + " (" + current + " / " + max + ")");
-            }
-        } catch (ex) {
-            console.log(ex);
+    DisplayFeature: function () {
+        if (this.CurrentStepId<0) {
+            this.CurrentStepId++;
         }
+        if (this.CurrentStepId>(this.AllSettings.length-1)) {
+            this.CurrentStepId--;
+        }
+        var mode=null;
+        var feature=this.AllSettings[this.CurrentStepId];
+
+        $('#prevSetting').removeClass('wizInactive');
+        $('#nextSetting').removeClass('wizInactive');
+        $('#nextSetting').addClass("wizActive");
+        $('#prevSetting').addClass("wizActive");
+        if (this.CurrentStepId==0) {
+            // erste Seite
+            $('#prevSetting').removeClass('wizActive');
+            $('#prevSetting').addClass("wizInactive");;
+        }
+        if (this.CurrentStepId==this.AllSettings.length-1) {
+            // letzte Seite:
+            $('#nextSetting').removeClass('wizActive');
+            $('#nextSetting').addClass("wizInactive");
+            // TODO: SAVE! 
+        }
+
+        $('.wizardImage img').attr('src', this.ImgPrefix + feature.Image);
+        $('.wizardRight h3').text(feature.Title);
+        $('#wr').empty();
+        $('#wr').append(feature.Description);
+        $('#wizardSubtitle').text("("+(this.CurrentStepId+1)+"/" + (this.AllSettings.length-1) + ")");
     },
     LoadCheckBox:function(property, boxName) {
         $(boxName).bootstrapSwitch('setState', JSON.parse(property));
