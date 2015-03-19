@@ -26,12 +26,7 @@ var SetupQuickshare = function () {
     this.Templates.DrillDownElement = '<div class="qsSelectCircleElement"><span class="__ICONCLASS__"></span><span title="__TITLE__" class="inner">__CIRCLE__</span></div>';
     this.Templates.Qs='<div class="selectedQS"><input type="hidden" class="qsId" value="__INDEX__" > <div class="qsImage"><img src="__IMAGE__"/></div><div class="qsRight"><div class="qsClose">&nbsp;</div><div class="qsText">__TITLE__</div><div class="qsCircles">__CIRCLES__<input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle"></div></div></div>';
     this.Templates.Circle='<span class="qsCircle __COLOR__"><span class="innerCircle"><span class="__CLASS__"></span><span class="qsCircleText">__NAME__</span><span class="qsCircleRemove"></span></span></span>';
-
-//    this.LoadQs();
 };
-
-
-
 
 SetupQuickshare.prototype = {
     constructor: SetupQuickshare,
@@ -58,8 +53,6 @@ SetupQuickshare.prototype = {
 
             return false;
         });
-
-
 
         $(document).on('click', '.qsClose', function () {
             obj.DeleteQs($(this));
@@ -137,6 +130,8 @@ SetupQuickshare.prototype = {
         var lsqs=localStorage['QuickShares'];
         var qs=JSON.parse(lsqs);
         var elementName=element.text();
+
+
         qs[id].Circles+=(","+elementName);
         localStorage["QuickShares"]=JSON.stringify(qs);
         this.ReloadQs(element.closest(wrapper));
@@ -177,6 +172,7 @@ SetupQuickshare.prototype = {
         var allCircles = this.GetAllCircles();
         qsSetting.Circles.split(",").forEach(function(value) {
             if (value.length>0) {
+
 
                 // Farben und Icons:
                 var color = "blue";

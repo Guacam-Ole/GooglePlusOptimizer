@@ -68,7 +68,7 @@ gpoQuickShareDisplay.prototype = {
         $('#allShare').append(singleRow);
         obj.AddQuickShareEvents();
 
-        $('.inputDD' + alreadyExistingRows).tagsInput({
+       /* $('.inputDD' + alreadyExistingRows).tagsInput({
             'autocomplete_url': ' ',
             'autocomplete': {
                 'source': allCircles
@@ -80,7 +80,7 @@ gpoQuickShareDisplay.prototype = {
             'onRemoveTag': function () {
                 SaveAllQuickShares();
             }
-        });
+        });*/
     },
     InitQSEvents: function () {
         $('#closeCirclesExplanation').click(function () {

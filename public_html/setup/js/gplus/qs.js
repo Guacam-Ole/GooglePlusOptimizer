@@ -4,6 +4,8 @@ var gpoQuickShare = function (shares) {
     this.AsBookmark = false;
     this.Link;
     this.Step = -1;
+    this.Communities=[];
+    this.LastCircleIsCommunity;
 };
 
 
@@ -35,6 +37,15 @@ gpoQuickShare.prototype = {
                 obj.Step = 1;
             }
         });
+        obj.LoadCommunities();
+    },
+    LoadCommunities:function() {
+        var obj=this;
+        chrome.runtime.sendMessage({
+            Action: "LoadCommunities"
+        }, function (response) {
+            obj.Communities=response.Result;
+        });
     },
     GetCircles: function () {
         // Kreise aktualisieren
@@ -47,6 +58,10 @@ gpoQuickShare.prototype = {
         });
         chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(kreise)});
     },
+    IsCommunity:function(value) {
+        return this.Communities.indexOf(value)>=0;
+    },
+
     Events: function (changedElements, step) {
         if (this.Step < 1) { // gar kein QS
             return;
@@ -59,37 +74,53 @@ gpoQuickShare.prototype = {
                 // Alle Kreise entfernen
                 $(this).click();
             });
+
             console.log("GPO->QS: Vorhandene Kreise entfernt");
             OpenTimer = setTimeout(function () {
                 if (obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').length > 0) {
                     obj.Link.closest('[role="article"]').parent().find('.g-h-f-N-N').click();
                     console.log("GPO->QS: Kreisauswahl geöffnet");
                     SelectTime = setTimeout(function () {
+                        var isCommunity=false;
                         while (obj.Circles.length > 0) {
                             var lastCircle = obj.Circles.pop();
-                            $('.d-A').each(function () {
-                                if ($(this).text().indexOf(lastCircle) === 1) {
-                                    $(this).click();
+                            if (lastCircle!==undefined && lastCircle!==null && lastCircle.length>0) {
+                                if (obj.IsCommunity(lastCircle)) {
+                                    obj.LastCircleIsCommunity=true;
                                 }
-                            });
+                                var type = "circle";
+                                if (lastCircle.indexOf('|') > 0) {
+                                    type = lastCircle.split('|')[1];
+                                    lastCircle = lastCircle.split('|')[0];
+                                }
+                                $('.d-A').each(function () {
+                                    if ($(this).text().indexOf(lastCircle) === 1) {
+                                        $(this).click();
+                                    }
+                                });
+                            }
                         }
                         console.log("GPO->QS: Kreise geklickt");
-                        FinalTime = setTimeout(function () {
-                            obj.Link.closest('[role="article"]').parent().find('[role="listbox"]').hide();
-                            if (obj.AsBookmark) {
-                                obj.Link.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
-                            } else {
-                                obj.Link.closest('[role="article"]').parent().find('[role="textbox"]').focus();
-                            }
-                            obj.Link.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
-                            obj.Step = -1;
-                            console.log("GPO->QS: Fertig");
-                        }, 1000);
+                        if (!obj.LastCircleIsCommunity) {
+                            FinalTime = setTimeout(function () {
+                                obj.Link.closest('[role="article"]').parent().find('[role="listbox"]').hide();
+                                if (obj.AsBookmark) {
+                                    obj.Link.closest('[role="article"]').parent().find('[guidedhelpid="sharebutton"]').click();
+                                } else {
+                                    obj.Link.closest('[role="article"]').parent().find('[role="textbox"]').focus();
+                                }
+                                obj.Link.closest('[role="article"]').parent().find('.ut.Ee.Yb.Wf').css({"height": 'auto'});
+                                obj.Step = -1;
+                                console.log("GPO->QS: Fertig");
+                            }, 1000);
+                        }
                     }, 1000);
                 }
             }, 1000);
         }
     },
+
+
     PaintIcons: function ($ce) {
         var obj = this;
         if (obj.Shares !== null && obj.Shares.length > 0) {
@@ -127,7 +158,7 @@ gpoQuickShare.prototype = {
         this.Link = container;
         //container.attr("circles","Hamburg,Nette Leute,Firmen");
         this.Circles = container.attr("circles").split(',');
-
+        this.LastCircleIsCommunity=false;
         this.AsBookmark = false; //JSON.parse(container.attr("isBookmark"));
         this.Link.closest('[role="article"]').find('.Dg.Ut').click();
         this.Step = 1;

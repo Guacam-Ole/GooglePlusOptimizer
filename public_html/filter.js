@@ -60,6 +60,14 @@ chrome.runtime.onMessage.addListener(
             circleSettings.Communities = request.Communities;
             localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
         }
+        else if (request.Action==="LoadCommunities") {
+            var allCircles=localStorage.getItem("QS.AllCircles");
+            if (allCircles!==undefined && allCircles!==null) {
+                var acc=JSON.parse(allCircles);
+                sendResponse({Result: acc.Communities});
+            }
+            return true;
+        }
     }
 );
 

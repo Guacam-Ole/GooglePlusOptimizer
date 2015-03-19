@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html.zip" afterPath="$PROJECT_DIR$/public_html.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" afterPath="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.footer.html" afterPath="$PROJECT_DIR$/setup/de/bs.footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.navigation.html" afterPath="$PROJECT_DIR$/setup/de/bs.navigation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\public_html.zip" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.quickshare.html" afterPath="$PROJECT_DIR$/setup/de/bs.quickshare.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filter.js" afterPath="$PROJECT_DIR$/filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/qs.js" afterPath="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\js\setup\quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/quickshare.js.kill" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,21 +44,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/de/index.html">
+      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-90.23077" vertical-offset="357" max-vertical-offset="2822">
-              <caret line="159" column="17" selection-start-line="159" selection-start-column="17" selection-end-line="159" selection-end-column="17" />
+            <state vertical-scroll-proportion="-9.5172415" vertical-offset="1339" max-vertical-offset="12478">
+              <caret line="95" column="23" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="23" />
+              <folding>
+                <marker date="1426800362383" expanded="true" signature="16376:16388" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="16665:16677" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="16997:17009" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="17260:17272" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="17654:17666" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="17936:17948" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="18222:18234" placeholder="..." />
+                <marker date="1426800362383" expanded="true" signature="18611:18620" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bs.quickshare.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/de/bs.quickshare.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="272">
+              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bs.footer.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/setup/de/bs.footer.html">
+      <file leaf-file-name="qs.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
-              <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="2941">
+              <caret line="87" column="47" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -64,50 +86,27 @@
       <file leaf-file-name="wizard.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/wizard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3604">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3036" max-vertical-offset="3604">
+              <caret line="202" column="35" selection-start-line="198" selection-start-column="8" selection-end-line="202" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wizard.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/de/wizard.html">
+      <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/filter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1326">
-              <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="82" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#1;n#a#0;n#div#1;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wizard.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/css/wizard.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.344828" vertical-offset="1836" max-vertical-offset="5610">
-              <caret line="141" column="14" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5304">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="features.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_locales/de/features.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.807692" vertical-offset="3842" max-vertical-offset="4675">
-              <caret line="267" column="285" selection-start-line="267" selection-start-column="285" selection-end-line="267" selection-end-column="285" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="1462">
+            <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1462">
               <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
               <folding />
             </state>
@@ -134,6 +133,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="bs.setup.Quickshare.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3072" max-vertical-offset="6341">
+              <caret line="202" column="21" selection-start-line="196" selection-start-column="20" selection-end-line="202" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -153,15 +162,12 @@
         <option value="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
         <option value="$PROJECT_DIR$/setup/de/qsTest.html" />
         <option value="$PROJECT_DIR$/setup/metronic/global/css/components.css" />
-        <option value="$PROJECT_DIR$/setup/de/bs.quickshare.html" />
-        <option value="$PROJECT_DIR$/setup/js/gplus/qs.js" />
         <option value="$PROJECT_DIR$/_locales/en/gpl.txt" />
         <option value="$PROJECT_DIR$/setup/de/bs.welcome.html" />
         <option value="$PROJECT_DIR$/setup/de/bs.header.html" />
         <option value="$PROJECT_DIR$/setup/de/bs.license.html.css" />
         <option value="$PROJECT_DIR$/setup/de/bs.license.html" />
         <option value="$PROJECT_DIR$/setup/de/bs.loadsave.html" />
-        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.loadsave.js" />
         <option value="$PROJECT_DIR$/setup/de/index.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/import-export.js" />
@@ -172,17 +178,21 @@
         <option value="$PROJECT_DIR$/setup/de/bs.wizard.html" />
         <option value="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/settings.js" />
-        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
         <option value="$PROJECT_DIR$/setup/de/wizard.html" />
-        <option value="$PROJECT_DIR$/filter.js" />
         <option value="$PROJECT_DIR$/setup/css/wizard.css" />
         <option value="$PROJECT_DIR$/setup/js/wizard.js" />
         <option value="$PROJECT_DIR$/_locales/de/features.json" />
         <option value="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" />
-        <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/setup/de/bs.navigation.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.footer.html" />
+        <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
+        <option value="$PROJECT_DIR$/setup/de/bs.quickshare.html" />
+        <option value="$PROJECT_DIR$/setup/js/setup/quickshare.js" />
+        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
+        <option value="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+        <option value="$PROJECT_DIR$/filter.js" />
+        <option value="$PROJECT_DIR$/manifest.json" />
       </list>
     </option>
   </component>
@@ -310,28 +320,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public_html" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="setup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gplus" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -484,12 +472,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33777776" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177028" sideWeight="0.49912128" order="0" side_tool="false" content_ui="combo" />
@@ -500,7 +489,6 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33777776" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -644,13 +632,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.quickshare.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="255">
-          <caret line="4" column="107" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.wetter.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
@@ -735,13 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5541327" vertical-offset="153" max-vertical-offset="6409">
-          <caret line="37" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplus/flags.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80504584" vertical-offset="471" max-vertical-offset="1343">
@@ -754,20 +728,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="7769">
           <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414">
-          <caret line="130" column="35" selection-start-line="130" selection-start-column="35" selection-end-line="130" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/quickshare.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1906" max-vertical-offset="3570">
-          <caret line="123" column="45" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -807,23 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2958" max-vertical-offset="12580">
-          <caret line="196" column="20" selection-start-line="196" selection-start-column="20" selection-end-line="196" selection-end-column="20" />
-          <folding>
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1426713525668" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
@@ -836,14 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="2312">
           <caret line="128" column="11" selection-start-line="119" selection-start-column="8" selection-end-line="128" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.379311" vertical-offset="0" max-vertical-offset="5168">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -864,21 +799,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/wizard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3604">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/wizard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1326">
           <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="82" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#a#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#1;n#a#0;n#div#1;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -895,14 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4683" max-vertical-offset="6460">
           <caret line="293" column="32" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="1462">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -935,6 +854,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
           <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.5172415" vertical-offset="1339" max-vertical-offset="12478">
+          <caret line="95" column="23" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="23" />
+          <folding>
+            <marker date="1426800362383" expanded="true" signature="16376:16388" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="16665:16677" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="16997:17009" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="17260:17272" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="17654:17666" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="17936:17948" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="18222:18234" placeholder="..." />
+            <marker date="1426800362383" expanded="true" signature="18611:18620" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/quickshare.js.kill">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.862069" vertical-offset="0" max-vertical-offset="3570">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <marker date="1426801261660" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.quickshare.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="272">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3072" max-vertical-offset="6341">
+          <caret line="202" column="21" selection-start-line="196" selection-start-column="20" selection-end-line="202" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/wizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3036" max-vertical-offset="3604">
+          <caret line="202" column="35" selection-start-line="198" selection-start-column="8" selection-end-line="202" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="2941">
+          <caret line="87" column="47" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5304">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1462">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
         </state>
       </provider>

@@ -76,8 +76,6 @@ function StartObservation() {
     });
 }
 
-
-
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
     return function (elem) {
@@ -85,11 +83,9 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
     };
 });
 
-
 String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
 };
-
 
 $(document).ready(function () {
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
@@ -342,7 +338,7 @@ function SaveCommunities(changedElements) {
     });
 
     // Eigene Communities:
-    var communities = [];
+    //var communities = [];
     $('.VYd').find('.RbAFad').each(function (index, value) {
         communities.push($(value).find('.ATc').text());
     });
@@ -354,8 +350,6 @@ function DoQuickshare(changedElements, step) {
     if (Subs.Quickshare !== null) {
         Subs.Quickshare.Events(changedElements, step);
     }
-
-
 }
 
 function FilterBlocks(changedElements) {
