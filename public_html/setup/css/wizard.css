@@ -77,6 +77,11 @@
     max-width: 440px;
 }
 
+.evenMoreStuff {
+    position: relative;
+    top: 20px;
+}
+
 .wizardRight {
     width: 470px;
     float: right;
@@ -134,6 +139,7 @@
     text-decoration: none;
     outline: none;
     background-color: white;
+    margin-top: 20px;
 }
 
 .switch-wrapper input[type=checkbox] {

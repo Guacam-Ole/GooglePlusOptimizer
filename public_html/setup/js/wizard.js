@@ -65,14 +65,14 @@ gpoWizard.prototype = {
 
             this.ImgPrefix=imageHost +"wizard/"+ obj.CurrentLang + "/";
 
-
-                $('#reloadPage').click(function () {
+            $(document).on("click","#reloadPage",function () {
                 window.location.reload(true);
             });
+
+
+
+
             version = version || "0";
-
-            //var version = window.location.search.substring(1) || "0";
-
 
             obj.CollectSteps(version);
 
@@ -83,21 +83,11 @@ gpoWizard.prototype = {
 
             $('.container').offset({left: ((screenWidth - divWidth) / 2)});
             $('.spam').offset({left: ((screenWidth - spamWidth) / 2)});
-            obj.LoadWizardSettings();
-
-          //  DisplayStep(allPages[0], 0, 0);
-            $('#spam1').attr('src', chrome.extension.getURL("setup/images/alster.png"));
-            $('.spam').fadeIn();
-
-
-            $('#robbe').attr('src', chrome.extension.getURL("setup/images/progress.gif"));
-            obj.WizSwitchEvents();
         } catch (ex) {
             console.log(ex);
         }
     },
     GetVersionLong:function(version) {
-
         var versionSplit = version.split('.');
         var versionLong = versionSplit[0] * 1000000;
         if (versionSplit.length > 1) {
@@ -115,8 +105,6 @@ gpoWizard.prototype = {
         return $.grep(haystack, function(e){ return e.Short == needle; })[0];
     },
     CollectSteps:function( version) {
-
-
         var obj=this;
         var minVersion = obj.GetVersionLong(version);
         obj.AllSettings=[];
@@ -132,7 +120,7 @@ gpoWizard.prototype = {
                     if (feature.ShowInWizard===true) {
                         obj.AllSettings.push(feature);
                     } else if (feature.Type===undefined) {
-                        complexFeatures.push(feature.Title);
+                        complexFeatures.push("<li>"+feature.Title+"</li>");
                     }
                 }
             });
@@ -140,33 +128,23 @@ gpoWizard.prototype = {
             // Weitere-Optionen - Kachel:
             if (complexFeatures.length>0) {
                 var complex=obj.GetFeatureByShortname(jsonFeatures,"moreOptions");
-                complex.Description=complex.Description.replace('_EVENMORESTUFF_',complexFeatures.toString());
+                complex.Description=complex.Description.replace('_EVENMORESTUFF_',"<ul>"+complexFeatures.join(" ")+"</ul>");
                 obj.AllSettings.push(complex);
             }
 
             // Wizard-Ende-Kachel:
             obj.AllSettings.push(obj.GetFeatureByShortname(jsonFeatures,"finishWizard"));
-
-
             obj.PaintWizard();
         });
     },
     PaintWizard:function() {
         this.CurrentStepId=0;
         this.SwitchEvents();
-        $( document ).ready(function() {
-
-            //$('.make-switch').bootstrapSwitch();
-        });
         this.DisplayFeature();
     },
     SwitchEvents:function() {
         var obj=this;
-        $.getScript(Browser.GetExtensionFile("/setup/js/lib/jquery-1.10.2.min.js"), function() {
-            $.getScript(Browser.GetExtensionFile("/setup/js/lib/jquery-ui.min.js"), function () {
-                $('.wizSwitch').switchButton();
-            });
-        });
+
 
         $('#wizSlide').on('click', function (e, data) {
             var short = $(this).data("short");
@@ -196,7 +174,6 @@ gpoWizard.prototype = {
             // letzte Seite:
             $('#nextSetting').removeClass('wizActive');
             $('#nextSetting').addClass("wizInactive");
-            // TODO: SAVE!
         }
 
         $('.wizardImage img').attr('src', this.ImgPrefix + feature.Image);

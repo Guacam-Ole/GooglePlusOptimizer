@@ -265,6 +265,6 @@
     "Short": "finishWizard",
     "Image": "lasthelp.png",
     "Title": "Konfiguration abgeschlossen",
-    "Description": "<div class='loadHtml' data-filename='wiz.finish'></div>"
+    "Description": "Alle Einstellungen wurden gespeichert. Der Wizard wird erst wieder angezeigt, wenn neue Optionen verfügbar sind. In den Einstellungen kannst Du Ihn für immer deaktivieren. <br/><br/> <center> <button class=\"wizButton\" id=\"reloadPage\">Wizard schließen</button>    </center><br/><br/>"
   }
 ]
