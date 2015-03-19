@@ -51,7 +51,7 @@ gpoWizard.prototype = {
                     ParameterValue: manifest.version
                 }, function (response) {
                 });
-           // $('.make-switch').bootstrapSwitch();
+
             $('#nextSetting').click(function () {
                 obj.CurrentStepId++;
                 obj.DisplayFeature(obj.CurrentStepId);
@@ -153,12 +153,24 @@ gpoWizard.prototype = {
     },
     PaintWizard:function() {
         this.CurrentStepId=0;
+        this.SwitchEvents();
+        $( document ).ready(function() {
 
+            //$('.make-switch').bootstrapSwitch();
+        });
         this.DisplayFeature();
     },
     SwitchEvents:function() {
-        $(".make-switch").on('switch-change', function (e, data) {
-            var id = $(this).attr("id");
+        var obj=this;
+        $.getScript(Browser.GetExtensionFile("/setup/js/lib/jquery-1.10.2.min.js"), function() {
+            $.getScript(Browser.GetExtensionFile("/setup/js/lib/jquery-ui.min.js"), function () {
+                $('.wizSwitch').switchButton();
+            });
+        });
+
+        $('#wizSlide').on('click', function (e, data) {
+            var short = $(this).data("short");
+            obj.SaveSetting(short,$(this).prop("checked"));
         });
     },
     DisplayFeature: function () {
@@ -184,7 +196,7 @@ gpoWizard.prototype = {
             // letzte Seite:
             $('#nextSetting').removeClass('wizActive');
             $('#nextSetting').addClass("wizInactive");
-            // TODO: SAVE! 
+            // TODO: SAVE!
         }
 
         $('.wizardImage img').attr('src', this.ImgPrefix + feature.Image);
@@ -192,11 +204,26 @@ gpoWizard.prototype = {
         $('#wr').empty();
         $('#wr').append(feature.Description);
         $('#wizardSubtitle').text("("+(this.CurrentStepId+1)+"/" + (this.AllSettings.length-1) + ")");
+        if (feature.ShowInWizard) {
+            $('.switch-wrapper').show();
+            chrome.runtime.sendMessage({
+                Action: "GetSetting",
+                Name: feature.Short
+            }, function (response) {
+                var value = response.Result;
+                $('#wizSlide').data("short",feature.Short);
+                $('#wizSlide').prop('checked',value=="true");
+            });
+        } else {
+            $('.switch-wrapper').hide();
+        }
     },
-    LoadCheckBox:function(property, boxName) {
-        $(boxName).bootstrapSwitch('setState', JSON.parse(property));
-    },
-    SaveCheckBox:function(propertyName, newValue) {
-        localStorage.setItem(propertyName, newValue);
+    SaveSetting:function(key, value) {
+        chrome.runtime.sendMessage({
+            Action: "SetSetting",
+            Name: key,
+            Value: value
+        }, function (response) {});
     }
+
 }

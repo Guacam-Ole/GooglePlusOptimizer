@@ -194,6 +194,7 @@ function DrawWizardTile() {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
                 $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
                 $('#wizardStart').click(function () {
+                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap.min.css") + "' type='text/css' media='screen' />"));
                     $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
                     $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var wizz = $('<div id="loadhere">&nbsp;</div>');

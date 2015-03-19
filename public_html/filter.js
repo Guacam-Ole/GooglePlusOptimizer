@@ -5,6 +5,9 @@ chrome.runtime.onMessage.addListener(
             var returnvalue=localStorage.getItem(request.Name);
             sendResponse({Result: returnvalue});
         }
+        if (request.Action==="SetSetting") {
+            localStorage.setItem(request.Name,request.Value);
+        }
         else if (request.Action==="AddTick") {
             var oldTicks=localStorage.getItem("Measurements_"+request.Scope);
             if (oldTicks===undefined || oldTicks===null) {
