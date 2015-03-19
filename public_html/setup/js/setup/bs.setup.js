@@ -56,6 +56,10 @@ Setup.prototype = {
     },
     StartUp: function () {
         this.UIActions();
+        var manifest = chrome.runtime.getManifest();
+        $('.page-logo').find('h3').text(manifest.name+" "+manifest.version);
+        //console.log(manifest.name);
+        //console.log(manifest.version);
     },
     MenuClick: function (menu) {
         this.FillHeader(menu.data("title"), menu.data("subtitle"), menu.data("title"));
