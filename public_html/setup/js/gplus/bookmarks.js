@@ -291,7 +291,7 @@ gpoBookmarks.prototype = {
             Action: "LoadBookmarks"
         }, function (response) {
             obj.BookmarkList = JSON.parse(response.Result) || null;
-            if (obj.BbookmarkList !== null && obj.BookmarkList.length > 0) {
+            if (obj.BookmarkList !== null && obj.BookmarkList.length > 0) {
                 $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
             }
         });
