@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\public_html.zip" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/qs.js" afterPath="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/clock.js" afterPath="$PROJECT_DIR$/setup/js/gplus/clock.js" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,23 +46,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qs.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="qs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36501902" vertical-offset="845" max-vertical-offset="2958">
+            <state vertical-scroll-proportion="-6.62069" vertical-offset="845" max-vertical-offset="2958">
               <caret line="61" column="82" selection-start-line="61" selection-start-column="82" selection-end-line="61" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/en/index.html">
+      <file leaf-file-name="clock.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup/js/gplus/clock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.692307" vertical-offset="1770" max-vertical-offset="2720">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.3320965" vertical-offset="603" max-vertical-offset="2550">
+              <caret line="46" column="7" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="7" />
               <folding>
-                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1426891633646" expanded="true" signature="768:778" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -144,7 +143,6 @@
       <list>
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.loadsave.js" />
         <option value="$PROJECT_DIR$/setup/js/setup/import-export.js" />
-        <option value="$PROJECT_DIR$/setup/js/gplus/clock.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/flags.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.ticket.html" />
         <option value="$PROJECT_DIR$/setup/de/bs.wizard.html" />
@@ -193,6 +191,7 @@
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+        <option value="$PROJECT_DIR$/setup/js/gplus/clock.js" />
       </list>
     </option>
   </component>
@@ -619,13 +618,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.wizard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="272">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/wizardloader.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
@@ -1004,9 +996,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36501902" vertical-offset="845" max-vertical-offset="2958">
+        <state vertical-scroll-proportion="-6.62069" vertical-offset="845" max-vertical-offset="2958">
           <caret line="61" column="82" selection-start-line="61" selection-start-column="82" selection-end-line="61" selection-end-column="82" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/clock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3320965" vertical-offset="603" max-vertical-offset="2550">
+          <caret line="46" column="7" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="7" />
+          <folding>
+            <marker date="1426891633646" expanded="true" signature="768:778" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -58,7 +58,6 @@ gpoClock.prototype = {
                 }
                 var now = new Date();
                 var diff = obj.TargetTime - now;
-                domChangeAllowed = false;
 
                 if (diff <= 0) {
                     $(".slider-clock").slider('value', 0);
@@ -90,8 +89,6 @@ gpoClock.prototype = {
                         obj.Minutes = minutes;
                         $(".slider-clock").slider('value', minutes + 1);
                     }
-                    domChangeAllowed = false;
-                    AllowDomChange();
                 }
             }, 1000);
         } catch (ex) {
