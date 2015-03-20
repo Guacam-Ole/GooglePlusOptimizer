@@ -59,6 +59,7 @@ gpoQuickShare.prototype = {
         chrome.runtime.sendMessage({Action: "SaveCircles", ParameterValue: JSON.stringify(kreise)});
     },
     IsCommunity:function(value) {
+        if (this.Communities===undefined || this.Communities===null) {return false}
         return this.Communities.indexOf(value)>=0;
     },
 
