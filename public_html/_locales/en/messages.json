@@ -169,7 +169,7 @@
             },
     "icons_education":
             {
-                "message": "Eductation"
+                "message": "Education"
             },
     "icons_electrical":
             {
@@ -271,12 +271,26 @@
             
     "Setup_newHashtag":
     {
-        "message": "Neuer Hashtag"
+        "message": "new hashtag"
     },
     "Setup_newFilter":
     {
-        "message": "Neuer Filter"
-    }
-          
-          
+        "message": "new filter"
+    },
+  "Circles_Public": {
+    "message": "Public"
+  },
+  "Circles_Private": {
+    "message": "My Circles"
+  },
+  "Circles_Extended": {
+    "message": "Extended Circles"
+  },
+  "QuickShare_Folders": {
+    "message": "[{\"file\":\"accounting\",\"text\":\"Accounting\"},{\"file\":\"business\",\"text\":\"Business\"},{\"file\":\"communication\",\"text\":\"Communication\"},{\"file\":\"construction\",\"text\":\"Construction\"},{\"file\":\"education\",\"text\":\"School\"},{\"file\":\"electrical\",\"text\":\"Electrical\"},{\"file\":\"flags\",\"text\":\"Flags\"},{\"file\":\"gadgets\",\"text\":\"Gadgets\"},{\"file\":\"jobs\",\"text\":\"Jobs\"},{\"file\":\"networking\",\"text\":\"Networking\"},{\"file\":\"transport\",\"text\":\"Transport\"}]"
+  },
+
+  "addCircle": {
+    "message": "+ Add circle or person"
+  }
 }

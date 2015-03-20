@@ -1,7 +1,6 @@
 var setup;
-var setupQs;
 var imageHost = "https://files.oles-cloud.de/optimizer/";
-
+var setupQs;
 $(document).ready(function () {
     InitMetronic();
     setup = new Setup();
@@ -17,12 +16,14 @@ document.addEventListener("DOMSubtreeModified", function () {
 
 
 var Setup = function () {
-
+    var obj=this;
     this.CurrentLang = this.GetLangFromUrl();
     this.Features = [];
     this.Browser = new Browser();
-    this.Browser.LoadMessagesForSetup();
-    this.LoadContent();
+    this.Browser.LoadMessagesForSetup(function(){
+        obj.LoadContent();
+    });
+
 };
 
 Setup.prototype = {
@@ -101,9 +102,9 @@ Setup.prototype = {
                 });
                 if (anyEnabled) {
                     if (anyNotEnabled) {
-                        $(value).find('a').append('<span class="badge badge-roundless badge-yellow">teilweise aktiv</span>');
+                        $(value).find('a').append('<span class="badge badge-roundless badge-yellow">'+$('.teilweise').text()+'</span>');
                     } else {
-                        $(value).find('a').append('<span class="badge badge-roundless badge-green">aktiv</span>');
+                        $(value).find('a').append('<span class="badge badge-roundless badge-green">'+$('.aktiv').text()+'</span>');
                     }
                 }
 
@@ -162,6 +163,11 @@ Setup.prototype = {
             $('.addNewTicket').fadeOut();
             return false;
         });
+        $(document).on('click', '.scroll-to-top', function () {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
+
 
         $(document).on('click', '#showTicketCreation', function () {
             if (localStorage.getItem("UserName")!==undefined) {
@@ -730,3 +736,4 @@ function InitMetronic() {
     Layout.init(); // init current layout
     QuickSidebar.init(); // init quick sidebar
 }
+

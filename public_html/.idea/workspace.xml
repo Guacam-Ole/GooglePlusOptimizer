@@ -2,15 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc6b7ec0-66f9-4ab2-9772-63df45338c18" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\public_html.zip" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.quickshare.html" afterPath="$PROJECT_DIR$/setup/de/bs.quickshare.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.circleNames.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.custom.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.feature.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.filterimages.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.filterlinks.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.filtervideo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.footer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.header.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.license.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.loadsave.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.navigation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.nofeature.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.quickshare.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.ticket.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.welcome.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.wetter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.wham.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.widget.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/bs.wizard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/erasedata.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_locales/en/features.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/qsTest.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup/en/wiz.finish.html" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\_locales\de\icons.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\additions.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\erweitert.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\help.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\measure.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\settings.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en\widgets.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html.zip" afterPath="$PROJECT_DIR$/public_html.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" afterPath="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filter.js" afterPath="$PROJECT_DIR$/filter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplusfilter.js" afterPath="$PROJECT_DIR$/setup/js/gplusfilter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" afterPath="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/bs.welcome.html" afterPath="$PROJECT_DIR$/setup/de/bs.welcome.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/de/index.html" afterPath="$PROJECT_DIR$/setup/de/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/index.html" afterPath="$PROJECT_DIR$/setup/en/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/js/gplus/qs.js" afterPath="$PROJECT_DIR$/setup/js/gplus/qs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_locales/de/messages.json" afterPath="$PROJECT_DIR$/_locales/de/messages.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_locales/en/messages.json" afterPath="$PROJECT_DIR$/_locales/en/messages.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/css/setup.css" afterPath="$PROJECT_DIR$/setup/css/setup.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/wizard.html" afterPath="$PROJECT_DIR$/setup/en/wizard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup/en/wizardloader.html" afterPath="$PROJECT_DIR$/setup/en/wizardloader.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\js\setup\quickshare.js" afterPath="$PROJECT_DIR$/setup/js/setup/quickshare.js.kill" />
     </list>
     <ignored path="public_html.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,100 +69,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bs.setup.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="12546">
-              <caret line="61" column="10" selection-start-line="61" selection-start-column="10" selection-end-line="61" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.54942966" vertical-offset="2550" max-vertical-offset="12665">
+              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gplusfilter.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/en/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.5172415" vertical-offset="1339" max-vertical-offset="12478">
-              <caret line="95" column="23" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="23" />
+            <state vertical-scroll-proportion="-11.692307" vertical-offset="1770" max-vertical-offset="2720">
+              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding>
-                <marker date="1426800362383" expanded="true" signature="16376:16388" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="16665:16677" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="16997:17009" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="17260:17272" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="17654:17666" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="17936:17948" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="18222:18234" placeholder="..." />
-                <marker date="1426800362383" expanded="true" signature="18611:18620" placeholder="..." />
+                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bs.quickshare.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/de/bs.quickshare.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/de/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="272">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="qs.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/js/gplus/qs.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="2941">
-              <caret line="87" column="47" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wizard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/js/wizard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3036" max-vertical-offset="3604">
-              <caret line="202" column="35" selection-start-line="198" selection-start-column="8" selection-end-line="202" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/filter.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5304">
-              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/manifest.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1462">
-              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-              <folding />
+            <state vertical-scroll-proportion="-10.461538" vertical-offset="1989" max-vertical-offset="2907">
+              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="bs.navigation.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/de/bs.navigation.html">
+        <entry file="file://$PROJECT_DIR$/setup/en/bs.navigation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.961538" vertical-offset="2911" max-vertical-offset="3774">
-              <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.1090908" vertical-offset="1495" max-vertical-offset="3621">
+              <caret line="98" column="42" selection-start-line="98" selection-start-column="42" selection-end-line="98" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bookmarks.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup/js/gplus/bookmarks.js">
+      <file leaf-file-name="bs.quickshare.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/en/bs.quickshare.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4683" max-vertical-offset="6460">
-              <caret line="293" column="32" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
+            <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="255">
+              <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -136,8 +126,48 @@
       <file leaf-file-name="bs.setup.Quickshare.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3072" max-vertical-offset="6341">
-              <caret line="202" column="21" selection-start-line="196" selection-start-column="20" selection-end-line="202" selection-end-column="21" />
+            <state vertical-scroll-proportion="-7.206897" vertical-offset="4109" max-vertical-offset="6392">
+              <caret line="254" column="37" selection-start-line="254" selection-start-column="37" selection-end-line="254" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7837">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="browser.chrome.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.62069" vertical-offset="0" max-vertical-offset="765">
+              <caret line="13" column="24" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_locales/de/messages.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.923077" vertical-offset="2905" max-vertical-offset="3519">
+              <caret line="183" column="4" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="messages.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_locales/en/messages.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="60.73077" vertical-offset="4486" max-vertical-offset="5117">
+              <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -156,27 +186,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/setup/de/bs.circleNames.html" />
-        <option value="$PROJECT_DIR$/setup/de/bs.featureNoCheckbox.html" />
-        <option value="$PROJECT_DIR$/_locales/de/messages.json" />
-        <option value="$PROJECT_DIR$/setup/js/setup/qsTest.js" />
-        <option value="$PROJECT_DIR$/setup/de/qsTest.html" />
-        <option value="$PROJECT_DIR$/setup/metronic/global/css/components.css" />
-        <option value="$PROJECT_DIR$/_locales/en/gpl.txt" />
-        <option value="$PROJECT_DIR$/setup/de/bs.welcome.html" />
-        <option value="$PROJECT_DIR$/setup/de/bs.header.html" />
-        <option value="$PROJECT_DIR$/setup/de/bs.license.html.css" />
-        <option value="$PROJECT_DIR$/setup/de/bs.license.html" />
-        <option value="$PROJECT_DIR$/setup/de/bs.loadsave.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.loadsave.js" />
-        <option value="$PROJECT_DIR$/setup/de/index.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/import-export.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/clock.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/flags.js" />
-        <option value="$PROJECT_DIR$/setup/css/setup.css" />
         <option value="$PROJECT_DIR$/setup/de/bs.ticket.html" />
         <option value="$PROJECT_DIR$/setup/de/bs.wizard.html" />
-        <option value="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/settings.js" />
         <option value="$PROJECT_DIR$/setup/de/wizard.html" />
         <option value="$PROJECT_DIR$/setup/css/wizard.css" />
@@ -184,15 +199,44 @@
         <option value="$PROJECT_DIR$/_locales/de/features.json" />
         <option value="$PROJECT_DIR$/setup/js/gplus/bookmarks.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.navigation.html" />
-        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.footer.html" />
         <option value="$PROJECT_DIR$/setup/js/gplusfilter.js" />
         <option value="$PROJECT_DIR$/setup/de/bs.quickshare.html" />
         <option value="$PROJECT_DIR$/setup/js/setup/quickshare.js" />
-        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
         <option value="$PROJECT_DIR$/setup/js/gplus/qs.js" />
         <option value="$PROJECT_DIR$/filter.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
+        <option value="$PROJECT_DIR$/setup/en/bs.circleNames.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.custom.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.feature.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.filterimages.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.filterlinks.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.filtervideo.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.header.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.license.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.loadsave.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.nofeature.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.ticket.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.wetter.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.wham.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.widget.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.wizard.html" />
+        <option value="$PROJECT_DIR$/setup/en/wiz.finish.html" />
+        <option value="$PROJECT_DIR$/setup/en/wizard.html" />
+        <option value="$PROJECT_DIR$/setup/en/wizardloader.html" />
+        <option value="$PROJECT_DIR$/_locales/en/features.json" />
+        <option value="$PROJECT_DIR$/setup/de/bs.welcome.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.welcome.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.navigation.html" />
+        <option value="$PROJECT_DIR$/setup/en/bs.quickshare.html" />
+        <option value="$PROJECT_DIR$/setup/de/index.html" />
+        <option value="$PROJECT_DIR$/setup/en/index.html" />
+        <option value="$PROJECT_DIR$/_locales/de/messages.json" />
+        <option value="$PROJECT_DIR$/_locales/en/messages.json" />
+        <option value="$PROJECT_DIR$/setup/js/gplus/browser.chrome.js" />
+        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js" />
+        <option value="$PROJECT_DIR$/setup/css/setup.css" />
+        <option value="$PROJECT_DIR$/setup/js/setup/bs.setup.js" />
       </list>
     </option>
   </component>
@@ -250,7 +294,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -337,6 +380,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="en" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="setup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="de" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -359,8 +420,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_locales" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="en" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_locales" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -396,6 +494,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Dox\g+Optimizer\g+Optimizer\public_html\_locales\en" />
+      <recent name="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\en" />
       <recent name="D:\Dox\g+Optimizer\g+Optimizer\public_html\setup\de" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -472,7 +572,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -481,7 +581,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33777776" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177028" sideWeight="0.49912128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18387777" sideWeight="0.49912128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4110629" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18020834" sideWeight="0.50087875" order="2" side_tool="true" content_ui="tabs" />
@@ -541,210 +641,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1326" max-vertical-offset="8364">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="12597">
-          <caret line="73" column="7" selection-start-line="71" selection-start-column="3" selection-end-line="73" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2006" max-vertical-offset="2312">
-          <caret line="118" column="37" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_locales/de/icons.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="38" max-vertical-offset="2210">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4863" max-vertical-offset="6188">
-          <caret line="333" column="18" selection-start-line="333" selection-start-column="18" selection-end-line="333" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11186">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="683" max-vertical-offset="1581">
-          <caret line="47" column="12" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_locales/de/icons.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_locales/de/icons.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="306">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.nofeature.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="357">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/weather.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1035" max-vertical-offset="3723">
-          <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/qsTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1034484" vertical-offset="0" max-vertical-offset="357">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.wetter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/qsTest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="561">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/license.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.welcome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4" vertical-offset="0" max-vertical-offset="867">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.circleNames.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="170">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.wham.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-45.115383" vertical-offset="51" max-vertical-offset="1734">
-          <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.loadsave.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.060283687" vertical-offset="0" max-vertical-offset="846">
-          <caret line="3" column="43" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/lib/FileSaver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3327" max-vertical-offset="4199">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/import-export.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64908254" vertical-offset="1049" max-vertical-offset="1972">
-          <caret line="95" column="24" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/clock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09747706" vertical-offset="1683" max-vertical-offset="2601">
-          <caret line="104" column="34" selection-start-line="104" selection-start-column="34" selection-end-line="104" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.license.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="10" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/flags.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80504584" vertical-offset="471" max-vertical-offset="1343">
-          <caret line="69" column="37" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="7769">
-          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/bs.ticket.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="374">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_locales/de/messages.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2575" max-vertical-offset="3434">
-          <caret line="188" column="29" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.wizard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="272">
@@ -763,15 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="782">
           <caret line="16" column="14" selection-start-line="10" selection-start-column="8" selection-end-line="16" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1440" max-vertical-offset="2312">
           <caret line="128" column="11" selection-start-line="119" selection-start-column="8" selection-end-line="128" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,7 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="612">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,7 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.344828" vertical-offset="1836" max-vertical-offset="5610">
           <caret line="141" column="14" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,10 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1326">
           <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="82" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#img#1;n#a#0;n#div#1;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,7 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.807692" vertical-offset="3842" max-vertical-offset="4675">
           <caret line="267" column="285" selection-start-line="267" selection-start-column="285" selection-end-line="267" selection-end-column="285" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -828,24 +707,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.navigation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-27.961538" vertical-offset="2911" max-vertical-offset="3774">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2911" max-vertical-offset="3774">
           <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/de/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-90.23077" vertical-offset="357" max-vertical-offset="2822">
-          <caret line="159" column="17" selection-start-line="159" selection-start-column="17" selection-end-line="159" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="12546">
-          <caret line="61" column="10" selection-start-line="61" selection-start-column="10" selection-end-line="61" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -854,24 +717,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
           <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/js/gplusfilter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.5172415" vertical-offset="1339" max-vertical-offset="12478">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1339" max-vertical-offset="12478">
           <caret line="95" column="23" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="23" />
-          <folding>
-            <marker date="1426800362383" expanded="true" signature="16376:16388" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="16665:16677" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="16997:17009" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="17260:17272" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="17654:17666" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="17936:17948" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="18222:18234" placeholder="..." />
-            <marker date="1426800362383" expanded="true" signature="18611:18620" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -879,25 +732,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.862069" vertical-offset="0" max-vertical-offset="3570">
           <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <marker date="1426801261660" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/setup/de/bs.quickshare.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="272">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="272">
           <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3072" max-vertical-offset="6341">
-          <caret line="202" column="21" selection-start-line="196" selection-start-column="20" selection-end-line="202" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,8 +768,265 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18819188" vertical-offset="0" max-vertical-offset="1462">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        <state vertical-scroll-proportion="-28.115385" vertical-offset="0" max-vertical-offset="1445">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.filterimages.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="357">
+          <caret line="10" column="79" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.filterlinks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="170">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.filtervideo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="357">
+          <caret line="10" column="74" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="153">
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.423077" vertical-offset="0" max-vertical-offset="731">
+          <caret line="19" column="86" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.license.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="238">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.loadsave.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="187">
+          <caret line="4" column="80" selection-start-line="4" selection-start-column="80" selection-end-line="4" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.custom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.020094562" vertical-offset="0" max-vertical-offset="846">
+          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.circleNames.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.060283687" vertical-offset="0" max-vertical-offset="846">
+          <caret line="3" column="93" selection-start-line="3" selection-start-column="93" selection-end-line="3" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.feature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.192308" vertical-offset="0" max-vertical-offset="782">
+          <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.nofeature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="357">
+          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.ticket.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="374">
+          <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.wetter.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="187">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.wham.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="833">
+          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.widget.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="527">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.wizard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="272">
+          <caret line="8" column="74" selection-start-line="8" selection-start-column="74" selection-end-line="8" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/erasedata.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/wiz.finish.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="629">
+          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/wizard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1326">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/wizardloader.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="629">
+          <caret line="20" column="100" selection-start-line="20" selection-start-column="100" selection-end-line="20" selection-end-column="100" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_locales/en/features.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0181818" vertical-offset="1194" max-vertical-offset="4658">
+          <caret line="80" column="39" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/bs.welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="867">
+          <caret line="11" column="126" selection-start-line="11" selection-start-column="126" selection-end-line="11" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="714">
+          <caret line="10" column="127" selection-start-line="10" selection-start-column="127" selection-end-line="10" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.navigation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1090908" vertical-offset="1495" max-vertical-offset="3621">
+          <caret line="98" column="42" selection-start-line="98" selection-start-column="42" selection-end-line="98" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/de/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538" vertical-offset="1989" max-vertical-offset="2907">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.692307" vertical-offset="1770" max-vertical-offset="2720">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/en/bs.quickshare.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="255">
+          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_locales/de/messages.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.923077" vertical-offset="2905" max-vertical-offset="3519">
+          <caret line="183" column="4" selection-start-line="183" selection-start-column="4" selection-end-line="183" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_locales/en/messages.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="60.73077" vertical-offset="4486" max-vertical-offset="5117">
+          <caret line="171" column="32" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/gplus/browser.chrome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.62069" vertical-offset="0" max-vertical-offset="765">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.Quickshare.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.206897" vertical-offset="4109" max-vertical-offset="6392">
+          <caret line="254" column="37" selection-start-line="254" selection-start-column="37" selection-end-line="254" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/css/setup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7837">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup/js/setup/bs.setup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54942966" vertical-offset="2550" max-vertical-offset="12665">
+          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
           <folding />
         </state>
       </provider>

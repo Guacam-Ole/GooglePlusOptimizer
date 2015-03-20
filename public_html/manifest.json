@@ -41,8 +41,7 @@
                         "setup/js/gplusfilter.js"
                         ]
                 }
-                
-                ],
+            ],
     "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'",
     "options_page": "setup/redirect.html",
     "background":

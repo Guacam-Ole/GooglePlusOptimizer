@@ -5,27 +5,28 @@ var setupQs;
 
 
 $(document).ready(function () {
-    setupQs=new SetupQuickshare();
+   setupQs=new SetupQuickshare();
 });
 
 
 
 var SetupQuickshare = function () {
     this.CurrentLang = this.GetLangFromUrl();
-    this.Browser = new Browser();
-    this.Browser.LoadMessagesForSetup();
-
-    this.MouseOffset=undefined;
-    this.SelectedBlock=undefined;
-    this.CompleteIconList=undefined;
-    this.AllFolders=undefined;
-    this.Events();
-    this.Templates={};
-    this.Templates.Folder = '<div class="qsIconCategory"><span>__CATEGORY__</span><div class="qsIconCategoryIcons">__ICONS__</div></div>';
-    this.Templates.SingleImage = '<img src="__PATH__/__FILE__"/>';
-    this.Templates.DrillDownElement = '<div class="qsSelectCircleElement"><span class="__ICONCLASS__"></span><span title="__TITLE__" class="inner">__CIRCLE__</span></div>';
-    this.Templates.Qs='<div class="selectedQS"><input type="hidden" class="qsId" value="__INDEX__" > <div class="qsImage"><img src="__IMAGE__"/></div><div class="qsRight"><div class="qsClose">&nbsp;</div><div class="qsText">__TITLE__</div><div class="qsCircles">__CIRCLES__<input type="text" placeholder="+ Kreis oder Person hinzufügen" class="qsAddCircle"></div></div></div>';
-    this.Templates.Circle='<span class="qsCircle __COLOR__"><span class="innerCircle"><span class="__CLASS__"></span><span class="qsCircleText">__NAME__</span><span class="qsCircleRemove"></span></span></span>';
+    this.Browser = new Browser(this.CurrentLang);
+    var obj=this;
+    this.Browser.LoadMessagesForSetup(function(){
+        obj.MouseOffset=undefined;
+        obj.SelectedBlock=undefined;
+        obj.CompleteIconList=undefined;
+        obj.AllFolders=undefined;
+        obj.Events();
+        obj.Templates={};
+        obj.Templates.Folder = '<div class="qsIconCategory"><span>__CATEGORY__</span><div class="qsIconCategoryIcons">__ICONS__</div></div>';
+        obj.Templates.SingleImage = '<img src="__PATH__/__FILE__"/>';
+        obj.Templates.DrillDownElement = '<div class="qsSelectCircleElement"><span class="__ICONCLASS__"></span><span title="__TITLE__" class="inner">__CIRCLE__</span></div>';
+        obj.Templates.Qs='<div class="selectedQS"><input type="hidden" class="qsId" value="__INDEX__" > <div class="qsImage"><img src="__IMAGE__"/></div><div class="qsRight"><div class="qsClose">&nbsp;</div><div class="qsText">__TITLE__</div><div class="qsCircles">__CIRCLES__<input type="text" placeholder="'+obj.Browser.GetMessageFromSetup('addCircle')+'" class="qsAddCircle"></div></div></div>';
+        obj.Templates.Circle='<span class="qsCircle __COLOR__"><span class="innerCircle"><span class="__CLASS__"></span><span class="qsCircleText">__NAME__</span><span class="qsCircleRemove"></span></span></span>';
+    });
 };
 
 SetupQuickshare.prototype = {
@@ -249,9 +250,9 @@ SetupQuickshare.prototype = {
     GetAllCircles:function () {
         var obj=this;
         var allCircles = JSON.parse(localStorage["QS.AllCircles"]);
-        allCircles.Public = allCircles.Public || obj.Browser.GetMessageFromSetup('Circles_Public');
-        allCircles.MyCircles = allCircles.MyCircles || obj.Browser.GetMessageFromSetup('Circles_Private');
-        allCircles.ExtendedCircles = allCircles.ExtendedCircles || obj.Browser.GetMessageFromSetup('Circles_Extended');
+        allCircles.Public =  obj.Browser.GetMessageFromSetup('Circles_Public');
+        allCircles.MyCircles = obj.Browser.GetMessageFromSetup('Circles_Private');
+        allCircles.ExtendedCircles = obj.Browser.GetMessageFromSetup('Circles_Extended');
 
         return allCircles;
     },
@@ -366,3 +367,4 @@ SetupQuickshare.prototype = {
         return lang;
     }
 };
+
