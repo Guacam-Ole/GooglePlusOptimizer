@@ -1,183 +1,161 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Google+ Filter</title>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css'/>
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'/>
-    <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/lib/jquery.tools.min.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/lib/jquery.tagsinput.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/lib/jquery.ui.widget.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/lib/jquery.ui.accordion.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/bootstrap-switch.min.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/lib/jquery.knob.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/gplusfilter.js" language="javascript"></script>
-    <script type="text/javascript" src="../js/setup.js" language="javascript"></script>
+    <meta charset="utf-8"/>
+    <title>Google+ - Optimizer</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="Setup Page Google+ Optimizer" name="description"/>
+    <meta content="Ole Albers" name="author"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"          type="text/css"/>
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/bootstrap-switch.css" rel="stylesheet" type="text/css"/>
+    <link href="https://files.oles-cloud.de/optimizer/metronic/global/css/components.css" rel="stylesheet" type="text/css"/>
+    <link href="https://files.oles-cloud.de/optimizer/metronic/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="https://files.oles-cloud.de/optimizer/metronic/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link id="style_color" href="https://files.oles-cloud.de/optimizer/metronic/admin/layout/css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://files.oles-cloud.de/optimizer/metronic/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/setup.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
 
 
 </head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content page-boxed page-sidebar-closed-hide-logo">
+<!-- BEGIN HEADER -->
+<div id="bsContentTop" class="page-header navbar navbar-fixed-top">
 
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<div class="container">
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper" id="bsContentNavigation">
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 
-<body>
-<div id="bg_top">
-    <div id="wrapper">
-        <div id="header">
-            <div id="logo"><h1>Optimizer for Google+</h1></div>
         </div>
-        <!--end header-->
-        <div id="menu">
-            <ul id="navigation">
-                <li><a href="index.html">Welcome</a></li>
-                <li><a href="settings.html">Filter</a></li>
-                <li><a href="erweitert.html">Settings</a></li>
-                <li><a href="widgets.html" class="active">Widgets</a></li>
-                <li><a href="additions.html">Features</a></li>
-                <li><a href="help.html">Help</a></li>
-                <li><a target="_blank"
-                       href="https://chrome.google.com/webstore/detail/google%2B-filter/edknapjhmlocokbpbihilmjmfmmddhop/reviews?hl=en&gl=EN">Rate
-                    plugin (Thanks!) </a></li>
-            </ul>
-        </div>
-        <!--end menu-->
-        <div id="content">
-            <div id="content_top"><img src="../images/main_top.png" width="956" height="16" alt="background"/></div>
-            <!-- the shadow border down left/right -->
-            <div id="content_border">
-                <!-- the gradient from top to bottom -->
-                <div id="content_bg">
-                    <!-- the optional line down the middle of the content area -->
-                    <!-- end line down the middle -->
-                    <div id="content_seperator">
-                        <div id="left_column">
-                            <div id="proposal" onclick="location.href = '#';" style="cursor:pointer;">
-                                <div class="text">
-                                    <h3 id="title">Google+-Filter</h3>
-
-                                    <p>
-
-                                    <div id="version">i dont fucking know</div>
-                                    </p>
-                                    <p><b>Author:</b> <a href="https://plus.google.com/+OleAlbers/about">Ole Albers</a>
-                                    </p>
-
-                                    <p><b>Additional Authors:</b> <a
-                                            href="https://plus.google.com/+MarcoGr%C3%A4tsch/about">Marco Grätsch</a>
-                                    </p>
-                                </div>
-                                <div class="icon"><img src="../images/icon_proposal.png" alt="Proposal" width="42"
-                                                       height="42" border="0"></div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
                             </div>
-                            <!--end proposal-->
-                            <div id="clients">
-                                <h3>Is there any pro-version?</h3>
-
-                                <p><br/>Nope. There is no pro-version and there will never be one.</p>
-
-                                <p>All features remain free for ever.<br/><br/></p>
-
-                                <p>If you want to support this project, feel free to donate any fee you want through
-                                    paypal or send us a flattr. This helps us developing even more features.<br/><br/>Thanks
-                                    for that :)</p>
-
-                                <p>
-                                    <br/>
-
-                                <div id="flattr">
-                                    <center><a
-                                            href="https://flattr.com/submit/auto?user_id=T0mat0&url=http://goo.gl/nDe4om&title=Google%2B%20Filter"
-                                            target="_blank"><img src="../images/flattr.png"/></a></center>
-                                </div>
-                                <br/><br/>
-                                </p>
-                                <p>
-
-                                <div id="paypal">
-                                    <center>
-                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-                                              target="_top">
-                                            <input type="hidden" name="cmd" value="_s-xclick"/>
-                                            <input type="hidden" name="hosted_button_id" value="4UK2CU9NJWAAG"/>
-                                            <input type="image"
-                                                   src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-                                                   border="0" name="submit"
-                                                   alt="PayPal - The safer, easier way to pay online!"/>
-                                            <img alt="" border="0"
-                                                 src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1"
-                                                 height="1"/>
-                                        </form>
-                                    </center>
-                                </div>
-                                </p>
+                            <div class="modal-body">
+                                Widget settings form goes here
                             </div>
-                            <!--end clients-->
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <!--end left_column-->
-                        <div id="right_column">
-                            <h1>Welcome to the Google+ - Optimizer</h1>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-                            <p>The purpose of this optimizer is to remove unwanted content and to add additional
-                                features to your Google+ - stream. To achieve this you can deactivate single Google+ -
-                                features or just remove specific content.</p>
+                <!-- BEGIN PAGE HEADER-->
+                <h3 class="page-title">
+                    Boxed Page
+                    <small>responsive boxed layout</small>
+                </h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="index.html">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Page Layouts</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#">Boxed Page</a>
+                        </li>
+                    </ul>
 
-                            <p>Enable or disable the single features with the help of the <a href="settings.html">filters</a>.
-                                To get more into detail use the <a href="erweitert.html">settings</a> to modify advanced
-                                filter settings.</p>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div class="row">
+                    <div class="col-md-12 features">
 
-                            <p>Additional features can be added in the <a href="widgets.html">widgets</a> area. To get
-                                more into detail use the <a href="erweitert.html">settings</a> to modify advanced filter
-                                settings.</p>
-
-                            <p>If there is any problem or question: Maybe the <a href="help.html">help</a> might be of
-                                help... :)</p>
-
-                            <h2>More Informationen:</h2>
-
-                            <p><a href="https://plus.google.com/u/0/communities/109839149408899563786">International
-                                Supportcommunity</a> Get help from the community</p>
-
-                            <p>
-                                <a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#bug">Bugs</a>
-                                Found an error? Tell us, please!</p>
-
-                            <p>
-                                <a href="https://chrome.google.com/webstore/support/edknapjhmlocokbpbihilmjmfmmddhop?hl=en&gl=EN#feature">Feature
-                                    requests</a> You miss a feature? Again: Tell us</p>
-
-                            <h2>Images</h2>
-
-                            <p>The Images from the chrome webstore and the icon of this extension were made by <a
-                                    href="https://plus.google.com/u/0/+IngoDingerKreativstapler/about">Ingo Dinger</a> (<a
-                                    href="www.kreativstapler.de">www.kreativstapler.de</a>)</p>
-                            <img src="../images/optimizer_setup.jpg"/>
-                        </div>
-                        <!--end right_column-->
-                        <hr class="clear">
-                        <!--hr makes sure the bottom of the box stays at the bottom-->
                     </div>
                 </div>
-                <!-- end the gradient from top to bottom -->
-            </div>
-            <!-- end the shadow border down left/right -->
-            <div id="content_bottom"><img src="../images/main_bottom.png" width="956" height="16" alt="background"/>
+                <!-- END PAGE CONTENT-->
             </div>
         </div>
-        <!-- end content wrap -->
-        <div id="footer">
-            <a href="help.html#license">Licences and sources</a>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div id="bsFooter" class="page-footer">
 
-            <div class="right">
-                <ul>
-                    <li class="keep_in"> contact:</li>
-                    <li><a href="https://plus.google.com/u/0/communities/111606711991143283422"
-                           title="Google+ Community"><img src="../images/googleplus.png" alt="Google+ Community"
-                                                          width="25" height="25" border="0"/></a></li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="https://files.oles-cloud.de/optimizer/metronic/global/plugins/respond.min.js"></script>
+<script src="https://files.oles-cloud.de/optimizer/metronic/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="../js/lib/jquery-1.10.2.min.js" language="javascript"></script>
+<script src="../js/lib/jquery-ui.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/setup/jquery.tools.min.js" language="javascript"></script>
+<script type="text/javascript" src="../js/setup/jquery.tagsinput.js" language="javascript"></script>
+<script src="../js/setup/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/setup/jquery.knob.js" language="javascript"></script>
+<script src="../js/setup/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../js/setup/jquery.blockui.min.js" type="text/javascript"></script>
+
+<!-- END CORE PLUGINS -->
+<script src="https://files.oles-cloud.de/optimizer/metronic/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="https://files.oles-cloud.de/optimizer/metronic/layout.js" type="text/javascript"></script>
+<script src="https://files.oles-cloud.de/optimizer/metronic/quick-sidebar.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="../js/gplus/browser.chrome.js" language="javascript"></script>
+<script type="text/javascript" src="../js/setup/bs.setup.js" language="javascript"></script>
+<script type="text/javascript" src="../js/setup/bs.setup.Quickshare.js" language="javascript"></script>
+<script type="text/javascript" src="../js/lib/FileSaver.js" language="javascript"></script>
+<script type="text/javascript" src="../js/setup/import-export.js" language="javascript"></script>
+
+<!-- END JAVASCRIPTS -->
 </body>
+<!-- END BODY -->
 </html>

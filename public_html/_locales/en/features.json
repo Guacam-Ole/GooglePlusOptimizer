@@ -1,0 +1,270 @@
+[
+  {
+    "remark": "---------MUSS IMMER GANZ OBEN STEHEN!----------",
+    "Short": "welcomeWizard",
+    "Image": "welcome.jpg",
+    "Title": "Willkommen beim Google+ Optimizer Wizard",
+    "Description": "Dieser Wizard hilft Dir dabei, die gewünschten Filter, Widgets und Erweiterungen einzurichten. Klicke auf \"weiter\" um den Wizard zu starten,<br/><br/><sup><b>Hinweis</b>: Dieser Wizard kann jederzeit neu in der Hilfe gestartet werden.</sup>"
+  },
+  {
+    "Short": "welcome",
+    "Type": "TextOnly",
+    "Title": "Herzlich willkommen beim Google+ Optimizer",
+    "Description": "<div class='loadHtml' data-filename='bs.welcome'></div>"
+  },
+  {
+    "Version": "1.0",
+    "Short": "plus1",
+    "Title": "+1 Filter",
+    "Description": "Mit diesem Filter werden sämtliche \"<i><b>John Doe</b> gibt +1 für folgenden Beitrag</i>\" - Beiträge entfernt.",
+    "ShowInWizard": true,
+    "Image": "plus1.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "yt",
+    "Title": "YouTube Filter",
+    "Description": "Dieser Filter entfernt sämtliche YouTube-Kommentare aus dem Stream.",
+    "ShowInWizard": true,
+    "Image": "yt.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.6",
+    "Short": "filterSharedCircles",
+    "Title": "Geteilte Kreise",
+    "Description": "Dieser Filter entfernt sämtliche geteilten Kreise aus dem Stream.",
+    "ShowInWizard": true,
+    "Image": "circleshare.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "community",
+    "Title": "Community-Einladungen",
+    "Description": "Google+ empfiehlt regelmäßig Communities, von denen es glaubt, sie könnten Dich interessieren. Wenn Du lieber selber aktiv nach passenden Communities suchst, kannst Du mit diesem Filter sowohl Empfehlungen, als auch Einladungen deaktivieren.",
+    "ShowInWizard": true,
+    "Image": "community.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "birthday",
+    "Title": "Geburtstage",
+    "Description": "Wenn ein Kreisling seinen Geburtstag hinterlegt hat, wirst Du aufgefordert, ihm wie alle anderen 24.592 Kontakte des Geburtstagskindes automatisierte Glückwünsche zu übermitteln. Willst Du nicht? Dann den Geburtstagsfilter auswählen.",
+    "ShowInWizard": true,
+    "Image": "birthday.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "known",
+    "Title": "Vielleicht kennen Sie",
+    "Description": "Anhand der Personen in den Kreisen versucht Google+ mal mehr, mal weniger erfolgreich zu erahnen, wer denn sonst noch für Dich interessant sein könnte. Um das zu verhindern dient der 'Vielleicht kennen Sie' – Filter.",
+    "ShowInWizard": true,
+    "Image": "known.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "custom",
+    "Title": "Volltext-Filter",
+    "Description": "<p>Hierüber lässt sich jeder beliebige Text herausfiltern. Der Filter ignoriert Groß/Kleinschreibung.<br/> <br/></p><p><div><input type='text' class='form-control tags tokensText' data-role='tagsinput' value='Hamburger Sportverein' style='display: none;'/></div></p> ",
+    "Image": "volltext.png",
+    "Cost": 2
+  },
+  {
+    "Version": "1.0",
+    "Short": "hashtag",
+    "Title": "Hashtag-Filter",
+    "Description": "<p>Über den Hashtag-Filter können beliebige Artikel mit vorgegebenen Hashtags herausgefiltert werden.<br/> <sup>(Es ist egal, ob die Werte mit oder ohne \"#\" eingegeben werden)</sup><br/><br/></p><p><div><input type='text' class='form-control tags tokensHashtags' data-default='neuer Hashtag' value='#catcontent,#katzencontent' style='display: none;'/></div></p>  ",
+    "Image": "hash.png",
+    "Cost": 1
+  },
+  {
+    "Version": "1.0",
+    "Short": "wham",
+    "Title": "Wham-Filter",
+    "Description": "<div class='loadHtml' data-filename='bs.wham'></div>",
+    "Image": "wham.png",
+    "Cost": 2
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterImages",
+    "Title": "Bilder minimieren",
+    "Description": "<div class='loadHtml' data-filename='bs.filterimages'></div>",
+    "Image": "bild.png",
+    "Cost": -1
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterVideo",
+    "Title": "Videos minimieren",
+    "Description": "<div class='loadHtml' data-filename='bs.filtervideo'></div>",
+    "Image": "video.png",
+    "Cost": -1
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterLinks",
+    "Title": "Links minimieren",
+    "Description": "<div class='loadHtml' data-filename='bs.filterlinks'></div>",
+    "Image": "links.png",
+    "Cost": -1
+  },
+  {
+    "Version": "2.2",
+    "Short": "weatherEnabled",
+    "Title": "Wettervorhersage",
+    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>Ort:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'> <a href='' class='btn  green '>Ort suchen <i class='m-icon-swapright m-icon-white'></i></a>  <div class='citySelect'><select><option>jjjj</option></select></div></div>",
+    "Image": "wetter.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.2",
+    "Short": "sportEnabled",
+    "Title": "Liveticker",
+    "Description": "<div class='loadHtml' data-filename='bs.sport'></div><div class='loadHtml' data-filename='bs.widget'></div>",
+    "Image": "sport.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.2",
+    "Short": "stoppwatch",
+    "Title": "Stoppuhr",
+    "Description": "Nie wieder die Pizza anbrennen lassen! Die Stoppuhr wird dezent am oberen Ende des Google+ - Streams angezeigt",
+    "ShowInWizard": true,
+    "Image": "uhr.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.3",
+    "Short": "colorUsers",
+    "Title": "Beiträge hervorheben",
+    "Description": " Mit dieser Erweiterung erhältst Du zusätzliche Optionen in den auf den Profilseiten Deiner Kontakte. Du kannst wichtige Kontakte farblich hervorheben und zusätzlich eine Notiz für jeden Kontakt hinterlegen, z.B. vorherige Bezeichnungen, oder auch Charakterbeschreibungen. Diese sind nur für Dich sichtbar.",
+    "ShowInWizard": true,
+    "Image": "color1.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.6.2",
+    "Short": "displayTrophy",
+    "Title": "Trophäen anzeigen",
+    "Description": "Trophäen sind Belohnungen für Aktionen bei Google+. Auch wenn es keinen echten Preis zu gewinnen gibt, so kannst Du nun auch in Google+ mit Deinen Fähigkeiten angeben.<br/><br/>Die Trophäen werden im \"Über mich\" - Bereich des Profils angezeigt. Zusätzlich werden alle Benutzer, die mindestens eine Trophäe besitzen mit einem kleinen Icon markiert.<br/><br/>",
+    "ShowInWizard": true,
+    "Image": "trophies.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.3",
+    "Short": "showEmoticons",
+    "Title": "Emoticons (Smilies) anzeigen",
+    "Description": "Wie man es aus vielen Foren kennt, wandelt diese Erweiterung automatisch Smilies in kleine Bilder um, was den Stream deutlich bunter macht. ",
+    "ShowInWizard": true,
+    "Image": "emoticons.png",
+    "Cost": 2
+  },
+  {
+    "Version": "2.6",
+    "Short": "markLSRPosts",
+    "Title": "Leistungsschutzrecht",
+    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt wird ein Sicherheitshinweis eingeblendet.",
+    "ShowInWizard": true,
+    "Image": "lsr.png",
+    "Cost": 2
+  },
+  {
+    "Version": "2.4",
+    "Short": "useAutoSave",
+    "Title": "Autosave",
+    "Description": "Autosave sorgt dafür, dass jeder Text, der in ein Kommentarfeld getippt wird auch dann nicht verloren geht, wenn man versehentlich den Browser schließt oder eine andere Seite öffnet.",
+    "ShowInWizard": true,
+    "Image": "autosave.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.4",
+    "Short": "enableQs",
+    "Title": "Quickshare",
+    "Description": "<div class='loadHtml' data-filename='bs.quickshare'></div>",
+    "Image": "qs.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.5",
+    "Short": "useBookmarks",
+    "Title": "Bookmarks (Favoriten)",
+    "Description": "Mit den Bookmarks lassen sich interessante Beiträge lokal speichern. Diese bleiben auch dann erhalten, wenn der Originalbeitrag gelöscht wird (Bilder und Videos werden allerdings nicht gespeichert).<br/>Da es sich bei den Bookmarks um eine lokale Kopie handelt, lassen sich die Beiträge dort nicht Kommentieren oder teilen. Hierzu in den Bookmarks auf die Uhrzeit des Beitrages klicken um zum Originalbeitrag zu gelangen.<br/>Die gespeicherten Bookmarks lassen sich über das Stern-Symbol neben der Benachrichtigungsglocke öffnen.",
+    "ShowInWizard": true,
+    "Image": "bookmark.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.6.2",
+    "Short": "displayLang",
+    "Title": "Sprachauswahl",
+    "Description": "Über diese Option lässt sich die Sprache von Google+ umstellen. Zusätzlich werden die \"Angesagten Beiträge\" auch abhängig von dem gewählten Land angezeigt",
+    "ShowInWizard": true,
+    "Image": "lang.png",
+    "Cost": 0
+  },
+  {
+    "Short": "bugs",
+    "Type": "TextOnly",
+    "Title": "Bugs",
+    "Description": "<p>Hier können Bugreports eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='tickets'></div></p>"
+  },
+  {
+    "Short": "featurerequests",
+    "Type": "TextOnly",
+    "Title": "Verbesserungsvorschläge",
+    "Description": "<p>Hier können Verbesserungsvorschläge eingesehen und bearbeitet werden<br/> <br/><br/></p><p>Vorhandene Tickets: <div class='featurerequests'></div></p>"
+  },
+  {
+    "Short": "newticket",
+    "Type": "TextOnly",
+    "Title": "Neues Ticket erstellen",
+    "Description": "<p>Bug melden oder Feature anfragen.<br/>  <a id='showTicketCreation' class='btn  green'>Ticket eröffnen <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
+  },
+  {
+    "Short": "defaultCircles",
+    "Type": "NoFeature",
+    "Title": "Standardbezeichner",
+    "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner von Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
+  },
+  {
+    "Short":"wizardMode",
+    "Type":"NoFeature",
+    "Title":"Wizard",
+    "Description":"<p>Der Wizard hilft, neue Features nach Updates zu konfigurieren. Wenn er erneut auftauchen soll, oder auch ganz deaktiviert, kannst Du dies hier einstellen.</p><div class='loadHtml' data-filename='bs.wizard'></div>"
+  },
+
+  {
+    "Short": "license",
+    "Type": "NoFeature",
+    "Title": "Lizenzen und Quellen",
+    "Description": "<div class='loadHtml' data-filename='bs.license'></div>"
+  },
+  {
+    "Short": "loadsave",
+    "Type": "NoFeature",
+    "Title": "Konfiguration sichern und wiederherstellenn",
+    "Description": "<div class='loadHtml' data-filename='bs.loadsave'></div>"
+  },
+  {
+    "Short": "moreOptions",
+    "Type": "NoFeature",
+    "Image": "lasthelp.png",
+    "Title": "Weitere Optionen vorhanden",
+    "Description": "Es sind weitere, neue Features vorhanden, die zu komplex sind um sie im Wizard darzustellen. Passe diese Optionen im Setup-Menü an, wenn Du sie nutzen möchtest. Diese Erweiterungen sind: <span class='evenMoreStuff'>_EVENMORESTUFF_</span>"
+  },
+  {
+    "remark": "-----MUSS IMMER GANZ UNTEN STEHEN!-------",
+    "Short": "finishWizard",
+    "Image": "lasthelp.png",
+    "Title": "Konfiguration abgeschlossen",
+    "Description": "Alle Einstellungen wurden gespeichert. Der Wizard wird erst wieder angezeigt, wenn neue Optionen verfügbar sind. In den Einstellungen kannst Du Ihn für immer deaktivieren. <br/><br/> <center> <button class=\"wizButton\" id=\"reloadPage\">Wizard schließen</button>    </center><br/><br/>"
+  }
+]
