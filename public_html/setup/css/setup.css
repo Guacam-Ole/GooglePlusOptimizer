@@ -1,0 +1,456 @@
+.thumbnail.selected {
+    border: solid;
+    border-color: #d05454;
+}
+
+.ticketTable {
+    width: 840px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.ticketDetails {
+    display: none;
+    width: 400px;
+
+}
+
+.existingQS {
+    margin-top: 40px;
+}
+
+.ticketTable td {
+    padding-left: 3px;
+}
+
+.ticketTable th {
+    padding-left: 3px;
+}
+
+.singleTicketPost {
+    background: lightgrey;
+/*
+    float: left;
+    padding-top: 2px;
+    margin-top: 4px;
+    margin-left: 30px;
+    width: 700px;
+    padding-left: 6px;*/
+}
+
+.singleTicketPost span.username {
+    font-weight: bold;
+
+    float: left;
+}
+
+.singleTicketPost span.date {
+    float: left;
+    width: 150px;
+}
+
+.singleTicketPost .body {
+    clear: both;
+}
+
+.weatherSelection {
+    clear: both;
+    float: left;
+    margin-left: 20px;
+}
+
+.weatherSelection input[type="text"] {
+    width: 300px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.weatherSelection span {
+    width: 50px;
+    float: left;
+}
+
+.citySelect {
+    margin-left: 70px;
+    display: none;
+}
+
+.citySelect select {
+    width: 300px;
+}
+
+.addNewTicket div {
+    padding-top: 2px;
+}
+
+.addNewTicket {
+    position: absolute;
+    top: 50px;
+    background: #3D3D3D;
+    left: 120px;
+    width: 540px;
+    height: 440px;
+    padding: 20px;
+    color: #d9d9d9;
+    display: none;
+
+}
+
+input#ticketUser {
+    width: 500px;
+    color: black;
+}
+
+.buttonYo {
+    padding-top: 0px !important;
+}
+
+.buttonYo {
+    float: right;
+}
+
+.addNewTicket a {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #D9D9D9;
+    color: #d9d9d9;
+    width: 120px;
+    float: left;
+}
+
+.addNewTicket a:hover {
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    color: white;
+    width: 120px;
+    float: left;
+}
+
+.addNewTicket .caption {
+    width: 200px;
+}
+
+.addNewTicket select#ticketType {
+    width: 500px;
+    color: black;
+}
+
+.addNewTicket input#ticketSubject {
+    width: 500px;
+    color: black;
+}
+
+.addNewTicket textarea#ticketContent {
+    width: 500px;
+    height: 200px;
+    color: black;
+}
+
+.buttonYo a {
+    margin-left: 20px;
+}
+
+.qsCircle {
+    background: #4285f4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4285f4), to(#4285f4));
+    border: 1px solid #4285f4;
+    border-radius: 15px; !important;
+    display: inline-block;
+    -webkit-border-radius: 15px !important;
+    color: #fff;
+    height: 28px;
+    margin: 2px;
+    outline: none;
+    padding: 0 1px;
+    vertical-align: middle;
+    cursor: default;
+    white-space: nowrap;
+    font: normal 13px Roboto, arial, sans-serif;
+
+    max-height: 310px;
+    overflow-y: auto;
+
+    -webkit-box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, .04);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, .04);
+    overflow-x: hidden;
+}
+
+.qsCircle .innerCircle {
+    padding: 4px 10px 6px 5px;
+}
+
+.qsCircle.green {
+    background: #67ae3f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#77bb4e), to(#57a02f));
+    border: 1px solid #3f980e;
+}
+
+.qsCircleText {
+    vertical-align: middle;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    word-wrap: normal;
+    padding-top: 6px;
+}
+
+.qsCircleWorld {
+
+    background: no-repeat url(../images/icons/googleicons.png) -17px -594px;
+}
+
+.qsCircleMany {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -796px;
+}
+
+.qsCircleSingle {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -488px;
+}
+
+.qsCircleCommunity {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -441px;
+}
+
+
+.qsCirclePerson {
+    background: no-repeat url(../images/icons/googleuser.png);
+    opacity: .7;
+    float: left;
+    width: 32px;
+    margin-left: 0px;
+    margin-top: -2px;
+    height: 30px;
+    border: 0px solid #4285f4 !important;
+}
+
+.qsCircleWorld, .qsCircleMany, .qsCircleSingle, .qsCircleCommunity {
+    opacity: .7;
+    float: left;
+    width: 17px;
+    margin-left: 7px;
+    margin-top: 5px;
+    height: 16px;
+}
+
+.qsCircleRemove {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -285px;
+    opacity: .7;
+    float: right;
+    width: 17px;
+    margin-right: 7px;
+    margin-top: 5px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.qsClose {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -285px;
+    opacity: .7;
+    float: right;
+    width: 17px;
+    margin-right: 7px;
+    margin-top: -5px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.qsCircles {
+    border: gray;
+    border-width: 1px;
+    border-style: dotted;
+    min-height: 42px;
+    margin-right: 10px;
+}
+
+.selectedQS {
+    width: 600px;
+    background: rgb(229, 229, 229);
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+    min-height: 90px;
+}
+
+.qsText {
+    height: 20px;
+    font-weight: bold;
+}
+
+.qsRight {
+    margin-left: 85px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.qsImage {
+    float: left;
+    width: 64px;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    height: 64px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+input.qsAddCircle {
+    width: 200px;
+    padding-left: 10px;
+    margin-top: 5px;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background: white;
+    height: 20px;
+    border-color: gray;
+    border-width: 1px;
+}
+
+.qsIconCategory span {
+    font-size: 12pt;
+    float: left;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 30px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: #d05454;
+    margin-bottom: 1px;
+    border-width: 1px;
+    color: white;
+    border-style: solid;
+    border-color: black;
+    cursor: pointer;
+    font-family: Helvetica;
+}
+
+.qsSelectIcon {
+    width: 420px;
+    height: 300px;
+    background: lightgrey;
+    border-style: solid;
+    border-width: 1px;
+    top: 20px;
+    overflow-y: auto;
+    left: 200px;
+    position: absolute;
+    overflow-x: hidden;
+    padding: 5px 5px 5px 5px;
+    display: none;
+}
+
+.qsIconCategoryIcons {
+    display: none;
+    float: left;
+    border-style: dashed;
+    border-color: #d05454;
+    border-width: 2px;
+    margin-bottom: 5px;
+    margin-top: -1px;
+    margin-left: 50px;
+    margin-right: -5px;
+}
+
+.qsIconCategoryIcons img {
+    cursor: pointer;
+    margin: 2px;
+}
+
+.addnewQs {
+    width: 600px;
+    margin-top: 5px;
+    border-width: 1px;
+    text-align: center;
+}
+
+.circleNames span {
+    width: 200px;
+    float: left;
+}
+
+.addNewQs {
+    margin-top: 20px;
+}
+
+
+.qsDrilldown {
+    position: absolute;
+    width: 210px;
+    background: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    height: 200px;
+    overflow-y: auto;
+    overflow-x:hidden;
+    padding-left: 10px;
+    z-index: 33;
+}
+
+.qsSingleCircle, .qsCommunity, .qsPublic, .qsMyCircles, .qsExtendedCircles {
+    opacity: .7;
+    float: left;
+    width: 20px;
+    margin-top: 2px;
+    height: 13px;
+}
+
+.qsPublic {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -719px;
+}
+
+.qsMyCircles {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -25px;
+}
+
+.qsExtendedCircles {
+    background: no-repeat url(../images/icons/googleicons.png) 0 -535px;
+}
+
+.qsSingleCircle {
+    background: no-repeat url(../images/icons/googleicons.png) -21px -25px;
+}
+
+.qsCommunity {
+    background: no-repeat url(../images/icons/googleicons.png) -17px -475px;
+}
+
+.qsSelectCircleElement {
+    height: 20px;
+    font-size: 12px;
+}
+
+.qsSelectCircleElement :hover {
+    background: lightgray;
+    cursor: pointer;
+}
+
+.qsSelectCircleElement .inner {
+    vertical-align: middle;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    word-wrap: normal;
+    float: left;
+    width: 158px;
+    height: 20px;
+}
+
+.grayLine {
+    height: 1px;
+    border-bottom: solid gray 1px;
+    margin-bottom: 4px;
+    width: 177px;
+}
+
+.qsIconCategoryIcons :hover {
+    background: white;
+}
+
+a#showTicketCreation {
+    margin-top: 10px;
+}

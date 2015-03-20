@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.06.2014, 19:22:20
+    Author     : Tomato
+*/
+
+.addBookmark {
+    float: left;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+.miniBookmark img {
+    height: 24px;
+    margin-right: 50px;
+    margin-bottom: 11px;
+}
+
+.clickOntoBookmark {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 80px;
+    width: 360px;
+    background-color: white;
+    float: left;
+    border-style: groove;
+    margin-bottom: 1px;
+    border-width: 2px;
+}
+
+.littleBookmarkImage {
+    float: left;
+    width: 90px;
+}
+
+.littleBookmarkImage img {
+    width: 80px;
+    height: 80px;
+}
+
+.littleBookmarkContent {
+    padding-top: 4px;
+}
+
+.BookmarksHover {
+    display: none;
+    background: #E5E5E5;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-wrap: normal;
+    margin-left: -200px;
+    width: 380px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    border-style: groove;
+}
+
+.showBmBig {
+    text-align: center;
+    margin-bottom: 7px;
+    display: none;
+}
+
+.bookDate {
+    float: right;
+    margin-right: 5px;
+    color: gray;
+    font-size: smaller;
+}
+
+.littleBookmarkTeaser {
+    margin-right: 20px;
+}
+
+.RemoveBookmarkCross {
+    float: right;
+}

@@ -1,0 +1,1267 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Template Layout*/
+body {
+    background-color: #000000;
+    background-image: url(../images/bg_brown_grunge.jpg);
+    background-position: top;
+    background-repeat: repeat;
+    margin: 0px;
+    padding: 0px;
+    color: #666666;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.5em; /* vertical spacing between your lines of text*/
+}
+
+a, a:link, a:visited {
+    color: #666666;
+    outline: none; /*gets rid of dotted select lines after clicking an image link*/
+}
+
+a:hover {
+    color: #fa7f28;
+    text-decoration: none;
+}
+
+#bg_top {
+    /*the transparent image that overlays all background images*/
+    background: url(../images/bg_top_gradient.png) top repeat-x;
+    width: 100%;
+}
+
+.spam {
+    width: 960px;
+    height: 250px;
+}
+
+#wrapper {
+    width: 956px;
+    margin: 0px auto; /*centers your design on the page*/
+}
+
+#header {
+    height: 80px;
+    width: 950px;
+    margin: 0px auto;
+}
+
+#logo {
+    width: 223px; /*change this width and height to match your logo image*/
+    height: 56px;
+    margin: 13px 0 0 22px; /*the indent on the top and left side*/
+    float: left;
+}
+
+#header_contact {
+    width: 150px;
+    height: 38px;
+    float: right;
+    margin: 27px 0px 0px 0px; /* you may need to change these margins if your contact info is larger, order is top, right, bottom, left*/
+    line-height: 19px;
+}
+
+#header_contact .icon {
+    width: 17px;
+    height: 13px;
+    float: left;
+    margin: 2px 5px 0 0;
+}
+
+#header_contact .small {
+    color: #cccccc;
+    font-size: 11px;
+    font-family: 'Droid Sans', arial, serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#header_contact .large {
+    color: #cccccc;
+    font-size: 19px;
+    font-family: 'Droid Sans', arial, serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.dd-container {
+    float: left;
+    width: 100px;
+}
+
+.removeDD {
+    float: left;
+    margin-top: 11px;
+}
+
+.inputDD {
+    width: 250px;
+    height: 475px;
+    float: left;
+}
+
+/*menu*/
+#menu {
+    /*the container that holds the main menu*/
+    height: 49px;
+    margin: 0px 0 6px 0;
+    clear: both;
+    background: url(../images/menu_bg.png) no-repeat top left;
+}
+
+ul#navigation {
+    margin: 0px 0 0 25px; /*indent to line up with the logo*/
+    padding: 0px;
+    height: 39px;
+    float: left;
+    position: absolute; /*makes dropdown sit on top of flash & map*/
+    z-index: 100; /*makes dropdown sit on top of flash & map*/
+}
+
+ul#navigation li {
+    float: left;
+    list-style: none;
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul#navigation a {
+    float: left; /*makes the text sit beside each other not down the page*/
+    color: #635e5e; /*menu color normal*/
+    padding: 12px 13px 10px 13px; /*space around and inbetween the buttons, top, right, bottom, left*/
+    text-decoration: none; /*no underline*/
+    text-transform: uppercase; /*all in capitals*/
+    font: 14px 'Droid Sans', arial, serif; /*menu text size and font*/
+    letter-spacing: 1px; /*space out the letters, remove if you want it normal*/
+    background-image: url(../images/menu_divider.gif); /*the bar between each button*/
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+ul#navigation li.hover a, ul#navigation li:hover a, ul#navigation a.active, ul#navigation a:hover {
+    color: #000000; /*color of text on mouse over*/
+}
+
+/*--drop down menu second-level - this is optional--*/
+ul#navigation li.hover, ul#navigation li:hover {
+    position: relative;
+}
+
+ul#navigation li.hover ul.second-level, ul#navigation li:hover ul.second-level {
+    display: block;
+}
+
+ul#navigation li.hover ul.second-level ul.third-level, ul#navigation li:hover ul.second-level ul.third-level {
+    display: none;
+}
+
+ul#navigation ul.second-level {
+    position: absolute;
+    top: 35px; /*how far away from the top menu*/
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    width: 160px;
+    display: none;
+    background-color: #e9edf0; /*color of the dropdown*/
+}
+
+ul#navigation ul.second-level li {
+    width: 160px;
+    margin: 0;
+}
+
+ul#navigation ul.second-level a {
+    display: block;
+    float: none;
+    width: 140px;
+    border: none;
+    padding: 0 10px;
+    background: none;
+    font: 12px/24px Arial, Helvetica, sans-serif; /*font size and line height*/
+    color: #666666;
+    border-bottom: 1px solid #cccccc;
+    text-transform: none; /*turns off the uppercase*/
+}
+
+ul#navigation ul.second-level li.hover a, ul#navigation ul.second-level li:hover a, ul#navigation ul.second-level a:hover {
+    color: #666666;
+    background-color: #f1f4f6;
+}
+
+/*search*/
+
+#search_box_container {
+    width: 233px;
+    float: right;
+}
+
+#search_box_container .field {
+    background-color: #FFF;
+    border: 1px solid #cccccc;
+    width: 155px;
+    height: 21px;
+    float: left;
+    margin: 6px 0px 0 0;
+}
+
+#search_box_container .button {
+    border: none;
+    background: none;
+    font: 11px 'Droid Sans', arial, serif;
+    color: #635e5e;
+    font-weight: bold;
+    float: right;
+    margin: 11px 10px 0 0;
+}
+
+/*main content*/
+
+img .addBookmark {
+    float: left;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+#content {
+}
+
+#content_border {
+    background: url(../images/bg_tile.png) repeat-y;
+}
+
+#content_bg {
+    /*white*/
+    background: url(../images/main_bg.png) repeat-x top;
+    margin: 0px 3px;
+    min-height: 550px;
+}
+
+#content_seperator {
+    /* the line down the middle of the content */
+    background: url(../images/main_dot.png) repeat-y 300px 0px transparent; /* change the 300px to change where line appears */
+}
+
+#content_seperator_none {
+    /*used on pages where you dont want to divide it into columns*/
+    padding: 20px;
+    min-height: 307px;
+}
+
+#left_column {
+    float: left;
+    width: 250px;
+    padding: 10px 20px 20px 20px;
+}
+
+#left_column p {
+    margin: 0px;
+    padding: 0px;
+}
+
+#right_column {
+    float: right;
+    width: 577px;
+    padding: 10px 20px 20px 20px;
+    margin-right: 20px;
+    overflow-y: auto; /*delete this if you want your design to grow and not scroll*/
+    overflow-x: hidden; /*delete this if you want your design to grow and not scroll*/
+    height: 490px; /*delete this if you want your design to grow and not scroll*/
+}
+
+hr.clear {
+    margin-top: 10px;
+    margin: 0px;
+    clear: both;
+    visibility: hidden;
+}
+
+/*footer*/
+#footer {
+    height: 49px;
+    width: 916px;
+    margin: 14px auto 0 auto;
+    color: #635e5e;
+    font-size: 10px;
+    padding: 10px 20px 0 20px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    clear: both;
+    background: url(../images/footer_bg.png) no-repeat top left;
+}
+
+#footer a, #footer a:link, #footer a:visited {
+    color: #635e5e;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+#footer ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#footer li {
+    margin: 0 4px 0 4px;
+    list-style: none;
+    float: left;
+}
+
+#footer img {
+    margin-top: -3px;
+}
+
+#footer .right {
+    width: 95px;
+    float: right;
+    text-align: right;
+}
+
+#footer .left {
+    width: 400px;
+    float: left;
+}
+
+.keep_in {
+    font-size: 14px;
+    font-family: 'Droid Sans', arial, serif;
+    padding-top: 1px;
+}
+
+/* General Content*/
+h1 {
+    color: #635e5e;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2 {
+    color: #333333;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 3px 0 3px 0;
+    padding: 0px;
+}
+
+h3 {
+    color: #000000;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 3px 0 0 0;
+    padding: 0px;
+}
+
+h4 {
+    color: #000000;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.droid_sans {
+    font-family: 'Droid Sans', arial, serif;
+}
+
+.image_padding {
+    margin: 0px 0px 15px 15px;
+}
+
+.size_14 {
+    font-size: 14px;
+}
+
+/*home*/
+
+.three_columns {
+    width: 597px;
+    min-height: 127px;
+    margin-top: 20px;
+}
+
+.three_columns .box {
+    width: 189px;
+    margin-right: 10px;
+    background: url(../images/box_bg.jpg) repeat-x bottom;
+    float: left;
+    height: 127px;
+    overflow: hidden; /*delete this if you would like the boxes to grow as needed*/
+}
+
+.three_columns .box .icon {
+    width: 27px;
+    float: left;
+}
+
+.three_columns .box .text {
+    width: 157px;
+    float: right;
+}
+
+.three_columns .box .text p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.three_columns .box .text ul {
+    margin: 5px 0 0 15px;
+    padding: 0px;
+}
+
+.three_columns .box .text li {
+    list-style: square;
+    font-size: 11px;
+    line-height: 12px;
+    padding-bottom: 5px;
+    color: #fa7f28;
+}
+
+.three_columns .box .text li a, .three_columns .box .text li a:link, .three_columns .box .text li a:visited {
+    text-decoration: none;
+}
+
+/* newsletter form */
+#newsletter {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#newsletter_form {
+    margin: 8px 0 0 0;
+    padding: 0;
+}
+
+#newsletter_input {
+    height: 35px;
+}
+
+#newsletter_input label {
+    float: left;
+}
+
+#newsletter_input label input {
+    border: 1px solid #e5e5e5;
+    padding: 4px;
+    height: 15px;
+    font-size: 11px;
+    width: 107px;
+    margin: 0px 6px 0 0;
+    color: #666666;
+}
+
+#newsletter_submit {
+    text-align: center;
+}
+
+#newsletter_submit input {
+    text-transform: uppercase;
+    background: #EFEFEF url("../images/buttons_tile.jpg") repeat;
+    border: 1px solid #e5e5e5;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 11px;
+    font-weight: bold;
+    width: 90px;
+    height: 22px;
+}
+
+/*proposal*/
+
+#proposal {
+    width: 100%;
+    height: 92px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+#proposal .text {
+    width: 200px;
+    float: left;
+    font-size: 12px;
+    color: #666666;
+    font-family: 'Droid Sans', arial, serif;
+}
+
+#proposal .icon {
+    width: 42px;
+    height: 42px;
+    float: right;
+}
+
+#proposal a, #proposal a:link, #proposal a:visited {
+    text-decoration: none !important;
+}
+
+/*filter*/
+#filter {
+    width: 100%;
+    height: 140px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+#filter ul {
+    margin: 3px 0 0px -7px;
+    padding: 0px;
+}
+
+#filter ul li {
+    list-style: none;
+    margin: 6px 6px 0 7px;
+    padding: 0px;
+    float: left;
+}
+
+#filter ul li img {
+    border: 1px solid #e5e5e5;
+}
+
+/*home blog*/
+
+#blog {
+    margin-left: -27px;
+    font-size: 11px;
+}
+
+#blog .date {
+    color: #999999;
+    font-size: 10px;
+}
+
+/*jquery tool tips used on our clients*/
+
+/* tooltip styling */
+.tooltip_button {
+    position: relative;
+}
+
+.tooltip {
+    display: none;
+    background: url(../images/tool_tip_large.png) no-repeat top left;
+    height: 120px; /*150px*/
+    padding: 15px 21px;
+    width: 306px; /*348px*/
+    font-size: 11px;
+    color: #fff;
+    z-index: 500;
+}
+
+/* a .label element inside tooltip */
+.tooltip .label {
+    color: yellow;
+    width: 35px;
+}
+
+.tooltip a {
+    color: #fa7f28;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tooltip .text {
+    width: 170px;
+    float: left;
+    color: #FFF;
+    font-size: 11px;
+    line-height: 1.3em;
+}
+
+.tooltip .text .title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tooltip p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.tooltip .icon {
+    width: 120px;
+    float: right;
+}
+
+/*services*/
+.side_menu {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.side_menu h2 {
+    margin-bottom: 10px;
+}
+
+.side_menu ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.side_menu li {
+    list-style: none;
+    background: url(../images/icon_arrow.gif) no-repeat 5px;
+    padding: 4px 0 4px 18px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.side_menu li a, .side_menu li a:link, .side_menu li a:hover {
+    text-decoration: none;
+}
+
+.service_box_container {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 5px;
+    padding: 5px 0;
+}
+
+.service_box_container .image {
+    float: left;
+    width: 67px;
+    height: 67px;
+    margin: 10px 0px 0px 22px;
+}
+
+.service_box_container .text {
+    float: right;
+    width: 400px;
+    font-size: 12px;
+    padding: 5px 0px;
+}
+
+.service_box_container .text p {
+    padding: 0px;
+    margin: 0px;
+}
+
+/*side slider used on the call back button*/
+
+.panel {
+    position: absolute;
+    top: 135px;
+    left: 0;
+    display: none;
+    background: #000000;
+    border: 1px solid #111111;
+    -moz-border-radius-topright: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    width: 235px;
+    min-height: 200px;
+    height: auto;
+    padding: 30px 30px 30px 80px;
+    filter: alpha(opacity=95);
+    opacity: .95;
+    z-index: 600;
+}
+
+.panel h3 {
+    color: #FFFFFF;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 3px 0 0 0;
+    padding: 0px;
+}
+
+.panel p {
+    margin: 0 0 15px 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+.panel a, .panel a:visited {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #9FC54E;
+}
+
+.panel a:hover, .panel a:visited:hover {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+a.trigger {
+    /*the button sitting off to the left*/
+    position: absolute;
+    text-decoration: none;
+    top: 135px;
+    left: -30px;
+    width: 51px;
+    height: 124px;
+    background: url(../images/side_call.png) no-repeat left;
+    /*turn this css on if you dont want to use an image
+font-size: 16px;
+letter-spacing:-1px;
+font-family: verdana, helvetica, arial, sans-serif;
+color:#fff;
+padding: 20px 40px 20px 15px;
+font-weight: 700;
+background:#333333 url(images/plus.png) 85% 55% no-repeat;
+border:1px solid #444444;
+-moz-border-radius-topright: 20px;
+-webkit-border-top-right-radius: 20px;
+-moz-border-radius-bottomright: 20px;
+-webkit-border-bottom-right-radius: 20px;
+-moz-border-radius-bottomleft: 0px;
+-webkit-border-bottom-left-radius: 0px;*/
+    display: block;
+    z-index: 1000;
+}
+
+a.trigger:hover {
+    position: absolute;
+    text-decoration: none;
+    top: 135px;
+    left: 0;
+    width: 51px;
+    height: 124px;
+    background: url(../images/side_call.png) no-repeat left;
+    /*turn this css on if you dont want to use an image
+font-size: 16px;
+letter-spacing:-1px;
+font-family: verdana, helvetica, arial, sans-serif;
+color:#fff;
+padding: 20px 40px 20px 20px;
+font-weight: 700;
+background:#222222 url(images/plus.png) 85% 55% no-repeat;
+border:1px solid #444444;
+-moz-border-radius-topright: 20px;
+-webkit-border-top-right-radius: 20px;
+-moz-border-radius-bottomright: 20px;
+-webkit-border-bottom-right-radius: 20px;
+-moz-border-radius-bottomleft: 0px;
+-webkit-border-bottom-left-radius: 0px;*/
+    display: block;
+}
+
+a.active.trigger {
+    /*background:#222222 url(images/minus.png) 85% 55% no-repeat;*/
+    background: url(../images/side_call_min.png) no-repeat left;
+}
+
+/* Call back form */
+#call_back {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#call_back_form {
+    margin: 8px 0 0 0;
+    padding: 0;
+}
+
+#call_back_input {
+    height: 35px;
+}
+
+#call_back_input label {
+    float: left;
+}
+
+#call_back_input label input {
+    border: 1px solid #e5e5e5;
+    padding: 4px;
+    height: 15px;
+    font-size: 11px;
+    margin: 0px 6px 8px 0;
+    color: #666666;
+}
+
+#call_back_submit {
+    text-align: center;
+}
+
+#call_back_submit input {
+    text-transform: uppercase;
+    background: #EFEFEF url("../images/buttons_tile.jpg") repeat;
+    border: 1px solid #e5e5e5;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 11px;
+    font-weight: bold;
+    width: 90px;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#call_back_name, #call_back_email, #call_back_phone {
+    width: 220px;
+}
+
+#call_back_time {
+    width: 110px;
+}
+
+/*company*/
+
+.staff_box_container {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 5px;
+    padding: 5px 0;
+}
+
+.staff_box_container .image {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 10px 0px 10px 22px;
+}
+
+.staff_box_container .text {
+    float: right;
+    width: 400px;
+    font-size: 12px;
+    padding: 5px 0px;
+}
+
+.staff_box_container .text p {
+    padding: 0px;
+    margin: 0px;
+}
+
+/*blog*/
+
+.blog_snippet {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 10px;
+    padding: 10px 0 20px 0;
+}
+
+.blog_snippet p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.blog_snippet .title {
+    font-family: 'Droid Sans', arial, serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.blog_snippet .date {
+    font-size: 10px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+/*case study*/
+
+.case_study_box_container {
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 5px;
+    padding: 5px 0;
+}
+
+.case_study_box_container .image {
+    float: left;
+    width: 120px;
+    margin: 10px 0px 10px 22px;
+}
+
+.case_study_box_container .image img {
+    border: 1px solid #e7e7e7;
+}
+
+.case_study_box_container .text {
+    float: right;
+    width: 400px;
+    font-size: 12px;
+    padding: 5px 0px;
+}
+
+.case_study_box_container .text p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.case_study_box_container h2 {
+    font-size: 18px;
+}
+
+.testimonial {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+    background-color: #f7f9fa;
+    border: 1px solid #e5e5e5;
+    font-style: italic;
+}
+
+/*Contact Page*/
+
+.left_details {
+    float: left;
+    width: 240px;
+}
+
+.left_details p {
+    margin: 15px 0 !important;
+}
+
+.contact_title {
+    font-weight: bold;
+    float: left;
+    width: 70px;
+}
+
+.contact_detail {
+    float: left;
+    width: 100px;
+    clear: right;
+}
+
+.forms {
+    background-color: #FFFFFF !important; /*the important gets rid of the yellow google toolbar field style*/
+    border: 1px solid #c8cdd2 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 12px;
+    margin: 3px 0px;
+    padding: 4px;
+    width: 240px;
+}
+
+#contact {
+    border: 0;
+}
+
+#contact label {
+    float: left;
+    width: 80px;
+    margin-right: 15px;
+    clear: left;
+    font-weight: bold;
+    text-align: right;
+    height: 32px;
+}
+
+#contact .submit_button {
+    clear: right;
+    margin-left: 95px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    background: #EFEFEF url("../images/buttons_tile.jpg") repeat;
+    border: 1px solid #e5e5e5;
+    font-family: 'Droid Sans', arial, serif;
+    font-size: 11px;
+    font-weight: bold;
+    width: 90px;
+    height: 22px;
+}
+
+#map {
+    width: 100%;
+    height: 48px;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+
+#map .text {
+    width: 198px;
+    float: left;
+    font-size: 12px;
+    color: #666666;
+    font-family: 'Droid Sans', arial, serif;
+}
+
+#map .icon {
+    width: 32px;
+    height: 32px;
+    float: right;
+    margin-top: 5px;
+}
+
+#map a, #map a:link, #map a:visited {
+    text-decoration: none !important;
+}
+
+.form-control {
+    background: #fff !important;
+    margin: 0;
+    width: 100% !important;
+    margin-bottom: 0px;
+}
+
+div.tagsinput {
+    border: 1px solid #CCC;
+    background: #FFF;
+    padding: 5px;
+    width: 300px;
+    height: 100px;
+    overflow-y: auto;
+}
+
+div.tagsinput span.tag {
+    border: 1px solid #a5d24a;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    display: block;
+    float: left;
+    padding: 5px;
+    text-decoration: none;
+    background: #cde69c;
+    color: #638421;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-family: helvetica;
+    font-size: 13px;
+}
+
+div.tagsinput span.tag a {
+    font-weight: bold;
+    color: #82ad2b;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+div.tagsinput input {
+    width: 80px;
+    margin: 0px;
+    font-family: helvetica;
+    font-size: 13px;
+    border: 1px solid transparent;
+    padding: 5px;
+    background: transparent;
+    color: #000;
+    outline: 0px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+div.tagsinput div {
+    display: block;
+    float: left;
+}
+
+.tags_clear {
+    clear: both;
+    width: 100%;
+    height: 0px;
+}
+
+.not_valid {
+    background: #FBD8DB !important;
+    color: #90111A !important;
+}
+
+.trSport select {
+    width: 400px;
+}
+
+.trWeather select {
+    width: 400px;
+}
+
+.trWeather input {
+    width: 341px;
+}
+
+.accordion h3 {
+    padding-left: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 1px solid #222222;
+    background-color: #CCCCCC;
+}
+
+.accordion div {
+    border: 1px solid #222222;
+}
+
+.btn.blue {
+    color: white;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+.btn {
+    border-width: 0;
+    padding: 7px 14px;
+    font-size: 14px;
+    outline: none !important;
+    text-shadow: none;
+}
+
+.searchWeather {
+    color: white !important;
+    border-width: 0;
+    padding: 4px 8px;
+    font-size: 10px;
+    outline: none !important;
+    text-shadow: none;
+    text-shadow: none;
+    background-color: #4d90fe;
+}
+
+.trophyDiv {
+    width: 320px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 340px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 666;
+
+}
+
+.trophyDivWhy {
+    width: 520px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 667;
+}
+
+.circlesLoaded {
+    width: 520px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 667;
+    display: none;
+}
+
+.circlesExplanation {
+    width: 520px;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 240px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 667;
+    display: none;
+}
+
+.trophyDivWhy h3 {
+    color: #31708f;
+}
+
+.iconSelectAll {
+/ / position : relative;
+    vertical-align: middle;
+    float: top;
+    height: auto
+}
+
+.iconSelectAll .iconSelectCategory {
+/ / width : 48 px;
+    vertical-align: middle;
+    float: top;
+    height: auto;
+/ / background-color : lightgray;
+}
+
+.iconSelectAll .iconSelectCategory .category {
+    float: top;
+    height: auto;
+}
+
+.imgSelSize {
+    padding-left: 0px;
+    padding-top: 0px;
+    height: 50px;
+    vertical-align: middle;
+    float: top;
+    height: auto;
+}
+
+.imgSelSize img {
+    vertical-align: middle;
+    border-width: 0px;
+    margin-right: 5px;
+
+}
+
+.iconSelectAll .iconSelectCategory .category .categoryHeader {
+    border-style: solid;
+    border-width: 1px;
+/ / border-bottom : 0 px;
+    border-color: gray;
+    display: none;
+    background-color: lightgray;
+    vertical-align: middle;
+    float: top;
+    height: auto;
+}
+
+.iconSelectAll .iconSelectCategory .category .categoryDetails {
+    float: top;
+    display: none;
+    background-color: lightgray;
+    height: auto;
+}
+
+.iconSelectAll .iconSelectCategory .category .categoryDetails .iconDescription {
+    float: left;
+}
+
+.listAllCircles {
+    display: none;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-width: 1px;
+    border-color: gray;
+    border-style: solid;
+    overflow: scroll;
+
+}
+

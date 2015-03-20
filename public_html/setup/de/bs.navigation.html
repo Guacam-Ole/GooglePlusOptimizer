@@ -1,0 +1,217 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-sub-menu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the sub-menues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+        <li class="sidebar-toggler-wrapper">
+            <a class="sidebar-toggler"></a>
+        </li>
+
+
+        <li class="menu start" data-title="Willkommen" data-subtitle="beim Google+ Optimizer" data-modules="welcome">
+            <a id="navHome" href="#">
+                <i class="icon-home"></i>
+                <span class="title">Willkommen</span>
+            </a>
+        </li>
+        <li class="menu" data-title="Filter" data-subtitle="Störende Inhalte löschen">
+            <a href="#">
+                <i class="icon-trash"></i>
+                <span class="title">Filter</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Beitragsarten" data-subtitle="Spezielle Arten von Artikeln filtern"
+                    data-modules="plus1,yt,filterSharedCircles">
+                    <a href="#">Beitragsarten</a>
+                </li>
+                <li data-title="Zusatzblöcke" data-subtitle="Bestimmte Blöcke von Google+ filtern"
+                    data-modules="community,birthday,known">
+                    <a href="#">Zusatzblöcke</a>
+                </li>
+                <li data-title="Textinhalt" data-subtitle="Nach einem beliebigen Text filtern" data-modules="custom">
+                    <a href="#">Nach Text</a>
+                </li>
+                <li data-title="Hashtags" data-subtitle="Nach bestimmten Hashtags filtern" data-modules="hashtag">
+                    <a href="#">Nach Hashtags</a>
+                </li>
+                <li data-title="WHAM Filter" data-subtitle="I already know, what you did 'Last christmas'"
+                    data-modules="wham">
+                    <a href="#">WHAM-Filter</a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="menu" data-title="Minimieren" data-subtitle="Bestimmte Inhalte per Default ausblenden">
+            <a href="#">
+                <i class="icon-eye"></i>
+                <span class="title">Minimieren</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Bilder" data-subtitle="Bilder ausblenden" data-modules="filterImages">
+                    <a href="#">Bilder</a>
+                </li>
+                <li data-title="Videos" data-subtitle="Videos ausblenden" data-modules="filterVideo">
+                    <a href="#">Videos</a>
+                </li>
+                <li data-title="Links" data-subtitle="Links ausblenden" data-modules="filterLinks">
+                    <a href="#">Links</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Widgets" data-subtitle="Zusätzliche Inhalte für den Google+ - Stream">
+            <a href="#">
+                <i class="icon-share-alt"></i>
+                <span class="title">Widgets</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Wetter" data-subtitle="Wozu aus dem Fenster schauen?" data-modules="weatherEnabled">
+                    <a href="#">Wetter</a>
+                </li>
+                <li data-title="Stoppuhr" data-subtitle="Nie wieder eine angebrannte Pizza essen"
+                    data-modules="stoppwatch">
+                    <a href="#">Stoppuhr</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Kontakte"
+            data-subtitle="Optionen, die zusätzliche Informationen zu Deinen Kontakten hinzufügen">
+            <a href="#">
+                <i class="icon-user"></i>
+                <span class="title">Kontakte</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Hervorheben" data-subtitle="Wichtige Personen farblich hervorheben"
+                    data-modules="colorUsers">
+                    <a href="#">Hervorheben</a>
+                </li>
+                <li data-title="Trophäen" data-subtitle="Trophäen bei Kontakten anzeigen" data-modules="displayTrophy">
+                    <a href="#">Trophäen</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Inhalte hervorheben"
+            data-subtitle="Hier lassen sich bestimmte Inhalte optische verändern und hervorheben">
+            <a href="#">
+                <i class="icon-emoticon-smile"></i>
+                <span class="title">Inhalte hervorheben</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Emoticons" data-subtitle="Smilies anzeigen" data-modules="showEmoticons">
+                    <a href="#">Emoticons</a>
+                </li>
+                <li data-title="Leistungsschutzrecht"
+                    data-subtitle="Verlage hervorheben, die sich im LSR organisiert haben" data-modules="markLSRPosts">
+                    <a href="#">Leistungsschutzrecht</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Schreiben" data-subtitle="Features, die das Schreiben bei Google+ erleichtern">
+            <a href="#">
+                <i class="icon-pencil"></i>
+                <span class="title">Schreiben</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Autosave" data-subtitle="Eingegebene Texte automatisch zwischenspeichern"
+                    data-modules="useAutoSave">
+                    <a href="#">Autosave</a>
+                </li>
+                <li data-title="Quickshare" data-subtitle="Beiträge mit einem einfachen Klick teilen"
+                    data-modules="enableQs">
+                    <a href="#">Quickshare</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Verbesserungen"
+            data-subtitle="Hier kannst Du zusätzliche Features zu Google+ hinzufügen">
+            <a href="#">
+                <i class="icon-star"></i>
+                <span class="title">Verbesserungen</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Bookmarks"
+                    data-subtitle="Dieses Feature erlaubt Dir, einzelne Beiträge als Bookmark zu speichern"
+                    data-modules="useBookmarks">
+                    <a href="#">Bookmarks</a>
+                </li>
+                <li data-title="Sprachauswahl" data-subtitle="Erlaubt Dir, die Sprache in Google+ umzustellen."
+                    data-modules="displayLang">
+                    <a href="#">Sprachauswahl</a>
+                </li>
+                <!-- <li data-title="Hashtags"
+                    data-subtitle="Zeigt Dir auf Wunsch sämtliche Hashtags des aktuellen Streams an"
+                    data-modules="displayQuickHashes">
+                    <a href="#">Hashtags</a>
+                </li>-->
+            </ul>
+        </li>
+        <li class="menu" data-title="Erweitert" data-subtitle="Erweiterte Einstellungen für den Google+ Optimizer">
+            <a href="#">
+                <i class="icon-settings"></i>
+                <span class="title">Erweitert</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <!--<li data-title="Pause" data-subtitle="Finetuning für besonders schnelle oder langsame Rechner">
+                    <a href="#">Pause</a>
+                </li>-->
+                <!-- <li data-title="Wizard" data-subtitle="Wizard-Einstellungen">
+                    <a href="#">Wizard</a>
+                </li>-->
+                <li data-title="Speichern und Laden" data-subtitle="Einstellungen sichern oder Wiederherstellen" data-modules="loadsave">
+                    <a href="#">Speichern & Laden</a>
+                </li>
+                <!-- <li data-title="Zeiten messen" data-subtitle="Zur Analyse bei langsamen Computern">
+                    <a href="#">Messen</a>
+                </li>-->
+                <li data-title="Standardbezeichner" data-subtitle="Standard-Bezeichner von Google (Sprachvarianten)"
+                    data-modules="defaultCircles">
+                    <a href="#">Standardbezeichner</a>
+                </li>
+                <li data-title="Wizard" data-subtitle="Wizard neu starten oder deaktivieren"
+                    data-modules="wizardMode">
+                    <a href="#">Wizard</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu" data-title="Lizenzen und Quellen" data-subtitle="Verwendete Grafiken und Module" data-modules="license">
+            <a href="#">
+                <i class="icon-picture"></i>
+                <span class="title">Lizenzen und Quellen</span>
+            </a>
+        </li>
+        <li class="menu" data-title="Bugs & Features" data-subtitle="Bugs melden oder Features anfragen">
+            <a href="#">
+                <i class="icon-cup"></i>
+                <span class="title">Bugs und Features</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li data-title="Tickets" data-modules="bugs" data-subtitle="Derzeit offene Tickets">
+                    <a href="#">Bugs</a>
+                </li>
+                <li data-title="Verbesserungsvorschläge" data-modules="featurerequests"
+                    data-subtitle="Derzeit offene Tickets">
+                    <a href="#">Verbesserungsvorschläge</a>
+                </li>
+                <li data-title="Neues Ticket eröffnen" data-modules="newticket"
+                    data-subtitle="Neuen Bug melden oder Feature anfragen">
+                    <a href="#">Neues Ticket</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- END SIDEBAR MENU -->
+</div>

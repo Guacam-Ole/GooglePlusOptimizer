@@ -1,0 +1,77 @@
+.goalLeft {
+    clear: both;
+    float: left;
+}
+
+.goalRight {
+    clear: both;
+    float: right;
+}
+
+.goals {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#NeuesVomSpocht div.arrow {
+    background: transparent url(setup/images/arrows.png) no-repeat scroll 0px -16px;
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+#NeuesVomSpocht div.up {
+    background-position: 0px 0px;
+}
+
+.goalImage {
+    display: block;
+    width: 22px;
+}
+
+.goalMin {
+    width: 25px;
+}
+
+.goalResult {
+    width: 50px;
+    display: block;
+    text-align: center;
+}
+
+.goalLeft .goalImage {
+    float: left;
+}
+
+.goalRight .goalImage {
+    float: right;
+    text-align: right;
+}
+
+.goalLeft .goalResult {
+    float: left;
+}
+
+.goalRight .goalResult {
+    float: right;
+}
+
+.goalRight .player {
+    float: right;
+    text-align: right;
+}
+
+.goalRight .goalMin {
+    float: right;
+    text-align: right;
+}
+
+.goalLeft .goalMin {
+    float: left;
+}
+
+.NeuesVomSpocht img {
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+}

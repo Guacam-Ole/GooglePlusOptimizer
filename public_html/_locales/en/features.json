@@ -1,0 +1,269 @@
+[
+  {
+    "remark": "---------MUSS IMMER GANZ OBEN STEHEN!----------",
+    "Short": "welcomeWizard",
+    "Image": "welcome.jpg",
+    "Title": "Welcome to the Google+ - Optimizer wizard",
+    "Description": "This wizard helps you configure the features, widgets and filters. Click onto \"next\" to start the wizard.<br/><br/><sup><b>Note</b>: You always can restart this wizard in the settings.</sup>"
+  },
+  {
+    "Short": "welcome",
+    "Type": "TextOnly",
+    "Title": "Welcome to the Google+ Optimizer",
+    "Description": "<div class='loadHtml' data-filename='bs.welcome'></div>"
+  },
+  {
+    "Version": "1.0",
+    "Short": "plus1",
+    "Title": "+1 Filter",
+    "Description": "This filter removes all \"<i><b>John Doe</b> +1'd this following post</i>\".",
+    "ShowInWizard": true,
+    "Image": "plus1.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "yt",
+    "Title": "YouTube Filter",
+    "Description": "This filter removes all youtube comments from your stream.",
+    "ShowInWizard": true,
+    "Image": "yt.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.6",
+    "Short": "filterSharedCircles",
+    "Title": "Shared Circles",
+    "Description": "This filter removes all shared cirlces from your stream.",
+    "ShowInWizard": true,
+    "Image": "circleshare.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "community",
+    "Title": "Community Invites",
+    "Description": "Google+ offers you communitis which might be of interest for you. If you don't want that, this filter removes suggestions and invites",
+    "ShowInWizard": true,
+    "Image": "community.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "birthday",
+    "Title": "Birthdays",
+    "Description": "If a person in your circles celebrates his birthday, you get the chance to congratulate him just like all the other 25.452 contacts here on Google+. You don't want that?? Enable this feature.",
+    "ShowInWizard": true,
+    "Image": "birthday.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "known",
+    "Title": "You may know",
+    "Description": "Google+ tries to analyze who you might like. Sometimes this works, sometimes not. If you don't want that activate this filter",
+    "ShowInWizard": true,
+    "Image": "known.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
+    "Short": "custom",
+    "Title": "Custom-Filter",
+    "Description": "<p>Filter ANY text in any post. This filter isn't case-sensitive.<br/> <br/></p><p><div><input type='text' class='form-control tags tokensText' data-role='tagsinput' value='' style='display: none;'/></div></p> ",
+    "Image": "volltext.png",
+    "Cost": 2
+  },
+  {
+    "Version": "1.0",
+    "Short": "hashtag",
+    "Title": "Hashtag-Filter",
+    "Description": "<p>Filter any post that contains a specific hashtag.<br/> <sup>(You can enter with or without the \"#\")</sup><br/><br/></p><p><div><input type='text' class='form-control tags tokensHashtags' data-default='neuer Hashtag' value='#catcontent' style='display: none;'/></div></p>  ",
+    "Image": "hash.png",
+    "Cost": 1
+  },
+  {
+    "Version": "1.0",
+    "Short": "wham",
+    "Title": "Wham-Filter",
+    "Description": "<div class='loadHtml' data-filename='bs.wham'></div>",
+    "Image": "wham.png",
+    "Cost": 2
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterImages",
+    "Title": "Minimize pictures",
+    "Description": "<div class='loadHtml' data-filename='bs.filterimages'></div>",
+    "Image": "bild.png",
+    "Cost": -1
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterVideo",
+    "Title": "Mimimize videos",
+    "Description": "<div class='loadHtml' data-filename='bs.filtervideo'></div>",
+    "Image": "video.png",
+    "Cost": -1
+  },
+  {
+    "Version": "1.2",
+    "Short": "filterLinks",
+    "Title": "Minimize Urls",
+    "Description": "<div class='loadHtml' data-filename='bs.filterlinks'></div>",
+    "Image": "links.png",
+    "Cost": -1
+  },
+  {
+    "Version": "2.2",
+    "Short": "weatherEnabled",
+    "Title": "Weather forecast",
+    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>City:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'> <a href='' class='btn  green '>Search <i class='m-icon-swapright m-icon-white'></i></a>  <div class='citySelect'><select><option>jjjj</option></select></div></div>",
+    "Image": "wetter.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.2",
+    "Short": "sportEnabled",
+    "Title": "Liveticker",
+    "Description": "<div class='loadHtml' data-filename='bs.sport'></div><div class='loadHtml' data-filename='bs.widget'></div>",
+    "Image": "sport.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.2",
+    "Short": "stoppwatch",
+    "Title": "Stoppwatch",
+    "Description": "Never burn your pizza again!",
+    "ShowInWizard": true,
+    "Image": "uhr.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.3",
+    "Short": "colorUsers",
+    "Title": "Highlight posts",
+    "Description": "You will get additional features on your contacts' pages. You can hightlight them by color or add additional information. Feel free to enter \"dumbass\" if you want. Noone else but you can see it.",
+    "ShowInWizard": true,
+    "Image": "color1.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.6.2",
+    "Short": "displayTrophy",
+    "Title": "Display trophies",
+    "Description": "Trophies are achievements you can earn by some actions in Google+. You cannot win a real price but you can brag with them... :) <br/><br/>The trophies are displayed in your profile. .<br/><br/>",
+    "ShowInWizard": true,
+    "Image": "trophies.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.3",
+    "Short": "showEmoticons",
+    "Title": "Display Emoticons ",
+    "Description": "Google+ suddenly just looks like you favourite chat-app ",
+    "ShowInWizard": true,
+    "Image": "emoticons.png",
+    "Cost": 2
+  },
+  {
+    "Version": "2.6",
+    "Short": "markLSRPosts",
+    "Title": "LSR",
+    "Description": "Display LSR-Notes.",
+    "ShowInWizard": true,
+    "Image": "lsr.png",
+    "Cost": 2
+  },
+  {
+    "Version": "2.4",
+    "Short": "useAutoSave",
+    "Title": "Autosave",
+    "Description": "Saves your posts even if you don't (or your browser crashes).",
+    "ShowInWizard": true,
+    "Image": "autosave.png",
+    "Cost": 0
+  },
+  {
+    "Version": "2.4",
+    "Short": "enableQs",
+    "Title": "Quickshare",
+    "Description": "<div class='loadHtml' data-filename='bs.quickshare'></div>",
+    "Image": "qs.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.5",
+    "Short": "useBookmarks",
+    "Title": "Bookmarks (Favourites)",
+    "Description": "You can save interesting posts and review them later on",
+    "ShowInWizard": true,
+    "Image": "bookmark.png",
+    "Cost": 1
+  },
+  {
+    "Version": "2.6.2",
+    "Short": "displayLang",
+    "Title": "Languages",
+    "Description": "Display Google+ in a different language. (This includes local results for \"what's hot\" ",
+    "ShowInWizard": true,
+    "Image": "lang.png",
+    "Cost": 0
+  },
+  {
+    "Short": "bugs",
+    "Type": "TextOnly",
+    "Title": "Bugs",
+    "Description": "<p>Watch and add bug reports<br/> <br/><br/></p><p>Existing tickets: <div class='tickets'></div></p>"
+  },
+  {
+    "Short": "featurerequests",
+    "Type": "TextOnly",
+    "Title": "Feature requests",
+    "Description": "<p>Watch and enter feature requests<br/> <br/><br/></p><p>Existing ticketsTickets: <div class='featurerequests'></div></p>"
+  },
+  {
+    "Short": "newticket",
+    "Type": "TextOnly",
+    "Title": "Add ticket",
+    "Description": "<p>Report bug or ask for a feature.<br/>  <a id='showTicketCreation' class='btn  green'>Create ticket <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
+  },
+  {
+    "Short": "defaultCircles",
+    "Type": "NoFeature",
+    "Title": "Default names",
+    "Description": "<p>Enter the default cirlce names for Google+. These are needed for the Quickshares. You only have to modify use this if you are NOT using the english version of Gooogle+</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
+  },
+  {
+    "Short":"wizardMode",
+    "Type":"NoFeature",
+    "Title":"Wizard",
+    "Description":"<p>The wizard offers an easy way to configure new features.Restart him or disable him here..</p><div class='loadHtml' data-filename='bs.wizard'></div>"
+  },
+  {
+    "Short": "license",
+    "Type": "NoFeature",
+    "Title": "Licenses and sources",
+    "Description": "<div class='loadHtml' data-filename='bs.license'></div>"
+  },
+  {
+    "Short": "loadsave",
+    "Type": "NoFeature",
+    "Title": "Save and load configuration",
+    "Description": "<div class='loadHtml' data-filename='bs.loadsave'></div>"
+  },
+  {
+    "Short": "moreOptions",
+    "Type": "NoFeature",
+    "Image": "lasthelp.png",
+    "Title": "There are even more new features",
+    "Description": "But these are to complex to setup them in this wizard. Use the setup to configure them. Those features are: <span class='evenMoreStuff'>_EVENMORESTUFF_</span>"
+  },
+  {
+    "remark": "-----MUSS IMMER GANZ UNTEN STEHEN!-------",
+    "Short": "finishWizard",
+    "Image": "lasthelp.png",
+    "Title": "Configuration finished",
+    "Description": "All settings have been saved. This wizard will disappear until new features are available. You can change this behaviour in the settings. <br/><br/> <center> <button class=\"wizButton\" id=\"reloadPage\">Close wizard</button>    </center><br/><br/>"
+  }
+]

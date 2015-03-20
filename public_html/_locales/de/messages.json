@@ -1,0 +1,202 @@
+{
+  "appName": {
+    "message": "Google+ - Optimizer"
+  },
+  "appDesc": {
+    "message": "Der Google+ Optimizer verbessert die Benutzererfahrung mit Google+. "
+  },
+  "lang": {
+    "message": "de"
+  },
+  "HasTrophies": {
+    "message": "Trophäen vorhanden"
+  },
+  "removeHashtag": {
+    "message": "Hashtag filtern"
+  },
+  "ligaVon": {
+    "message": "Die Livedaten stammen von "
+  },
+  "Pause": {
+    "message": "Pause"
+  },
+  "Fortsetzen": {
+    "message": "Fortsetzen"
+  },
+  "Stoppuhr_starten": {
+    "message": "Stoppuhr starten"
+  },
+  "Stoppuhr_stoppen": {
+    "message": "Stopuhr stoppen"
+  },
+  "Stoppuhr": {
+    "message": "Stoppuhr"
+  },
+  "Heimmannschaft": {
+    "message": "Heimmannschaft"
+  },
+  "Gaestemannschaft": {
+    "message": "Gästemannschaft"
+  },
+  "Stand": {
+    "message": "Stand"
+  },
+  "RemarkPlaceholder": {
+    "message": "Kommentar für __USER__ fehlt"
+  },
+  "WidgetHide": {
+    "message": "(nicht anzeigen)"
+  },
+  "WidgetLeft": {
+    "message": "Links"
+  },
+  "WidgetMiddle": {
+    "message": "Mitte"
+  },
+  "WidgetRight": {
+    "message": "Rechts"
+  },
+  "WidgetShow": {
+    "message": "Anzeigen"
+  },
+  "DisplayImage": {
+    "message": "Bild anzeigen ⇘"
+  },
+  "DisplayVideo": {
+    "message": "Video anzeigen ⇘"
+  },
+  "DisplayLink": {
+    "message": "Link anzeigen ⇘"
+  },
+  "DisplayContent": {
+    "message": "Inhalt anzeigen ⇘"
+  },
+  "DisplayImageAnimated": {
+    "message": "Animierted Bild anzeigen ⇘"
+  },
+  "DisplayVideoAnimated": {
+    "message": "Animiertes Video anzeigen ⇘"
+  },
+  "ReadingCircleData": {
+    "message": "Lese Daten aus den Kreisen"
+  },
+  "ReadingCircleUsers": {
+    "message": "Lese Kontaktdaten"
+  },
+  "TrophiesCollected": {
+    "message": "Trophäen gesammelt"
+  },
+  "ReadingPublicStream": {
+    "message": "Lese Daten aus öffentlichen Stream"
+  },
+  "ReadingDataFrom": {
+    "message": "Lese Beiträge vom:"
+  },
+  "ReadingProfileData": {
+    "message": "Analysiere Profil"
+  },
+  "done": {
+    "message": "fertig."
+  },
+  "trophies": {
+    "message": "Trophäen"
+  },
+  "goldTrophies": {
+    "message": "Gold-Trophäen"
+  },
+  "silverTrophies": {
+    "message": "Silber-Trophäen"
+  },
+  "bronzeTrophies": {
+    "message": "Bronze-Trophäen"
+  },
+  "icons_flags": {
+    "message": "Fahnen"
+  },
+  "icons_misc": {
+    "message": "Verschiedenes"
+  },
+  "icons_people": {
+    "message": "Menschen"
+  },
+  "icons_smilies": {
+    "message": "Smilies"
+  },
+  "icons_tiere": {
+    "message": "Tiere"
+  },
+  "icons_tools": {
+    "message": "Gegenstände"
+  },
+  "icons_vehicles": {
+    "message": "Fahrzeuge"
+  },
+  "selectIcon": {
+    "message": "Icon auswählen"
+  },
+  "selectCircle": {
+    "message": "Kreis auswählen"
+  },
+  "BookmarkMode": {
+    "message": "Bookmark-Modus"
+  },
+  "sharedImmediatly": {
+    "message": "(Beiträge werden sofort geteilt)"
+  },
+  "RemoveHashtag": {
+    "message": "Hashtag filtern"
+  },
+  "RemoveKeyword": {
+    "message": "Wort filtern"
+  },
+  "HashtagFilteredTitle": {
+    "message": "Hashtag wurde zum Filter hinzugefügt"
+  },
+  "HashtagFiltered": {
+    "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
+  },
+  "KeywordFilteredTitle": {
+    "message": "Wort wurde zum Filter hinzugefügt."
+  },
+  "KeywordFiltered": {
+    "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
+  },
+  "WARNING": {
+    "message": "ACHTUNG! Enthält LSR-Links!"
+  },
+  "hasnotrophies": {
+    "message": "hat noch keine Trophäen gesammelt. "
+  },
+  "youhavenotrophies": {
+    "message": "Du hast noch keine Trophäen gesammelt! "
+  },
+  "letsgo": {
+    "message": "Dann aber mal los!"
+  },
+  "moredetails": {
+    "message": "Ich brauche mehr Details!"
+  },
+  "Setup_newHashtag": {
+    "message": "Neuer Hashtag"
+  },
+  "Setup_newFilter": {
+    "message": "Neuer Filter"
+  },
+  "Circles_Public": {
+    "message": "Öffentlich"
+  },
+  "Circles_Private": {
+    "message": "Meine Kreise"
+  },
+  "Circles_Extended": {
+    "message": "Erweiterte Kreise"
+  },
+  "QuickShare_Folders": {
+    "message": "[{\"file\":\"accounting\",\"text\":\"Buchhaltung\"},{\"file\":\"business\",\"text\":\"Business\"},{\"file\":\"communication\",\"text\":\"Kommunikation\"},{\"file\":\"construction\",\"text\":\"Auf dem Bau\"},{\"file\":\"education\",\"text\":\"Schule\"},{\"file\":\"electrical\",\"text\":\"Elektrische Geräte\"},{\"file\":\"flags\",\"text\":\"Fahnen\"},{\"file\":\"gadgets\",\"text\":\"Gadgets\"},{\"file\":\"jobs\",\"text\":\"Jobs\"},{\"file\":\"networking\",\"text\":\"Netzwerk\"},{\"file\":\"transport\",\"text\":\"Transport\"}]"
+  },
+  "addCircle": {
+    "message": "+ Kreis oder Person hinzufügen"
+  }
+
+
+}
