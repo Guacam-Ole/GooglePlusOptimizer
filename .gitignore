@@ -8,6 +8,9 @@ trophy.de.json
 trophy.json
 nbproject
 pakete
+*.zip
+*.rar
+*.php
 pix
 /.settings
 /.project
