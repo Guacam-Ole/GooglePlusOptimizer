@@ -639,7 +639,7 @@ function PageLoad() {
         });
 
         SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function () {
-            $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
+         //   $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
         });
 
         SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
