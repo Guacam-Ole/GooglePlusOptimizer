@@ -43,10 +43,18 @@ gpoTrophy.prototype = {
     },
     GetCurrentUserId: function () {
         var dirtyId = $('[role=tablist]').attr("id");
-        return dirtyId.split('-')[0];
+        if (dirtyId!==undefined) {
+            return dirtyId.split('-')[0];
+        } else {
+            return undefined;
+        }
     },
     Draw: function (hover, $trophy, userId) {
+
         var obj = this;
+        if (userId===undefined) {
+            obj.RenderEmpty();
+        }
         chrome.runtime.sendMessage({
             Action: "getTrophiesForUser",
             UserId: userId
