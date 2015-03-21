@@ -15,5 +15,5 @@ pix
 /.settings
 /.project
 .idea
-public_html/.idea
-
+public_html/.idea/*
+workspace.xml
