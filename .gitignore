@@ -15,4 +15,5 @@ pix
 /.settings
 /.project
 .idea
+public_html/.idea
 
