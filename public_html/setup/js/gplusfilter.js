@@ -1,8 +1,10 @@
 console.log('g+ - filter started');
 this.Browser = new Browser();
+this.Log=new gpoLog();
+this.Log.Init();
 var columnCount;
 var imageHost = "https://files.oles-cloud.de/optimizer/";
-
+var debugMode=localStorage.getItem("debugMode")==="true";
 
 var domainBlacklist = [];
 
@@ -28,26 +30,28 @@ var forEach = Array.prototype.forEach;
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation.type === "childList") {
+           Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
             forEach.call(mutation.addedNodes, function (addedNode) {
                 if (addedNode.classList !== undefined) {
                     if (addedNode.classList.contains('PD')) {
-                        //console.log("DOM PD:"+addedNode.classList);
+                        Log.Debug("DOM PD:"+addedNode.classList);
                         PaintBin(addedNode);
                     } else if (addedNode.classList.contains('nja')) {
-                        //console.log("DOM NJA:"+addedNode.classList);
+                        Log.Debug("DOM NJA:"+addedNode.classList);
                         FilterBlocks(addedNode);
                     } else if (addedNode.classList.contains('URaP8')) {
-                        //console.log("DOM URA:"+addedNode.classList);
+                        Log.Debug("DOM URA:" + addedNode.classList);
                         DoQuickshare(addedNode, 1);
                     }
                     //g-h-f-N-N
                     else {
                         var jsModel = addedNode.attributes["jsmodel"];
                         if (jsModel !== undefined && jsModel.value === "XNmfOc") {
-                            //console.log("DOM JS:"+addedNode.classList);
+                            Log.Debug("DOM JS:"+addedNode.classList);
                             StartFilter(addedNode);
                         } else {
-                            //console.log("DOM IGNORED:"+addedNode.classList);
+                            Log.Debug("DOM IGNORED:"+addedNode.classList);
+             //               Log.Debug("iid:"+addedNode.data("id"));
                         }
                     }
                 }
@@ -107,7 +111,7 @@ $(document).ready(function () {
         });
 
         $(document).on('click', '.removeHashTag', function () {
-            console.log('Add Hashtag');
+            Log.Info('Add Hashtag');
             if (Subs.Settings.Values.HashTags === null) {
                 Subs.Settings.Values.HashTags = "";
             }
@@ -197,13 +201,13 @@ function DrawWizardTile() {
                     $('body').prepend(wizz);
                     $('#loadhere').load(Browser.GetExtensionFile("setup/" + lang + "/wizard.html"), function () {
                         wizard.InitWizard(Subs.Settings.Values.LastWizard);
-                        console.log('Wizard loaded');
+                        Log.Info('Wizard loaded');
                     });
                 });
             });
         }
     } catch (ex) {
-        console.log(ex);
+        Log.Error(ex);
     }
 }
 
@@ -271,7 +275,7 @@ function CountColumns() {
             }
         }
     } catch (ex) {
-        console.log(ex);
+        Log.Error(ex);
     }
 }
 
@@ -485,7 +489,7 @@ function DOMFilterFreetext($ce) {
             HideOnContent($ce, $ce.find('div.Al.pf:Contains(' + fulltext + ')'));
         });
     } catch (ex) {
-        console.log(ex);
+        Log.Error(ex);
     }
 }
 
@@ -520,10 +524,9 @@ function DOMFilterImages($ce) {
                 $ce.find('.d-s.ob.Ks').closest('.q9.yg').not(".hidewrapper .q9.yg").wrap("<div class='hidewrapper' style=\"display:none\"></div>").closest('.yx.Nf').prepend("<a href=\"#\" class=\"unhideImage\" >" + chrome.i18n.getMessage("DisplayImage") + "</a>");
             }
         }
-
     }
     catch (ex) {
-        console.log(ex);
+        Log.Error(ex);
     }
 }
 
@@ -552,7 +555,7 @@ function DOMFilterHashtags($ce) {
             });
         }
     } catch (ex) {
-        console.log(ex);
+        Log.Error(ex);
     }
 }
 
@@ -658,8 +661,7 @@ function PageLoad() {
     TripleInit();
 
 
-
-    console.log('G+Filter: Google+ - Filter initialisiert');
+    Log.Info('G+Filter: Google+ - Filter initialisiert');
 }
 
 function TripleInit() {
