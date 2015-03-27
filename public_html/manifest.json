@@ -29,6 +29,7 @@
                 "setup/js/gplus/autosave.js",
                 "setup/js/gplus/bookmarks.js",
                 "setup/js/gplus/flags.js",
+                "setup/js/gplus/log.js",
                 "setup/js/gplus/qs.js",
                 "setup/js/gplus/trophy.js",
                 "setup/js/gplus/lsr.js",

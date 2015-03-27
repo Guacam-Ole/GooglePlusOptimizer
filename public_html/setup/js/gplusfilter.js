@@ -96,7 +96,7 @@ $(document).ready(function () {
     {
         LoadSetup();
     }
-    else if (window.location.href.indexOf("/communities") > 0) {
+    else if (window.location.href.indexOf("/communities") > 0 && (window.location.href.indexOf("/communities/")== -1)) {
         SaveCommunities();
     }
     else  {
