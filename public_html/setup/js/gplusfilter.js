@@ -99,7 +99,7 @@ $(document).ready(function () {
     else if (window.location.href.indexOf("/communities") > 0) {
         SaveCommunities();
     }
-    else if (window.location.hostname === "plus.google.com") {
+    else  {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
 
         InitSettings();
@@ -229,10 +229,7 @@ function InitGoogle() {
 }
 
 function LoadGoogle() {
-
 }
-// Yp yt Xa
-
 
 /**
  * Widgets zeichnen
@@ -610,11 +607,7 @@ function InitObjects() {
 }
 
 function PageLoad() {
-    InitObjects();
-
-
-
-
+        InitObjects();
         Subs.Measure = new gpoMeasure("START", true);
 
         var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
