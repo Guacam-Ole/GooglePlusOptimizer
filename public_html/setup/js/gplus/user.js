@@ -108,6 +108,9 @@ gpoUser.prototype = {
     },
     GetCurrentUserId: function () {
         var dirtyId = $('[role=tablist]').attr("id");
+        if (dirtyId===undefined) {
+            return null;
+        }
         return dirtyId.split('-')[0];
     },
     RemoveSelection: function () {
@@ -119,7 +122,7 @@ gpoUser.prototype = {
         var obj = this;
         var currentUserId = obj.GetCurrentUserId();
         var userSettings = obj.AllUserSettings;
-        if (userSettings === null || userSettings === undefined) {
+        if (userSettings === null || userSettings === undefined || currentUserId===null) {
             return null;
         }
         for (var i in userSettings) {
