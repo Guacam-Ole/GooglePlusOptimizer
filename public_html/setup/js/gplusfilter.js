@@ -604,7 +604,7 @@ function InitObjects() {
     }
 
     if ($('.gb_ua').length>0) {
-        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').text()});
+        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').find('.gb_ya').text()});
     }
     StartObservation();
 }
