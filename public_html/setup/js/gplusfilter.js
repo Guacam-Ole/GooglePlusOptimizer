@@ -359,6 +359,7 @@ function FilterBlocks(changedElements) {
     SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
         HideOnAttr($ce, 'data-iid', 'sii2:112');
         HideOnAttr($ce, 'data-iid', 'sii2:116');
+        HideOnAttr($ce, 'data-iid', 'sii2:127');
     });
     SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
         HideOnAttr($ce, 'data-iid', 'sii2:114');
