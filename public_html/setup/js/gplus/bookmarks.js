@@ -5,6 +5,7 @@ var gpoBookmarks = function () {
     this.BookmarkList;
     this.NewBookmarkList;
     this.BookmarkContent;
+    this.StillLoading;
     this.SearchString = "notifications/all?displayBookmarks=abersicherdatt";
 };
 
@@ -12,7 +13,7 @@ gpoBookmarks.prototype = {
     constructor: gpoBookmarks,
     Init: function () {
         var obj = this;
-
+        obj.GetBookmarksFromStorage(function() {obj.ContinueLoading();});
         $(document).on("click", ".clickOntoBookmark", function () {
             var target = $(this).data("target");
             window.location.href = target;
@@ -29,13 +30,23 @@ gpoBookmarks.prototype = {
         });
 
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
-        obj.LoadBookmarkList();
+
+
+    },
+    ContinueLoading:function() {
+        var obj=this;
+        //obj.LoadBookmarkList();
         obj.LoadBookmarkContent();
         obj.PaintFloatingIcon($(document));
         obj.DisplayBookmarksHover();
-
     },
     Dom: function ($ce) {
+        var obj=this;
+        if (obj.NewBookmarkList===undefined || obj.StillLoading===true) {
+            obj.GetBookmarksFromStorage(function() {obj.PaintStars()});
+        } else {
+            obj.PaintStars();
+        }
        //this.PaintFloatingIcon($ce);
     },
     PaintFloatingIcon:function($ce) {
@@ -169,20 +180,15 @@ gpoBookmarks.prototype = {
             });
         });
     },
-    DisplayBookmarksHover: function () {
-        var obj = this;
-
-        var savedBookmarks = [];
-        var container = '<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
-
-        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross Sgb" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
-        var bookmarkDivs = '';
-
+    GetBookmarksFromStorage:function(target) {
+        var obj=this;
+        obj.StillLoading=true;
+        obj.NewBookmarkList=[];
         chrome.storage.sync.get(null, function (syncResult) {
             // Erst einmal die cloud-Bookmarks:
             $.each(syncResult, function (key, value) {
                 if (key.indexOf(obj.BookmarkPrefix) === 0) {
-                    savedBookmarks.push(JSON.parse(value));
+                    obj.NewBookmarkList.push(JSON.parse(value));
                 }
             });
 
@@ -190,54 +196,64 @@ gpoBookmarks.prototype = {
                 // Jetzt, wenn vorhanden: Bookmarks, die lokal liegen
                 $.each(localResult, function (key, value) {
                     if (key.indexOf(obj.BookmarkPrefix) === 0) {
-                        var foundBookmark = $.grep(savedBookmarks, function (e) {
+                        var foundBookmark = $.grep(obj.NewBookmarkList, function (e) {
                             return e.Id === JSON.parse(value).Id;
                         });
                         if (foundBookmark.length > 0) {
-                            var index = savedBookmarks.indexOf(foundBookmark[0]);
-                            savedBookmarks[index] = JSON.parse(value);
+                            var index = obj.NewBookmarkList.indexOf(foundBookmark[0]);
+                            obj.NewBookmarkList[index] = JSON.parse(value);
                         }
                     }
                 });
-
-                obj.NewBookmarkList = savedBookmarks;
-                if (savedBookmarks.length > 0) {
-                    $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-                }
-
-                savedBookmarks.sort(function (a, b) {
-                    return (new Date(b.Created)) - (new Date(a.Created))
-                });
-                $.each(savedBookmarks, function (index, value) {
-
-
-                    var teaser = value.ContentText;
-                    if (teaser.indexOf(" ") > 0) {
-                        teaser = teaser.substring(0, teaser.lastIndexOf(" "))
-                    }
-
-                    bookmarkDivs += bookmarkDivTemplate.replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
-                });
-                var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
-                $('.BookmarksHover').remove();
-                $('.Pzc').append($(completeDiv));
-                $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
-                    var scrollTo = null;
-                    if (e.type == 'mousewheel') {
-                        scrollTo = (e.originalEvent.wheelDelta * -1);
-                    }
-                    else if (e.type == 'DOMMouseScroll') {
-                        scrollTo = 40 * e.originalEvent.detail;
-                    }
-                    if (scrollTo) {
-                        e.preventDefault();
-                        $(this).scrollTop(scrollTo + $(this).scrollTop());
-                    }
-                });
-                obj.PaintStars();
-                console.log("bookmarks read");
+                obj.StillLoading=false;
+                target();
             });
         });
+    },
+    DisplayBookmarksHover: function () {
+        var obj = this;
+
+        var savedBookmarks = obj.NewBookmarkList;
+        var container = '<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
+
+        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross Sgb" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
+        var bookmarkDivs = '';
+
+        if (savedBookmarks.length > 0) {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        }
+
+        savedBookmarks.sort(function (a, b) {
+            return (new Date(b.Created)) - (new Date(a.Created))
+        });
+        $.each(savedBookmarks, function (index, value) {
+
+
+            var teaser = value.ContentText;
+            if (teaser.indexOf(" ") > 0) {
+                teaser = teaser.substring(0, teaser.lastIndexOf(" "))
+            }
+
+            bookmarkDivs += bookmarkDivTemplate.replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
+        });
+        var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
+        $('.BookmarksHover').remove();
+        $('.Pzc').append($(completeDiv));
+        $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
+            var scrollTo = null;
+            if (e.type == 'mousewheel') {
+                scrollTo = (e.originalEvent.wheelDelta * -1);
+            }
+            else if (e.type == 'DOMMouseScroll') {
+                scrollTo = 40 * e.originalEvent.detail;
+            }
+            if (scrollTo) {
+                e.preventDefault();
+                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            }
+        });
+        obj.PaintStars();
+        console.log("bookmarks read");
     },
     PaintStars: function () {
         var obj = this;
@@ -285,7 +301,7 @@ gpoBookmarks.prototype = {
             });
         });
     },
-    LoadBookmarkList: function () {
+    /* LoadBookmarkList: function () {
         var obj = this;
         chrome.runtime.sendMessage({
             Action: "LoadBookmarks"
@@ -295,7 +311,7 @@ gpoBookmarks.prototype = {
                 $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
             }
         });
-    },
+    },*/
     LoadBookmarkContent: function () {
         var obj = this;
         chrome.runtime.sendMessage({

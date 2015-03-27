@@ -459,7 +459,7 @@ function StartFilter(changedElements) {
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.Dom($ce);
       //  Subs.Bookmarks.DisplayBookmarks($ce);
-        Subs.Bookmarks.PaintStars($ce);
+      //  Subs.Bookmarks.PaintStars($ce);
     });
 
 }
