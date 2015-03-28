@@ -24,11 +24,17 @@ var Subs = {
     Weather: null
 };
 
+var oldUrl=window.location.href;
+
 
 var forEach = Array.prototype.forEach;
 
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
+        if (oldUrl!==window.location.href) {
+            RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
+        }
+        oldUrl=window.location.href;
         if (mutation.type === "childList") {
            Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
             forEach.call(mutation.addedNodes, function (addedNode) {
@@ -124,6 +130,9 @@ $(document).ready(function () {
             $(this).hide();
 
             return false;
+        });
+        $(document).on('click','.JZ',function() {
+            RestartFilter();  // Reload Page. Limitieren auf 20 neue Objekte, sonst wirds zu langsam
         });
 
 
@@ -389,6 +398,7 @@ function ShowWidgets() {
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter(changedElements) {
+    changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
 
@@ -651,21 +661,30 @@ function PageLoad() {
         DrawWidgets();
         CountColumns();
 
-        // TODO: Dies ist nur ein WORKAROUND! Warum der MutationObserver da nicht immer will, ist noch zu prüfen!
-    TripleInit();
+
+        FirstStartInit();
 
 
-    Log.Info('G+Filter: Google+ - Filter initialisiert');
+        Log.Info('G+Filter: Google+ - Filter initialisiert');
 }
 
-function TripleInit() {
+function RestartFilter() {
+    window.setTimeout(function() {
+            FirstStartInit();
+    },1000);
+}
+
+function FirstStartInit() {
     // Initial Mutation Observer simulieren:
-    $('[jsmodel="XNmfOc"]').each(function (index, value) {
+    $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
         StartFilter(value);
     });
     $('.nja').each(function (index, value) {
         FilterBlocks(value);
     });
+
+
+
 }
 
 /**
