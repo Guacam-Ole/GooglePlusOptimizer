@@ -6,6 +6,7 @@ var gpoBookmarks = function () {
     this.NewBookmarkList;
     this.BookmarkContent;
     this.StillLoading;
+    this.WaitCount=0;
     this.SearchString = "notifications/all?displayBookmarks=abersicherdatt";
 };
 
@@ -40,10 +41,24 @@ gpoBookmarks.prototype = {
         obj.PaintFloatingIcon($(document));
         obj.DisplayBookmarksHover();
     },
+    WaitBeforePaint:function($ce) {
+        var obj=this;
+        obj.WaitCount++;
+        window.setTimeout(function() {
+            if (obj.NewBookmarkList===undefined || obj.StillLoading===true) {
+                obj.WaitBeforePaint($ce);
+            } else {
+                if (obj.WaitCount!==0) {
+                    obj.PaintStars();
+                    obj.WaitCount = 0;
+                }
+            }
+        },1000);
+    },
     Dom: function ($ce) {
         var obj=this;
         if (obj.NewBookmarkList===undefined || obj.StillLoading===true) {
-            obj.GetBookmarksFromStorage(function() {obj.PaintStars()});
+            obj.WaitBeforePaint($ce);
         } else {
             obj.PaintStars();
         }

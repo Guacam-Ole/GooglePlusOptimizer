@@ -12,6 +12,7 @@ and open the template in the editor.
     float: left;
     margin-right: 5px;
     margin-left: -5px;
+    cursor: pointer;
 }
 
 .miniBookmark img {
