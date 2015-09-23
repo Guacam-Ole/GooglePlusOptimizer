@@ -378,6 +378,9 @@ function FilterBlocks(changedElements) {
         HideOnAttr($ce, 'data-iid', 'sii2:105');
         HideOnAttr($ce, 'data-iid', 'sii2:106');
     });
+    SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
+        HideOnAttr($ce, 'data-iid', 'sii2:102');
+    });
 }
 
 function ShowWidgets() {

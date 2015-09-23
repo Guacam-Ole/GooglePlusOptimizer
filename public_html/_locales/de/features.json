@@ -68,6 +68,15 @@
   },
   {
     "Version": "1.0",
+    "Short": "trending",
+    "Title": "Trending",
+    "Description": "Wen kümmert es, was Trend?",
+    "ShowInWizard": true,
+    "Image": "trending.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
     "Short": "custom",
     "Title": "Volltext-Filter",
     "Description": "<p>Hierüber lässt sich jeder beliebige Text herausfiltern. Der Filter ignoriert Groß/Kleinschreibung.<br/> <br/></p><p><div><input type='text' class='form-control tags tokensText' data-role='tagsinput' value='Hamburger Sportverein' style='display: none;'/></div></p> ",
