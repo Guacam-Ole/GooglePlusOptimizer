@@ -68,6 +68,15 @@
   },
   {
     "Version": "1.0",
+    "Short": "trending",
+    "Title": "Trending",
+    "Description": "Who cares what's trending? Don't be a sheep!",
+    "ShowInWizard": true,
+    "Image": "trending.png",
+    "Cost": 0
+  },
+  {
+    "Version": "1.0",
     "Short": "custom",
     "Title": "Custom-Filter",
     "Description": "<p>Filter ANY text in any post. This filter isn't case-sensitive.<br/> <br/></p><p><div><input type='text' class='form-control tags tokensText' data-role='tagsinput' value='' style='display: none;'/></div></p> ",
