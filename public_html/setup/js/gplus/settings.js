@@ -33,7 +33,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("filterLinks"));
         obj.AllSettings.push(new gpoSetting("filterGifOnly"));
         obj.AllSettings.push(new gpoSetting("filterMp4Only"));
-        obj.AllSettings.push(new gpoSetting("filterSharedCircles"));
+        //obj.AllSettings.push(new gpoSetting("filterSharedCircles"));
         obj.AllSettings.push(new gpoSetting("displayTrophy"));
         obj.AllSettings.push(new gpoSetting("displayLang"));
         obj.AllSettings.push(new gpoSetting("showEmoticons"));
@@ -52,6 +52,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("weatherWidget"));
         obj.AllSettings.push(new gpoSetting("enableQs"));
         obj.AllSettings.push(new gpoSetting("UserCols"));
+        obj.AllSettings.push(new gpoSetting("postillon"));
     },
     Load: function (ret) {
         var obj = this;

@@ -30,15 +30,7 @@
     "Image": "yt.png",
     "Cost": 0
   },
-  {
-    "Version": "2.6",
-    "Short": "filterSharedCircles",
-    "Title": "Shared Circles",
-    "Description": "This filter removes all shared cirlces from your stream.",
-    "ShowInWizard": true,
-    "Image": "circleshare.png",
-    "Cost": 0
-  },
+
   {
     "Version": "1.0",
     "Short": "community",

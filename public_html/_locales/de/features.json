@@ -31,15 +31,6 @@
     "Cost": 0
   },
   {
-    "Version": "2.6",
-    "Short": "filterSharedCircles",
-    "Title": "Geteilte Kreise",
-    "Description": "Dieser Filter entfernt sämtliche geteilten Kreise aus dem Stream.",
-    "ShowInWizard": true,
-    "Image": "circleshare.png",
-    "Cost": 0
-  },
-  {
     "Version": "1.0",
     "Short": "community",
     "Title": "Community-Einladungen",
@@ -173,6 +164,15 @@
     "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt wird ein Sicherheitshinweis eingeblendet.",
     "ShowInWizard": true,
     "Image": "lsr.png",
+    "Cost": 2
+  },
+  {
+    "Version": "3.0.2",
+    "Short": "postillon",
+    "Title": "Brüllzeichen (Postillon)",
+    "Description": "Überbordende Ausrufezeichen und Fragezeichen - Cascaden werden entsprechend den Vorschlägen des Dudenvorlags mittels Brüllzeichen (ﾔ) und Interrobang(‽) dargstellt. Genauere Informationen dazu <a href='http://www.der-postillon.com/2010/10/neue-satzzeichen-sollen-internet.html'>beim Postillon</a>",
+    "ShowInWizard": true,
+    "Image": "postillon.png",
     "Cost": 2
   },
   {

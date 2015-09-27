@@ -363,6 +363,7 @@ function DoQuickshare(changedElements, step) {
 }
 
 function FilterBlocks(changedElements) {
+    changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
     SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
@@ -428,6 +429,11 @@ function StartFilter(changedElements) {
         }
     });
 
+    /* Postillon */
+    SingleMeasureBool(Subs.Settings.Values.Postillon, "Postillon", function() {
+        DOMFilterPostillon($ce);
+    });
+
     /* Blöcke */
     SingleMeasureBool(Subs.Settings.Values.Plus1, "Plus1", function () {
         HideOnContent($ce, $ce.find('.xv'));
@@ -446,9 +452,11 @@ function StartFilter(changedElements) {
     SingleMeasureBool((Subs.Settings.Values.Custom && Subs.Settings.Values.Fulltext !== null && Subs.Settings.Values.Fulltext !== ""), "Fulltext", function () {
         DOMFilterFreetext($ce);
     });
+    /*
     SingleMeasureBool(Subs.Settings.Values.FilterSharedCircles, "Shared Circles", function () {
         HideOnContent($ce, $ce.find('div.ki.ve').find('div.Wy'));
     });
+    */
 
 
     /* Erweiterungen */
@@ -499,6 +507,22 @@ function DOMFilterFreetext($ce) {
     } catch (ex) {
         Log.Error(ex);
     }
+}
+
+/*
+Postillon
+ */
+function DOMFilterPostillon ($ce) {
+    var obj = this;
+
+    $ce.find('.Ct').each(function () {
+        if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
+            $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
+        }
+        if ($(this).text().indexOf("???!!?") >= 0) {
+            $(this).html($(this).html().replaceAll("???!!?", "‽"));
+        }
+    });
 }
 
 /**
@@ -679,12 +703,13 @@ function FirstStartInit() {
     $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
         StartFilter(value);
     });
-    $('.nja').each(function (index, value) {
+    $('.nja:not(".gplusoptimizer")').each(function (index, value) {
         FilterBlocks(value);
     });
+}
 
-
-
+function StartFilterLoop() {
+    var timerId = setInterval(FirstStartInit, 10000);   // Einmal alle 10 Sekunden ungefiltere Elemente filtern
 }
 
 /**
