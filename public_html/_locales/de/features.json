@@ -58,10 +58,10 @@
     "Cost": 0
   },
   {
-    "Version": "1.0",
+    "Version": "3.0.2",
     "Short": "trending",
     "Title": "Trending",
-    "Description": "Wen kümmert es, was Trend?",
+    "Description": "Wen kümmert es, was im Trend ist?",
     "ShowInWizard": true,
     "Image": "trending.png",
     "Cost": 0
