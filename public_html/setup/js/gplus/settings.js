@@ -21,6 +21,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("birthday"));
         obj.AllSettings.push(new gpoSetting("known"));
         obj.AllSettings.push(new gpoSetting("trending"));
+        obj.AllSettings.push(new gpoSetting("featcol"));
         obj.AllSettings.push(new gpoSetting("hashTags"));
         obj.AllSettings.push(new gpoSetting("fulltext"));
         obj.AllSettings.push(new gpoSetting("WHAMWhamText"));
