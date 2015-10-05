@@ -67,6 +67,15 @@
     "Cost": 0
   },
   {
+    "Version": "3.0.3",
+    "Short": "featcol",
+    "Title": "Featured Collections",
+    "Description": "Wenn Sie nicht für diesen Auflistungen kümmern, aktivieren Sie diesen Filter.",
+    "ShowInWizard": true,
+    "Image": "featured-collections.png",
+    "Cost": 0
+  },
+  {
     "Version": "1.0",
     "Short": "custom",
     "Title": "Volltext-Filter",

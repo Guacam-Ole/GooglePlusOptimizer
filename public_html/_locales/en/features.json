@@ -68,6 +68,15 @@
     "Cost": 0
   },
   {
+    "Version": "3.0.3",
+    "Short": "featcol",
+    "Title": "Featured Collections",
+    "Description": "If you don't care for these collections, enable this filter.",
+    "ShowInWizard": true,
+    "Image": "featured-collections.png",
+    "Cost": 0
+  },
+  {
     "Version": "1.0",
     "Short": "custom",
     "Title": "Custom-Filter",

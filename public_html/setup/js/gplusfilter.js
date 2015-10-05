@@ -382,6 +382,9 @@ function FilterBlocks(changedElements) {
     SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
         HideOnAttr($ce, 'data-iid', 'sii2:102');
     });
+    SingleMeasureBool(Subs.Settings.Values.Featcol, "Featured Collections", function () {
+        HideOnAttr($ce, 'data-iid', 'sii2:165');
+    });
 }
 
 function ShowWidgets() {
