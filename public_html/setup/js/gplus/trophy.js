@@ -5,7 +5,9 @@ var gpoTrophy = function () {
 
 gpoTrophy.prototype = {
     constructor: gpoTrophy,
-    Init: function () {
+    OldLayout:true,
+    Init: function (oldLayout) {
+        this.OldLayout=oldLayout;
         var obj = this;
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/trophy.css") + "' type='text/css' media='screen' />"));
         obj.GetUsers();
@@ -31,8 +33,14 @@ gpoTrophy.prototype = {
     },
     About: function () {
         var obj = this;
-        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
-            return;
+        if (obj.OldLayout) {
+            if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
+                return;
+            }
+        } else {
+            if ($('.yLFagc')===null || $('.yLFagc').length===0) {
+                return;
+            }
         }
         if ($('.trophyDisplay').length > 0) {
             // schon gezeichnet
@@ -42,12 +50,19 @@ gpoTrophy.prototype = {
         }
     },
     GetCurrentUserId: function () {
-        var dirtyId = $('[role=tablist]').attr("id");
-        if (dirtyId!==undefined) {
-            return dirtyId.split('-')[0];
+        if (this.OldLayout) {
+            var dirtyId = $('[role=tablist]').attr("id");
+
+            if (dirtyId !== undefined) {
+                return dirtyId.split('-')[0];
+            } else {
+                return undefined;
+            }
         } else {
-            return undefined;
+            return $('[jsAction="JIbuQc:yRYTGf(hL3Im);"]').data("oid");
         }
+
+
     },
     Draw: function (hover, $trophy, userId) {
 
@@ -85,14 +100,23 @@ gpoTrophy.prototype = {
         var obj = this;
         if (hover) {
 
-            obj.RenderHover(trophies, $trophy.closest('.InfoUsrTop').next(), userId, false);
+            if (obj.OldLayout) {
+                obj.RenderHover(trophies, $trophy.closest('.InfoUsrTop').next(), userId, false);
+            } else {
+                obj.RenderHover(trophies, $trophy.closest('.dzuq1e').next(), userId, true);
+            }
+
         } else {
             if ($('.trophyDisplay').length > 0) {
                 // schon gezeichnet
                 return;
             }
+            if (obj.OldLayout) {
+                obj.RenderHover(trophies, $('.Ypa.jw.am:first'), userId, true);
+            } else {
+                obj.RenderHover(trophies, $('.H68wj:first'), userId, true);
 
-            obj.RenderHover(trophies, $('.Ypa.jw.am:first'), userId, true);
+            }
         }
     },
     ItsMe: function () {
@@ -108,7 +132,7 @@ gpoTrophy.prototype = {
         var noTrophiesYet = "";
 
 
-        var html = "<div  class=\"trophyDisplay Ee i5a vna CVb\" role=\"article\">"
+        var html = "<div  class=\"trophyDisplay Ee i5a vna CVb Ihwked\" role=\"article\">"
             + "<div class=\"ZYa ukoEtfi\"><div class=\"Lqc\"><div class=\"F9a\">" + chrome.i18n.getMessage("trophies") + "</div></div><br/><br/>"
             + "<div class=\"Uia\">"
             + "{{NOTROPHY}}"
@@ -121,10 +145,18 @@ gpoTrophy.prototype = {
             noTrophiesYet = this.GetUserName() + " " + chrome.i18n.getMessage("hasnotrophies");
         }
         html = html.replace("{{ITSME}}", itsmeblock).replace("{{NOTROPHY}}", noTrophiesYet);
-        $('.Ypa.jw.am:first').prepend(html);
+        if (this.OldLayout) {
+            $('.Ypa.jw.am:first').prepend(html);
+        } else {
+            $('.H68wj:first').prepend(html);
+        }
     },
     GetUserName: function () {
-        return $('[guidedhelpid="profile_name"]').html();
+        if (this.OldLayout) {
+            return $('[guidedhelpid="profile_name"]').html();
+        } else {
+            return $('.RdrCV').text();
+        }
     },
     GetUsers: function () {
         var obj = this;
@@ -147,13 +179,24 @@ gpoTrophy.prototype = {
         if (obj.AllUsers !== undefined && obj.AllUsers !== null && obj.AllUsers.length > 0) {
             for (var i in obj.AllUsers) {
                 var currentUser = obj.AllUsers[i].id;
-                if ($ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0) {
-                    $ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').each(function () {
-                        AddHeadWrapper($(this));
-                        if ($(this).html().indexOf('trophyImg') === -1) {
-                            $(this).find('.InfoUsrTop').prepend("<a href=\"#\"><img class=\"trophyImg\" userId='" + currentUser + "' title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
-                        }
-                    });
+                if (obj.OldLayout) {
+                    if ($ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0) {
+                        $ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').each(function () {
+                            AddHeadWrapper($(this));
+                            if ($(this).html().indexOf('trophyImg') === -1) {
+                                $(this).find('.InfoUsrTop').prepend("<a><img class=\"trophyImg\" userId='" + currentUser + "' title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
+                            }
+                        });
+                    }
+                } else {
+                    if ($ce.find('a[data-profileid="' + currentUser + '"]').closest('div').length > 0) {
+                        $ce.find('a[data-profileid="' + currentUser + '"]').closest('div').each(function () {
+                            AddHeadWrapper($(this));
+                            if ($(this).html().indexOf('trophyImg') === -1) {
+                                $(this).find('.InfoUsrTop').prepend("<a><img class=\"trophyImg\" userId='" + currentUser + "' title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
+                            }
+                        });
+                    }
                 }
             }
         }
