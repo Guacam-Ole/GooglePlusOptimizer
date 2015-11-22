@@ -1,6 +1,6 @@
 var oldLayout=true;
+var loaded=false;
 
-;
 this.Browser = new Browser();
 this.Log=new gpoLog();
 this.Log.Init();
@@ -92,8 +92,10 @@ var newObserver= new MutationObserver(function (mutations) {
             });
         }
     });
-    ShowWidgets();
-    MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
+    if (loaded) {
+        ShowWidgets();
+        MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
+    }
 });
 
 var observer = new MutationObserver(function (mutations) {
@@ -140,8 +142,10 @@ var observer = new MutationObserver(function (mutations) {
 
         }
     });
-    ShowWidgets();
-    MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
+    if (loaded) {
+        ShowWidgets();
+        MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
+    }
 });
 
 function StartObservation() {
@@ -162,6 +166,7 @@ function StartObservation() {
     }
 }
 
+InitSettings();
 
 $(document).ready(function () {
 
@@ -169,7 +174,7 @@ $(document).ready(function () {
     console.log('g+ - filter started');
     oldLayout=$('.FGhx7c')===null || $('.FGhx7c').length===0;
     console.log(oldLayout?"(old Layout)":"(new Layout)");
-
+    StartObservation();
     chrome.runtime.sendMessage({Action: "SetSetting", Name: "oldLayout", Value: oldLayout});
 
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
@@ -179,7 +184,7 @@ $(document).ready(function () {
     else  {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
 
-        InitSettings();
+
 
         if (oldLayout) {
             $(document).on('click', '.unhideImage', function () {
@@ -698,8 +703,9 @@ function InitObjects() {
     if ($('.gb_7a').length>0) {
         // Gültig in beiden Layouts
         chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_7a').text()});
+        loaded=true;
     }
-    StartObservation();
+//    StartObservation();
 }
 
 function PageLoad() {
@@ -745,6 +751,7 @@ function PageLoad() {
 
 
         FirstStartInit();
+        //RestartFilter();
 
 
         Log.Info('G+Filter: Google+ - Filter initialisiert');
@@ -753,17 +760,30 @@ function PageLoad() {
 function RestartFilter() {
     window.setTimeout(function() {
             FirstStartInit();
-    },1000);
+    },5000);
 }
 
 function FirstStartInit() {
-    // Initial Mutation Observer simulieren:
-    $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
-        StartFilter(value);
-    });
-    $('.nja:not(".gplusoptimizer")').each(function (index, value) {
-        FilterBlocks(value);
-    });
+    if (oldLayout) {
+        // Initial Mutation Observer simulieren:
+        $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
+            StartFilter(value);
+        });
+        $('.nja:not(".gplusoptimizer")').each(function (index, value) {
+            FilterBlocks(value);
+        });
+    } else {
+        $('[jsmodel="rIipNe iMhCXb"]:not(".gplusoptimizer")').each(function (index, value) {
+            StartFilter(value);
+        });
+
+    }
+    if ($('.gplusoptimizer').length===0) {
+        // Keine blöcke bearbeitet, vermutlich noch am laden
+        RestartFilter();
+    }
+
+
 }
 
 function StartFilterLoop() {
