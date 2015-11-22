@@ -14,10 +14,18 @@ gpoTrophy.prototype = {
 
         $(document).on({
             click: function () {
-                if ($(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').length > 0) {
-                    $(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').remove();
+                if (obj.OldLayout) {
+                    if ($(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').length > 0) {
+                        $(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').remove();
+                    } else {
+                        obj.Hover($(this));
+                    }
                 } else {
-                    obj.Hover($(this));
+                    if ($(this).closest('.Ihwked').find('.trophyDisplay').length > 0) {
+                        $(this).closest('.Ihwked').find('.trophyDisplay').remove();
+                    } else {
+                        obj.Hover($(this));
+                    }
                 }
                 return false;
             }

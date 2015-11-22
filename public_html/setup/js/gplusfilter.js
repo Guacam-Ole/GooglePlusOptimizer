@@ -166,7 +166,7 @@ function StartObservation() {
     }
 }
 
-InitSettings();
+
 
 $(document).ready(function () {
 
@@ -174,6 +174,7 @@ $(document).ready(function () {
     console.log('g+ - filter started');
     oldLayout=$('.FGhx7c')===null || $('.FGhx7c').length===0;
     console.log(oldLayout?"(old Layout)":"(new Layout)");
+    InitSettings();
     StartObservation();
     chrome.runtime.sendMessage({Action: "SetSetting", Name: "oldLayout", Value: oldLayout});
 
