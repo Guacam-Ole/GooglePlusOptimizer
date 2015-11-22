@@ -5,12 +5,14 @@ var gpoClock = function () {
     this.ClockObj = null;
     this.Minutes;
     this.TargetTime;
-    //var imageHost = "https://files.oles-cloud.de/optimizer/";
+
 };
 
 gpoClock.prototype = {
     constructor: gpoClock,
-    Init: function () {
+    OldLayout: true,
+    Init: function (oldLayout) {
+        this.OldLayout=oldLayout;
         var obj = this;
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/jquery-ui.min.css") + "' type='text/css' media='screen' />"));
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
@@ -133,7 +135,12 @@ gpoClock.prototype = {
         var obj = this;
 
         if ($('.clock').length === 0) {
-            $('.ona.Fdb').prepend(obj.ClockObj);
+
+            if (this.OldLayout) {
+                $('.ona.Fdb').prepend(obj.ClockObj);
+            } else {
+                $('.rymPhb').prepend(obj.ClockObj);
+            }
             $('.clockLabel').text("00:00");
             $(".slider-clock").slider({value: 0, min: 0, max: 60});
             obj.UpdateWatch();

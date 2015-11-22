@@ -4,7 +4,9 @@ var gpoLsr = function () {
 
 gpoLsr.prototype = {
     constructor: gpoLsr,
-    Init: function () {
+    OldLayout:true,
+    Init: function (oldLayout) {
+        this.OldLayout=oldLayout;
         this.LoadLsrList();
     },
     Dom: function ($ce) {
@@ -31,10 +33,19 @@ gpoLsr.prototype = {
         }
         var obj = this;
         var mark = function ($el) {
-            $el.find('div[jsname="P3RoXc"]')
-                .not('.wrng')
-                .addClass('wrng')
-                .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+
+            if (oldLayout) {
+                $el.find('div[jsname="P3RoXc"]')
+                    .not('.wrng')
+                    .addClass('wrng')
+                    .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+            } else {
+                $el.find('div[jsname="WsjYwc"]')
+                    .not('.wrng')
+                    .addClass('wrng')
+                    .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+
+            }
         };
 
         var markComment = function ($el) {
@@ -44,30 +55,50 @@ gpoLsr.prototype = {
         };
 
         // Hauptbeitrag:
-        $ce.find('div.Xx.xJ a').each(function (i, div) {
-            obj.DomainBlacklist.forEach(function (domain) {
-                if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                    mark($(div).closest("div.Yp.yt.Xa"));
-                }
+        if (obj.OldLayout) {
+            $ce.find('div.Xx.xJ a').each(function (i, div) {
+                obj.DomainBlacklist.forEach(function (domain) {
+                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
+                        mark($(div).closest("div.Yp.yt.Xa"));
+                    }
+                });
             });
-        });
-        $ce.find('div.yx.Nf a').each(function (i, div) {
-            obj.DomainBlacklist.forEach(function (domain) {
-                if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                    mark($(div).closest("div.Yp.yt.Xa"));
-                }
+            $ce.find('div.yx.Nf a').each(function (i, div) {
+                obj.DomainBlacklist.forEach(function (domain) {
+                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
+                        mark($(div).closest("div.Yp.yt.Xa"));
+                    }
+                });
             });
-        });
+        } else {
+
+            $ce.find('div.bldpQb a').each(function (i, div) {
+                obj.DomainBlacklist.forEach(function (domain) {
+                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
+                        mark($(div).closest('div[jsname="WsjYwc"]'));
+                    }
+                });
+            });
+        }
 
         // Kommentare:
-        $ce.find('div.Ik.Wv a').each(function (i, div) {
-            obj.DomainBlacklist.forEach(function (domain) {
-                if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                    markComment($(div).closest("div.Ik.Wv"));
-                }
+        if (obj.OldLayout) {
+            $ce.find('div.Ik.Wv a').each(function (i, div) {
+                obj.DomainBlacklist.forEach(function (domain) {
+                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
+                        markComment($(div).closest("div.Ik.Wv"));
+                    }
+                });
             });
-        });
-
+        } else {
+            $ce.find('div.KwDIr a').each(function (i, div) {
+                obj.DomainBlacklist.forEach(function (domain) {
+                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
+                        markComment($(div).closest("li.M24KRd"));
+                    }
+                });
+            });
+        }
     }
 };
 

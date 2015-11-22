@@ -7,7 +7,9 @@ var gpoUser = function () {
 
 gpoUser.prototype = {
     constructor: gpoUser,
-    Init: function () {
+    OldLayout:true,
+    Init: function (oldLayout) {
+        this.OldLayout=oldLayout;
         this.OptStartColors();
     },
     Dom: function ($ce) {
@@ -58,18 +60,34 @@ gpoUser.prototype = {
                     return e.Color === currentUserSetting.Color;
                 });
                 if (paintColor.length > 0) {
-                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
-                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass(paintColor[0].CssClass);
+                    if (obj.OldLayout) {
+                        $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
+                        $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass(paintColor[0].CssClass);
+                    } else {
+                     //   $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
+                        $ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('.Ihwked.UB0dDd.GcESAf').addClass(paintColor[0].CssClass);
+                    }
                 }
             }
             if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
-                if ($ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').length > 0) {
-                    $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function () {
-                        AddHeadWrapper($(this));
-                        if ($(this).html().indexOf('infoImg') === -1) {
-                            $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
-                        }
-                    });
+                if (obj.OldLayout) {
+                    if ($ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').length > 0) {
+                        $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('.lea').each(function () {
+                            AddHeadWrapper($(this));
+                            if ($(this).html().indexOf('infoImg') === -1) {
+                                $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
+                            }
+                        });
+                    }
+                } else {
+                    if ($ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('div').length > 0) {
+                        $ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('div').each(function () {
+                            AddHeadWrapper($(this));
+                            if ($(this).html().indexOf('infoImg') === -1) {
+                                $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
+                            }
+                        });
+                    }
                 }
             }
         }
