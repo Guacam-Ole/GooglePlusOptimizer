@@ -70,7 +70,7 @@
     "Version": "3.0.3",
     "Short": "featcol",
     "Title": "Featured Collections",
-    "Description": "Wenn Sie nicht für diesen Auflistungen kümmern, aktivieren Sie diesen Filter.",
+    "Description": "Doch lieber selbst nach spannenden Themen suchen.",
     "ShowInWizard": true,
     "Image": "featured-collections.png",
     "Cost": 0

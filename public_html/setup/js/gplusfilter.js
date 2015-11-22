@@ -1,4 +1,6 @@
-console.log('g+ - filter started');
+var oldLayout=true;
+
+;
 this.Browser = new Browser();
 this.Log=new gpoLog();
 this.Log.Init();
@@ -24,10 +26,75 @@ var Subs = {
     Weather: null
 };
 
+/** Hilfsfunktionen: **/
+function CleanDate(anyDate) {
+    if (anyDate.indexOf("(") > 0) {
+        return anyDate.substring(0, anyDate.indexOf("(") - 1);
+    }
+}
+
+
+// Case - INSensitive Contains Variant:
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
+    return function (elem) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});
+
+String.prototype.replaceAll = function (str1, str2, ignore) {
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
+};
+
+
+function SortByName(a, b) {
+    var aName = a.text.toLowerCase();
+    var bName = b.text.toLowerCase();
+    return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+}
+
+function AddHeadWrapper(parent) {
+    if (parent.html().indexOf('InfoUsrTop') === -1) {
+        parent.prepend("<div class='InfoUsrTop'>");
+    }
+}
+
 var oldUrl=window.location.href;
 
 
 var forEach = Array.prototype.forEach;
+
+var newObserver= new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (oldUrl!==window.location.href) {
+            RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
+        }
+        oldUrl=window.location.href;
+        if (mutation.type === "childList") {
+            Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
+            forEach.call(mutation.addedNodes, function (addedNode) {
+                if (addedNode.classList !== undefined) {
+                    if (addedNode.classList.contains('PD')) {
+                        // Gibt (noch) keine Hashtaglisten im neuen Layout
+                    } else if (addedNode.classList.contains('nja')) {
+                        // Gibt (noch) keine Vorschläge u.ä. im neuen Layout
+                    }
+                    else {
+                        var jsModel = addedNode.attributes["jsmodel"];
+                        if (jsModel !== undefined && jsModel.value === "rIipNe iMhCXb") { // Neuer Artikelblock
+                            Log.Debug("DOM JS:"+addedNode.classList);
+                            StartFilter(addedNode);
+                        } else {
+                            Log.Debug("DOM IGNORED:"+addedNode.classList);
+                            //               Log.Debug("iid:"+addedNode.data("id"));
+                        }
+                    }
+                }
+            });
+        }
+    });
+    ShowWidgets();
+    MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
+});
 
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
@@ -78,119 +145,79 @@ var observer = new MutationObserver(function (mutations) {
 });
 
 function StartObservation() {
-    observer.observe(document, {
-        childList: true,
-        subtree: true,
-        characterData: false,
-        attributes: false
-    });
+    if (oldLayout) {
+        observer.observe(document, {
+            childList: true,
+            subtree: true,
+            characterData: false,
+            attributes: false
+        });
+    } else {
+        newObserver.observe(document, {
+            childList: true,
+            subtree: true,
+            characterData: false,
+            attributes: false
+        });
+    }
 }
 
-// Case - INSensitive Contains Variant:
-jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
-    return function (elem) {
-        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-    };
-});
-
-String.prototype.replaceAll = function (str1, str2, ignore) {
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
-};
 
 $(document).ready(function () {
+
+
+    console.log('g+ - filter started');
+    oldLayout=$('.FGhx7c')===null || $('.FGhx7c').length===0;
+    console.log(oldLayout?"(old Layout)":"(new Layout)");
+
+    chrome.runtime.sendMessage({Action: "SetSetting", Name: "oldLayout", Value: oldLayout});
+
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
         LoadSetup();
-    }
-    else if (window.location.href.indexOf("/communities") > 0 && (window.location.href.indexOf("/communities/")== -1)) {
-        SaveCommunities();
     }
     else  {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
 
         InitSettings();
 
-        $(document).on('click', '.unhideImage', function () {
-            $(this).parent().find('.hidewrapper').show();
-            $(this).remove();
-            return false;
-        });
+        if (oldLayout) {
+            $(document).on('click', '.unhideImage', function () {
+                $(this).parent().find('.hidewrapper').show();
+                $(this).remove();
+                return false;
+            });
 
-        $(document).on('click', '.removeHashTag', function () {
-            Log.Info('Add Hashtag');
-            if (Subs.Settings.Values.HashTags === null) {
-                Subs.Settings.Values.HashTags = "";
-            }
-            var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
-            if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$"))) {
-                // Einmal reicht...
-                return;
-            }
-            AddHashtagToList(newHashtag);
-            $(this).hide();
+            $(document).on('click', '.removeHashTag', function () {
+                Log.Info('Add Hashtag');
+                if (Subs.Settings.Values.HashTags === null) {
+                    Subs.Settings.Values.HashTags = "";
+                }
+                var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
+                if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$"))) {
+                    // Einmal reicht...
+                    return;
+                }
+                AddHashtagToList(newHashtag);
+                $(this).hide();
 
-            return false;
-        });
-        $(document).on('click','.JZ',function() {
-            RestartFilter();  // Reload Page. Limitieren auf 20 neue Objekte, sonst wirds zu langsam
-        });
-
-
+                return false;
+            });
+            $(document).on('click', '.JZ', function () {
+                RestartFilter();  // Reload Page. Limitieren auf 20 neue Objekte, sonst wirds zu langsam
+            });
+        }
     }
 });
-function DisplayHashtags() {
 
-}
-
-function SortByName(a, b) {
-    var aName = a.text.toLowerCase();
-    var bName = b.text.toLowerCase();
-    return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
-}
-
-
-function GetAllCircles() {
-    // Kreise auslesen
-    $('script').each(function () {
-        try {
-            if (this.innerHTML.indexOf("AF_initDataCallback({key: '12'") > -1) {
-                var newCircles = [];
-                var complete = this.innerHTML;
-                var startJSON = complete.indexOf('[');
-                var endJSON = complete.lastIndexOf(']');
-                var cstr = complete.substring(startJSON, endJSON + 1);
-
-                while (cstr.indexOf(",,") > 0) {
-                    cstr = cstr.replace(",,", ",null,");
-                }
-
-                var allCircles = $.parseJSON(cstr);
-                if (allCircles.length === 1) {
-                    for (i = 0; i < allCircles[0].length; i++) {
-                        if (allCircles[0][i].length === 2 && allCircles[0][i][1].length === 16) {
-                            var circleName = allCircles[0][i][1][0];
-                            newCircles.push(circleName);
-                        }
-                    }
-                }
-                chrome.runtime.sendMessage({Action: "SaveCircles", Circles: newCircles});
-            }
-        } catch (ex) {
-        }
-    });
-}
-
-
-function AddHeadWrapper(parent) {
-    if (parent.html().indexOf('InfoUsrTop') === -1) {
-        parent.prepend("<div class='InfoUsrTop'>");
-    }
-}
 
 /**
  * Wizard-Kachel zeichnen
  */
 function DrawWizardTile() {
+    if (!oldLayout) {
+        return;    // Derzeit noch kein Wizard im neuen Layout, weil: Sieht echt scheiße aus
+    }
     //return;
     try {
         var wizard=new gpoWizard();
@@ -201,7 +228,12 @@ function DrawWizardTile() {
         if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
             $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
                 var htmlObject = $('<div/>').html(htmlWizard).contents();
-                $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+                if (oldLayout) {
+                    $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+                } else {
+                    $('.H68wj.jxKp7 :first').prepend(htmlObject.find('[data-iid="wizard"]'));
+
+                }
                 $('#wizardStart').click(function () {
                     $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap.min.css") + "' type='text/css' media='screen' />"));
                     $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
@@ -233,12 +265,8 @@ function InitGoogle() {
     PageLoad();
 
     chrome.extension.sendMessage("show_page_action");
-
-
 }
 
-function LoadGoogle() {
-}
 
 /**
  * Widgets zeichnen
@@ -249,21 +277,14 @@ function DrawWidgets() {
     if (Subs.Weather !== null) {
         Subs.Measure.Do("weatherEnabled", function () {
             Subs.Weather.Settings = Subs.Settings.Values.WeatherWidget;
-            Subs.Weather.Init();
-        });
-    }
-
-    if (Subs.Soccer !== null) {
-        Subs.Soccer.Settings = Subs.Settings.Values.Sport;
-        Subs.Measure.Do("sportEnabled", function () {
-            Subs.Soccer.Init();
+            Subs.Weather.Init(oldLayout);
         });
     }
 
     if (Subs.Clock !== null) {
         Subs.Measure.Do("stoppwatch", function () {
             CreateBlock(JSON.parse(Subs.Settings.Values.Stoppwatch) + 1, "clock");
-            Subs.Clock.Init();
+            Subs.Clock.Init(oldLayout);
         });
     }
 }
@@ -273,11 +294,21 @@ function DrawWidgets() {
  */
 function CountColumns() {
     try {
-        var $wrapper = $('.ona.Fdb');
-        if ($wrapper.length > 0) {
-            var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
-            if (columns > 0) {
-                chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
+        if (oldLayout) {
+            var $wrapper = $('.ona.Fdb');
+            if ($wrapper.length > 0) {
+                var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
+                if (columns > 0) {
+                    chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
+                }
+            }
+        } else {
+            var $wrapper = $('.jx5iDb.pd4VHb');
+            if ($wrapper.length > 0) {
+                var columns = $wrapper.find('.H68wj.jxKp7').first().nextUntil(':not(.H68wj.jxKp7)').addBack().length;
+                if (columns > 0) {
+                    chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
+                }
             }
         }
     } catch (ex) {
@@ -285,30 +316,29 @@ function CountColumns() {
     }
 }
 
-function CleanDate(anyDate) {
-    if (anyDate.indexOf("(") > 0) {
-        return anyDate.substring(0, anyDate.indexOf("(") - 1);
-    }
-}
+
 
 function MoveHeaderIcon() {
-    if (Subs.Settings.Values.UseBookmarks || Subs.Settings.Values.DisplayLang) {
-        var icondiff = 0;
-        if (Subs.Settings.Values.DisplayLang) {
-            icondiff += 60;
-        }
-        if (Subs.Settings.Values.UseBookmarks) {
-            icondiff += 60;
-        }
-        if ($('.V9b').length > 0) {
-            var oldStyle = $('.V9b').attr('style');
-            if (oldStyle.indexOf("modified") === -1) {
-                var oldValEnd = oldStyle.indexOf("px");
-                var oldValStart = oldStyle.indexOf(" ");
-                var oldVal = oldStyle.substring(oldValStart, oldValEnd);
-                var oldValI = parseInt(oldVal);
-                $('.V9b').attr('style', "right: " + (oldValI + icondiff) + "px; modified");
+    if (oldLayout) {
+        // Kein Floating im neuen Layout
+        if (Subs.Settings.Values.UseBookmarks || Subs.Settings.Values.DisplayLang) {
+            var icondiff = 0;
+            if (Subs.Settings.Values.DisplayLang) {
+                icondiff += 60;
             }
+            if (Subs.Settings.Values.UseBookmarks) {
+                icondiff += 60;
+            }
+                if ($('.V9b').length > 0) {
+                    var oldStyle = $('.V9b').attr('style');
+                    if (oldStyle.indexOf("modified") === -1) {
+                        var oldValEnd = oldStyle.indexOf("px");
+                        var oldValStart = oldStyle.indexOf(" ");
+                        var oldVal = oldStyle.substring(oldValStart, oldValEnd);
+                        var oldValI = parseInt(oldVal);
+                        $('.V9b').attr('style', "right: " + (oldValI + icondiff) + "px; modified");
+                    }
+                }
         }
     }
 }
@@ -340,29 +370,12 @@ function HideOnAttr(parent, attr, value) {
     }
 }
 
-function SaveCommunities(changedElements) {
-    // Beigetretene Communities:
-    var communities = [];
-    $('.UYd').find('.JUKJAb').each(function (index, value) {
-        communities.push($(value).find('.ATc').text());
-    });
 
-    // Eigene Communities:
-    //var communities = [];
-    $('.VYd').find('.RbAFad').each(function (index, value) {
-        communities.push($(value).find('.ATc').text());
-    });
-
-    chrome.runtime.sendMessage({Action: "SaveCommunities", Communities: communities});
-}
-
-function DoQuickshare(changedElements, step) {
-    if (Subs.Quickshare !== null) {
-        Subs.Quickshare.Events(changedElements, step);
-    }
-}
 
 function FilterBlocks(changedElements) {
+    if (!oldLayout) {
+        return;
+    }
     changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
@@ -409,29 +422,43 @@ function StartFilter(changedElements) {
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
 
-    if (Subs.Quickshare !== null) {
-        Subs.Measure.Do("QuickShares", function () {
-            Subs.Quickshare.Events();   // TODO: prüfen!
-        });
-    }
+
 
    // MoveHeaderIcon();   // Prüfen wg. Performance!
 
     /* WHAM */
     SingleMeasureBool(Subs.Settings.Values.Wham, "Wham", function () {
         if (Subs.Settings.Values.WHAMWhamText) {
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("wham")'));
+            if (oldLayout) {
+                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("wham")'));
+            } else {
+                HideOnContent($ce, $ce.find('.ELUvyf:Contains("wham")'));
+            }
         }
         if (Subs.Settings.Values.WHAMChristmasText) {
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("Last Christmas")'));
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("LastChristmas")'));
+            if (oldLayout) {
+                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("Last Christmas")'));
+                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("LastChristmas")'));
+            } else {
+                HideOnContent($ce, $ce.find('.ELUvyf:Contains("Last Christmas")'));
+                HideOnContent($ce, $ce.find('.ELUvyf:Contains("LastChristmas")'));
+            }
         }
         if (Subs.Settings.Values.WHAMWhamLink) {
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("wham")'));
+            if (oldLayout) {
+                HideOnContent($ce, $ce.find('.yx.Nf:Contains("wham")'));
+            } else {
+                HideOnContent($ce, $ce.find('.IJZbFe :Contains("wham")'));
+            }
         }
         if (Subs.Settings.Values.WHAMChristmasLink) {
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("LastChristmas")'));
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("Last Christmas")'));
+            if (oldLayout) {
+                HideOnContent($ce, $ce.find('.yx.Nf:Contains("LastChristmas")'));
+                HideOnContent($ce, $ce.find('.yx.Nf:Contains("Last Christmas")'));
+            } else {
+                HideOnContent($ce, $ce.find('.IJZbFe :Contains("LastChristmas")'));
+                HideOnContent($ce, $ce.find('.IJZbFe :Contains("Last Christmas")'));
+            }
         }
     });
 
@@ -442,11 +469,13 @@ function StartFilter(changedElements) {
 
     /* Blöcke */
     SingleMeasureBool(Subs.Settings.Values.Plus1, "Plus1", function () {
-        HideOnContent($ce, $ce.find('.xv'));
+        if (oldLayout) {
+            HideOnContent($ce, $ce.find('.xv'));
+        } else {
+            HideOnContent($ce, $ce.find('.RcaDXc'));
+        }
     });
-    SingleMeasureBool(Subs.Settings.Values.Yt, "Youtube", function () {
-        HideOnContent($ce, $ce.find('.SR'));
-    });
+
 
 
     SingleMeasureBool(Subs.Settings.Values.Hashtag, "Hashtag-Filter", function () {
@@ -507,8 +536,12 @@ function DOMFilterFreetext($ce) {
     try {
         var textArray = Subs.Settings.Values.Fulltext.split(',');
         $.each(textArray, function (i, fulltext) {
-            HideOnContent($ce, $ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
-            HideOnContent($ce, $ce.find('div.Al.pf:Contains(' + fulltext + ')'));
+            if (oldLayout) {
+                HideOnContent($ce, $ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
+                HideOnContent($ce, $ce.find('div.Al.pf:Contains(' + fulltext + ')'));
+            } else {
+                HideOnContent($ce, $ce.find('div.ELUvyf:Contains(' + fulltext + ')'));
+            }
         });
     } catch (ex) {
         Log.Error(ex);
@@ -521,20 +554,34 @@ Postillon
 function DOMFilterPostillon ($ce) {
     var obj = this;
 
-    $ce.find('.Ct').each(function () {
-        if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
-            $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
-        }
-        if ($(this).text().indexOf("???!!?") >= 0) {
-            $(this).html($(this).html().replaceAll("???!!?", "‽"));
-        }
-    });
+    if (oldLayout) {
+        $ce.find('.Ct').each(function () {
+            if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
+                $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
+            }
+            if ($(this).text().indexOf("???!!?") >= 0) {
+                $(this).html($(this).html().replaceAll("???!!?", "‽"));
+            }
+        });
+    } else {
+        $ce.find('.wftCae').each(function () {
+            if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
+                $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
+            }
+            if ($(this).text().indexOf("???!!?") >= 0) {
+                $(this).html($(this).html().replaceAll("???!!?", "‽"));
+            }
+        });
+    }
 }
 
 /**
  * Bilder, Videos und Links ausblenden
  */
 function DOMFilterImages($ce) {
+    if (!oldLayout) {
+        return;     // Animitertes GIF-Filter und Co. macht im neuen Layout derzeit keinen Sinn
+    }
     try {
         $ce.find('.unhideImage').click(function () {
             $(this).parent().find('.hidewrapper').show();
@@ -569,6 +616,9 @@ function DOMFilterImages($ce) {
 }
 
 function PaintBin(ce) {
+    if (!oldLayout) {
+        return;
+    }
     $(ce).find('.zZ.a0').each(function (index, value) {
         if ($(this).find('a').length <= 1) {
             $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
@@ -586,9 +636,13 @@ function DOMFilterHashtags($ce) {
             var hashTagArray = Subs.Settings.Values.HashTags.split(',');
             $.each(hashTagArray, function (i, hashTag) {
                 if (hashTag.length > 1) {
-                    HideOnContent($ce, $ce.find('.zda.Zg:Contains(' + hashTag + ')'));
-                    HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
-                    HideOnContent($ce, $ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
+                    if (oldLayout) {
+                        HideOnContent($ce, $ce.find('.zda.Zg:Contains(' + hashTag + ')'));
+                        HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
+                        HideOnContent($ce, $ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
+                    } else {
+                        HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
+                    }
                 }
             });
         }
@@ -614,7 +668,7 @@ function InitObject(condition, object) {
 
 function InitObjects() {
     Subs.Bookmarks = InitObject(Subs.Settings.Values.UseBookmarks, gpoBookmarks);
-    Subs.Autosave = InitObject(Subs.Settings.Values.UseAutoSave, gpoAutosave);
+    Subs.Autosave = InitObject(oldLayout && Subs.Settings.Values.UseAutoSave, gpoAutosave); // Autosave erst mal raus im neuen Layout
     Subs.Flags = InitObject(Subs.Settings.Values.DisplayLang, gpoFlags);
     Subs.Lsr = InitObject(Subs.Settings.Values.MarkLSRPosts, gpoLsr);
     Subs.Trophy = InitObject(Subs.Settings.Values.DisplayTrophy, gpoTrophy);
@@ -641,8 +695,9 @@ function InitObjects() {
         Subs.Quickshare.Shares = qs;
     }
 
-    if ($('.gb_ua').length>0) {
-        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').find('.gb_ya').text()});
+    if ($('.gb_7a').length>0) {
+        // Gültig in beiden Layouts
+        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_7a').text()});
     }
     StartObservation();
 }
@@ -659,20 +714,20 @@ function PageLoad() {
         });
 
         SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
-            Subs.Bookmarks.Init();
+            Subs.Bookmarks.Init(oldLayout);
         });
 
         SingleMeasure(Subs.Autosave, "useAutoSave", function () {
             Subs.Autosave.CleanupAutosave();
-            Subs.Autosave.Init();
+            Subs.Autosave.Init(oldLayout);
         });
 
         SingleMeasure(Subs.User, "colorUser", function () {
-            Subs.User.Init();
+            Subs.User.Init(oldLayout);
         });
 
         SingleMeasure(Subs.Trophy, "displayTrophy", function () {
-            Subs.Trophy.Init();
+            Subs.Trophy.Init(oldLayout);
         });
 
         SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function () {
@@ -680,14 +735,11 @@ function PageLoad() {
         });
 
         SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
-            Subs.Lsr.Init();
+            Subs.Lsr.Init(oldLayout);
         });
 
-        SingleMeasure(Subs.Quickshare, "QuickShares", function () {
-            Subs.Quickshare.Init();
-        });
 
-        GetAllCircles();
+
         DrawWidgets();
         CountColumns();
 
@@ -725,11 +777,19 @@ function StartFilterLoop() {
  */
 function CreateBlock(position, id) {
     var wrapper = "<div  tabindex=\"-1\" class=\"nja\" id=\"" + id + "\"></div>";
-    if (position === 1) {
-        $('[data-iid="sii2:111"]').append(wrapper);
-    } else {
+    if (oldLayout) {
+        if (position === 1) {
+            $('[data-iid="sii2:111"]').append(wrapper);
+        } else {
 
-        $(".ona.Fdb .Ypa:nth-child(" + position + ")").prepend(wrapper);
+            $(".ona.Fdb .Ypa:nth-child(" + position + ")").prepend(wrapper);
+        }
+    } else {
+        if (position === 1) {
+            $('.uenjKc').append(wrapper);
+        } else {
+            $(".rymPhb .H68wj:nth-child(" + position + ")").prepend(wrapper);
+        }
     }
 }
 
