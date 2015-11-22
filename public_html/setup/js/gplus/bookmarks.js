@@ -7,12 +7,13 @@ var gpoBookmarks = function () {
     this.BookmarkContent;
     this.StillLoading;
     this.WaitCount=0;
-    this.SearchString = "notifications/all?displayBookmarks=abersicherdatt";
 };
 
 gpoBookmarks.prototype = {
     constructor: gpoBookmarks,
-    Init: function () {
+    OldLayout:true,
+    Init: function (oldLayout) {
+        this.OldLayout=oldLayout;
         var obj = this;
         obj.GetBookmarksFromStorage(function() {obj.ContinueLoading();});
         $(document).on("click", ".clickOntoBookmark", function () {
@@ -66,13 +67,20 @@ gpoBookmarks.prototype = {
     },
     PaintFloatingIcon:function($ce) {
         var obj = this;
+        if (!obj.OldLayout) {
+        //    return; // Kein floating-bereich im neuen Layout
+        }
         if ($ce.find('.miniBookmark').length === 0) {
             $(document).on('click', '.miniBookmark', function () {
                 obj.ShowBookmarkFloat();
             });
 
             var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-            $ce.find('.Pzc').prepend($(bookmarkIcon));
+            if (obj.OldLayout) {
+                $ce.find('.Pzc').prepend($(bookmarkIcon));
+            } else {
+                $ce.find('.gb_Pb.gb_le').prepend($(bookmarkIcon));
+            }
         }
     },
     CalcBookmarkFloat: function () {
@@ -94,17 +102,30 @@ gpoBookmarks.prototype = {
     },
     AddNewBookmark: function ($source) {
         var obj = this;
-        var $bmDateElement = $source.find('.o-U-s.FI.Rg');
-        var $bmSenderPicElement = $source.find(".Uk.wi.hE");
-        var $bmSenderNameElement = $source.find(".ob.tv.Ub.Hf").first();
-        var $bmImageElement = $source.find(".ar.Mc");
-        var $bmLinkElement = $source.find(".ot-anchor");
-        var $bmVisibilityElement = $source.find(".d-s.Vt.Hm.dk.Q9");
-        var $bmIdElement = $source.parent();
-        var $bmContentElements = $source.find('.Ct');
+        if (this.OldLayout) {
+            var $bmDateElement = $source.find('.o-U-s.FI.Rg');
+            var date = $bmDateElement.attr("Title");
+            var $bmSenderPicElement = $source.find(".Uk.wi.hE");
+            var $bmSenderNameElement = $source.find(".ob.tv.Ub.Hf").first();
+            var $bmImageElement = $source.find(".ar.Mc");
+            var $bmLinkElement = $source.find(".ot-anchor");
+            var $bmVisibilityElement = $source.find(".d-s.Vt.Hm.dk.Q9");
+            var $bmIdElement = $source.parent();
+            var $bmContentElements = $source.find('.Ct');
+            var id =$bmIdElement.attr("id");
+        } else {
+            var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
+            var date =$bmDateElement.find('span').text();
+            var $bmSenderPicElement = $source.find(".URgs7");
+            var $bmSenderNameElement = $source.find(".m3JvWd").first();
+            var $bmImageElement = $source.find(".JZUAbb");
+            var $bmLinkElement = $source.find(".ot-anchor");
+            var $bmVisibilityElement = $source.find(".UTObDb");
+            var $bmIdElement = $source.parent();
+            var $bmContentElements = $source.find('.wftCae');
+            var id =$bmIdElement.data("iid")
+        }
 
-        var id = $bmIdElement.attr("id");
-        var date = $bmDateElement.attr("Title");
         var origin = $bmDateElement.attr("href");
         var userPic = $bmSenderPicElement.attr("src");
         var userName = $bmSenderNameElement.text();
@@ -122,6 +143,26 @@ gpoBookmarks.prototype = {
 
         if (contentText.length > obj.MaxTeaserLength) {
             contentText = contentText.substring(0, obj.MaxTeaserLength + " ");
+        }
+        date=date.replace(String.fromCharCode(160)," ");
+        var splitDate=date.split(' ');
+        if (splitDate.length>1) {
+            // Angabe wie xxx Sekunden
+            switch (splitDate[1]) {
+                case "Sek.":
+                    date= Date.now().setSeconds(Date.now().getSeconds()-splitDate[0]);
+                    break;
+                case "Min.":
+                    date= Date.now().setMinutes(Date.now().getMinutes()-splitDate[0]);
+                    break;
+                case "Std.":
+                    date= Date.now().setHours(Date.now().getHours()-splitDate[0]);
+                    break;
+            }
+        }
+        // TODO: Englische Variante erkennen (33m, 3h, 23s)
+        if (Date.parse(date)===null) {
+            date=Date.now;
         }
 
         var bookmarkContent = {
@@ -253,7 +294,15 @@ gpoBookmarks.prototype = {
         });
         var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
         $('.BookmarksHover').remove();
-        $('.Pzc').append($(completeDiv));
+        if (obj.OldLayout) {
+            $('.Pzc').append($(completeDiv));
+        } else {
+            $('body').append($(completeDiv));
+            $('.BookmarksHover').css("position","absolute");
+            $('.BookmarksHover').css("z-index","700");
+            $('.BookmarksHover').css("top","70px");
+            $('.BookmarksHover').css("right","20px");
+        }
         $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
             var scrollTo = null;
             if (e.type == 'mousewheel') {
@@ -272,21 +321,45 @@ gpoBookmarks.prototype = {
     },
     PaintStars: function () {
         var obj = this;
-        $('.lea:not(:has(.addBookmark))').each(function () {
-            AddHeadWrapper($(this));
-            var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
-            var iconHtml = "";
-            var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
-            if (obj.ContainsBookmark(id)) {
-                iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
-            }
-            iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+        if (obj.OldLayout) {
+            $('.lea:not(:has(.addBookmark))').each(function () {
+                AddHeadWrapper($(this));
+                var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
 
-            $(this).find('.InfoUsrTop').append(iconHtml);
-        });
+
+                var iconHtml = "";
+                var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
+                if (obj.ContainsBookmark(id)) {
+                    iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
+                }
+                iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+
+                $(this).find('.InfoUsrTop').append(iconHtml);
+            });
+        } else {
+            $('.dzuq1e:not(:has(.addBookmark))').each(function () {
+                AddHeadWrapper($(this));
+                var id = $(this).closest('.dzuq1e').find('.qXj2He').attr('href');
+
+
+                var iconHtml = "";
+                var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
+                if (obj.ContainsBookmark(id)) {
+                    iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
+                }
+                iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+
+                $(this).find('.InfoUsrTop').append(iconHtml);
+            });
+        }
     },
     ClickBookmark: function (bookmarkButton) {
-        this.AddNewBookmark(bookmarkButton.closest('[role="article"]'));
+        if (oldLayout) {
+            this.AddNewBookmark(bookmarkButton.closest('[role="article"]'));
+        } else {
+            this.AddNewBookmark(bookmarkButton.closest('[jsname="WsjYwc"]'));
+        }
+
         return;
     },
     ContainsBookmark: function (id) {
@@ -316,17 +389,7 @@ gpoBookmarks.prototype = {
             });
         });
     },
-    /* LoadBookmarkList: function () {
-        var obj = this;
-        chrome.runtime.sendMessage({
-            Action: "LoadBookmarks"
-        }, function (response) {
-            obj.BookmarkList = JSON.parse(response.Result) || null;
-            if (obj.BookmarkList !== null && obj.BookmarkList.length > 0) {
-                $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-            }
-        });
-    },*/
+
     LoadBookmarkContent: function () {
         var obj = this;
         chrome.runtime.sendMessage({
@@ -337,7 +400,7 @@ gpoBookmarks.prototype = {
     },
     IsBookmarkPage: function () {
         // Für die ALTE Bookmarkseite. Irgendwann rauskicken!
-        return window.location.href.indexOf(this.SearchString) >= 0;
+        return false;
     },
     SaveBookmarks: function () {
         var obj = this;
@@ -374,31 +437,6 @@ gpoBookmarks.prototype = {
                     $('.displayBookMarks').prepend($(value));
                 }
             });
-        }
-    },
-    DisplayBookmarks: function () {
-        // ALTER SCHEISS! Übergangsweise drin lassen
-        if (this.IsBookmarkPage()) {
-            var obj = this;
-            obj.LoadBookmarkContent();
-            // Erst mal alles ausblenden, was Benachrichtigung ist:
-            $('.zia.vAa').hide();
-            $('.d-s.L5').hide();
-
-            // Dann die einzelnen Bookmarks anfügen:
-            if ((obj.BookmarkContent || null) !== null && obj.BookmarkContent.length > 0) {
-
-                $.each(obj.BookmarkContent, function (index, value) {
-                    if (value !== null && $('.UPa.hHa.Ic').html().indexOf(value) < 0) {
-                        $('.UPa.hHa.Ic').prepend($(value));
-                    }
-                });
-
-                for (var i = 0; i < 500; i++) {
-                    $('.UPa.hHa.Ic').append($("<div><p><br/>&nbsp;</p></div>oink."));
-                }
-            }
-            $('.CF').css("width", "2000px;");
         }
     }
 };
