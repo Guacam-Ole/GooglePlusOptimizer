@@ -40,7 +40,7 @@ gpoLsr.prototype = {
                     .addClass('wrng')
                     .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
             } else {
-                $el.find('div[jsname="WsjYwc"]')
+                $el.find('.wftCae')
                     .not('.wrng')
                     .addClass('wrng')
                     .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
@@ -49,9 +49,16 @@ gpoLsr.prototype = {
         };
 
         var markComment = function ($el) {
-            $el.not('.wrng')
-                .addClass('wrng')
-                .prepend($('<div style="background-color:red;font-size: 8pt;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+            if (oldLayout) {
+                $el.not('.wrng')
+                    .addClass('wrng')
+                    .prepend($('<div style="background-color:red;font-size: 8pt;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+            } else {
+                $el.not('.wrng')
+                    .addClass('wrng')
+                    .before($('<div style="background-color:red;font-size: 8pt;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
+
+            }
         };
 
         // Hauptbeitrag:
@@ -72,10 +79,10 @@ gpoLsr.prototype = {
             });
         } else {
 
-            $ce.find('div.bldpQb a').each(function (i, div) {
+            $ce.find('[role="main"] a').each(function (i, div) {
                 obj.DomainBlacklist.forEach(function (domain) {
                     if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                        mark($(div).closest('div[jsname="WsjYwc"]'));
+                        mark($(div).closest('.ELUvyf'));
                     }
                 });
             });
@@ -91,7 +98,7 @@ gpoLsr.prototype = {
                 });
             });
         } else {
-            $ce.find('div.KwDIr a').each(function (i, div) {
+            $ce.find('.M24KRd a').each(function (i, div) {
                 obj.DomainBlacklist.forEach(function (domain) {
                     if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
                         markComment($(div).closest("li.M24KRd"));
