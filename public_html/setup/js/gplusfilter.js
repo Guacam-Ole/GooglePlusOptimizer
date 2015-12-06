@@ -745,6 +745,10 @@ function PageLoad() {
             Subs.Lsr.Init(oldLayout);
         });
 
+        SingleMeasure(Subs.Lsr, "showEmoticons", function () {
+            Subs.Emoticons.Init(oldLayout);
+        });
+
 
 
         DrawWidgets();
