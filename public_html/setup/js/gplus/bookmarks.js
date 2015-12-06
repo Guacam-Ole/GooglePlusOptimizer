@@ -79,7 +79,7 @@ gpoBookmarks.prototype = {
             if (obj.OldLayout) {
                 $ce.find('.Pzc').prepend($(bookmarkIcon));
             } else {
-                $ce.find('.gb_Pb.gb_le').prepend($(bookmarkIcon));
+                $ce.find('.gb_Pb').prepend($(bookmarkIcon));
             }
         }
     },
@@ -272,7 +272,7 @@ gpoBookmarks.prototype = {
         var savedBookmarks = obj.NewBookmarkList;
         var container = '<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
 
-        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross Sgb" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
+        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
         var bookmarkDivs = '';
 
         if (savedBookmarks.length > 0) {

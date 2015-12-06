@@ -83,4 +83,7 @@ and open the template in the editor.
 
 .RemoveBookmarkCross {
     float: right;
+    background: no-repeat url(https://ssl.gstatic.com/s2/oz/images/sprites/notsg-a7af8b0efa4566ea1e9b98ed49df0b2e.png) 0 -182px;
+    height: 16px;
+    width: 16px;
 }
