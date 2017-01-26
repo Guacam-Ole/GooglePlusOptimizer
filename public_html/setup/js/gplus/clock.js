@@ -10,9 +10,7 @@ var gpoClock = function () {
 
 gpoClock.prototype = {
     constructor: gpoClock,
-    OldLayout: true,
-    Init: function (oldLayout) {
-        this.OldLayout=oldLayout;
+    Init: function () {
         var obj = this;
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/jquery-ui.min.css") + "' type='text/css' media='screen' />"));
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/clock.css") + "' type='text/css' media='screen' />"));
@@ -42,9 +40,7 @@ gpoClock.prototype = {
             obj.HasStarted = true;
             obj.TargetTime = new Date(oldValue);
         }
-        ;
-
-        console.log("Clock started.");
+        Log.Debug("Clock started.");
     },
     Dom: function ($ce) {
         this.PaintWatch($ce);
@@ -136,11 +132,7 @@ gpoClock.prototype = {
 
         if ($('.clock').length === 0) {
 
-            if (this.OldLayout) {
-                $('.ona.Fdb').prepend(obj.ClockObj);
-            } else {
-                $('.rymPhb').prepend(obj.ClockObj);
-            }
+            $('.M7vp2c').prepend(obj.ClockObj);
             $('.clockLabel').text("00:00");
             $(".slider-clock").slider({value: 0, min: 0, max: 60});
             obj.UpdateWatch();

@@ -1,11 +1,15 @@
 
 .clock {
-    padding: 20px;
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 20px;
     padding-right: 20px;
-    background: lightgray;
+    background: #db4437;
+    position: fixed;
+    z-index: 333;
+    left: 310px;
+    right: 140px;
+    color: white;
 }
 
 .clockLabel {
@@ -14,7 +18,11 @@
 }
 
 .slider-clock {
-    margin-left: 50px;
+    margin-left: 70px;
     margin-top: 3px;
+}
+
+[jsname="rymPhb"] {
+    padding-top: 20px;
 }
 
