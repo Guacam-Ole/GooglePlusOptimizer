@@ -67,7 +67,7 @@ var newObserver= new MutationObserver(function (mutations) {
         }
         oldUrl=window.location.href;
         if (mutation.type === "childList") {
-            Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
+            //Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
             forEach.call(mutation.addedNodes, function (addedNode) {
                 if (addedNode.classList !== undefined) {
                     if (addedNode.classList.contains('PD')) {
@@ -77,11 +77,11 @@ var newObserver= new MutationObserver(function (mutations) {
                     }
                     else {
                         var jsModel = addedNode.attributes["jsmodel"];
-                        if (jsModel !== undefined && jsModel.value === "rIipNe iMhCXb") { // Neuer Artikelblock
-                            Log.Debug("DOM JS:"+addedNode.classList);
+                        if (jsModel !== undefined && jsModel.value.indexOf("iMhCXb")>0) { // Neuer Artikelblock
+
                             StartFilter(addedNode);
                         } else {
-                            Log.Debug("DOM IGNORED:"+addedNode.classList);
+                           // Log.Debug("DOM IGNORED:"+addedNode.classList);
                             //               Log.Debug("iid:"+addedNode.data("id"));
                         }
                     }
@@ -343,8 +343,11 @@ function MoveHeaderIcon() {
     }
 }
 
-function HideOnContent(parent, element) {
+function HideOnContent(parent, element,  log ) {
     if (element !== undefined && element.length > 0) {
+        if (log) {
+            Log.Debug("Filtered: "+log+" ["+element.text()+"]");
+        }
         parent.hide();
     }
 }
@@ -405,9 +408,7 @@ function ShowWidgets() {
     SingleMeasure(Subs.Clock, "stoppwatch", function () {
         Subs.Clock.Dom();
     });
-    SingleMeasure(Subs.Soccer, "sportEnabled", function () {
-        Subs.Soccer.Dom();
-    });
+
     SingleMeasure(Subs.Flags, "displayLang", function () {
         Subs.Flags.Dom();
     });
@@ -418,13 +419,10 @@ function ShowWidgets() {
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter(changedElements) {
+    Log.Debug("Neuer Beitrag geladen. Wird analysiert");
     changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
-
-
-
-   // MoveHeaderIcon();   // Prüfen wg. Performance!
 
     /* WHAM */
     SingleMeasureBool(Subs.Settings.Values.Wham, "Wham", function () {
@@ -469,11 +467,8 @@ function StartFilter(changedElements) {
 
     /* Blöcke */
     SingleMeasureBool(Subs.Settings.Values.Plus1, "Plus1", function () {
-        if (oldLayout) {
-            HideOnContent($ce, $ce.find('.xv'));
-        } else {
-            HideOnContent($ce, $ce.find('.RcaDXc'));
-        }
+        HideOnContent($ce, $ce.find('.sLDTkb').find('.RcaDXc'), "Plus1");
+    //    HideOnContent($ce, $ce.find('.sLDTkb').find('.aaTEdf'), "Collection-Spam");    //Hat dieses und xxx weitere Updates hinzugefügt. Taucht nur bei mehreren gleichzeitigen Posts auf
     });
 
 
