@@ -28,14 +28,12 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("WHAMWhamUrl"));
         obj.AllSettings.push(new gpoSetting("WHAMChristmasText"));
         obj.AllSettings.push(new gpoSetting("WHAMChristmasUrl"));
-        obj.AllSettings.push(new gpoSetting("Weather"));
         obj.AllSettings.push(new gpoSetting("colorUsers"));
         obj.AllSettings.push(new gpoSetting("filterImages"));
         obj.AllSettings.push(new gpoSetting("filterVideo"));
         obj.AllSettings.push(new gpoSetting("filterLinks"));
         obj.AllSettings.push(new gpoSetting("filterGifOnly"));
         obj.AllSettings.push(new gpoSetting("filterMp4Only"));
-        //obj.AllSettings.push(new gpoSetting("filterSharedCircles"));
         obj.AllSettings.push(new gpoSetting("displayTrophy"));
         obj.AllSettings.push(new gpoSetting("displayLang"));
         obj.AllSettings.push(new gpoSetting("showEmoticons"));
@@ -47,12 +45,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("displayQuickHashes"));
         obj.AllSettings.push(new gpoSetting("WizardMode", 1));
         obj.AllSettings.push(new gpoSetting("interval", 500));
-        obj.AllSettings.push(new gpoSetting("sportEnabled"));
-        obj.AllSettings.push(new gpoSetting("weatherEnabled"));
-        obj.AllSettings.push(new gpoSetting("Sport"));
         obj.AllSettings.push(new gpoSetting("QuickShares"));
-        obj.AllSettings.push(new gpoSetting("weatherWidget"));
-        obj.AllSettings.push(new gpoSetting("enableQs"));
         obj.AllSettings.push(new gpoSetting("UserCols"));
         obj.AllSettings.push(new gpoSetting("postillon"));
     },

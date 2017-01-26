@@ -30,13 +30,10 @@
                 "setup/js/gplus/bookmarks.js",
                 "setup/js/gplus/flags.js",
                 "setup/js/gplus/log.js",
-                "setup/js/gplus/qs.js",
                 "setup/js/gplus/trophy.js",
                 "setup/js/gplus/lsr.js",
-                "setup/js/gplus/sport.js",
                 "setup/js/gplus/smilies.js",
                 "setup/js/gplus/user.js",
-                "setup/js/gplus/weather.js",
                 "setup/js/gplus/browser.chrome.js",
                 "setup/js/gplusfilter.js"
             ]

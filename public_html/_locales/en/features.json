@@ -126,22 +126,6 @@
   },
   {
     "Version": "2.2",
-    "Short": "weatherEnabled",
-    "Title": "Weather forecast",
-    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>City:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'> <a href='' class='btn  green '>Search <i class='m-icon-swapright m-icon-white'></i></a>  <div class='citySelect'><select><option>jjjj</option></select></div></div>",
-    "Image": "wetter.png",
-    "Cost": 0
-  },
-  {
-    "Version": "2.2",
-    "Short": "sportEnabled",
-    "Title": "Liveticker",
-    "Description": "<div class='loadHtml' data-filename='bs.sport'></div><div class='loadHtml' data-filename='bs.widget'></div>",
-    "Image": "sport.png",
-    "Cost": 1
-  },
-  {
-    "Version": "2.2",
     "Short": "stoppwatch",
     "Title": "Stoppwatch",
     "Description": "Never burn your pizza again!",
@@ -195,14 +179,6 @@
     "Cost": 0
   },
   {
-    "Version": "2.4",
-    "Short": "enableQs",
-    "Title": "Quickshare",
-    "Description": "<div class='loadHtml' data-filename='bs.quickshare'></div>",
-    "Image": "qs.png",
-    "Cost": 1
-  },
-  {
     "Version": "2.5",
     "Short": "useBookmarks",
     "Title": "Bookmarks (Favourites)",
@@ -237,12 +213,6 @@
     "Type": "TextOnly",
     "Title": "Add ticket",
     "Description": "<p>Report bug or ask for a feature.<br/>  <a id='showTicketCreation' class='btn  green'>Create ticket <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
-  },
-  {
-    "Short": "defaultCircles",
-    "Type": "NoFeature",
-    "Title": "Default names",
-    "Description": "<p>Enter the default cirlce names for Google+. These are needed for the Quickshares. You only have to modify use this if you are NOT using the english version of Gooogle+</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
   },
   {
     "Short":"wizardMode",

@@ -125,22 +125,6 @@
   },
   {
     "Version": "2.2",
-    "Short": "weatherEnabled",
-    "Title": "Wettervorhersage",
-    "Description": "<div class='parentWeather'><div class='loadHtml' data-filename='bs.wetter'></div><div class='loadHtml' data-filename='bs.widget'></div><div class='weatherSelection'><span>Ort:</span><input type='text' class='cityName'> <input type='hidden' class='cityId'> <a href='' class='btn  green '>Ort suchen <i class='m-icon-swapright m-icon-white'></i></a>  <div class='citySelect'><select><option>jjjj</option></select></div></div>",
-    "Image": "wetter.png",
-    "Cost": 0
-  },
-  {
-    "Version": "2.2",
-    "Short": "sportEnabled",
-    "Title": "Liveticker",
-    "Description": "<div class='loadHtml' data-filename='bs.sport'></div><div class='loadHtml' data-filename='bs.widget'></div>",
-    "Image": "sport.png",
-    "Cost": 1
-  },
-  {
-    "Version": "2.2",
     "Short": "stoppwatch",
     "Title": "Stoppuhr",
     "Description": "Nie wieder die Pizza anbrennen lassen! Die Stoppuhr wird dezent am oberen Ende des Google+ - Streams angezeigt",
@@ -203,14 +187,6 @@
     "Cost": 0
   },
   {
-    "Version": "2.4",
-    "Short": "enableQs",
-    "Title": "Quickshare",
-    "Description": "<div class='loadHtml' data-filename='bs.quickshare'></div>",
-    "Image": "qs.png",
-    "Cost": 1
-  },
-  {
     "Version": "2.5",
     "Short": "useBookmarks",
     "Title": "Bookmarks (Favoriten)",
@@ -246,12 +222,7 @@
     "Title": "Neues Ticket erstellen",
     "Description": "<p>Bug melden oder Feature anfragen.<br/>  <a id='showTicketCreation' class='btn  green'>Ticket eröffnen <i class='m-icon-swapright m-icon-white'></i></a></p><div class='loadHtml' data-filename='bs.ticket'></div>"
   },
-  {
-    "Short": "defaultCircles",
-    "Type": "NoFeature",
-    "Title": "Standardbezeichner",
-    "Description": "<p>Hier kannst Du eintragen, wie die Standardbezeichner von Google+ bei Dir lauten. Dies wird beispielsweise für die Quickshares benötigt. Wenn Google+ bei Dir auf Deutsch eingestellt ist, sollte keine Anpassung notwendig sein</p><div class='loadHtml' data-filename='bs.circleNames'></div>"
-  },
+
   {
     "Short":"wizardMode",
     "Type":"NoFeature",

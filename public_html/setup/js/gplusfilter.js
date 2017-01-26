@@ -1,14 +1,11 @@
-var oldLayout=true;
+var oldLayout=false;
 var loaded=false;
 
 this.Browser = new Browser();
 this.Log=new gpoLog();
 this.Log.Init();
-var columnCount;
 var imageHost = "https://files.oles-cloud.de/optimizer/";
-var debugMode=localStorage.getItem("debugMode")==="true";
 
-var domainBlacklist = [];
 
 var Subs = {
     Settings: null,
@@ -168,12 +165,9 @@ function StartObservation() {
 
 
 
+
 $(document).ready(function () {
-
-
-    console.log('g+ - filter started');
-    oldLayout=$('.FGhx7c')===null || $('.FGhx7c').length===0;
-    console.log(oldLayout?"(old Layout)":"(new Layout)");
+    Log.Info('G+ - filter started');
     InitSettings();
     StartObservation();
     chrome.runtime.sendMessage({Action: "SetSetting", Name: "oldLayout", Value: oldLayout});
@@ -678,27 +672,11 @@ function InitObjects() {
     Subs.Flags = InitObject(Subs.Settings.Values.DisplayLang, gpoFlags);
     Subs.Lsr = InitObject(Subs.Settings.Values.MarkLSRPosts, gpoLsr);
     Subs.Trophy = InitObject(Subs.Settings.Values.DisplayTrophy, gpoTrophy);
-    Subs.Soccer = InitObject(Subs.Settings.Values.SportEnabled, gpoSport);
     Subs.Clock = InitObject(Subs.Settings.Values.Stoppwatch, gpoClock);
     Subs.Emoticons = InitObject(Subs.Settings.Values.ShowEmoticons, gpoEmoticons);
     Subs.User = InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
     if (Subs.User !== null) {
         Subs.User.AllUserSettings = Subs.Settings.Values.UserCols;
-    }
-    var weatherSettings = Subs.Settings.Values.WeatherWidget;
-    if (weatherSettings !== undefined && weatherSettings !== null) {
-        //weatherSettings=JSON.parse(weatherSettings);
-        Subs.Weather = InitObject(weatherSettings.Enabled, gpoWeather);
-        gpoWeather.Settings = weatherSettings;
-    }
-
-    //Subs.Weather=InitObject(Subs.Settings.Values.WeatherEnabled,gpoWeather);    
-
-    var qs = Subs.Settings.Values.QuickShares;
-    var qsEnabled = Subs.Settings.Values.EnableQs;
-    Subs.Quickshare = InitObject((qsEnabled && qs !== null && qs.length > 0), gpoQuickShare);
-    if (Subs.Quickshare !== null) {
-        Subs.Quickshare.Shares = qs;
     }
 
     if ($('.gb_7a').length>0) {
