@@ -614,13 +614,7 @@ function DOMFilterHashtags($ce) {
             var hashTagArray = Subs.Settings.Values.HashTags.split(',');
             $.each(hashTagArray, function (i, hashTag) {
                 if (hashTag.length > 1) {
-                    if (oldLayout) {
-                        HideOnContent($ce, $ce.find('.zda.Zg:Contains(' + hashTag + ')'));
-                        HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
-                        HideOnContent($ce, $ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
-                    } else {
-                        HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
-                    }
+                    HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'),"Hashtag:"+hashTag);
                 }
             });
         }
