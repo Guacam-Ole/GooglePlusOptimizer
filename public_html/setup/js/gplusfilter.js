@@ -519,12 +519,7 @@ function DOMFilterFreetext($ce) {
     try {
         var textArray = Subs.Settings.Values.Fulltext.split(',');
         $.each(textArray, function (i, fulltext) {
-            if (oldLayout) {
-                HideOnContent($ce, $ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
-                HideOnContent($ce, $ce.find('div.Al.pf:Contains(' + fulltext + ')'));
-            } else {
-                HideOnContent($ce, $ce.find('div.ELUvyf:Contains(' + fulltext + ')'));
-            }
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:Contains(' + fulltext + ')'),"Fulltext:"+fulltext);
         });
     } catch (ex) {
         Log.Error(ex);
