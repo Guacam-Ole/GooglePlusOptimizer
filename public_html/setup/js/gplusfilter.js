@@ -104,19 +104,6 @@ var observer = new MutationObserver(function (mutations) {
         if (mutation.type === "childList") {
            Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
             forEach.call(mutation.addedNodes, function (addedNode) {
-                if (addedNode.classList !== undefined) {
-                    if (addedNode.classList.contains('PD')) {
-                        Log.Debug("DOM PD:"+addedNode.classList);
-                        PaintBin(addedNode);
-                    } else if (addedNode.classList.contains('nja')) {
-                        Log.Debug("DOM NJA:"+addedNode.classList);
-                        FilterBlocks(addedNode);
-                    } else if (addedNode.classList.contains('URaP8')) {
-                        Log.Debug("DOM URA:" + addedNode.classList);
-                        DoQuickshare(addedNode, 1);
-                    }
-                    //g-h-f-N-N
-                    else {
                         var jsModel = addedNode.attributes["jsmodel"];
                         if (jsModel !== undefined && jsModel.value === "XNmfOc") {
                             Log.Debug("DOM JS:"+addedNode.classList);
@@ -125,7 +112,6 @@ var observer = new MutationObserver(function (mutations) {
                             Log.Debug("DOM IGNORED:"+addedNode.classList);
              //               Log.Debug("iid:"+addedNode.data("id"));
                         }
-                    }
                 }
             });
             forEach.call(mutation.removedNodes, function (removedNode) {
@@ -593,16 +579,7 @@ function DOMFilterImages($ce) {
     }
 }
 
-function PaintBin(ce) {
-    if (!oldLayout) {
-        return;
-    }
-    $(ce).find('.zZ.a0').each(function (index, value) {
-        if ($(this).find('a').length <= 1) {
-            $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
-        }
-    });
-}
+
 
 /**
  * Hashtags filtern
