@@ -415,6 +415,12 @@ function ShowWidgets() {
 
 }
 
+$.extend($.expr[":"], {
+    "containsNC": function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+});
+
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
  */
@@ -427,36 +433,18 @@ function StartFilter(changedElements) {
     /* WHAM */
     SingleMeasureBool(Subs.Settings.Values.Wham, "Wham", function () {
         if (Subs.Settings.Values.WHAMWhamText) {
-            if (oldLayout) {
-                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("wham")'));
-            } else {
-                HideOnContent($ce, $ce.find('.ELUvyf:Contains("wham")'));
-            }
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("wham")'), "WHAM-Fulltext:WHAM");
         }
         if (Subs.Settings.Values.WHAMChristmasText) {
-            if (oldLayout) {
-                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("Last Christmas")'));
-                HideOnContent($ce, $ce.find('.Xx.xJ:Contains("LastChristmas")'));
-            } else {
-                HideOnContent($ce, $ce.find('.ELUvyf:Contains("Last Christmas")'));
-                HideOnContent($ce, $ce.find('.ELUvyf:Contains("LastChristmas")'));
-            }
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("Last Christmas")'),"WHAM-Fulltext:LC");
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("LastChristmas")'),"WHAM-Fulltext:LC");
         }
-        if (Subs.Settings.Values.WHAMWhamLink) {
-            if (oldLayout) {
-                HideOnContent($ce, $ce.find('.yx.Nf:Contains("wham")'));
-            } else {
-                HideOnContent($ce, $ce.find('.IJZbFe :Contains("wham")'));
-            }
+        if (Subs.Settings.Values.WHAMWhamUrl) {
+            HideOnContent($ce, $ce.find('a:containsNC("wham")'),"WHAM-Link:Wham");
         }
-        if (Subs.Settings.Values.WHAMChristmasLink) {
-            if (oldLayout) {
-                HideOnContent($ce, $ce.find('.yx.Nf:Contains("LastChristmas")'));
-                HideOnContent($ce, $ce.find('.yx.Nf:Contains("Last Christmas")'));
-            } else {
-                HideOnContent($ce, $ce.find('.IJZbFe :Contains("LastChristmas")'));
-                HideOnContent($ce, $ce.find('.IJZbFe :Contains("Last Christmas")'));
-            }
+        if (Subs.Settings.Values.WHAMChristmasUrl) {
+            HideOnContent($ce, $ce.find('a:containsNC("LastChristmas")'),"WHAM-Link:LC");
+            HideOnContent($ce, $ce.find('a:containsNC("Last Christmas")'),"WHAM-Link:LC");
         }
     });
 
