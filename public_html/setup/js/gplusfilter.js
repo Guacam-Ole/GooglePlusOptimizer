@@ -316,7 +316,7 @@ function SingleMeasure(setting, measureTitle, functionName) {
 }
 function HideOnAttr(element, attr, value, log) {
     if (element.attributes[attr].value === value) {
-        $(parent).hide();
+        $(element).hide();
         if (log) {
             Log.Debug("Block removed: "+log);
         }
@@ -326,48 +326,33 @@ function HideOnAttr(element, attr, value, log) {
 
 
 function FilterBlocks(changedElement) {
-    Log.Debug("Neuer Block");
+    Log.Debug("New block detected");
     changedElement.classList.add("gplusoptimizer");
 
     Subs.Measure = new gpoMeasure("DOM", true);
 
     SingleMeasureBool(Subs.Settings.Values.Featcol, "Featured Collections", function () {
-        HideOnAttr(changedElement, "data-iid", "165", "Angesagte Sammlungen");
+        HideOnAttr(changedElement, "data-iid", "165", "Featured Collections");
     });
     SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
         HideOnAttr(changedElement, "data-iid", "116", "Communities");
     });
+    // Ab hier Zahlenwerte aus altem Layout, sind im neuen noch gar nicht vorhanden
     SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
-        HideOnAttr(changedElement, "data-iid", "114", "Geburtstag");
+        HideOnAttr(changedElement, "data-iid", "114", "Birthday");
     });
     SingleMeasureBool(Subs.Settings.Values.Known, "Persons", function () {
-        HideOnAttr(changedElement, "data-iid", "103", "Personen");
-        HideOnAttr(changedElement, "data-iid", "105", "Personen");
-        HideOnAttr(changedElement, "data-iid", "106", "Personen");
+        HideOnAttr(changedElement, "data-iid", "103", "Persons");
+        HideOnAttr(changedElement, "data-iid", "105", "Persons");
+        HideOnAttr(changedElement, "data-iid", "106", "Persons");
     });
     SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
-        HideOnAttr(changedElement, "data-iid", "102", "Angesagte Beiträge");
+        HideOnAttr(changedElement, "data-iid", "102", "Trending");
     });
 
 
     return;
-    var $ce = $(changedElements);
-    // Altes Layout:
 
-    SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:114');
-    });
-    SingleMeasureBool(Subs.Settings.Values.Known, "Persons", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:103');
-        HideOnAttr($ce, 'data-iid', 'sii2:105');
-        HideOnAttr($ce, 'data-iid', 'sii2:106');
-    });
-    SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:102');
-    });
-    SingleMeasureBool(Subs.Settings.Values.Featcol, "Featured Collections", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:165');
-    });
 }
 
 function ShowWidgets() {
@@ -392,7 +377,6 @@ $.extend($.expr[":"], {
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter(changedElements) {
-   // Log.Debug("Neuer Beitrag geladen. Wird analysiert");
     changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
