@@ -560,7 +560,7 @@ function AddHashtagToList(newHashtag) {
 
 function InitObject(condition, object) {
     if (condition) {
-        return new object;
+        return new object(Log);
     }
     return null;
 }
@@ -568,7 +568,7 @@ function InitObject(condition, object) {
 
 function InitObjects() {
     Subs.Bookmarks = InitObject(Subs.Settings.Values.UseBookmarks, gpoBookmarks);
-    Subs.Autosave = InitObject(oldLayout && Subs.Settings.Values.UseAutoSave, gpoAutosave); // Autosave erst mal raus im neuen Layout
+    Subs.Autosave = InitObject(Subs.Settings.Values.UseAutoSave, gpoAutosave);
     Subs.Flags = InitObject(Subs.Settings.Values.DisplayLang, gpoFlags);
     Subs.Lsr = InitObject(Subs.Settings.Values.MarkLSRPosts, gpoLsr);
     Subs.Trophy = InitObject(Subs.Settings.Values.DisplayTrophy, gpoTrophy);
@@ -627,17 +627,12 @@ function PageLoad() {
             Subs.Emoticons.Init(oldLayout);
         });
 
-
-
         DrawWidgets();
         CountColumns();
-
-
         FirstStartInit();
         RestartFilter();
 
-
-        Log.Info('G+Filter: Google+ - Filter initialisiert');
+        Log.Info('G+Filter: Google+ - Filter initialized');
 }
 
 function RestartFilter() {
