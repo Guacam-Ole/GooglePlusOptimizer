@@ -77,7 +77,7 @@ gpoEmoticons.prototype = {
         var obj = this;
 
         if (oldLayout) {
-            $ce.find('.Ct').each(function () {
+            $ce.find('li [jsname="jNm5if"]').each(function () {
                 obj.PaintInner($(this));
             });
         } else {

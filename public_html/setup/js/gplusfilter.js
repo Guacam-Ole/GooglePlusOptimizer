@@ -10,12 +10,10 @@ var imageHost = "https://files.oles-cloud.de/optimizer/";
 var Subs = {
     Settings: null,
     Clock: null,
-    Autosave: null,
     Bookmarks: null,
     Measure: null,
     Flags: null,
     Lsr: null,
-    Quickshare: null,
     Trophy: null,
     Soccer: null,
     Emoticons: null,
@@ -56,97 +54,58 @@ function AddHeadWrapper(parent) {
 }
 
 var oldUrl=window.location.href;
-
-
 var forEach = Array.prototype.forEach;
 
-var newObserver= new MutationObserver(function (mutations) {
+function DomCheckArticle(element) {
+    if (element.nodeName == "C-WIZ") {
+        if (element.attributes) {
+            var jsModel = element.attributes["jsmodel"];
+            if (jsModel) {
+                if (jsModel.value.indexOf("iMhCXb") > 0) { // Neuer Artikelblock
+                    StartFilter(element);
+                }
+            }
+        }
+    }
+}
+
+function DomCheckBlock(element) {
+    if (element.nodeName == "DIV") {
+        var dataiid = element.attributes["data-iid"];
+        if (dataiid) {
+            if (dataiid.value.length < 5) { // Neuer Artikelblock
+                FilterBlocks(element);
+            }
+        }
+    }
+}
+
+var cwizObserver= new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (oldUrl!==window.location.href) {
             RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
         }
         oldUrl=window.location.href;
         if (mutation.type === "childList") {
-            //Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
             forEach.call(mutation.addedNodes, function (addedNode) {
-                if (addedNode.classList !== undefined) {
-                    if (addedNode.classList.contains('PD')) {
-                        // Gibt (noch) keine Hashtaglisten im neuen Layout
-                    } else if (addedNode.classList.contains('nja')) {
-                        // Gibt (noch) keine Vorschläge u.ä. im neuen Layout
-                    }
-                    else {
-                        var jsModel = addedNode.attributes["jsmodel"];
-                        if (jsModel !== undefined && jsModel.value.indexOf("iMhCXb")>0) { // Neuer Artikelblock
-
-                            StartFilter(addedNode);
-                        } else {
-                           // Log.Debug("DOM IGNORED:"+addedNode.classList);
-                            //               Log.Debug("iid:"+addedNode.data("id"));
-                        }
-                    }
-                }
+                DomCheckArticle(addedNode);
+                DomCheckBlock(addedNode);
             });
         }
     });
-    if (loaded) {
-        ShowWidgets();
-        MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
-    }
 });
 
-var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        if (oldUrl!==window.location.href) {
-            RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
-        }
-        oldUrl=window.location.href;
-        if (mutation.type === "childList") {
-           Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
-            forEach.call(mutation.addedNodes, function (addedNode) {
-                        var jsModel = addedNode.attributes["jsmodel"];
-                        if (jsModel !== undefined && jsModel.value === "XNmfOc") {
-                            Log.Debug("DOM JS:"+addedNode.classList);
-                            StartFilter(addedNode);
-                        } else {
-                            Log.Debug("DOM IGNORED:"+addedNode.classList);
-             //               Log.Debug("iid:"+addedNode.data("id"));
-                        }
-                }
-            });
-            forEach.call(mutation.removedNodes, function (removedNode) {
-                if (removedNode.classList !== undefined) {
-                    if (removedNode.classList.contains("YB")) {
-                        // private Beiträge, Warnmeldung
-                        DoQuickshare(removedNode, 1);
-                    }
-                }
-            });
 
-        }
-    });
-    if (loaded) {
-        ShowWidgets();
-        MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
-    }
-});
 
 function StartObservation() {
-    if (oldLayout) {
-        observer.observe(document, {
-            childList: true,
-            subtree: true,
-            characterData: false,
-            attributes: false
-        });
-    } else {
-        newObserver.observe(document, {
-            childList: true,
-            subtree: true,
-            characterData: false,
-            attributes: false
-        });
-    }
+
+    cwizObserver.observe(document, {
+        childList: true,
+        subtree: true,
+        characterData: false,
+        attributes: false
+    });
+
 }
 
 
@@ -338,6 +297,8 @@ function HideOnContent(parent, element,  log ) {
     }
 }
 
+
+
 function SingleMeasureBool(setting, measureTitle, functionName) {
     if (setting === true) {
         Subs.Measure.Do(measureTitle, function () {
@@ -353,26 +314,46 @@ function SingleMeasure(setting, measureTitle, functionName) {
         });
     }
 }
-function HideOnAttr(parent, attr, value) {
-    if (parent.attr(attr) === value) {
-        parent.hide();
+function HideOnAttr(element, attr, value, log) {
+    if (element.attributes[attr].value === value) {
+        $(parent).hide();
+        if (log) {
+            Log.Debug("Block removed: "+log);
+        }
     }
 }
 
 
 
-function FilterBlocks(changedElements) {
-    if (!oldLayout) {
-        return;
-    }
-    changedElements.classList.add("gplusoptimizer");
-    var $ce = $(changedElements);
+function FilterBlocks(changedElement) {
+    Log.Debug("Neuer Block");
+    changedElement.classList.add("gplusoptimizer");
+
     Subs.Measure = new gpoMeasure("DOM", true);
-    SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:112');
-        HideOnAttr($ce, 'data-iid', 'sii2:116');
-        HideOnAttr($ce, 'data-iid', 'sii2:127');
+
+    SingleMeasureBool(Subs.Settings.Values.Featcol, "Featured Collections", function () {
+        HideOnAttr(changedElement, "data-iid", "165", "Angesagte Sammlungen");
     });
+    SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
+        HideOnAttr(changedElement, "data-iid", "116", "Communities");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
+        HideOnAttr(changedElement, "data-iid", "114", "Geburtstag");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Known, "Persons", function () {
+        HideOnAttr(changedElement, "data-iid", "103", "Personen");
+        HideOnAttr(changedElement, "data-iid", "105", "Personen");
+        HideOnAttr(changedElement, "data-iid", "106", "Personen");
+    });
+    SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
+        HideOnAttr(changedElement, "data-iid", "102", "Angesagte Beiträge");
+    });
+
+
+    return;
+    var $ce = $(changedElements);
+    // Altes Layout:
+
     SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
         HideOnAttr($ce, 'data-iid', 'sii2:114');
     });
@@ -411,7 +392,7 @@ $.extend($.expr[":"], {
  * Filteraktionen (bei jeder DOM-Änderung)
  */
 function StartFilter(changedElements) {
-    Log.Debug("Neuer Beitrag geladen. Wird analysiert");
+   // Log.Debug("Neuer Beitrag geladen. Wird analysiert");
     changedElements.classList.add("gplusoptimizer");
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
@@ -476,9 +457,7 @@ function StartFilter(changedElements) {
     SingleMeasure(Subs.Emoticons, "showEmoticons", function () {
         Subs.Emoticons.Dom($ce);
     });
-    SingleMeasure(Subs.Quickshare, "QuickShare", function () {
-        Subs.Quickshare.Dom($ce);
-    });
+
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.Dom($ce);
       //  Subs.Bookmarks.DisplayBookmarks($ce);
@@ -517,26 +496,14 @@ Postillon
  */
 function DOMFilterPostillon ($ce) {
     var obj = this;
-
-    if (oldLayout) {
-        $ce.find('.Ct').each(function () {
-            if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
-                $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
-            }
-            if ($(this).text().indexOf("???!!?") >= 0) {
-                $(this).html($(this).html().replaceAll("???!!?", "‽"));
-            }
-        });
-    } else {
-        $ce.find('.wftCae').each(function () {
-            if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
-                $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
-            }
-            if ($(this).text().indexOf("???!!?") >= 0) {
-                $(this).html($(this).html().replaceAll("???!!?", "‽"));
-            }
-        });
-    }
+    $ce.find('.wftCae').each(function () {
+        if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
+            $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
+        }
+        if ($(this).text().indexOf("???!!?") >= 0) {
+            $(this).html($(this).html().replaceAll("???!!?", "‽"));
+        }
+    });
 }
 
 /**
@@ -683,7 +650,7 @@ function PageLoad() {
 
 
         FirstStartInit();
-        //RestartFilter();
+        RestartFilter();
 
 
         Log.Info('G+Filter: Google+ - Filter initialisiert');
@@ -696,25 +663,22 @@ function RestartFilter() {
 }
 
 function FirstStartInit() {
-    if (oldLayout) {
-        // Initial Mutation Observer simulieren:
-        $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
-            StartFilter(value);
-        });
-        $('.nja:not(".gplusoptimizer")').each(function (index, value) {
-            FilterBlocks(value);
-        });
-    } else {
-        $('[jsmodel="rIipNe iMhCXb"]:not(".gplusoptimizer")').each(function (index, value) {
-            StartFilter(value);
-        });
 
-    }
+    $('c-wiz:not(".gplusoptimizer")').each(function (index, value) {
+        DomCheckArticle(value);
+        //StartFilter(value);
+    });
+    $('div:not(".gplusoptimizer")').each(function (index, value) {
+        DomCheckBlock(value);
+    });
+
     if ($('.gplusoptimizer').length===0) {
         // Keine blöcke bearbeitet, vermutlich noch am laden
         RestartFilter();
     }
-
+    if (loaded) {
+        ShowWidgets();
+    }
 
 }
 
