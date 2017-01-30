@@ -5,28 +5,19 @@ var gpoTrophy = function () {
 
 gpoTrophy.prototype = {
     constructor: gpoTrophy,
-    OldLayout:true,
-    Init: function (oldLayout) {
-        this.OldLayout=oldLayout;
+    Init: function () {
         var obj = this;
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/trophy.css") + "' type='text/css' media='screen' />"));
         obj.GetUsers();
 
         $(document).on({
             click: function () {
-                if (obj.OldLayout) {
-                    if ($(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').length > 0) {
-                        $(this).closest('.InfoUsrTop').parent().find('.trophyDisplay').remove();
-                    } else {
-                        obj.Hover($(this));
-                    }
-                } else {
+
                     if ($(this).closest('.Ihwked').find('.trophyDisplay').length > 0) {
                         $(this).closest('.Ihwked').find('.trophyDisplay').remove();
                     } else {
                         obj.Hover($(this));
                     }
-                }
                 return false;
             }
         }, ".trophyImg"); //pass the element as an argument to .on
@@ -41,15 +32,10 @@ gpoTrophy.prototype = {
     },
     About: function () {
         var obj = this;
-        if (obj.OldLayout) {
-            if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
-                return;
-            }
-        } else {
+
             if ($('.yLFagc')===null || $('.yLFagc').length===0) {
                 return;
             }
-        }
         if ($('.trophyDisplay').length > 0) {
             // schon gezeichnet
             return;
@@ -58,17 +44,8 @@ gpoTrophy.prototype = {
         }
     },
     GetCurrentUserId: function () {
-        if (this.OldLayout) {
-            var dirtyId = $('[role=tablist]').attr("id");
 
-            if (dirtyId !== undefined) {
-                return dirtyId.split('-')[0];
-            } else {
-                return undefined;
-            }
-        } else {
             return $('[jsAction="JIbuQc:yRYTGf(hL3Im);"]').data("oid");
-        }
 
 
     },
@@ -108,23 +85,17 @@ gpoTrophy.prototype = {
         var obj = this;
         if (hover) {
 
-            if (obj.OldLayout) {
-                obj.RenderHover(trophies, $trophy.closest('.InfoUsrTop').next(), userId, false);
-            } else {
+
                 obj.RenderHover(trophies, $trophy.closest('.dzuq1e').next(), userId, true);
-            }
 
         } else {
             if ($('.trophyDisplay').length > 0) {
                 // schon gezeichnet
                 return;
             }
-            if (obj.OldLayout) {
-                obj.RenderHover(trophies, $('.Ypa.jw.am:first'), userId, true);
-            } else {
+
                 obj.RenderHover(trophies, $('.H68wj:first'), userId, true);
 
-            }
         }
     },
     ItsMe: function () {
@@ -153,18 +124,11 @@ gpoTrophy.prototype = {
             noTrophiesYet = this.GetUserName() + " " + chrome.i18n.getMessage("hasnotrophies");
         }
         html = html.replace("{{ITSME}}", itsmeblock).replace("{{NOTROPHY}}", noTrophiesYet);
-        if (this.OldLayout) {
-            $('.Ypa.jw.am:first').prepend(html);
-        } else {
             $('.H68wj:first').prepend(html);
-        }
     },
     GetUserName: function () {
-        if (this.OldLayout) {
-            return $('[guidedhelpid="profile_name"]').html();
-        } else {
+
             return $('.RdrCV').text();
-        }
     },
     GetUsers: function () {
         var obj = this;
@@ -187,16 +151,7 @@ gpoTrophy.prototype = {
         if (obj.AllUsers !== undefined && obj.AllUsers !== null && obj.AllUsers.length > 0) {
             for (var i in obj.AllUsers) {
                 var currentUser = obj.AllUsers[i].id;
-                if (obj.OldLayout) {
-                    if ($ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').length > 0) {
-                        $ce.find('h3 [oid="' + currentUser + '"]').closest('.lea').each(function () {
-                            AddHeadWrapper($(this));
-                            if ($(this).html().indexOf('trophyImg') === -1) {
-                                $(this).find('.InfoUsrTop').prepend("<a><img class=\"trophyImg\" userId='" + currentUser + "' title=\"" + chrome.i18n.getMessage("HasTrophies") + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/trophy_24.png') + "\" />");
-                            }
-                        });
-                    }
-                } else {
+
                     if ($ce.find('a[data-profileid="' + currentUser + '"]').closest('div').length > 0) {
                         $ce.find('a[data-profileid="' + currentUser + '"]').closest('div').each(function () {
                             AddHeadWrapper($(this));
@@ -205,7 +160,6 @@ gpoTrophy.prototype = {
                             }
                         });
                     }
-                }
             }
         }
     },

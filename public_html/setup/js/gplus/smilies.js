@@ -54,8 +54,7 @@ gpoEmoticons.prototype = {
     Dom: function ($ce) {
         this.PaintEmoticons($ce);
     },
-    Init:function(oldLayout) {
-        this.OldLayout=oldLayout;
+    Init:function() {
     },
     PaintInner:function($element) {
         var obj = this;
@@ -76,14 +75,9 @@ gpoEmoticons.prototype = {
     PaintEmoticons: function ($ce) {
         var obj = this;
 
-        if (oldLayout) {
-            $ce.find('li [jsname="jNm5if"]').each(function () {
-                obj.PaintInner($(this));
-            });
-        } else {
+
             $ce.find('.wftCae').each(function () {
                 obj.PaintInner($(this));
             });
-        }
     }
 };

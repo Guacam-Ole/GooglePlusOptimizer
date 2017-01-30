@@ -599,20 +599,20 @@ function PageLoad() {
         });
 
         SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
-            Subs.Bookmarks.Init(oldLayout);
+            Subs.Bookmarks.Init();
         });
 
         SingleMeasure(Subs.Autosave, "useAutoSave", function () {
             Subs.Autosave.CleanupAutosave();
-            Subs.Autosave.Init(oldLayout);
+            Subs.Autosave.Init();
         });
 
         SingleMeasure(Subs.User, "colorUser", function () {
-            Subs.User.Init(oldLayout);
+            Subs.User.Init();
         });
 
         SingleMeasure(Subs.Trophy, "displayTrophy", function () {
-            Subs.Trophy.Init(oldLayout);
+            Subs.Trophy.Init();
         });
 
         SingleMeasureBool(Subs.Settings.Values.DisplayQuickHashes, "displayQuickHashes", function () {
@@ -620,11 +620,11 @@ function PageLoad() {
         });
 
         SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
-            Subs.Lsr.Init(oldLayout);
+            Subs.Lsr.Init();
         });
 
         SingleMeasure(Subs.Lsr, "showEmoticons", function () {
-            Subs.Emoticons.Init(oldLayout);
+            Subs.Emoticons.Init();
         });
 
         DrawWidgets();

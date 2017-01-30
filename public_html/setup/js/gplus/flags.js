@@ -21,9 +21,7 @@ var gpoFlags = function () {
 
 gpoFlags.prototype = {
     constructor: gpoFlags,
-    OldLayout:true,
-    Init: function (oldLayout) {
-        this.OldLayout=oldLayout;
+    Init: function () {
     },
     Dom: function ($ce) {
         if ($('.langSelect').length === 0) {
@@ -37,11 +35,9 @@ gpoFlags.prototype = {
             });
 
             languageSelector += "</span></span>";
-            if (obj.OldLayout)  {
-                $('.Pzc').prepend($(languageSelector));
-            } else {
+
                 $('.gb_PB.gb_le').prepend($(languageSelector));
-            }
+
 
 
             $('.langOpen').click(function () {

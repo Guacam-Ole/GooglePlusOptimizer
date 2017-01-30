@@ -4,9 +4,7 @@ var gpoLsr = function () {
 
 gpoLsr.prototype = {
     constructor: gpoLsr,
-    OldLayout:true,
-    Init: function (oldLayout) {
-        this.OldLayout=oldLayout;
+    Init: function () {
         this.LoadLsrList();
     },
     Dom: function ($ce) {
@@ -34,51 +32,23 @@ gpoLsr.prototype = {
         var obj = this;
         var mark = function ($el) {
 
-            if (oldLayout) {
-                $el.find('div[jsname="P3RoXc"]')
-                    .not('.wrng')
-                    .addClass('wrng')
-                    .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
-            } else {
+
                 $el.find('.wftCae')
                     .not('.wrng')
                     .addClass('wrng')
                     .prepend($('<div style="background-color:red;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
 
-            }
+
         };
 
         var markComment = function ($el) {
-            if (oldLayout) {
-                $el.not('.wrng')
-                    .addClass('wrng')
-                    .prepend($('<div style="background-color:red;font-size: 8pt;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
-            } else {
                 $el.not('.wrng')
                     .addClass('wrng')
                     .before($('<div style="background-color:red;font-size: 8pt;color:white;text-align:center;font-weight:bold;letter-spacing:0.1em;">' + chrome.i18n.getMessage('WARNING') + '</div>'));
 
-            }
         };
 
         // Hauptbeitrag:
-        if (obj.OldLayout) {
-            $ce.find('div.Xx.xJ a').each(function (i, div) {
-                obj.DomainBlacklist.forEach(function (domain) {
-                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                        mark($(div).closest("div.Yp.yt.Xa"));
-                    }
-                });
-            });
-            $ce.find('div.yx.Nf a').each(function (i, div) {
-                obj.DomainBlacklist.forEach(function (domain) {
-                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                        mark($(div).closest("div.Yp.yt.Xa"));
-                    }
-                });
-            });
-        } else {
-
             $ce.find('[role="main"] a').each(function (i, div) {
                 obj.DomainBlacklist.forEach(function (domain) {
                     if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
@@ -86,18 +56,8 @@ gpoLsr.prototype = {
                     }
                 });
             });
-        }
 
         // Kommentare:
-        if (obj.OldLayout) {
-            $ce.find('div.Ik.Wv a').each(function (i, div) {
-                obj.DomainBlacklist.forEach(function (domain) {
-                    if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
-                        markComment($(div).closest("div.Ik.Wv"));
-                    }
-                });
-            });
-        } else {
             $ce.find('.M24KRd a').each(function (i, div) {
                 obj.DomainBlacklist.forEach(function (domain) {
                     if (div.href.indexOf(domain + "/") > -1 || div.href.substr(-1, 1) === domain) {
@@ -105,7 +65,6 @@ gpoLsr.prototype = {
                     }
                 });
             });
-        }
     }
 };
 

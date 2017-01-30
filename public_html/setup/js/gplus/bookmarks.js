@@ -1,4 +1,4 @@
-var gpoBookmarks = function () {
+var gpoBookmarks = function (Log) {
     this.BookmarkPrefix = "Google+Optimizer.Bookmark->";
     this.MaxTeaserLength = 100;
     this.DisplayBookmarks;
@@ -7,13 +7,12 @@ var gpoBookmarks = function () {
     this.BookmarkContent;
     this.StillLoading;
     this.WaitCount=0;
+    this.Log=Log;
 };
 
 gpoBookmarks.prototype = {
     constructor: gpoBookmarks,
-    OldLayout:true,
-    Init: function (oldLayout) {
-        this.OldLayout=oldLayout;
+    Init: function () {
         var obj = this;
         obj.GetBookmarksFromStorage(function() {obj.ContinueLoading();});
         $(document).on("click", ".clickOntoBookmark", function () {
@@ -102,29 +101,18 @@ gpoBookmarks.prototype = {
     },
     AddNewBookmark: function ($source) {
         var obj = this;
-        if (this.OldLayout) {
-            var $bmDateElement = $source.find('.o-U-s.FI.Rg');
-            var date = $bmDateElement.attr("Title");
-            var $bmSenderPicElement = $source.find(".Uk.wi.hE");
-            var $bmSenderNameElement = $source.find(".ob.tv.Ub.Hf").first();
-            var $bmImageElement = $source.find(".ar.Mc");
-            var $bmLinkElement = $source.find(".ot-anchor");
-            var $bmVisibilityElement = $source.find(".d-s.Vt.Hm.dk.Q9");
-            var $bmIdElement = $source.parent();
-            var $bmContentElements = $source.find('.Ct');
-            var id =$bmIdElement.attr("id");
-        } else {
-            var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
-            var date =$bmDateElement.find('span').text();
-            var $bmSenderPicElement = $source.find(".URgs7");
-            var $bmSenderNameElement = $source.find(".m3JvWd").first();
-            var $bmImageElement = $source.find(".JZUAbb");
-            var $bmLinkElement = $source.find(".ot-anchor");
-            var $bmVisibilityElement = $source.find(".UTObDb");
-            var $bmIdElement = $source.parent();
-            var $bmContentElements = $source.find('.wftCae');
-            var id =$bmIdElement.data("iid")
-        }
+
+        var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
+        var date =$bmDateElement.find('span').text();
+        var $bmSenderPicElement = $source.find(".URgs7");
+        var $bmSenderNameElement = $source.find(".m3JvWd").first();
+        var $bmImageElement = $source.find(".JZUAbb");
+        var $bmLinkElement = $source.find(".ot-anchor");
+        var $bmVisibilityElement = $source.find(".UTObDb");
+        var $bmIdElement = $source.parent();
+        var $bmContentElements = $source.find('.wftCae');
+        var id =$bmIdElement.data("iid");
+
 
         var origin = $bmDateElement.attr("href");
         var userPic = $bmSenderPicElement.attr("src");
@@ -193,12 +181,14 @@ gpoBookmarks.prototype = {
             isNewBookmark = true;
         }
 
+
         var iconUrl;
         if (isNewBookmark) {
             iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
         } else {
             iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
         }
+        obj.GetBookmarksFromStorage();  // reload Bookmarks
         $source.find('.addBookmark').attr('src', iconUrl);
     },
     RemoveNewBookmark: function (bookmark, displayBookmarks, $parent) {
@@ -226,12 +216,12 @@ gpoBookmarks.prototype = {
 
         // Erst Lokal:
         chrome.storage.local.set(bookmarkObj, function () {
-            console.log("Bookmark saved locally");
+            Log.Debug("Bookmark saved locally");
             bookmark.ContentHtml = null;
             bookmark.IsCloudOnly = true;
             bookmarkObj[storageName] = JSON.stringify(bookmark);
             chrome.storage.sync.set(bookmarkObj, function () {
-                console.log("... and up in da cloud");
+                Log.Debug("... and up in da cloud");
                 obj.DisplayBookmarksHover();
             });
         });
@@ -262,7 +252,10 @@ gpoBookmarks.prototype = {
                     }
                 });
                 obj.StillLoading=false;
-                target();
+                Log.Debug("Read Bookmarks");
+                if (target) {
+                    target();
+                }
             });
         });
     },
@@ -294,15 +287,13 @@ gpoBookmarks.prototype = {
         });
         var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
         $('.BookmarksHover').remove();
-        if (obj.OldLayout) {
-            $('.Pzc').append($(completeDiv));
-        } else {
+
             $('body').append($(completeDiv));
             $('.BookmarksHover').css("position","absolute");
             $('.BookmarksHover').css("z-index","700");
             $('.BookmarksHover').css("top","70px");
             $('.BookmarksHover').css("right","20px");
-        }
+
         $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
             var scrollTo = null;
             if (e.type == 'mousewheel') {
@@ -317,26 +308,11 @@ gpoBookmarks.prototype = {
             }
         });
         obj.PaintStars();
-        console.log("bookmarks read");
+        Log.Debug("bookmarks read");
     },
     PaintStars: function () {
         var obj = this;
-        if (obj.OldLayout) {
-            $('.lea:not(:has(.addBookmark))').each(function () {
-                AddHeadWrapper($(this));
-                var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
 
-
-                var iconHtml = "";
-                var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
-                if (obj.ContainsBookmark(id)) {
-                    iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
-                }
-                iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
-
-                $(this).find('.InfoUsrTop').append(iconHtml);
-            });
-        } else {
             $('.dzuq1e:not(:has(.addBookmark))').each(function () {
                 AddHeadWrapper($(this));
                 var id = $(this).closest('.dzuq1e').find('.qXj2He').attr('href');
@@ -351,15 +327,10 @@ gpoBookmarks.prototype = {
 
                 $(this).find('.InfoUsrTop').append(iconHtml);
             });
-        }
+
     },
     ClickBookmark: function (bookmarkButton) {
-        if (oldLayout) {
-            this.AddNewBookmark(bookmarkButton.closest('[role="article"]'));
-        } else {
-            this.AddNewBookmark(bookmarkButton.closest('[jsname="WsjYwc"]'));
-        }
-
+        this.AddNewBookmark(bookmarkButton.closest('[jsname="WsjYwc"]'));
         return;
     },
     ContainsBookmark: function (id) {
@@ -398,10 +369,7 @@ gpoBookmarks.prototype = {
             obj.BookmarkContent = JSON.parse(response.Result) || null;
         });
     },
-    IsBookmarkPage: function () {
-        // Für die ALTE Bookmarkseite. Irgendwann rauskicken!
-        return false;
-    },
+
     SaveBookmarks: function () {
         var obj = this;
         chrome.runtime.sendMessage({Action: "SaveBookmarks", ParameterValue: JSON.stringify(bookmarkList)});
@@ -411,6 +379,7 @@ gpoBookmarks.prototype = {
         obj.LoadBookmarkContent();
     },
     AddBookmark: function (id, content) {
+        Log.Info("Bookmark "+id+" added");
         var obj = this;
         if ((obj.BookmarkList || null) === null) {
             obj.BookmarkList = [];
@@ -421,6 +390,7 @@ gpoBookmarks.prototype = {
         obj.SaveBookmarks();
     },
     RemoveBookmark: function (id) {
+        Log.Info("Bookmark "+id+" removed");
         var obj = this;
         var position = $.inArray(id, obj.BookmarkList);
         if (position >= 0) {
