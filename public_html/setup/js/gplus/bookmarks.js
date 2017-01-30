@@ -188,7 +188,7 @@ gpoBookmarks.prototype = {
         } else {
             iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
         }
-        obj.GetBookmarksFromStorage();  // reload Bookmarks
+
         $source.find('.addBookmark').attr('src', iconUrl);
     },
     RemoveNewBookmark: function (bookmark, displayBookmarks, $parent) {
@@ -196,6 +196,7 @@ gpoBookmarks.prototype = {
         if (displayBookmarks === undefined) {
             displayBookmarks = true;
         }
+        Log.Info("Bookmark "+bookmark.Id+" removed");
         var storageName = obj.BookmarkPrefix + bookmark.Id;
         chrome.storage.local.remove(storageName, function () {
             chrome.storage.sync.remove(storageName, function () {
@@ -205,6 +206,7 @@ gpoBookmarks.prototype = {
                     $parent.remove();
                     obj.CalcBookmarkFloat();
                 }
+                obj.GetBookmarksFromStorage();  // reload Bookmarks
             });
         });
     },
@@ -214,6 +216,7 @@ gpoBookmarks.prototype = {
         var storageName = obj.BookmarkPrefix + bookmark.Id;
         bookmarkObj[storageName] = JSON.stringify(bookmark);
 
+        Log.Info("Bookmark "+bookmark.Id+" added");
         // Erst Lokal:
         chrome.storage.local.set(bookmarkObj, function () {
             Log.Debug("Bookmark saved locally");
@@ -223,6 +226,7 @@ gpoBookmarks.prototype = {
             chrome.storage.sync.set(bookmarkObj, function () {
                 Log.Debug("... and up in da cloud");
                 obj.DisplayBookmarksHover();
+                obj.GetBookmarksFromStorage();  // reload Bookmarks
             });
         });
     },
@@ -378,7 +382,7 @@ gpoBookmarks.prototype = {
         obj.LoadBookmarkList();
         obj.LoadBookmarkContent();
     },
-    AddBookmark: function (id, content) {
+  /*  AddBookmark: function (id, content) {
         Log.Info("Bookmark "+id+" added");
         var obj = this;
         if ((obj.BookmarkList || null) === null) {
@@ -398,7 +402,7 @@ gpoBookmarks.prototype = {
             obj.BookmarkContent.splice(position, 1);
         }
         obj.SaveBookmarks();
-    },
+    },*/
     DisplayBookmarksInside: function () {
         var obj = this;
         if ((obj.BookmarkContent || null) !== null && obj.B.bookmarkContent.length > 0) {
