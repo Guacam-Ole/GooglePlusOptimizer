@@ -155,45 +155,48 @@ $(document).ready(function () {
     }
 });
 
-
-/**
- * Wizard-Kachel zeichnen
- */
-function DrawWizardTile() {
-    if (!oldLayout) {
-        return;    // Derzeit noch kein Wizard im neuen Layout, weil: Sieht echt scheiße aus
-    }
-    //return;
+function DrawWizard() {
     try {
         var wizard=new gpoWizard();
-
-
         var lang = chrome.i18n.getMessage("lang");
         wizard.CurrentLang=lang;
-        if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
-            $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
-                var htmlObject = $('<div/>').html(htmlWizard).contents();
-                if (oldLayout) {
-                    $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
-                } else {
-                    $('.H68wj.jxKp7 :first').prepend(htmlObject.find('[data-iid="wizard"]'));
 
-                }
-                $('#wizardStart').click(function () {
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap.min.css") + "' type='text/css' media='screen' />"));
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
-                    var wizz = $('<div id="loadhere">&nbsp;</div>');
-                    $('body').prepend(wizz);
-                    $('#loadhere').load(Browser.GetExtensionFile("setup/" + lang + "/wizard.html"), function () {
-                        wizard.InitWizard(Subs.Settings.Values.LastWizard);
-                        Log.Info('Wizard loaded');
-                    });
+        if (!Subs.Settings.Values.LastWizard || true) {
+            // Noch nie installiert
+            $.get(chrome.extension.getURL("setup/" + lang + "/wizard.new.html"), function (htmlWizard) {
+                $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                var htmlObject = $('<div/>').html(htmlWizard).contents();
+                htmlObject.find('#headerImg').attr("src",chrome.extension.getURL("setup/images/optimizer_setup.jpg"));
+                htmlObject.find('#helpImg').attr("src",chrome.extension.getURL("setup/images/options.png"));
+                $("body").prepend(htmlObject);
+
+                $('#wizardClose').click(function () {
+                    wizard.SaveVersion();
+                    $('.gPlusWizard').fadeOut();
                 });
             });
+
+        } else {
+            if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard) || true) {
+                $.get(chrome.extension.getURL("setup/" + lang + "/wizard.update.html"), function (htmlWizard) {
+                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                    var htmlObject = $('<div/>').html(htmlWizard).contents();
+                    htmlObject.find('#headerImg').attr("src",chrome.extension.getURL("setup/images/optimizer_setup.jpg"));
+                    htmlObject.find('#helpImg').attr("src",chrome.extension.getURL("setup/images/options.png"));
+                    $("body").prepend(htmlObject);
+
+                    $('#wizardClose').click(function () {
+                        wizard.SaveVersion();
+                        $('.gPlusWizard').fadeOut();
+                    });
+                });
+            }
         }
     } catch (ex) {
+        // Sicherheitshalber Wizard als ausgeführt speichern, damit G+ nicht kaputt geht
         Log.Error(ex);
+        wizard.SaveVersion();
+
     }
 }
 
@@ -258,6 +261,7 @@ function CountColumns() {
         }
     } catch (ex) {
         Log.Error(ex);
+
     }
 }
 
@@ -588,15 +592,14 @@ function InitObjects() {
 }
 
 function PageLoad() {
-        InitObjects();
+        InitObjects()
+    DrawWizard();;
         Subs.Measure = new gpoMeasure("START", true);
 
         var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
 
 
-        SingleMeasureBool(wizard >= 0, "wizard", function () {
-            DrawWizardTile();
-        });
+
 
         SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
             Subs.Bookmarks.Init();

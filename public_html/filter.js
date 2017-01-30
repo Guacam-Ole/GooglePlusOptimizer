@@ -18,55 +18,13 @@ chrome.runtime.onMessage.addListener(
             oldTicks.push({Name:request.Name, Scope:request.Scope, Start:request.Start, Stop:request.Stop});
             localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));                 
         }
+
+
         else if (request.Action==="DeleteTicks") {
              localStorage.removeItem("Measurements_"+request.Scope);
         }
         else if (request.Action==="SaveUserName") {
             localStorage["UserName"]=request.ParameterValue;
-        }
-        else if (request.Action==="GetSoccerScores") {
-            var orderId=request.Day;
-            var smallCompleteUrl = "http://www.nocarrier.de/opendb.php?command=GetCurrentGroup&league=" + request.League;
-            $.getJSON(smallCompleteUrl, function(data) {
-                if (orderId===null) {
-                    orderId = data.groupOrderID;
-                }
-                var completeUrl = "http://www.nocarrier.de/opendb.php?command=GetResults&league=" + request.League + "&season=" + request.Season + "&orderId=" + orderId;
-                $.getJSON(completeUrl, function(inner) {
-                    var res=JSON.stringify(inner);
-                    sendResponse({Result: res});
-                    return true;
-                });
-                return true;
-            });
-            return true;
-        }
-
-        else if (request.Action === "SaveCircles") {
-            var ls=localStorage.getItem("QS.AllCircles");
-            if (ls===undefined || ls===null||ls==="undefined") {
-                ls=JSON.stringify({});
-            }
-            var circleSettings=JSON.parse(ls);
-            circleSettings.Circles=request.Circles;
-            localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
-        }
-        else if (request.Action==="SaveCommunities") {
-            var ls=localStorage.getItem("QS.AllCircles");
-            if (ls===undefined || ls===null||ls==="undefined") {
-                ls=JSON.stringify({});
-            }
-            var circleSettings = JSON.parse(ls);
-            circleSettings.Communities = request.Communities;
-            localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
-        }
-        else if (request.Action==="LoadCommunities") {
-            var allCircles=localStorage.getItem("QS.AllCircles");
-            if (allCircles!==undefined && allCircles!==null) {
-                var acc=JSON.parse(allCircles);
-                sendResponse({Result: acc.Communities});
-            }
-            return true;
         }
     }
 );
@@ -148,25 +106,6 @@ chrome.runtime.onMessage.addListener(
                     sendResponse({Result: token});
                 });
                 return true;
-            }
-            else if (request.Action === "SaveQS")
-            {
-                localStorage.setItem("QuickShares", request.QuickShares);
-                sendResponse({Result: "Setting saved."});
-            }
-            else if (request.Action === "LoadQS")
-            {
-                sendResponse({Result: localStorage.getItem("QuickShares")});
-            }
-            else if (request.Action === "LoadCircles")
-            {
-                var circles = localStorage.getItem("Circles") || null;
-                if (circles !== null) {
-                    circles = JSON.parse(circles);
-                } else {
-                    circles = [];
-                }
-                sendResponse({Result: circles});
             }
             else if (request.Action === "SaveColumns")
             {

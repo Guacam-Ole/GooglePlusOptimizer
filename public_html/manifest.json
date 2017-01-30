@@ -63,12 +63,8 @@
         "setup/images/weather/50x50/*",
         "setup/css/*",
         "setup/js/*",
-        "setup/de/wizardloader.html",
-        "setup/de/wizard.html",
-        "setup/de/wizimg/*",
-        "setup/en/wizimg/*",
-        "setup/en/wizardloader.html",
-        "setup/en/wizard.html",
+        "setup/de/*",
+        "setup/en/*",
         "_locales/*"
     ],
     "content_security_policy":"script-src 'self'  https://files.oles-cloud.de; object-src 'self'"
