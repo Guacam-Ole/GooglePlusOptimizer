@@ -66,20 +66,17 @@ gpoBookmarks.prototype = {
     },
     PaintFloatingIcon:function($ce) {
         var obj = this;
-        if (!obj.OldLayout) {
-        //    return; // Kein floating-bereich im neuen Layout
-        }
+
         if ($ce.find('.miniBookmark').length === 0) {
             $(document).on('click', '.miniBookmark', function () {
                 obj.ShowBookmarkFloat();
             });
 
-            var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-            if (obj.OldLayout) {
-                $ce.find('.Pzc').prepend($(bookmarkIcon));
-            } else {
-                $ce.find('.gb_Pb').prepend($(bookmarkIcon));
-            }
+            var bookmarkIcon='<a class="M9kDrd miniBookmark"><div class="Hj0nzc"><img src="' + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + '" title="Bookmarks"></div>'
+            +'<div class="CjySve">Bookmarks</div></a>';
+
+            //var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
+                $ce.find('.L1NA8d').append($(bookmarkIcon));
         }
     },
     CalcBookmarkFloat: function () {
@@ -200,13 +197,15 @@ gpoBookmarks.prototype = {
         var storageName = obj.BookmarkPrefix + bookmark.Id;
         chrome.storage.local.remove(storageName, function () {
             chrome.storage.sync.remove(storageName, function () {
-                if (displayBookmarks) {
-                    obj.DisplayBookmarksHover();
-                } else {
-                    $parent.remove();
-                    obj.CalcBookmarkFloat();
-                }
-                obj.GetBookmarksFromStorage();  // reload Bookmarks
+
+                    obj.GetBookmarksFromStorage(function() {
+                        if (displayBookmarks) {
+                            obj.DisplayBookmarksHover();
+                        } else {
+                            $parent.remove();
+                            obj.CalcBookmarkFloat();
+                        }
+                    });  // reload Bookmarks
             });
         });
     },
@@ -225,8 +224,9 @@ gpoBookmarks.prototype = {
             bookmarkObj[storageName] = JSON.stringify(bookmark);
             chrome.storage.sync.set(bookmarkObj, function () {
                 Log.Debug("... and up in da cloud");
-                obj.DisplayBookmarksHover();
-                obj.GetBookmarksFromStorage();  // reload Bookmarks
+                obj.GetBookmarksFromStorage(function() {
+                    obj.DisplayBookmarksHover();
+                });  // reload Bookmarks
             });
         });
     },
@@ -260,6 +260,11 @@ gpoBookmarks.prototype = {
                 if (target) {
                     target();
                 }
+                if (obj.NewBookmarkList.length > 0) {
+                    $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+                } else {
+                    $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png"));
+                }
             });
         });
     },
@@ -267,14 +272,10 @@ gpoBookmarks.prototype = {
         var obj = this;
 
         var savedBookmarks = obj.NewBookmarkList;
-        var container = '<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
+        var container = '<div class="BookmarksHover"><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
 
         var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
         var bookmarkDivs = '';
-
-        if (savedBookmarks.length > 0) {
-            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-        }
 
         savedBookmarks.sort(function (a, b) {
             return (new Date(b.Created)) - (new Date(a.Created))
@@ -296,7 +297,7 @@ gpoBookmarks.prototype = {
             $('.BookmarksHover').css("position","absolute");
             $('.BookmarksHover').css("z-index","700");
             $('.BookmarksHover').css("top","70px");
-            $('.BookmarksHover').css("right","20px");
+            $('.BookmarksHover').css("left","420px");
 
         $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
             var scrollTo = null;
@@ -382,27 +383,7 @@ gpoBookmarks.prototype = {
         obj.LoadBookmarkList();
         obj.LoadBookmarkContent();
     },
-  /*  AddBookmark: function (id, content) {
-        Log.Info("Bookmark "+id+" added");
-        var obj = this;
-        if ((obj.BookmarkList || null) === null) {
-            obj.BookmarkList = [];
-            obj.BookmarkContent = [];
-        }
-        obj.BookmarkList.push(id);
-        obj.BookmarkContent.push(content);
-        obj.SaveBookmarks();
-    },
-    RemoveBookmark: function (id) {
-        Log.Info("Bookmark "+id+" removed");
-        var obj = this;
-        var position = $.inArray(id, obj.BookmarkList);
-        if (position >= 0) {
-            obj.BookmarkList.splice(position, 1);
-            obj.BookmarkContent.splice(position, 1);
-        }
-        obj.SaveBookmarks();
-    },*/
+
     DisplayBookmarksInside: function () {
         var obj = this;
         if ((obj.BookmarkContent || null) !== null && obj.B.bookmarkContent.length > 0) {
