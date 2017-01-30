@@ -34,6 +34,7 @@ gpoWizard.prototype = {
         }
     },
     SaveVersion:function () {
+        var manifest = chrome.runtime.getManifest();
         chrome.runtime.sendMessage(
         {
             Action: "SaveWizardVersion",

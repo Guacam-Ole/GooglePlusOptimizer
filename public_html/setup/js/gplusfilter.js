@@ -161,7 +161,7 @@ function DrawWizard() {
         var lang = chrome.i18n.getMessage("lang");
         wizard.CurrentLang=lang;
 
-        if (!Subs.Settings.Values.LastWizard || true) {
+        if (!Subs.Settings.Values.LastWizard || Subs.Settings.Values.LastWizard=="null" ) {
             // Noch nie installiert
             $.get(chrome.extension.getURL("setup/" + lang + "/wizard.new.html"), function (htmlWizard) {
                 $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
@@ -177,12 +177,11 @@ function DrawWizard() {
             });
 
         } else {
-            if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard) || true) {
+            if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
                 $.get(chrome.extension.getURL("setup/" + lang + "/wizard.update.html"), function (htmlWizard) {
                     $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
                     var htmlObject = $('<div/>').html(htmlWizard).contents();
                     htmlObject.find('#headerImg').attr("src",chrome.extension.getURL("setup/images/optimizer_setup.jpg"));
-                    htmlObject.find('#helpImg').attr("src",chrome.extension.getURL("setup/images/options.png"));
                     $("body").prepend(htmlObject);
 
                     $('#wizardClose').click(function () {
@@ -593,10 +592,11 @@ function InitObjects() {
 
 function PageLoad() {
         InitObjects()
-    DrawWizard();;
+        DrawWizard();;
+
         Subs.Measure = new gpoMeasure("START", true);
 
-        var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
+        //var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
 
 
 

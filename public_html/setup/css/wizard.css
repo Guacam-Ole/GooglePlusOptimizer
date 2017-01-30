@@ -26,3 +26,12 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+
+.gPlusWizard ul {
+    text-align: left;
+}
+
+.gPlusWizard ul span {
+    font-size: 12px;
+    display: block;
+}

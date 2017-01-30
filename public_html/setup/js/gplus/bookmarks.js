@@ -294,7 +294,7 @@ gpoBookmarks.prototype = {
         $('.BookmarksHover').remove();
 
             $('body').append($(completeDiv));
-            $('.BookmarksHover').css("position","absolute");
+            $('.BookmarksHover').css("position","fixed");
             $('.BookmarksHover').css("z-index","700");
             $('.BookmarksHover').css("top","70px");
             $('.BookmarksHover').css("left","420px");
