@@ -432,7 +432,7 @@ function StartFilter(changedElements) {
 
 
     /* Erweiterungen */
-    SingleMeasure(Subs.Lsr, "measureTitle", function () {
+ /*   SingleMeasure(Subs.Lsr, "measureTitle", function () {
         Subs.Lsr.Dom($ce);
     });
     SingleMeasure(Subs.Trophy, "displayTrophy", function () {
@@ -440,7 +440,7 @@ function StartFilter(changedElements) {
     });
     SingleMeasure(Subs.User, "colorUser", function () {
         Subs.User.Dom($ce);
-    });
+    });*/
     SingleMeasure(Subs.Emoticons, "showEmoticons", function () {
         Subs.Emoticons.Dom($ce);
     });
