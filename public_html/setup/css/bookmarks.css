@@ -46,6 +46,9 @@ and open the template in the editor.
 
 .littleBookmarkContent {
     padding-top: 20px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .BookmarksHover {
