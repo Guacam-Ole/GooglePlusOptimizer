@@ -1,6 +1,6 @@
 var gpoBookmarks = function (Log) {
     this.BookmarkPrefix = "Google+Optimizer.Bookmark->";
-    this.MaxTeaserLength = 140;
+    this.MaxTeaserLength = 120;
     this.DisplayBookmarks;
     this.BookmarkList;
     this.NewBookmarkList;
@@ -106,7 +106,6 @@ gpoBookmarks.prototype = {
         var obj = this;
 
         var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
-        var date =$bmDateElement.find('span').text();
         var $bmSenderPicElement = $source.find(".URgs7");
         var $bmSenderNameElement = $source.find(".m3JvWd").first();
         var $bmImageElement = $source.find(".JZUAbb");
@@ -138,30 +137,13 @@ gpoBookmarks.prototype = {
         if (contentText.length > obj.MaxTeaserLength) {
             contentText = contentText.substring(0, obj.MaxTeaserLength) + "...";
         }
-        date=date.replace(String.fromCharCode(160)," ");
-        var splitDate=date.split(' ');
-        if (splitDate.length>1) {
-            // Angabe wie xxx Sekunden
-            switch (splitDate[1]) {
-                case "Sek.":
-                    date= Date.now().setSeconds(Date.now().getSeconds()-splitDate[0]);
-                    break;
-                case "Min.":
-                    date= Date.now().setMinutes(Date.now().getMinutes()-splitDate[0]);
-                    break;
-                case "Std.":
-                    date= Date.now().setHours(Date.now().getHours()-splitDate[0]);
-                    break;
-            }
-        }
-        // TODO: Englische Variante erkennen (33m, 3h, 23s)
-        if (Date.parse(date)===null) {
-            date=Date.now;
-        }
+
+
+        var date=Date.now();
 
         var bookmarkContent = {
             Id: origin,
-            Created: Date.parse(date),
+            Created: date,
             Origin: origin,
             User: {
                 Picture: userPic,
