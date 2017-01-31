@@ -1,6 +1,6 @@
 var gpoBookmarks = function (Log) {
     this.BookmarkPrefix = "Google+Optimizer.Bookmark->";
-    this.MaxTeaserLength = 100;
+    this.MaxTeaserLength = 140;
     this.DisplayBookmarks;
     this.BookmarkList;
     this.NewBookmarkList;
@@ -28,6 +28,9 @@ gpoBookmarks.prototype = {
             var bookmark = {Id: id};
             obj.RemoveNewBookmark(bookmark, false, $(this).parent());
             return false;
+        });
+        $(document).on('click', '.miniBookmark', function () {
+            obj.ShowBookmarkFloat();
         });
 
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
@@ -62,15 +65,13 @@ gpoBookmarks.prototype = {
         } else {
             obj.PaintStars();
         }
-       //this.PaintFloatingIcon($ce);
+     //  this.PaintFloatingIcon($ce);
     },
     PaintFloatingIcon:function($ce) {
         var obj = this;
 
         if ($ce.find('.miniBookmark').length === 0) {
-            $(document).on('click', '.miniBookmark', function () {
-                obj.ShowBookmarkFloat();
-            });
+
 
             var bookmarkIcon='<a class="M9kDrd miniBookmark"><div class="Hj0nzc"><img src="' + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + '" title="Bookmarks"></div>'
             +'<div class="CjySve">Bookmarks</div></a>';
@@ -78,14 +79,19 @@ gpoBookmarks.prototype = {
             //var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
                 $ce.find('.L1NA8d').append($(bookmarkIcon));
         }
+        if (obj.NewBookmarkList.length > 0) {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        } else {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png"));
+        }
     },
     CalcBookmarkFloat: function () {
         var maxHeight = $(window).height() - 200;
         var bookmarkCount = $(".allBookmarks").find(".clickOntoBookmark").length;
-        var singleHeight = 88;
+        var singleHeight = 110;
         var top = $(".miniBookmark").position().top;
-        var totalHeight = singleHeight * bookmarkCount + 35;
-        var endPos = totalHeight + top;
+        var totalHeight = singleHeight * bookmarkCount +20;
+        var endPos = totalHeight; // + top;
         if (endPos > maxHeight) {
             totalHeight = maxHeight;
         }
@@ -107,7 +113,10 @@ gpoBookmarks.prototype = {
         var $bmLinkElement = $source.find(".ot-anchor");
         var $bmVisibilityElement = $source.find(".UTObDb");
         var $bmIdElement = $source.parent();
-        var $bmContentElements = $source.find('.wftCae');
+        var $bmContentElements = $source.find('[jsname="EjRJtf"]'); // collection
+        if ($bmContentElements.length==0) {
+            $bmContentElements = $source.find('.ELUvyf'); // Normaler Beitrag
+        }
         var id =$bmIdElement.data("iid");
 
 
@@ -127,7 +136,7 @@ gpoBookmarks.prototype = {
         });
 
         if (contentText.length > obj.MaxTeaserLength) {
-            contentText = contentText.substring(0, obj.MaxTeaserLength + " ");
+            contentText = contentText.substring(0, obj.MaxTeaserLength) + "...";
         }
         date=date.replace(String.fromCharCode(160)," ");
         var splitDate=date.split(' ');
@@ -281,12 +290,10 @@ gpoBookmarks.prototype = {
             return (new Date(b.Created)) - (new Date(a.Created))
         });
         $.each(savedBookmarks, function (index, value) {
-
-
             var teaser = value.ContentText;
-            if (teaser.indexOf(" ") > 0) {
-                teaser = teaser.substring(0, teaser.lastIndexOf(" "))
-            }
+           // if (teaser.indexOf(" ") > 0) {
+                teaser = teaser.trim();
+            //}
 
             bookmarkDivs += bookmarkDivTemplate.replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
         });

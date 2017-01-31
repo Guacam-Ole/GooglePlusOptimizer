@@ -90,6 +90,7 @@ var cwizObserver= new MutationObserver(function (mutations) {
             forEach.call(mutation.addedNodes, function (addedNode) {
                 DomCheckArticle(addedNode);
                 DomCheckBlock(addedNode);
+                DomCheckLeftNav(addedNode);
             });
         }
     });
@@ -110,6 +111,16 @@ function StartObservation() {
 
 
 
+function DomCheckLeftNav(node) {
+    if (!node.classList) return;
+    if (Array.from(node.classList).indexOf("OFyC1e")<0) return;
+
+  //  if (!node.class.contains('BTaief')) return;
+    SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
+        var $ce=$(node);
+        Subs.Bookmarks.PaintFloatingIcon($ce);
+    });
+}
 
 $(document).ready(function () {
     Log.Info('G+ - filter started');
@@ -447,8 +458,6 @@ function StartFilter(changedElements) {
 
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.Dom($ce);
-      //  Subs.Bookmarks.DisplayBookmarks($ce);
-      //  Subs.Bookmarks.PaintStars($ce);
     });
 
 }
