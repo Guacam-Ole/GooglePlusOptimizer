@@ -67,10 +67,10 @@ gpoEmoticons.prototype = {
                 smilieCount++;
             }
         }
-        if (smilieCount > 0) {
+/*        if (smilieCount > 0) {
             var oldHeight = $element.parent().height();
             $element.parent().css('max-height', (oldHeight + 40) + 'px');
-        }
+        }*/
     },
     PaintEmoticons: function ($ce) {
         var obj = this;
@@ -79,5 +79,10 @@ gpoEmoticons.prototype = {
             $ce.find('.wftCae').each(function () {
                 obj.PaintInner($(this));
             });
+            // Kommentare:
+        $ce.find('[jsname="ugGwVe"]').each(function () {
+            obj.PaintInner($(this));
+        });
+
     }
 };
