@@ -69,8 +69,12 @@ gpoBookmarks.prototype = {
     },
     PaintFloatingIcon:function($ce) {
         var obj = this;
+        var oldBookmark=$ce.find('.miniBookmark');
+        if (oldBookmark) {
+            oldBookmark.remove();
+        }
 
-        if ($ce.find('.miniBookmark').length === 0) {
+
 
 
             var bookmarkIcon='<a class="M9kDrd miniBookmark"><div class="Hj0nzc"><img src="' + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + '" title="Bookmarks"></div>'
@@ -78,7 +82,7 @@ gpoBookmarks.prototype = {
 
             //var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
                 $ce.find('.L1NA8d').append($(bookmarkIcon));
-        }
+
         if (obj.NewBookmarkList.length > 0) {
             $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
         } else {

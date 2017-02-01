@@ -1,4 +1,3 @@
-var oldLayout=false;
 var loaded=false;
 
 this.Browser = new Browser();
@@ -69,6 +68,15 @@ function DomCheckArticle(element) {
     }
 }
 
+function DomCheckNavigation(element) {
+    // Seite wurde neu geladen durch Navigation links, oder klick auf Name, oder...
+    if (element.nodeName == "C-WIZ") {
+        if (!element.classList) return;
+        if (Array.from(element.classList).indexOf("cla0ib")<0) return;
+        RestartFilter();
+    }
+}
+
 function DomCheckBlock(element) {
     if (element.nodeName == "DIV") {
         var dataiid = element.attributes["data-iid"];
@@ -91,6 +99,7 @@ var cwizObserver= new MutationObserver(function (mutations) {
                 DomCheckArticle(addedNode);
                 DomCheckBlock(addedNode);
                 DomCheckLeftNav(addedNode);
+                DomCheckNavigation(addedNode);
             });
         }
     });
@@ -126,7 +135,6 @@ $(document).ready(function () {
     Log.Info('G+ - filter started');
     InitSettings();
     StartObservation();
-    chrome.runtime.sendMessage({Action: "SetSetting", Name: "oldLayout", Value: oldLayout});
 
     if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
     {
@@ -135,34 +143,10 @@ $(document).ready(function () {
     else  {
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
 
-
-
-        if (oldLayout) {
-            $(document).on('click', '.unhideImage', function () {
-                $(this).parent().find('.hidewrapper').show();
-                $(this).remove();
-                return false;
-            });
-
-            $(document).on('click', '.removeHashTag', function () {
-                Log.Info('Add Hashtag');
-                if (Subs.Settings.Values.HashTags === null) {
-                    Subs.Settings.Values.HashTags = "";
-                }
-                var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
-                if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$"))) {
-                    // Einmal reicht...
-                    return;
-                }
-                AddHashtagToList(newHashtag);
-                $(this).hide();
-
-                return false;
-            });
-            $(document).on('click', '.JZ', function () {
-                RestartFilter();  // Reload Page. Limitieren auf 20 neue Objekte, sonst wirds zu langsam
-            });
-        }
+        $(document).on('click', '.xdjHt', function () {
+            // Dicker Google+ - Button
+            RestartFilter();
+        });
     }
 });
 
@@ -235,14 +219,14 @@ function DrawWidgets() {
     if (Subs.Weather !== null) {
         Subs.Measure.Do("weatherEnabled", function () {
             Subs.Weather.Settings = Subs.Settings.Values.WeatherWidget;
-            Subs.Weather.Init(oldLayout);
+            Subs.Weather.Init();
         });
     }
 
     if (Subs.Clock !== null) {
         Subs.Measure.Do("stoppwatch", function () {
             CreateBlock(JSON.parse(Subs.Settings.Values.Stoppwatch) + 1, "clock");
-            Subs.Clock.Init(oldLayout);
+            Subs.Clock.Init();
         });
     }
 }
@@ -252,15 +236,7 @@ function DrawWidgets() {
  */
 function CountColumns() {
     try {
-        if (oldLayout) {
-            var $wrapper = $('.ona.Fdb');
-            if ($wrapper.length > 0) {
-                var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
-                if (columns > 0) {
-                    chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
-                }
-            }
-        } else {
+
             var $wrapper = $('.jx5iDb.pd4VHb');
             if ($wrapper.length > 0) {
                 var columns = $wrapper.find('.H68wj.jxKp7').first().nextUntil(':not(.H68wj.jxKp7)').addBack().length;
@@ -268,7 +244,6 @@ function CountColumns() {
                     chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
                 }
             }
-        }
     } catch (ex) {
         Log.Error(ex);
 
@@ -277,30 +252,6 @@ function CountColumns() {
 
 
 
-function MoveHeaderIcon() {
-    if (oldLayout) {
-        // Kein Floating im neuen Layout
-        if (Subs.Settings.Values.UseBookmarks || Subs.Settings.Values.DisplayLang) {
-            var icondiff = 0;
-            if (Subs.Settings.Values.DisplayLang) {
-                icondiff += 60;
-            }
-            if (Subs.Settings.Values.UseBookmarks) {
-                icondiff += 60;
-            }
-                if ($('.V9b').length > 0) {
-                    var oldStyle = $('.V9b').attr('style');
-                    if (oldStyle.indexOf("modified") === -1) {
-                        var oldValEnd = oldStyle.indexOf("px");
-                        var oldValStart = oldStyle.indexOf(" ");
-                        var oldVal = oldStyle.substring(oldValStart, oldValEnd);
-                        var oldValI = parseInt(oldVal);
-                        $('.V9b').attr('style', "right: " + (oldValI + icondiff) + "px; modified");
-                    }
-                }
-        }
-    }
-}
 
 function HideOnContent(parent, element,  log ) {
     if (element !== undefined && element.length > 0) {
@@ -506,9 +457,7 @@ function DOMFilterPostillon ($ce) {
  * Bilder, Videos und Links ausblenden
  */
 function DOMFilterImages($ce) {
-    if (!oldLayout) {
         return;     // Animitertes GIF-Filter und Co. macht im neuen Layout derzeit keinen Sinn
-    }
     try {
         $ce.find('.unhideImage').click(function () {
             $(this).parent().find('.hidewrapper').show();
@@ -648,9 +597,13 @@ function PageLoad() {
 }
 
 function RestartFilter() {
-    window.setTimeout(function() {
+    Log.Info("Filter restarted (new page opened)");
+    $(document).ready(function() {
+        window.setTimeout(function () {
             FirstStartInit();
-    },5000);
+         //   Log.Debug("Timeout reached");
+        }, 5000);
+    });
 }
 
 function FirstStartInit() {
@@ -670,7 +623,9 @@ function FirstStartInit() {
     if (loaded) {
         ShowWidgets();
     }
-
+    SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
+        Subs.Bookmarks.PaintFloatingIcon($(document));
+    });
 }
 
 function StartFilterLoop() {
@@ -684,20 +639,12 @@ function StartFilterLoop() {
  */
 function CreateBlock(position, id) {
     var wrapper = "<div  tabindex=\"-1\" class=\"nja\" id=\"" + id + "\"></div>";
-    if (oldLayout) {
-        if (position === 1) {
-            $('[data-iid="sii2:111"]').append(wrapper);
-        } else {
 
-            $(".ona.Fdb .Ypa:nth-child(" + position + ")").prepend(wrapper);
-        }
-    } else {
         if (position === 1) {
             $('.uenjKc').append(wrapper);
         } else {
             $(".rymPhb .H68wj:nth-child(" + position + ")").prepend(wrapper);
         }
-    }
 }
 
 /**
