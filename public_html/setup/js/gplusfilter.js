@@ -399,10 +399,10 @@ function StartFilter(changedElements) {
     });
     SingleMeasure(Subs.Trophy, "displayTrophy", function () {
         Subs.Trophy.Dom($ce);
-    });
+    });*/
     SingleMeasure(Subs.User, "colorUser", function () {
         Subs.User.Dom($ce);
-    });*/
+    });
     SingleMeasure(Subs.Emoticons, "showEmoticons", function () {
         Subs.Emoticons.Dom($ce);
     });

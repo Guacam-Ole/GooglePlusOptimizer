@@ -1,13 +1,13 @@
 
 table.colorUsers {
-    width: 280px;
+    table-layout: fixed;
     border-style: solid;
     border-width: 1px;
+    width: 100%;
 }
 
 table.colorUsers td {
     text-align: center;
-    width: 40px;
 }
 
 table.colorUsers td.usrBlue {
@@ -35,10 +35,14 @@ table.colorUsers td.usrMagenta {
 }
 
 .userRemark {
-    width: 269px;
+    width: 99%;
     border-style: solid;
     border-width: 1px;
     padding-left: 5px;
     padding-right: 5px;
+    position: absolute;
+    margin-right: 100px;
+    height: 25px;
+    margin-bottom: 20px;
 }
 

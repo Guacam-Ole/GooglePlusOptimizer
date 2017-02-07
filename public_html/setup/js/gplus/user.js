@@ -22,25 +22,45 @@ gpoUser.prototype = {
     },
     PaintColorBlock: function () {
         var obj = this;
-        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
-            return;
-        }
-        if ($(".colorUsers").length > 0 || $('[ guidedhelpid="profile_name"]').length === 0) {
-            return;
-        }
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
-        var userName = obj.GetUserName();
-        var colorBlock = "<br><table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
-        var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
-        var $completeBlock = $(colorBlock + userInfo.replace('__USER__', userName));
-        obj.PaintCurrentUserSettings($completeBlock);
+        var meta=$('[itemtype="https://schema.org/Person"]');
+        if (!meta) return;
 
-        $('[guidedhelpid="profile_name"]').parent().append($completeBlock);
+        if ($(".colorUsers").length > 0) {
+            // schon gepinselt
+            return;
+        }
+        var userName = obj.GetUserName();
+        if (!userName) return;
+
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
+
+        var wrapper="<div role='region' aria-label='Google+ Optimizer Colorbox'><c-wiz>__HEADER____BODY__</c-wiz></div>" ;
+        var header="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>Google+ - Optimizer Colorbox </div></div></div>";
+        var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>__INFO__<br/><br/><br/></div></div></div>";
+
+        var colorBlock = "<table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
+        var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
+        body=body.replace("__INFO__",colorBlock + userInfo.replace('__USER__', userName));
+
+        wrapper=wrapper.replace("__HEADER__",header).replace("__BODY__",body);
+        var $completeBlock = $(wrapper);
+
+
+
+        setInterval(function () {
+            // Wait for Blocks to be finished;
+            obj.PaintCurrentUserSettings($completeBlock);
+        },1000);
+
+
+        $('.JXv70c').prepend($completeBlock);
+        //$('[guidedhelpid="profile_name"]').parent().append($completeBlock);
         $('.colClick').click(function () {
             obj.RemoveSelection();
             $(this).append("✓");
             obj.UpdateUserData();
         });
+
         $('.userRemark').change(function () {
             obj.UpdateUserData();
         });
@@ -75,19 +95,21 @@ gpoUser.prototype = {
         }
     },
     GetUserName: function () {
-        return $('[guidedhelpid="profile_name"]').html();
+        if (!$('meta[itemprop="name"]') || $('meta[itemprop="name"]').length==0) return undefined;
+        return $('meta[itemprop="name"]')[0].content;
     },
     PaintCurrentUserSettings: function ($ce) {
         var obj = this;
         if ($ce === undefined) {
             $ce = $(document);
         }
-        if (document.URL.indexOf("about") === -1 && document.URL.indexOf("posts") === -1) {
-            return;
-        }
-        if ($('[ guidedhelpid="profile_name"]').length === 0) {
-            return;
-        }
+        var meta=$('[itemtype="https://schema.org/Person"]');
+        if (!meta) return;
+
+
+
+
+        if ($(".colorUsers").length === 0) return;
 
         var currentUserSettings = this.GetCurrentUserSettings() || null;
         if (currentUserSettings === null) {
@@ -107,11 +129,9 @@ gpoUser.prototype = {
         });
     },
     GetCurrentUserId: function () {
-        var dirtyId = $('[role=tablist]').attr("id");
-        if (dirtyId===undefined) {
-            return null;
-        }
-        return dirtyId.split('-')[0];
+        var idElements=$('.DZ7mXe');
+        if (!idElements || idElements.length==0) return;
+        return $($('.DZ7mXe')[0]).data('oid');
     },
     RemoveSelection: function () {
         $('.colorUsers td').each(function () {
