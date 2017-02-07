@@ -13,7 +13,7 @@ gpoUser.prototype = {
     Dom: function ($ce) {
         this.PaintColorBlock();
         this.PaintForUser($ce);
-        this.PaintCurrentUserSettings();
+    //    this.PaintCurrentUserSettings();
     },
     OptStartColors: function () {
         this.AllCssColors = this.GetCssColors();
@@ -36,7 +36,7 @@ gpoUser.prototype = {
 
         var wrapper="<div role='region' aria-label='Google+ Optimizer Colorbox'><c-wiz>__HEADER____BODY__</c-wiz></div>" ;
         var header="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>Google+ - Optimizer Colorbox </div></div></div>";
-        var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>__INFO__<br/><br/><br/></div></div></div>";
+        var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>__INFO__<br/></div></div></div>";
 
         var colorBlock = "<table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
@@ -47,14 +47,13 @@ gpoUser.prototype = {
 
 
 
-        setInterval(function () {
+        setTimeout(function () {
             // Wait for Blocks to be finished;
             obj.PaintCurrentUserSettings($completeBlock);
         },1000);
 
 
         $('.JXv70c').prepend($completeBlock);
-        //$('[guidedhelpid="profile_name"]').parent().append($completeBlock);
         $('.colClick').click(function () {
             obj.RemoveSelection();
             $(this).append("✓");
@@ -79,7 +78,19 @@ gpoUser.prototype = {
                 });
                 if (paintColor.length > 0) {
                      //   $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
-                        $ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('.Ihwked.UB0dDd.GcESAf').addClass(paintColor[0].CssClass);
+                        var profile= $ce.find('a[data-profileid="' + currentUserSetting.UserId + '"]');
+                        if (profile && profile.length>0 ) {
+
+
+
+                        profile.closest('.dzuq1e').addClass(paintColor[0].CssClass);
+
+
+                            //profile.closest('.Ihwked').css("border","solid 5px "+paintColor[0].Color);
+                            profile.closest('.Ihwked').css("background-color",paintColor[0].Color);
+                        }
+
+                        //dzuq1e sw0FGe iCPjVb hE2QI
                 }
             }
             if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
