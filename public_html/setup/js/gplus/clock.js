@@ -131,8 +131,8 @@ gpoClock.prototype = {
         var obj = this;
 
         if ($('.clock').length === 0) {
-
-            $('.M7vp2c').prepend(obj.ClockObj);
+            $('[jsname="NsVJLb"]').after(obj.ClockObj);
+            //$('.M7vp2c').prepend(obj.ClockObj);
             $('.clockLabel').text("00:00");
             $(".slider-clock").slider({value: 0, min: 0, max: 60});
             obj.UpdateWatch();
