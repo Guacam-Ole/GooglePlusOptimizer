@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(
                 oldTicks = JSON.parse(oldTicks);
             }
             oldTicks.push({Name:request.Name, Scope:request.Scope, Start:request.Start, Stop:request.Stop});
-            localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));                 
+            localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));
         }
 
 
@@ -52,7 +52,7 @@ chrome.extension.onMessage.addListener(function(request, sender) {
 
 // Trophies
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    
+
     if (request.Action==="getTrophyUsers") {
         var users;
         var file="http://www.trophies.at/php/getusers.php?version=1.0";
@@ -63,7 +63,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             success: function(data) {
                 users=data;
             }
-        });       
+        });
         sendResponse({Result: users});
     } else if (request.Action==="getTrophyDescriptions") {
         var trophynames;
@@ -133,9 +133,9 @@ chrome.runtime.onMessage.addListener(
             else if (request.Action === "LoadTicks")
             {
                 var ticks = localStorage.getItem("Ticks");
-                 
+
                 sendResponse({
-                   
+
                     Ticks: ticks,
                     Result: "Settings loaded."
                 });
@@ -169,13 +169,13 @@ chrome.runtime.onMessage.addListener(
                 var allTicks=[];
                 localStorage.setItem("Ticks",JSON.stringify(allTicks));
             }
-           
+
             else if (request.Action==="EndTick") {
                 var oldTicks=localStorage.getItem("Ticks");
                 if (oldTicks!==undefined) {
                     var oldTicks = JSON.parse(oldTicks);
                     oldTicks.push({Name:request.Name, Time:request.Time, IsInit:request.IsInit,  Type:"STOPP"});
-                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));                 
+                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));
                 }
             }
             else if (request.Action==="GetTicks") {

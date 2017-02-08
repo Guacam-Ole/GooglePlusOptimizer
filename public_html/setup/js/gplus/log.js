@@ -4,7 +4,7 @@
 
 
 var gpoLog = function () {
-    this.Mode="INFO";
+    this.Mode="DEBUG";
 };
 
 gpoLog.prototype = {

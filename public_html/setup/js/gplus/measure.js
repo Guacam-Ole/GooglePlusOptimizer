@@ -1,7 +1,7 @@
 var gpoMeasure = function (scope, doCollect) {
     this.Scope = scope;
     this.MeasureMents = [];
-    this.DoCollect = doCollect;
+    this.DoCollect = false;
     chrome.runtime.sendMessage({Action: "DeleteTicks", Scope: scope});
 };
 
@@ -9,6 +9,7 @@ var gpoMeasure = function (scope, doCollect) {
 gpoMeasure.prototype = {
     constructor: gpoMeasure,
     Do: function (featureName, ret) {
+
         var obj = this;
 
         if (obj.DoCollect) {
@@ -24,5 +25,5 @@ gpoMeasure.prototype = {
         var obj = this;
         chrome.runtime.sendMessage({Action: "AddTick", Scope: obj.Scope, Name: featureName, Start: start, Stop: stop});
     }
-}
+};
     

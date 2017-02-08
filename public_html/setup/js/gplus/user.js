@@ -20,11 +20,8 @@ gpoUser.prototype = {
         //this.GetAllUserSettings();
         console.log("GPO: Usercolors loaded.");
     },
-    PaintColorBlock: function () {
-        var obj = this;
-        var meta=$('[itemtype="https://schema.org/Person"]');
-        if (!meta) return;
-
+    PaintColorInner:function () {
+        var obj=this;
         if ($(".colorUsers").length > 0) {
             // schon gepinselt
             return;
@@ -34,7 +31,7 @@ gpoUser.prototype = {
 
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/user.css") + "' type='text/css' media='screen' />"));
 
-        var wrapper="<div role='region' aria-label='Google+ Optimizer Colorbox'><c-wiz>__HEADER____BODY__</c-wiz></div>" ;
+        var wrapper="<div role='region' id='colorUsersContainer' aria-label='Google+ Optimizer Colorbox'><c-wiz>__HEADER____BODY__</c-wiz></div>" ;
         var header="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>Google+ - Optimizer Colorbox </div></div></div>";
         var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>__INFO__<br/></div></div></div>";
 
@@ -63,6 +60,23 @@ gpoUser.prototype = {
         $('.userRemark').change(function () {
             obj.UpdateUserData();
         });
+    },
+    PaintColorBlock: function () {
+        var obj = this;
+        var meta=$('[itemtype="https://schema.org/Person"]');
+        if (!meta || meta.length==0) return;
+        var container=$('#colorUsersContainer');
+        if (container) {
+          //  $.when($(".colClick").unbind()).then(function () {
+                $.when(container.remove()).then(function () {
+                    obj.PaintColorInner();
+                });
+            //})
+        } else {
+                obj.PaintColorInner();
+            }
+
+
     }, PaintForUser: function ($ce) {
         var obj = this;
         if (obj.AllUserSettings === null || obj.AllUserSettings === undefined) {
@@ -106,8 +120,9 @@ gpoUser.prototype = {
         }
     },
     GetUserName: function () {
-        if (!$('meta[itemprop="name"]') || $('meta[itemprop="name"]').length==0) return undefined;
-        return $('meta[itemprop="name"]')[0].content;
+            var names=$('meta[itemprop="name"]');
+        if (!names || names.length==0) return undefined;
+        return names[names.length-1].content;
     },
     PaintCurrentUserSettings: function ($ce) {
         var obj = this;
@@ -140,9 +155,9 @@ gpoUser.prototype = {
         });
     },
     GetCurrentUserId: function () {
-        var idElements=$('.DZ7mXe');
+        var idElements=$('.uyYuVb');
         if (!idElements || idElements.length==0) return;
-        return $($('.DZ7mXe')[0]).data('oid');
+        return $(idElements[idElements.length-1]).data('oid');
     },
     RemoveSelection: function () {
         $('.colorUsers td').each(function () {
