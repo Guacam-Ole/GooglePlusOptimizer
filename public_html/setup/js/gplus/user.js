@@ -91,20 +91,11 @@ gpoUser.prototype = {
                     return e.Color === currentUserSetting.Color;
                 });
                 if (paintColor.length > 0) {
-                     //   $ce.find('h3 [oid="' + currentUserSetting.UserId + '"]').closest('[role="article"]').addClass("vna");
-                        var profile= $ce.find('a[data-profileid="' + currentUserSetting.UserId + '"]');
-                        if (profile && profile.length>0 ) {
-
-
-
+                    var profile= $ce.find('a[data-profileid="' + currentUserSetting.UserId + '"]');
+                    if (profile && profile.length>0 ) {
                         profile.closest('.dzuq1e').addClass(paintColor[0].CssClass);
-
-
-                            //profile.closest('.Ihwked').css("border","solid 5px "+paintColor[0].Color);
-                            profile.closest('.Ihwked').css("background-color",paintColor[0].Color);
-                        }
-
-                        //dzuq1e sw0FGe iCPjVb hE2QI
+                        profile.closest('.Ihwked').css("background-color",paintColor[0].Color);
+                    }
                 }
             }
             if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
@@ -240,20 +231,7 @@ gpoUser.prototype = {
                 obj.UpdateUserSettings(currentUserSettings.I, userRemark, selectedColor);
             }
         }
-//    },
-//    GetAllUserSettings:function() {
-//        var obj=this;
-//        chrome.runtime.sendMessage({
-//            Action: "LoadUsers"
-//        }, function(response) {
-//            obj.AllUserSettings= JSON.parse(response.AllUserSettings);   
-//            $('[role="article"]').each(function(index,value) {
-//                obj.PaintForUser($(value));    // Nach dem Laden der Einstellungen Initial ausführen
-//            });
-//            obj.PaintColorBlock();
-//            
-//            //obj.PaintColorBlock();            
-//        });
+
     }, HexToR: function (h) {
         var obj = this;
         return parseInt((obj.CutHex(h)).substring(0, 2), 16);
@@ -289,7 +267,7 @@ gpoUser.prototype = {
         var col = obj.HexToRGB(name);
         var colorData = new Object();
         colorData.Name = name;
-        colorData.Color = "rgb(" + col[0] + ", " + col[1] + ", " + col[2] + ")";
+        colorData.Color = "rgba(" + col[0] + ", " + col[1] + ", " + col[2] + ", 0.5)";
         colorData.CssClass = cssclass;
         return colorData;
     }
