@@ -248,6 +248,14 @@ Setup.prototype = {
                 }
             }
         });
+        $(document).on('click','.urlFilterBack',function () {
+            console.log("Back");
+           // $('body')[0].style.backgroundColor = e.color.toString(                'rgba');
+        });
+
+
+
+
 
         $(document).on('change', '.citySelect select', function () {
             $(this).closest('.weatherSelection').find('.cityId').val($(this).val());
@@ -422,6 +430,11 @@ Setup.prototype = {
                             break;
                     }
 
+                } else if (filename=='bs.urlfilter') {
+                    $('.urlFilterBack').colorpicker().on('changeColor', function(e) {
+                        $(this).parent().find('.previewFilter').css("background-color",e.color.toString("rgba"));
+                        console.log(e.color.toString("rgba"));
+                    });
                 }
             });
         });
