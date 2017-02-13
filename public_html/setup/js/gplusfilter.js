@@ -1,22 +1,18 @@
-console.log('g+ - filter started');
+var loaded=false;
+
 this.Browser = new Browser();
 this.Log=new gpoLog();
 this.Log.Init();
-var columnCount;
 var imageHost = "https://files.oles-cloud.de/optimizer/";
-var debugMode=localStorage.getItem("debugMode")==="true";
 
-var domainBlacklist = [];
 
 var Subs = {
     Settings: null,
     Clock: null,
-    Autosave: null,
     Bookmarks: null,
     Measure: null,
     Flags: null,
     Lsr: null,
-    Quickshare: null,
     Trophy: null,
     Soccer: null,
     Emoticons: null,
@@ -24,67 +20,13 @@ var Subs = {
     Weather: null
 };
 
-var oldUrl=window.location.href;
-
-
-var forEach = Array.prototype.forEach;
-
-var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-        if (oldUrl!==window.location.href) {
-            RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
-        }
-        oldUrl=window.location.href;
-        if (mutation.type === "childList") {
-           Log.Debug("mutation: Childlist:"+mutation.addedNodes.length);
-            forEach.call(mutation.addedNodes, function (addedNode) {
-                if (addedNode.classList !== undefined) {
-                    if (addedNode.classList.contains('PD')) {
-                        Log.Debug("DOM PD:"+addedNode.classList);
-                        PaintBin(addedNode);
-                    } else if (addedNode.classList.contains('nja')) {
-                        Log.Debug("DOM NJA:"+addedNode.classList);
-                        FilterBlocks(addedNode);
-                    } else if (addedNode.classList.contains('URaP8')) {
-                        Log.Debug("DOM URA:" + addedNode.classList);
-                        DoQuickshare(addedNode, 1);
-                    }
-                    //g-h-f-N-N
-                    else {
-                        var jsModel = addedNode.attributes["jsmodel"];
-                        if (jsModel !== undefined && jsModel.value === "XNmfOc") {
-                            Log.Debug("DOM JS:"+addedNode.classList);
-                            StartFilter(addedNode);
-                        } else {
-                            Log.Debug("DOM IGNORED:"+addedNode.classList);
-             //               Log.Debug("iid:"+addedNode.data("id"));
-                        }
-                    }
-                }
-            });
-            forEach.call(mutation.removedNodes, function (removedNode) {
-                if (removedNode.classList !== undefined) {
-                    if (removedNode.classList.contains("YB")) {
-                        // private Beiträge, Warnmeldung
-                        DoQuickshare(removedNode, 1);
-                    }
-                }
-            });
-
-        }
-    });
-    ShowWidgets();
-    MoveHeaderIcon();   // Evtl. Prüfen, ob man das auch an einen konkreten Dom-Change festmachen kann...
-});
-
-function StartObservation() {
-    observer.observe(document, {
-        childList: true,
-        subtree: true,
-        characterData: false,
-        attributes: false
-    });
+/** Hilfsfunktionen: **/
+function CleanDate(anyDate) {
+    if (anyDate.indexOf("(") > 0) {
+        return anyDate.substring(0, anyDate.indexOf("(") - 1);
+    }
 }
+
 
 // Case - INSensitive Contains Variant:
 jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function (arg) {
@@ -97,50 +39,6 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) === "string") ? str2.replace(/\$/g, "$$$$") : str2);
 };
 
-$(document).ready(function () {
-    if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
-    {
-        LoadSetup();
-    }
-    else if (window.location.href.indexOf("/communities") > 0 && (window.location.href.indexOf("/communities/")== -1)) {
-        SaveCommunities();
-    }
-    else  {
-        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
-
-        InitSettings();
-
-        $(document).on('click', '.unhideImage', function () {
-            $(this).parent().find('.hidewrapper').show();
-            $(this).remove();
-            return false;
-        });
-
-        $(document).on('click', '.removeHashTag', function () {
-            Log.Info('Add Hashtag');
-            if (Subs.Settings.Values.HashTags === null) {
-                Subs.Settings.Values.HashTags = "";
-            }
-            var newHashtag = $(this).closest('.zZ').find('a')[0].innerText;
-            if ((propsHashtags.indexOf(newHashtag + ",") >= 0) || propsHashtags.match(new RegExp("/" + newHashtag + "/$"))) {
-                // Einmal reicht...
-                return;
-            }
-            AddHashtagToList(newHashtag);
-            $(this).hide();
-
-            return false;
-        });
-        $(document).on('click','.JZ',function() {
-            RestartFilter();  // Reload Page. Limitieren auf 20 neue Objekte, sonst wirds zu langsam
-        });
-
-
-    }
-});
-function DisplayHashtags() {
-
-}
 
 function SortByName(a, b) {
     var aName = a.text.toLowerCase();
@@ -148,75 +46,151 @@ function SortByName(a, b) {
     return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
-
-function GetAllCircles() {
-    // Kreise auslesen
-    $('script').each(function () {
-        try {
-            if (this.innerHTML.indexOf("AF_initDataCallback({key: '12'") > -1) {
-                var newCircles = [];
-                var complete = this.innerHTML;
-                var startJSON = complete.indexOf('[');
-                var endJSON = complete.lastIndexOf(']');
-                var cstr = complete.substring(startJSON, endJSON + 1);
-
-                while (cstr.indexOf(",,") > 0) {
-                    cstr = cstr.replace(",,", ",null,");
-                }
-
-                var allCircles = $.parseJSON(cstr);
-                if (allCircles.length === 1) {
-                    for (i = 0; i < allCircles[0].length; i++) {
-                        if (allCircles[0][i].length === 2 && allCircles[0][i][1].length === 16) {
-                            var circleName = allCircles[0][i][1][0];
-                            newCircles.push(circleName);
-                        }
-                    }
-                }
-                chrome.runtime.sendMessage({Action: "SaveCircles", Circles: newCircles});
-            }
-        } catch (ex) {
-        }
-    });
-}
-
-
 function AddHeadWrapper(parent) {
     if (parent.html().indexOf('InfoUsrTop') === -1) {
         parent.prepend("<div class='InfoUsrTop'>");
     }
 }
 
-/**
- * Wizard-Kachel zeichnen
- */
-function DrawWizardTile() {
-    //return;
-    try {
-        var wizard=new gpoWizard();
+var oldUrl=window.location.href;
+var forEach = Array.prototype.forEach;
 
+function DomCheckArticle(element) {
+    if (element.nodeName == "C-WIZ") {
+        if (element.attributes) {
+            var jsModel = element.attributes["jsmodel"];
+            if (jsModel) {
+                if (jsModel.value.indexOf("iMhCXb") > 0) { // Neuer Artikelblock
+                    StartFilter(element);
+                }
+            }
+        }
+    }
+}
 
-        var lang = chrome.i18n.getMessage("lang");
-        wizard.CurrentLang=lang;
-        if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
-            $.get(chrome.extension.getURL("setup/" + lang + "/wizardloader.html"), function (htmlWizard) {
-                var htmlObject = $('<div/>').html(htmlWizard).contents();
-                $('.Ypa.jw.am :first').prepend(htmlObject.find('[data-iid="wizard"]'));
-                $('#wizardStart').click(function () {
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap.min.css") + "' type='text/css' media='screen' />"));
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/bootstrap-switch.css") + "' type='text/css' media='screen' />"));
-                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
-                    var wizz = $('<div id="loadhere">&nbsp;</div>');
-                    $('body').prepend(wizz);
-                    $('#loadhere').load(Browser.GetExtensionFile("setup/" + lang + "/wizard.html"), function () {
-                        wizard.InitWizard(Subs.Settings.Values.LastWizard);
-                        Log.Info('Wizard loaded');
-                    });
-                });
+function DomCheckNavigation(element) {
+    // Seite wurde neu geladen durch Navigation links, oder klick auf Name, oder...
+    if (element.nodeName == "C-WIZ") {
+        if (!element.classList) return;
+        if (Array.from(element.classList).indexOf("cla0ib")<0) return;
+        RestartFilter();
+    }
+}
+
+function DomCheckBlock(element) {
+    if (element.nodeName == "DIV") {
+        var dataiid = element.attributes["data-iid"];
+        if (dataiid) {
+            if (dataiid.value.length < 5) { // Neuer Artikelblock
+                FilterBlocks(element);
+            }
+        }
+    }
+}
+
+var cwizObserver= new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (oldUrl!==window.location.href) {
+            RestartFilter();    // Neue Seite aufgerufen, z.B. "Angesagte Beiträge", Person, Community
+        }
+        oldUrl=window.location.href;
+        if (mutation.type === "childList") {
+            forEach.call(mutation.addedNodes, function (addedNode) {
+                DomCheckArticle(addedNode);
+                DomCheckBlock(addedNode);
+                DomCheckLeftNav(addedNode);
+                DomCheckNavigation(addedNode);
             });
         }
+    });
+});
+
+
+
+function StartObservation() {
+
+    cwizObserver.observe(document, {
+        childList: true,
+        subtree: true,
+        characterData: false,
+        attributes: false
+    });
+
+}
+
+
+
+function DomCheckLeftNav(node) {
+    if (!node.classList) return;
+    if (Array.from(node.classList).indexOf("OFyC1e")<0) return;
+
+  //  if (!node.class.contains('BTaief')) return;
+    SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
+        var $ce=$(node);
+        Subs.Bookmarks.PaintFloatingIcon($ce);
+    });
+}
+
+$(document).ready(function () {
+    Log.Info('G+ - filter started');
+    InitSettings();
+    StartObservation();
+
+    if (document.title.indexOf("Google+ Filter") !== -1)  	// Setup-Seiten
+    {
+        LoadSetup();
+    }
+    else  {
+        $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("setup/css/simple.css") + "' type='text/css' media='screen' />"));
+
+        $(document).on('click', '.xdjHt', function () {
+            // Dicker Google+ - Button
+            RestartFilter();
+        });
+    }
+});
+
+function DrawWizard() {
+    try {
+        var wizard=new gpoWizard();
+        var lang = chrome.i18n.getMessage("lang");
+        wizard.CurrentLang=lang;
+
+        if (!Subs.Settings.Values.LastWizard || Subs.Settings.Values.LastWizard=="null" ) {
+            // Noch nie installiert
+            $.get(chrome.extension.getURL("setup/" + lang + "/wizard.new.html"), function (htmlWizard) {
+                $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                var htmlObject = $('<div/>').html(htmlWizard).contents();
+                htmlObject.find('#headerImg').attr("src",chrome.extension.getURL("setup/images/optimizer_setup.jpg"));
+                htmlObject.find('#helpImg').attr("src",chrome.extension.getURL("setup/images/options.png"));
+                $("body").prepend(htmlObject);
+
+                $('#wizardClose').click(function () {
+                    wizard.SaveVersion();
+                    $('.gPlusWizard').fadeOut();
+                });
+            });
+
+        } else {
+            if (wizard.NewWizardOptionsExist(Subs.Settings.Values.LastWizard)) {
+                $.get(chrome.extension.getURL("setup/" + lang + "/wizard.update.html"), function (htmlWizard) {
+                    $("head").append($("<link rel='stylesheet' href='" + Browser.GetExtensionFile("setup/css/wizard.css") + "' type='text/css' media='screen' />"));
+                    var htmlObject = $('<div/>').html(htmlWizard).contents();
+                    htmlObject.find('#headerImg').attr("src",chrome.extension.getURL("setup/images/optimizer_setup.jpg"));
+                    $("body").prepend(htmlObject);
+
+                    $('#wizardClose').click(function () {
+                        wizard.SaveVersion();
+                        $('.gPlusWizard').fadeOut();
+                    });
+                });
+            }
+        }
     } catch (ex) {
+        // Sicherheitshalber Wizard als ausgeführt speichern, damit G+ nicht kaputt geht
         Log.Error(ex);
+        wizard.SaveVersion();
+
     }
 }
 
@@ -233,12 +207,8 @@ function InitGoogle() {
     PageLoad();
 
     chrome.extension.sendMessage("show_page_action");
-
-
 }
 
-function LoadGoogle() {
-}
 
 /**
  * Widgets zeichnen
@@ -250,13 +220,6 @@ function DrawWidgets() {
         Subs.Measure.Do("weatherEnabled", function () {
             Subs.Weather.Settings = Subs.Settings.Values.WeatherWidget;
             Subs.Weather.Init();
-        });
-    }
-
-    if (Subs.Soccer !== null) {
-        Subs.Soccer.Settings = Subs.Settings.Values.Sport;
-        Subs.Measure.Do("sportEnabled", function () {
-            Subs.Soccer.Init();
         });
     }
 
@@ -273,51 +236,33 @@ function DrawWidgets() {
  */
 function CountColumns() {
     try {
-        var $wrapper = $('.ona.Fdb');
-        if ($wrapper.length > 0) {
-            var columns = $wrapper.find('.Ypa.jw.am').first().nextUntil(':not(.Ypa.jw.am)').addBack().length;
-            if (columns > 0) {
-                chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
+
+            var $wrapper = $('.jx5iDb.pd4VHb');
+            if ($wrapper.length > 0) {
+                var columns = $wrapper.find('.H68wj.jxKp7').first().nextUntil(':not(.H68wj.jxKp7)').addBack().length;
+                if (columns > 0) {
+                    chrome.runtime.sendMessage({Action: "SaveColumns", ParameterValue: columns});
+                }
             }
-        }
     } catch (ex) {
         Log.Error(ex);
+
     }
 }
 
-function CleanDate(anyDate) {
-    if (anyDate.indexOf("(") > 0) {
-        return anyDate.substring(0, anyDate.indexOf("(") - 1);
-    }
-}
 
-function MoveHeaderIcon() {
-    if (Subs.Settings.Values.UseBookmarks || Subs.Settings.Values.DisplayLang) {
-        var icondiff = 0;
-        if (Subs.Settings.Values.DisplayLang) {
-            icondiff += 60;
-        }
-        if (Subs.Settings.Values.UseBookmarks) {
-            icondiff += 60;
-        }
-        if ($('.V9b').length > 0) {
-            var oldStyle = $('.V9b').attr('style');
-            if (oldStyle.indexOf("modified") === -1) {
-                var oldValEnd = oldStyle.indexOf("px");
-                var oldValStart = oldStyle.indexOf(" ");
-                var oldVal = oldStyle.substring(oldValStart, oldValEnd);
-                var oldValI = parseInt(oldVal);
-                $('.V9b').attr('style', "right: " + (oldValI + icondiff) + "px; modified");
-            }
-        }
-    }
-}
 
-function HideOnContent(parent, element) {
+
+function HideOnContent(parent, element,  log ) {
     if (element !== undefined && element.length > 0) {
+        if (log) {
+            Log.Debug("Filtered: "+log+" ["+element.text()+"]");
+        }
         parent.hide();
     }
 }
+
+
 
 function SingleMeasureBool(setting, measureTitle, functionName) {
     if (setting === true) {
@@ -334,54 +279,45 @@ function SingleMeasure(setting, measureTitle, functionName) {
         });
     }
 }
-function HideOnAttr(parent, attr, value) {
-    if (parent.attr(attr) === value) {
-        parent.hide();
+function HideOnAttr(element, attr, value, log) {
+    if (element.attributes[attr].value === value) {
+        $(element).hide();
+        if (log) {
+            Log.Debug("Block removed: "+log);
+        }
     }
 }
 
-function SaveCommunities(changedElements) {
-    // Beigetretene Communities:
-    var communities = [];
-    $('.UYd').find('.JUKJAb').each(function (index, value) {
-        communities.push($(value).find('.ATc').text());
-    });
 
-    // Eigene Communities:
-    //var communities = [];
-    $('.VYd').find('.RbAFad').each(function (index, value) {
-        communities.push($(value).find('.ATc').text());
-    });
 
-    chrome.runtime.sendMessage({Action: "SaveCommunities", Communities: communities});
-}
+function FilterBlocks(changedElement) {
+    Log.Debug("New block detected");
+    changedElement.classList.add("gplusoptimizer");
 
-function DoQuickshare(changedElements, step) {
-    if (Subs.Quickshare !== null) {
-        Subs.Quickshare.Events(changedElements, step);
-    }
-}
-
-function FilterBlocks(changedElements) {
-    changedElements.classList.add("gplusoptimizer");
-    var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
-    SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:112');
-        HideOnAttr($ce, 'data-iid', 'sii2:116');
-        HideOnAttr($ce, 'data-iid', 'sii2:127');
+
+    SingleMeasureBool(Subs.Settings.Values.Featcol, "Featured Collections", function () {
+        HideOnAttr(changedElement, "data-iid", "165", "Featured Collections");
     });
+    SingleMeasureBool(Subs.Settings.Values.Community, "Community", function () {
+        HideOnAttr(changedElement, "data-iid", "116", "Communities");
+    });
+    // Ab hier Zahlenwerte aus altem Layout, sind im neuen noch gar nicht vorhanden
     SingleMeasureBool(Subs.Settings.Values.Birthday, "Birthday", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:114');
+        HideOnAttr(changedElement, "data-iid", "114", "Birthday");
     });
     SingleMeasureBool(Subs.Settings.Values.Known, "Persons", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:103');
-        HideOnAttr($ce, 'data-iid', 'sii2:105');
-        HideOnAttr($ce, 'data-iid', 'sii2:106');
+        HideOnAttr(changedElement, "data-iid", "103", "Persons");
+        HideOnAttr(changedElement, "data-iid", "105", "Persons");
+        HideOnAttr(changedElement, "data-iid", "106", "Persons");
     });
     SingleMeasureBool(Subs.Settings.Values.Trending, "Trending", function () {
-        HideOnAttr($ce, 'data-iid', 'sii2:102');
+        HideOnAttr(changedElement, "data-iid", "102", "Trending");
     });
+
+
+    return;
+
 }
 
 function ShowWidgets() {
@@ -389,14 +325,18 @@ function ShowWidgets() {
     SingleMeasure(Subs.Clock, "stoppwatch", function () {
         Subs.Clock.Dom();
     });
-    SingleMeasure(Subs.Soccer, "sportEnabled", function () {
-        Subs.Soccer.Dom();
-    });
+
     SingleMeasure(Subs.Flags, "displayLang", function () {
         Subs.Flags.Dom();
     });
 
 }
+
+$.extend($.expr[":"], {
+    "containsNC": function(elem, i, match, array) {
+        return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+});
 
 /**
  * Filteraktionen (bei jeder DOM-Änderung)
@@ -406,29 +346,21 @@ function StartFilter(changedElements) {
     var $ce = $(changedElements);
     Subs.Measure = new gpoMeasure("DOM", true);
 
-    if (Subs.Quickshare !== null) {
-        Subs.Measure.Do("QuickShares", function () {
-            Subs.Quickshare.Events();   // TODO: prüfen!
-        });
-    }
-
-   // MoveHeaderIcon();   // Prüfen wg. Performance!
-
     /* WHAM */
     SingleMeasureBool(Subs.Settings.Values.Wham, "Wham", function () {
         if (Subs.Settings.Values.WHAMWhamText) {
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("wham")'));
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("wham")'), "WHAM-Fulltext:WHAM");
         }
         if (Subs.Settings.Values.WHAMChristmasText) {
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("Last Christmas")'));
-            HideOnContent($ce, $ce.find('.Xx.xJ:Contains("LastChristmas")'));
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("Last Christmas")'),"WHAM-Fulltext:LC");
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:containsNC("LastChristmas")'),"WHAM-Fulltext:LC");
         }
-        if (Subs.Settings.Values.WHAMWhamLink) {
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("wham")'));
+        if (Subs.Settings.Values.WHAMWhamUrl) {
+            HideOnContent($ce, $ce.find('a:containsNC("wham")'),"WHAM-Link:Wham");
         }
-        if (Subs.Settings.Values.WHAMChristmasLink) {
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("LastChristmas")'));
-            HideOnContent($ce, $ce.find('.yx.Nf:Contains("Last Christmas")'));
+        if (Subs.Settings.Values.WHAMChristmasUrl) {
+            HideOnContent($ce, $ce.find('a:containsNC("LastChristmas")'),"WHAM-Link:LC");
+            HideOnContent($ce, $ce.find('a:containsNC("Last Christmas")'),"WHAM-Link:LC");
         }
     });
 
@@ -439,11 +371,10 @@ function StartFilter(changedElements) {
 
     /* Blöcke */
     SingleMeasureBool(Subs.Settings.Values.Plus1, "Plus1", function () {
-        HideOnContent($ce, $ce.find('.xv'));
+        HideOnContent($ce, $ce.find('.sLDTkb').find('.RcaDXc'), "Plus1");
+    //    HideOnContent($ce, $ce.find('.sLDTkb').find('.aaTEdf'), "Collection-Spam");    //Hat dieses und xxx weitere Updates hinzugefügt. Taucht nur bei mehreren gleichzeitigen Posts auf
     });
-    SingleMeasureBool(Subs.Settings.Values.Yt, "Youtube", function () {
-        HideOnContent($ce, $ce.find('.SR'));
-    });
+
 
 
     SingleMeasureBool(Subs.Settings.Values.Hashtag, "Hashtag-Filter", function () {
@@ -463,25 +394,21 @@ function StartFilter(changedElements) {
 
 
     /* Erweiterungen */
-    SingleMeasure(Subs.Lsr, "measureTitle", function () {
+ /*   SingleMeasure(Subs.Lsr, "measureTitle", function () {
         Subs.Lsr.Dom($ce);
     });
     SingleMeasure(Subs.Trophy, "displayTrophy", function () {
         Subs.Trophy.Dom($ce);
-    });
+    });*/
     SingleMeasure(Subs.User, "colorUser", function () {
         Subs.User.Dom($ce);
     });
     SingleMeasure(Subs.Emoticons, "showEmoticons", function () {
         Subs.Emoticons.Dom($ce);
     });
-    SingleMeasure(Subs.Quickshare, "QuickShare", function () {
-        Subs.Quickshare.Dom($ce);
-    });
+
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.Dom($ce);
-      //  Subs.Bookmarks.DisplayBookmarks($ce);
-      //  Subs.Bookmarks.PaintStars($ce);
     });
 
 }
@@ -504,8 +431,7 @@ function DOMFilterFreetext($ce) {
     try {
         var textArray = Subs.Settings.Values.Fulltext.split(',');
         $.each(textArray, function (i, fulltext) {
-            HideOnContent($ce, $ce.find('div.Xx.xJ:Contains(' + fulltext + ')'));
-            HideOnContent($ce, $ce.find('div.Al.pf:Contains(' + fulltext + ')'));
+            HideOnContent($ce, $ce.find('[jsname="EjRJtf"]:Contains(' + fulltext + ')'),"Fulltext:"+fulltext);
         });
     } catch (ex) {
         Log.Error(ex);
@@ -517,8 +443,7 @@ Postillon
  */
 function DOMFilterPostillon ($ce) {
     var obj = this;
-
-    $ce.find('.Ct').each(function () {
+    $ce.find('.wftCae').each(function () {
         if ($(this).text().indexOf("!!!!!!!!!!") >= 0) {
             $(this).html($(this).html().replaceAll("!!!!!!!!!!", "ﾔ"));
         }
@@ -532,6 +457,7 @@ function DOMFilterPostillon ($ce) {
  * Bilder, Videos und Links ausblenden
  */
 function DOMFilterImages($ce) {
+        return;     // Animitertes GIF-Filter und Co. macht im neuen Layout derzeit keinen Sinn
     try {
         $ce.find('.unhideImage').click(function () {
             $(this).parent().find('.hidewrapper').show();
@@ -565,13 +491,7 @@ function DOMFilterImages($ce) {
     }
 }
 
-function PaintBin(ce) {
-    $(ce).find('.zZ.a0').each(function (index, value) {
-        if ($(this).find('a').length <= 1) {
-            $(this).append(" <a style=\"color:red\" href=\"#\" class=\"removeHashTag\"><img title=\"" + chrome.i18n.getMessage("RemoveHashtag") + "\" src=\"" + chrome.extension.getURL('setup/images/delete.png') + "\"/></a>");
-        }
-    });
-}
+
 
 /**
  * Hashtags filtern
@@ -583,9 +503,7 @@ function DOMFilterHashtags($ce) {
             var hashTagArray = Subs.Settings.Values.HashTags.split(',');
             $.each(hashTagArray, function (i, hashTag) {
                 if (hashTag.length > 1) {
-                    HideOnContent($ce, $ce.find('.zda.Zg:Contains(' + hashTag + ')'));
-                    HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'));
-                    HideOnContent($ce, $ce.find("a[data-topicid='\/hashtag\/" + hashTag.toLowerCase() + "']"));
+                    HideOnContent($ce, $ce.find('.ot-hashtag:Contains(' + hashTag + ')'),"Hashtag:"+hashTag);
                 }
             });
         }
@@ -603,7 +521,7 @@ function AddHashtagToList(newHashtag) {
 
 function InitObject(condition, object) {
     if (condition) {
-        return new object;
+        return new object(Log);
     }
     return null;
 }
@@ -615,45 +533,31 @@ function InitObjects() {
     Subs.Flags = InitObject(Subs.Settings.Values.DisplayLang, gpoFlags);
     Subs.Lsr = InitObject(Subs.Settings.Values.MarkLSRPosts, gpoLsr);
     Subs.Trophy = InitObject(Subs.Settings.Values.DisplayTrophy, gpoTrophy);
-    Subs.Soccer = InitObject(Subs.Settings.Values.SportEnabled, gpoSport);
     Subs.Clock = InitObject(Subs.Settings.Values.Stoppwatch, gpoClock);
     Subs.Emoticons = InitObject(Subs.Settings.Values.ShowEmoticons, gpoEmoticons);
     Subs.User = InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
     if (Subs.User !== null) {
         Subs.User.AllUserSettings = Subs.Settings.Values.UserCols;
     }
-    var weatherSettings = Subs.Settings.Values.WeatherWidget;
-    if (weatherSettings !== undefined && weatherSettings !== null) {
-        //weatherSettings=JSON.parse(weatherSettings);
-        Subs.Weather = InitObject(weatherSettings.Enabled, gpoWeather);
-        gpoWeather.Settings = weatherSettings;
-    }
 
-    //Subs.Weather=InitObject(Subs.Settings.Values.WeatherEnabled,gpoWeather);    
-
-    var qs = Subs.Settings.Values.QuickShares;
-    var qsEnabled = Subs.Settings.Values.EnableQs;
-    Subs.Quickshare = InitObject((qsEnabled && qs !== null && qs.length > 0), gpoQuickShare);
-    if (Subs.Quickshare !== null) {
-        Subs.Quickshare.Shares = qs;
+    if ($('.gb_7a').length>0) {
+        // Gültig in beiden Layouts
+        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_7a').text()});
+        loaded=true;
     }
-
-    if ($('.gb_ua').length>0) {
-        chrome.runtime.sendMessage({Action: "SaveUserName", ParameterValue: $('.gb_ua').find('.gb_ya').text()});
-    }
-    StartObservation();
+//    StartObservation();
 }
 
 function PageLoad() {
-        InitObjects();
+        InitObjects()
+        DrawWizard();;
+
         Subs.Measure = new gpoMeasure("START", true);
 
-        var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
+        //var wizard = JSON.parse(Subs.Settings.Values.WizardMode);
 
 
-        SingleMeasureBool(wizard >= 0, "wizard", function () {
-            DrawWizardTile();
-        });
+
 
         SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
             Subs.Bookmarks.Init();
@@ -680,34 +584,47 @@ function PageLoad() {
             Subs.Lsr.Init();
         });
 
-        SingleMeasure(Subs.Quickshare, "QuickShares", function () {
-            Subs.Quickshare.Init();
+        SingleMeasure(Subs.Lsr, "showEmoticons", function () {
+            Subs.Emoticons.Init();
         });
 
-        GetAllCircles();
         DrawWidgets();
         CountColumns();
-
-
         FirstStartInit();
+        RestartFilter();
 
-
-        Log.Info('G+Filter: Google+ - Filter initialisiert');
+        Log.Info('G+Filter: Google+ - Filter initialized');
 }
 
 function RestartFilter() {
-    window.setTimeout(function() {
+    Log.Info("Filter restarted (new page opened)");
+    $(document).ready(function() {
+        window.setTimeout(function () {
             FirstStartInit();
-    },1000);
+         //   Log.Debug("Timeout reached");
+        }, 5000);
+    });
 }
 
 function FirstStartInit() {
-    // Initial Mutation Observer simulieren:
-    $('[jsmodel="XNmfOc"]:not(".gplusoptimizer")').each(function (index, value) {
-        StartFilter(value);
+
+    $('c-wiz:not(".gplusoptimizer")').each(function (index, value) {
+        DomCheckArticle(value);
+        //StartFilter(value);
     });
-    $('.nja:not(".gplusoptimizer")').each(function (index, value) {
-        FilterBlocks(value);
+    $('div:not(".gplusoptimizer")').each(function (index, value) {
+        DomCheckBlock(value);
+    });
+
+    if ($('.gplusoptimizer').length===0) {
+        // Keine blöcke bearbeitet, vermutlich noch am laden
+        RestartFilter();
+    }
+    if (loaded) {
+        ShowWidgets();
+    }
+    SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
+        Subs.Bookmarks.PaintFloatingIcon($(document));
     });
 }
 
@@ -722,12 +639,12 @@ function StartFilterLoop() {
  */
 function CreateBlock(position, id) {
     var wrapper = "<div  tabindex=\"-1\" class=\"nja\" id=\"" + id + "\"></div>";
-    if (position === 1) {
-        $('[data-iid="sii2:111"]').append(wrapper);
-    } else {
 
-        $(".ona.Fdb .Ypa:nth-child(" + position + ")").prepend(wrapper);
-    }
+        if (position === 1) {
+            $('.uenjKc').append(wrapper);
+        } else {
+            $(".rymPhb .H68wj:nth-child(" + position + ")").prepend(wrapper);
+        }
 }
 
 /**

@@ -1,13 +1,13 @@
-var gpoBookmarks = function () {
+var gpoBookmarks = function (Log) {
     this.BookmarkPrefix = "Google+Optimizer.Bookmark->";
-    this.MaxTeaserLength = 100;
+    this.MaxTeaserLength = 120;
     this.DisplayBookmarks;
     this.BookmarkList;
     this.NewBookmarkList;
     this.BookmarkContent;
     this.StillLoading;
     this.WaitCount=0;
-    this.SearchString = "notifications/all?displayBookmarks=abersicherdatt";
+    this.Log=Log;
 };
 
 gpoBookmarks.prototype = {
@@ -28,6 +28,9 @@ gpoBookmarks.prototype = {
             var bookmark = {Id: id};
             obj.RemoveNewBookmark(bookmark, false, $(this).parent());
             return false;
+        });
+        $(document).on('click', '.miniBookmark', function () {
+            obj.ShowBookmarkFloat();
         });
 
         $("head").append($("<link rel='stylesheet' href='" + chrome.extension.getURL("./setup/css/bookmarks.css") + "' type='text/css' media='screen' />"));
@@ -62,26 +65,37 @@ gpoBookmarks.prototype = {
         } else {
             obj.PaintStars();
         }
-       //this.PaintFloatingIcon($ce);
+     //  this.PaintFloatingIcon($ce);
     },
     PaintFloatingIcon:function($ce) {
         var obj = this;
-        if ($ce.find('.miniBookmark').length === 0) {
-            $(document).on('click', '.miniBookmark', function () {
-                obj.ShowBookmarkFloat();
-            });
+        var oldBookmark=$ce.find('.miniBookmark');
+        if (oldBookmark) {
+            oldBookmark.remove();
+        }
 
-            var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
-            $ce.find('.Pzc').prepend($(bookmarkIcon));
+
+
+
+            var bookmarkIcon='<a class="M9kDrd miniBookmark"><div class="Hj0nzc"><img src="' + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + '" title="Bookmarks"></div>'
+            +'<div class="CjySve">Bookmarks</div></a>';
+
+            //var bookmarkIcon = "<a class='miniBookmark' > <img src='" + chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png") + "' title='Bookmarks'></a>";
+                $ce.find('.L1NA8d').append($(bookmarkIcon));
+
+        if (obj.NewBookmarkList.length > 0) {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+        } else {
+            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png"));
         }
     },
     CalcBookmarkFloat: function () {
         var maxHeight = $(window).height() - 200;
         var bookmarkCount = $(".allBookmarks").find(".clickOntoBookmark").length;
-        var singleHeight = 88;
+        var singleHeight = 110;
         var top = $(".miniBookmark").position().top;
-        var totalHeight = singleHeight * bookmarkCount + 35;
-        var endPos = totalHeight + top;
+        var totalHeight = singleHeight * bookmarkCount +20;
+        var endPos = totalHeight; // + top;
         if (endPos > maxHeight) {
             totalHeight = maxHeight;
         }
@@ -94,17 +108,21 @@ gpoBookmarks.prototype = {
     },
     AddNewBookmark: function ($source) {
         var obj = this;
-        var $bmDateElement = $source.find('.o-U-s.FI.Rg');
-        var $bmSenderPicElement = $source.find(".Uk.wi.hE");
-        var $bmSenderNameElement = $source.find(".ob.tv.Ub.Hf").first();
-        var $bmImageElement = $source.find(".ar.Mc");
-        var $bmLinkElement = $source.find(".ot-anchor");
-        var $bmVisibilityElement = $source.find(".d-s.Vt.Hm.dk.Q9");
-        var $bmIdElement = $source.parent();
-        var $bmContentElements = $source.find('.Ct');
 
-        var id = $bmIdElement.attr("id");
-        var date = $bmDateElement.attr("Title");
+        var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
+        var $bmSenderPicElement = $source.find(".URgs7");
+        var $bmSenderNameElement = $source.find(".m3JvWd").first();
+        var $bmImageElement = $source.find(".JZUAbb");
+        var $bmLinkElement = $source.find(".ot-anchor");
+        var $bmVisibilityElement = $source.find(".UTObDb");
+        var $bmIdElement = $source.parent();
+        var $bmContentElements = $source.find('[jsname="EjRJtf"]'); // collection
+        if ($bmContentElements.length==0) {
+            $bmContentElements = $source.find('.ELUvyf'); // Normaler Beitrag
+        }
+        var id =$bmIdElement.data("iid");
+
+
         var origin = $bmDateElement.attr("href");
         var userPic = $bmSenderPicElement.attr("src");
         var userName = $bmSenderNameElement.text();
@@ -121,12 +139,15 @@ gpoBookmarks.prototype = {
         });
 
         if (contentText.length > obj.MaxTeaserLength) {
-            contentText = contentText.substring(0, obj.MaxTeaserLength + " ");
+            contentText = contentText.substring(0, obj.MaxTeaserLength) + "...";
         }
+
+
+        var date=Date.now();
 
         var bookmarkContent = {
             Id: origin,
-            Created: Date.parse(date),
+            Created: date,
             Origin: origin,
             User: {
                 Picture: userPic,
@@ -152,12 +173,14 @@ gpoBookmarks.prototype = {
             isNewBookmark = true;
         }
 
+
         var iconUrl;
         if (isNewBookmark) {
             iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
         } else {
             iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
         }
+
         $source.find('.addBookmark').attr('src', iconUrl);
     },
     RemoveNewBookmark: function (bookmark, displayBookmarks, $parent) {
@@ -165,15 +188,19 @@ gpoBookmarks.prototype = {
         if (displayBookmarks === undefined) {
             displayBookmarks = true;
         }
+        Log.Info("Bookmark "+bookmark.Id+" removed");
         var storageName = obj.BookmarkPrefix + bookmark.Id;
         chrome.storage.local.remove(storageName, function () {
             chrome.storage.sync.remove(storageName, function () {
-                if (displayBookmarks) {
-                    obj.DisplayBookmarksHover();
-                } else {
-                    $parent.remove();
-                    obj.CalcBookmarkFloat();
-                }
+
+                    obj.GetBookmarksFromStorage(function() {
+                        if (displayBookmarks) {
+                            obj.DisplayBookmarksHover();
+                        } else {
+                            $parent.remove();
+                            obj.CalcBookmarkFloat();
+                        }
+                    });  // reload Bookmarks
             });
         });
     },
@@ -183,15 +210,18 @@ gpoBookmarks.prototype = {
         var storageName = obj.BookmarkPrefix + bookmark.Id;
         bookmarkObj[storageName] = JSON.stringify(bookmark);
 
+        Log.Info("Bookmark "+bookmark.Id+" added");
         // Erst Lokal:
         chrome.storage.local.set(bookmarkObj, function () {
-            console.log("Bookmark saved locally");
+            Log.Debug("Bookmark saved locally");
             bookmark.ContentHtml = null;
             bookmark.IsCloudOnly = true;
             bookmarkObj[storageName] = JSON.stringify(bookmark);
             chrome.storage.sync.set(bookmarkObj, function () {
-                console.log("... and up in da cloud");
-                obj.DisplayBookmarksHover();
+                Log.Debug("... and up in da cloud");
+                obj.GetBookmarksFromStorage(function() {
+                    obj.DisplayBookmarksHover();
+                });  // reload Bookmarks
             });
         });
     },
@@ -221,7 +251,15 @@ gpoBookmarks.prototype = {
                     }
                 });
                 obj.StillLoading=false;
-                target();
+                Log.Debug("Read Bookmarks");
+                if (target) {
+                    target();
+                }
+                if (obj.NewBookmarkList.length > 0) {
+                    $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
+                } else {
+                    $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png"));
+                }
             });
         });
     },
@@ -229,31 +267,31 @@ gpoBookmarks.prototype = {
         var obj = this;
 
         var savedBookmarks = obj.NewBookmarkList;
-        var container = '<div class="QPc y9fV aac BookmarksHover"><div class="showBmBig"><a class="maximizeBookmarks" href="#">Bookmarks maximieren</a></div><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
+        var container = '<div class="BookmarksHover"><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
 
-        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross Sgb" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
+        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
         var bookmarkDivs = '';
-
-        if (savedBookmarks.length > 0) {
-            $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-        }
 
         savedBookmarks.sort(function (a, b) {
             return (new Date(b.Created)) - (new Date(a.Created))
         });
         $.each(savedBookmarks, function (index, value) {
-
-
             var teaser = value.ContentText;
-            if (teaser.indexOf(" ") > 0) {
-                teaser = teaser.substring(0, teaser.lastIndexOf(" "))
-            }
+           // if (teaser.indexOf(" ") > 0) {
+                teaser = teaser.trim();
+            //}
 
             bookmarkDivs += bookmarkDivTemplate.replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
         });
         var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
         $('.BookmarksHover').remove();
-        $('.Pzc').append($(completeDiv));
+
+            $('body').append($(completeDiv));
+            $('.BookmarksHover').css("position","fixed");
+            $('.BookmarksHover').css("z-index","700");
+            $('.BookmarksHover').css("top","70px");
+            $('.BookmarksHover').css("left","420px");
+
         $('.BookmarksHover').bind('mousewheel DOMMouseScroll', function (e) {
             var scrollTo = null;
             if (e.type == 'mousewheel') {
@@ -268,25 +306,29 @@ gpoBookmarks.prototype = {
             }
         });
         obj.PaintStars();
-        console.log("bookmarks read");
+        Log.Debug("bookmarks read");
     },
     PaintStars: function () {
         var obj = this;
-        $('.lea:not(:has(.addBookmark))').each(function () {
-            AddHeadWrapper($(this));
-            var id = $(this).closest('.ys').find('.uv.PL a').attr('href');
-            var iconHtml = "";
-            var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
-            if (obj.ContainsBookmark(id)) {
-                iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
-            }
-            iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
 
-            $(this).find('.InfoUsrTop').append(iconHtml);
-        });
+            $('.dzuq1e:not(:has(.addBookmark))').each(function () {
+                AddHeadWrapper($(this));
+                var id = $(this).closest('.dzuq1e').find('.qXj2He').attr('href');
+
+
+                var iconHtml = "";
+                var iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_dis.png");
+                if (obj.ContainsBookmark(id)) {
+                    iconUrl = chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png");
+                }
+                iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
+
+                $(this).find('.InfoUsrTop').append(iconHtml);
+            });
+
     },
     ClickBookmark: function (bookmarkButton) {
-        this.AddNewBookmark(bookmarkButton.closest('[role="article"]'));
+        this.AddNewBookmark(bookmarkButton.closest('[jsname="WsjYwc"]'));
         return;
     },
     ContainsBookmark: function (id) {
@@ -316,17 +358,7 @@ gpoBookmarks.prototype = {
             });
         });
     },
-    /* LoadBookmarkList: function () {
-        var obj = this;
-        chrome.runtime.sendMessage({
-            Action: "LoadBookmarks"
-        }, function (response) {
-            obj.BookmarkList = JSON.parse(response.Result) || null;
-            if (obj.BookmarkList !== null && obj.BookmarkList.length > 0) {
-                $('.miniBookmark img').attr("src", chrome.extension.getURL("./setup/images/icons/small/star_24_hot.png"));
-            }
-        });
-    },*/
+
     LoadBookmarkContent: function () {
         var obj = this;
         chrome.runtime.sendMessage({
@@ -335,10 +367,7 @@ gpoBookmarks.prototype = {
             obj.BookmarkContent = JSON.parse(response.Result) || null;
         });
     },
-    IsBookmarkPage: function () {
-        // Für die ALTE Bookmarkseite. Irgendwann rauskicken!
-        return window.location.href.indexOf(this.SearchString) >= 0;
-    },
+
     SaveBookmarks: function () {
         var obj = this;
         chrome.runtime.sendMessage({Action: "SaveBookmarks", ParameterValue: JSON.stringify(bookmarkList)});
@@ -347,25 +376,7 @@ gpoBookmarks.prototype = {
         obj.LoadBookmarkList();
         obj.LoadBookmarkContent();
     },
-    AddBookmark: function (id, content) {
-        var obj = this;
-        if ((obj.BookmarkList || null) === null) {
-            obj.BookmarkList = [];
-            obj.BookmarkContent = [];
-        }
-        obj.BookmarkList.push(id);
-        obj.BookmarkContent.push(content);
-        obj.SaveBookmarks();
-    },
-    RemoveBookmark: function (id) {
-        var obj = this;
-        var position = $.inArray(id, obj.BookmarkList);
-        if (position >= 0) {
-            obj.BookmarkList.splice(position, 1);
-            obj.BookmarkContent.splice(position, 1);
-        }
-        obj.SaveBookmarks();
-    },
+
     DisplayBookmarksInside: function () {
         var obj = this;
         if ((obj.BookmarkContent || null) !== null && obj.B.bookmarkContent.length > 0) {
@@ -374,31 +385,6 @@ gpoBookmarks.prototype = {
                     $('.displayBookMarks').prepend($(value));
                 }
             });
-        }
-    },
-    DisplayBookmarks: function () {
-        // ALTER SCHEISS! Übergangsweise drin lassen
-        if (this.IsBookmarkPage()) {
-            var obj = this;
-            obj.LoadBookmarkContent();
-            // Erst mal alles ausblenden, was Benachrichtigung ist:
-            $('.zia.vAa').hide();
-            $('.d-s.L5').hide();
-
-            // Dann die einzelnen Bookmarks anfügen:
-            if ((obj.BookmarkContent || null) !== null && obj.BookmarkContent.length > 0) {
-
-                $.each(obj.BookmarkContent, function (index, value) {
-                    if (value !== null && $('.UPa.hHa.Ic').html().indexOf(value) < 0) {
-                        $('.UPa.hHa.Ic').prepend($(value));
-                    }
-                });
-
-                for (var i = 0; i < 500; i++) {
-                    $('.UPa.hHa.Ic').append($("<div><p><br/>&nbsp;</p></div>oink."));
-                }
-            }
-            $('.CF').css("width", "2000px;");
         }
     }
 };

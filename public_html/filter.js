@@ -16,57 +16,15 @@ chrome.runtime.onMessage.addListener(
                 oldTicks = JSON.parse(oldTicks);
             }
             oldTicks.push({Name:request.Name, Scope:request.Scope, Start:request.Start, Stop:request.Stop});
-            localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));                 
+            localStorage.setItem("Measurements_"+request.Scope,JSON.stringify(oldTicks));
         }
+
+
         else if (request.Action==="DeleteTicks") {
              localStorage.removeItem("Measurements_"+request.Scope);
         }
         else if (request.Action==="SaveUserName") {
             localStorage["UserName"]=request.ParameterValue;
-        }
-        else if (request.Action==="GetSoccerScores") {
-            var orderId=request.Day;
-            var smallCompleteUrl = "http://www.nocarrier.de/opendb.php?command=GetCurrentGroup&league=" + request.League;
-            $.getJSON(smallCompleteUrl, function(data) {
-                if (orderId===null) {
-                    orderId = data.groupOrderID;
-                }
-                var completeUrl = "http://www.nocarrier.de/opendb.php?command=GetResults&league=" + request.League + "&season=" + request.Season + "&orderId=" + orderId;
-                $.getJSON(completeUrl, function(inner) {
-                    var res=JSON.stringify(inner);
-                    sendResponse({Result: res});
-                    return true;
-                });
-                return true;
-            });
-            return true;
-        }
-
-        else if (request.Action === "SaveCircles") {
-            var ls=localStorage.getItem("QS.AllCircles");
-            if (ls===undefined || ls===null||ls==="undefined") {
-                ls=JSON.stringify({});
-            }
-            var circleSettings=JSON.parse(ls);
-            circleSettings.Circles=request.Circles;
-            localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
-        }
-        else if (request.Action==="SaveCommunities") {
-            var ls=localStorage.getItem("QS.AllCircles");
-            if (ls===undefined || ls===null||ls==="undefined") {
-                ls=JSON.stringify({});
-            }
-            var circleSettings = JSON.parse(ls);
-            circleSettings.Communities = request.Communities;
-            localStorage.setItem("QS.AllCircles", JSON.stringify(circleSettings));
-        }
-        else if (request.Action==="LoadCommunities") {
-            var allCircles=localStorage.getItem("QS.AllCircles");
-            if (allCircles!==undefined && allCircles!==null) {
-                var acc=JSON.parse(allCircles);
-                sendResponse({Result: acc.Communities});
-            }
-            return true;
         }
     }
 );
@@ -94,7 +52,7 @@ chrome.extension.onMessage.addListener(function(request, sender) {
 
 // Trophies
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    
+
     if (request.Action==="getTrophyUsers") {
         var users;
         var file="http://www.trophies.at/php/getusers.php?version=1.0";
@@ -105,7 +63,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             success: function(data) {
                 users=data;
             }
-        });       
+        });
         sendResponse({Result: users});
     } else if (request.Action==="getTrophyDescriptions") {
         var trophynames;
@@ -149,25 +107,6 @@ chrome.runtime.onMessage.addListener(
                 });
                 return true;
             }
-            else if (request.Action === "SaveQS")
-            {
-                localStorage.setItem("QuickShares", request.QuickShares);
-                sendResponse({Result: "Setting saved."});
-            }
-            else if (request.Action === "LoadQS")
-            {
-                sendResponse({Result: localStorage.getItem("QuickShares")});
-            }
-            else if (request.Action === "LoadCircles")
-            {
-                var circles = localStorage.getItem("Circles") || null;
-                if (circles !== null) {
-                    circles = JSON.parse(circles);
-                } else {
-                    circles = [];
-                }
-                sendResponse({Result: circles});
-            }
             else if (request.Action === "SaveColumns")
             {
                 localStorage.setItem("columns", request.ParameterValue);
@@ -194,9 +133,9 @@ chrome.runtime.onMessage.addListener(
             else if (request.Action === "LoadTicks")
             {
                 var ticks = localStorage.getItem("Ticks");
-                 
+
                 sendResponse({
-                   
+
                     Ticks: ticks,
                     Result: "Settings loaded."
                 });
@@ -230,13 +169,13 @@ chrome.runtime.onMessage.addListener(
                 var allTicks=[];
                 localStorage.setItem("Ticks",JSON.stringify(allTicks));
             }
-           
+
             else if (request.Action==="EndTick") {
                 var oldTicks=localStorage.getItem("Ticks");
                 if (oldTicks!==undefined) {
                     var oldTicks = JSON.parse(oldTicks);
                     oldTicks.push({Name:request.Name, Time:request.Time, IsInit:request.IsInit,  Type:"STOPP"});
-                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));                 
+                    localStorage.setItem("Ticks",JSON.stringify(oldTicks));
                 }
             }
             else if (request.Action==="GetTicks") {

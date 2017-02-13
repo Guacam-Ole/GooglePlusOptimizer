@@ -11,27 +11,31 @@ and open the template in the editor.
 .addBookmark {
     float: left;
     margin-right: 5px;
-    margin-left: -5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .miniBookmark img {
-    height: 24px;
-    margin-right: 50px;
-    margin-bottom: 11px;
+    margin-top: 10px;
+    margin-left: 1px;
 }
 
 .clickOntoBookmark {
     -webkit-border-radius: 3px;
     border-radius: 3px;
     cursor: pointer;
-    height: 80px;
-    width: 360px;
+    height: 100px;
+    width: 500px;
     background-color: white;
     float: left;
     border-style: groove;
-    margin-bottom: 1px;
+    margin-bottom: 10px;
     border-width: 2px;
+    border-top-left-radius: 50px;
+    border-left-style: inset;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+
 }
 
 .littleBookmarkImage {
@@ -40,12 +44,18 @@ and open the template in the editor.
 }
 
 .littleBookmarkImage img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-top: 15px;
 }
 
 .littleBookmarkContent {
-    padding-top: 4px;
+    padding-top: 20px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .BookmarksHover {
@@ -54,33 +64,33 @@ and open the template in the editor.
     padding-left: 15px;
     padding-right: 10px;
     padding-top: 10px;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     overflow-wrap: normal;
     margin-left: -200px;
-    width: 380px;
+    width: 520px;
     -webkit-border-radius: 3px;
-    cursor: pointer;
+
     border-style: groove;
 }
-
-.showBmBig {
-    text-align: center;
-    margin-bottom: 7px;
-    display: none;
-}
-
 .bookDate {
     float: right;
-    margin-right: 5px;
     color: gray;
     font-size: smaller;
+    padding-top: -20px;
+    margin-top: -20px;
+    margin-right: 20px;
 }
 
 .littleBookmarkTeaser {
     margin-right: 20px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .RemoveBookmarkCross {
     float: right;
+    background: no-repeat url(https://ssl.gstatic.com/s2/oz/images/sprites/notsg-a7af8b0efa4566ea1e9b98ed49df0b2e.png) 0 -182px;
+    height: 16px;
+    width: 16px;
 }

@@ -54,24 +54,35 @@ gpoEmoticons.prototype = {
     Dom: function ($ce) {
         this.PaintEmoticons($ce);
     },
-    PaintEmoticons: function ($ce) {
+    Init:function() {
+    },
+    PaintInner:function($element) {
         var obj = this;
         var smilies = JSON.parse(obj.Emoticons);
-
-        $ce.find('.Ct').each(function () {
-            var smilieCount = 0;
-            for (var i in smilies) {
-                var smilie = smilies[i];
-                if ($(this).text().indexOf(" " + smilie.short) >= 0) {
-                    $(this).html($(this).html().replaceAll(" " + smilie.short, " <img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
-                    smilieCount++;
-                }
+        var smilieCount = 0;
+        for (var i in smilies) {
+            var smilie = smilies[i];
+            if ($element.text().indexOf(" " + smilie.short) >= 0) {
+                $element.html($element.html().replaceAll(" " + smilie.short, " <img align=\"absbottom\" src=\"" + chrome.extension.getURL("./setup/images/emoticons/" + smilie.img) + "\"/>"));
+                smilieCount++;
             }
-            if (smilieCount > 0) {
-                var oldHeight = $(this).parent().height();
-                $(this).parent().css('max-height', (oldHeight + 40) + 'px');
+        }
+/*        if (smilieCount > 0) {
+            var oldHeight = $element.parent().height();
+            $element.parent().css('max-height', (oldHeight + 40) + 'px');
+        }*/
+    },
+    PaintEmoticons: function ($ce) {
+        var obj = this;
 
-            }
+
+            $ce.find('.wftCae').each(function () {
+                obj.PaintInner($(this));
+            });
+            // Kommentare:
+        $ce.find('[jsname="ugGwVe"]').each(function () {
+            obj.PaintInner($(this));
         });
+
     }
 };

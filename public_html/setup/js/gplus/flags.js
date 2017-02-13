@@ -35,7 +35,10 @@ gpoFlags.prototype = {
             });
 
             languageSelector += "</span></span>";
-            $('.Pzc').prepend($(languageSelector));
+
+                $('.gb_PB.gb_le').prepend($(languageSelector));
+
+
 
             $('.langOpen').click(function () {
                 $(this).closest('.langSelect').find('.langAll').toggle();

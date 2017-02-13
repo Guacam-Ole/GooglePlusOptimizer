@@ -22,27 +22,24 @@
 
 .badge {
     background-color: #333333;
-/ / ffffff;
-/ / #4387fd;
     border: 1px solid #4387fd;
     margin: 0 3px 3px 0;
     display: inline-block;
     text-decoration: none;
     white-space: nowrap;
-/ / line-height : 32 px;
     border-radius: 4px;
     font: normal 13px Roboto, arial, sans-serif;
-/ / font-weight : bold;
     background-repeat: no-repeat;
     background-position-y: center;
     background-position-x: 4px;
     padding-left: 15px;
     padding-right: 5px;
     padding-top: 4px;
-/ / padding-top : 5 px;
     height: 22px;
-/ / vertical-align : middle;
+}
 
+.trophyImg {
+    cursor:pointer;
 }
 
 .gold {

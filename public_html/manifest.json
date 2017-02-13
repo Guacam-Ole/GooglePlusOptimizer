@@ -4,7 +4,7 @@
     "short_name":"G+Filter",
     "description":"__MSG_appDesc__",
     "default_locale":"en",
-    "version":"3.0.2",
+    "version":"5.1.0",
     "author":"Ole Albers",
     "permissions":[
         "storage",
@@ -18,7 +18,7 @@
                 "https://plus.google.com/*"
             ],
             "js":[
-                "setup/js/lib/jquery-1.10.2.min.js",
+               "setup/js/lib/jquery-1.10.2.min.js",
                 "setup/js/lib/jquery-ui.min.js",
                 "setup/js/lib/date.js",
                 "setup/js/lib/ion.sound.js",
@@ -30,13 +30,10 @@
                 "setup/js/gplus/bookmarks.js",
                 "setup/js/gplus/flags.js",
                 "setup/js/gplus/log.js",
-                "setup/js/gplus/qs.js",
                 "setup/js/gplus/trophy.js",
                 "setup/js/gplus/lsr.js",
-                "setup/js/gplus/sport.js",
                 "setup/js/gplus/smilies.js",
                 "setup/js/gplus/user.js",
-                "setup/js/gplus/weather.js",
                 "setup/js/gplus/browser.chrome.js",
                 "setup/js/gplusfilter.js"
             ]
@@ -66,12 +63,8 @@
         "setup/images/weather/50x50/*",
         "setup/css/*",
         "setup/js/*",
-        "setup/de/wizardloader.html",
-        "setup/de/wizard.html",
-        "setup/de/wizimg/*",
-        "setup/en/wizimg/*",
-        "setup/en/wizardloader.html",
-        "setup/en/wizard.html",
+        "setup/de/*",
+        "setup/en/*",
         "_locales/*"
     ],
     "content_security_policy":"script-src 'self'  https://files.oles-cloud.de; object-src 'self'"

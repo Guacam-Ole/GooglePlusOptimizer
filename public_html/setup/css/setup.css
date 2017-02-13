@@ -454,3 +454,17 @@ input.qsAddCircle {
 a#showTicketCreation {
     margin-top: 10px;
 }
+
+.previewFilter {
+    background: red;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    height: 22px;
+    width: 394px;
+}
+
+.previewFilterBlock {
+    margin-left: 70px;
+    margin-top: 10px;
+}

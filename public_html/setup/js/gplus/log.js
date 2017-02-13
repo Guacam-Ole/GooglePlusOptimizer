@@ -4,7 +4,7 @@
 
 
 var gpoLog = function () {
-    this.Mode="WARN";
+    this.Mode="DEBUG";
 };
 
 gpoLog.prototype = {
@@ -36,6 +36,6 @@ gpoLog.prototype = {
         }
     },
     Log: function (mode, message) {
-        console.log(mode+"["+new Date().toLocaleString()+"] "+message);
+        console.log("["+new Date().toLocaleString()+"] "+mode+" "+message);
     }
 }
