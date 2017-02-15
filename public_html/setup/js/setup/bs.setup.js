@@ -431,9 +431,34 @@ Setup.prototype = {
                     }
 
                 } else if (filename=='bs.urlfilter') {
-                    $('.urlFilterBack').colorpicker().on('changeColor', function(e) {
-                        $(this).parent().find('.previewFilter').css("background-color",e.color.toString("rgba"));
-                        console.log(e.color.toString("rgba"));
+                    var defaultUrlText=[];
+                    defaultUrlText['markLSR']='Seite unterstützt LSR';
+                    defaultUrlText['markAdblock']='Seite besitzt AdBlock-Erkennung';
+                    defaultUrlText['markCustom']='Favoriten-Link';
+                    // chrome.i18n.getMessage('WARNING')
+
+                    var urlSettingName=$(this).closest('.singleFeature').find('.enableFeature label').data('setting');
+                    var urlTextBox=$($(this).find('.urlFilterText')[0]);
+                    urlTextBox.css('background-color',localStorage.getItem(urlSettingName+"Back"));
+                    urlTextBox.css('color',localStorage.getItem(urlSettingName+"Front"));
+
+                    var customText=localStorage.getItem(urlSettingName+"Text");
+                    if (!customText) {
+                        customText=defaultUrlText[urlSettingName];
+                    }
+                    urlTextBox.val(customText);
+
+                    urlTextBox.on('change',function(e){
+                        localStorage.setItem(urlSettingName+"Text", $(this).val());
+                    });
+
+                    $(this).find('.urlFilterBack').colorpicker().on('changeColor', function(e) {
+                        urlTextBox.css("background-color",e.color.toString("rgba"));
+                        localStorage.setItem(urlSettingName+"Back", e.color.toString("rgba"));
+                    });
+                    $(this).find('.urlFilterFront').colorpicker().on('changeColor', function(e) {
+                        urlTextBox.css("color",e.color.toString("rgba"));
+                        localStorage.setItem(urlSettingName+"Front", e.color.toString("rgba"));
                     });
                 }
             });

@@ -161,9 +161,9 @@
   },
   {
     "Version": "2.6",
-    "Short": "markLSRPosts",
-    "Title": "Leistungsschutzrecht",
-    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "Short": "markLSR",
+    "Title": "Leistungsschutzrecht hervorheben",
+    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt, wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
     "Image": "lsr.png",
     "Cost": 2
@@ -171,17 +171,17 @@
   {
     "Version": "5.2",
     "Short": "markAdblock",
-    "Title": "Adblocker-Blocker",
-    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "Title": "Seiten mit Adblock-Erkennung hervorheben",
+    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die Inhalte ausblendet, wenn ein Adblocker erkannt wird, dann wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
     "Image": "lsr.png",
     "Cost": 2
   },
   {
     "Version": "5.2",
-    "Short": "markCustomUrls",
-    "Title": "Individuelle URLs",
-    "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "Short": "markCustom",
+    "Title": "Individuelle URLs hervorheben",
+    "Description": "Beliebige URLs hervorheben.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
     "Image": "lsr.png",
     "Cost": 2

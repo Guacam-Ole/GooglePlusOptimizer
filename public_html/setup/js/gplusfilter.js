@@ -12,7 +12,7 @@ var Subs = {
     Bookmarks: null,
     Measure: null,
     Flags: null,
-    Lsr: null,
+    Domain: null,
     Trophy: null,
     Soccer: null,
     Emoticons: null,
@@ -71,9 +71,14 @@ function DomCheckArticle(element) {
 function DomCheckNavigation(element) {
     // Seite wurde neu geladen durch Navigation links, oder klick auf Name, oder...
     if (element.nodeName == "C-WIZ") {
-        if (!element.classList) return;
-        if (Array.from(element.classList).indexOf("cla0ib")<0) return;
-        RestartFilter();
+        if (!element.classList || element.classList.length==0) {
+            $(element).find('li').each(function(i,li) {
+                DomCheckComment(li);
+            }    );
+        } else {
+            if (Array.from(element.classList).indexOf("cla0ib") < 0) return;
+            RestartFilter();
+        }
     }
 }
 
@@ -88,6 +93,17 @@ function DomCheckBlock(element) {
     }
 }
 
+function DomCheckComment(element) {
+    if (element.nodeName=="LI") {
+        if (!element.classList) return;
+        if (Array.from(element.classList).indexOf("BCNiN")<0) return;
+        SingleMeasure(Subs.Domain, "domain", function () {
+            Subs.Domain.Dom($(element));
+        });
+    }
+
+}
+
 var cwizObserver= new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (oldUrl!==window.location.href) {
@@ -100,6 +116,7 @@ var cwizObserver= new MutationObserver(function (mutations) {
                 DomCheckBlock(addedNode);
                 DomCheckLeftNav(addedNode);
                 DomCheckNavigation(addedNode);
+              //  DomCheckComment(addedNode);
             });
         }
     });
@@ -394,9 +411,10 @@ function StartFilter(changedElements) {
 
 
     /* Erweiterungen */
- /*   SingleMeasure(Subs.Lsr, "measureTitle", function () {
-        Subs.Lsr.Dom($ce);
+    SingleMeasure(Subs.Domain, "domain", function () {
+        Subs.Domain.Dom($ce);
     });
+    /*
     SingleMeasure(Subs.Trophy, "displayTrophy", function () {
         Subs.Trophy.Dom($ce);
     });*/
@@ -531,7 +549,7 @@ function InitObjects() {
     Subs.Bookmarks = InitObject(Subs.Settings.Values.UseBookmarks, gpoBookmarks);
     Subs.Autosave = InitObject(Subs.Settings.Values.UseAutoSave, gpoAutosave);
     Subs.Flags = InitObject(Subs.Settings.Values.DisplayLang, gpoFlags);
-    Subs.Lsr = InitObject(Subs.Settings.Values.MarkLSRPosts, gpoLsr);
+    Subs.Domain = InitObject(Subs.Settings.Values.MarkLSR || Subs.Settings.Values.MarkAdblock || Subs.Settings.Values.MarkCustom, gpoDomainBlock);
     Subs.Trophy = InitObject(Subs.Settings.Values.DisplayTrophy, gpoTrophy);
     Subs.Clock = InitObject(Subs.Settings.Values.Stoppwatch, gpoClock);
     Subs.Emoticons = InitObject(Subs.Settings.Values.ShowEmoticons, gpoEmoticons);
@@ -580,11 +598,11 @@ function PageLoad() {
          //   $('#contentPane').parent().prepend('<div id="quickht">Quick-Hashtags:<br/></div>');
         });
 
-        SingleMeasure(Subs.Lsr, "markLSRPosts", function () {
-            Subs.Lsr.Init();
+        SingleMeasure(Subs.Domain, "markDomain", function () {
+            Subs.Domain.Init(Subs.Settings.Values);
         });
 
-        SingleMeasure(Subs.Lsr, "showEmoticons", function () {
+        SingleMeasure(Subs.Emoticons, "showEmoticons", function () {
             Subs.Emoticons.Init();
         });
 
