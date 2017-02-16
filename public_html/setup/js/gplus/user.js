@@ -16,7 +16,7 @@ gpoUser.prototype = {
     //    this.PaintCurrentUserSettings();
     },
     OptStartColors: function () {
-        this.AllCssColors = this.GetCssColors();
+       // this.AllCssColors = this.GetCssColors();
         //this.GetAllUserSettings();
         console.log("GPO: Usercolors loaded.");
     },
@@ -33,32 +33,30 @@ gpoUser.prototype = {
 
         var wrapper="<div role='region' id='colorUsersContainer' aria-label='Google+ Optimizer Colorbox'><c-wiz>__HEADER____BODY__</c-wiz></div>" ;
         var header="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>Google+ - Optimizer Colorbox </div></div></div>";
-        var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>__INFO__<br/></div></div></div>";
+        var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div>__INFO__<br/></div></div></div>";
 
         var colorBlock = "<table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
+        var colorBlock=obj.PaintTable();
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
         body=body.replace("__INFO__",colorBlock + userInfo.replace('__USER__', userName));
 
         wrapper=wrapper.replace("__HEADER__",header).replace("__BODY__",body);
         var $completeBlock = $(wrapper);
 
-
-
         setTimeout(function () {
             // Wait for Blocks to be finished;
             obj.PaintCurrentUserSettings($completeBlock);
         },1000);
 
-
         $('.JXv70c').prepend($completeBlock);
         $('.colClick').click(function () {
             obj.RemoveSelection();
             $(this).append("✓");
-            obj.UpdateUserData();
+            obj.UpdateUserData(false);
         });
-
-        $('.userRemark').change(function () {
-            obj.UpdateUserData();
+        $('.colClickRemove').click(function () {
+            obj.RemoveSelection();
+            obj.UpdateUserData(true);
         });
     },
     PaintColorBlock: function () {
@@ -67,46 +65,55 @@ gpoUser.prototype = {
         if (!meta || meta.length==0) return;
         var container=$('#colorUsersContainer');
         if (container) {
-          //  $.when($(".colClick").unbind()).then(function () {
-                $.when(container.remove()).then(function () {
-                    obj.PaintColorInner();
-                });
-            //})
-        } else {
+            $.when(container.remove()).then(function () {
                 obj.PaintColorInner();
-            }
+            });
+        } else {
+            obj.PaintColorInner();
+        }
+    },
+    PaintTd:function(h,s,l) {
+        var retval="<td class='colClick' style='font-weight:bold;__FRONTSTYLE__;background-color:hsl("+h+","+s+"%,"+l+"%);'>&nbsp;</td>";
+        if (l<50) {
+          return retval.replace('__FRONTSTYLE__','color:white');
+        }
+        return retval.replace('__FRONTSTYLE__','color:black');
+    },
 
+    PaintTr:function (l) {
+        var tds="";
+        var h=0;
+        while (h<360) {
+            tds+=this.PaintTd(h,100,l);
+            h+=10;
+        }
 
-    }, PaintForUser: function ($ce) {
+        return "<tr>"+tds+"</tr>";
+    },
+    PaintTable:function () {
+        return "<table class='colorUsers'><tr><td colspan='36' class='colClickRemove'>Nicht hervorheben</td> </tr>"+this.PaintTr(30)+this.PaintTr(50)+this.PaintTr(85)+"</table>";
+    },
+    CleanForUser:function ($ce) {
+        var profile= $ce.find('a[data-profileid="' + this.GetCurrentUserId() + '"]');
+        if (profile && profile.length>0 ) {
+            profile.closest('.Ihwked').css("border","");
+            profile.closest('.Ihwked').css("border-top","");
+        }
+    },
+    PaintForUser: function ($ce) {
         var obj = this;
+
         if (obj.AllUserSettings === null || obj.AllUserSettings === undefined) {
             return;
         }
 
         for (var i in obj.AllUserSettings) {
             var currentUserSetting = obj.AllUserSettings[i];
-            if (currentUserSetting.Color !== "rgb(0, 0, 0)" && currentUserSetting.Color !== "rgba(0, 0, 0, 0)") {
-                // Einfärben
-                var paintColor = $.grep(obj.AllCssColors, function (e) {
-                    return e.Color === currentUserSetting.Color;
-                });
-                if (paintColor.length > 0) {
-                    var profile= $ce.find('a[data-profileid="' + currentUserSetting.UserId + '"]');
-                    if (profile && profile.length>0 ) {
-                        profile.closest('.dzuq1e').addClass(paintColor[0].CssClass);
-                        profile.closest('.Ihwked').css("background-color",paintColor[0].Color);
-                    }
-                }
-            }
-            if (currentUserSetting.Text !== null && currentUserSetting.Text !== undefined && currentUserSetting.Text !== "") {
-                    if ($ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('div').length > 0) {
-                        $ce.find('a [data-profileid="' + currentUserSetting.UserId + '"]').closest('div').each(function () {
-                            AddHeadWrapper($(this));
-                            if ($(this).html().indexOf('infoImg') === -1) {
-                                $(this).find('.InfoUsrTop').prepend("<img class=\"infoImg\" title=\"" + currentUserSetting.Text + "\" src=\"" + chrome.extension.getURL('setup/images/icons/small/info_24_hot.png') + "\" />");
-                            }
-                        });
-                }
+            // Einfärben
+            var profile= $ce.find('a[data-profileid="' + currentUserSetting.UserId + '"]');
+            if (profile && profile.length>0 ) {
+                profile.closest('.Ihwked').css("border","solid 2px " + currentUserSetting.Color);
+                profile.closest('.Ihwked').css("border-top","solid 30px " + currentUserSetting.Color);
             }
         }
     },
@@ -122,9 +129,6 @@ gpoUser.prototype = {
         }
         var meta=$('[itemtype="https://schema.org/Person"]');
         if (!meta) return;
-
-
-
 
         if ($(".colorUsers").length === 0) return;
 
@@ -151,7 +155,7 @@ gpoUser.prototype = {
         return $(idElements[idElements.length-1]).data('oid');
     },
     RemoveSelection: function () {
-        $('.colorUsers td').each(function () {
+        $('.colorUsers td.colClick').each(function () {
             $(this).html("");
         });
     },
@@ -193,7 +197,7 @@ gpoUser.prototype = {
         allUserSettings.push(currentSettingsObject);
         obj.SaveAllUserSettings(allUserSettings);
     }
-    , RemoveUserSettigns: function (i) {
+    , RemoveUserSettings: function (i) {
         var obj = this;
         var allUserSettings = obj.AllUserSettings;
         allUserSettings.splice(i, 1);
@@ -206,11 +210,11 @@ gpoUser.prototype = {
         allUserSettings[i] = currentSettingsObject;
         obj.SaveAllUserSettings(allUserSettings);
     },
-    UpdateUserData: function () {
+
+    UpdateUserData: function (removeData) {
         var obj = this;
         var userRemark = $('.userRemark').val();
         var selectedColor;
-        var removeData = (($('.usrWhite').val() === '✓') && userRemark.trim() === "");
 
         $('.colorUsers td').each(function () {
             if ($(this).html() === "✓") {
@@ -224,51 +228,22 @@ gpoUser.prototype = {
                 return; // Nichts zu tun
             }
             obj.AddUserSettings(userRemark, selectedColor);  // Einstellung hinzufügen
+            $('c-wiz').each(function () {
+                obj.PaintForUser($(this));
+            })
         } else {
             if (removeData) {
                 obj.RemoveUserSettings(currentUserSettings.I);
+                $('c-wiz').each(function () {
+                    obj.CleanForUser($(this));
+                })
             } else {
                 obj.UpdateUserSettings(currentUserSettings.I, userRemark, selectedColor);
+                $('c-wiz').each(function () {
+                    obj.PaintForUser($(this));
+                })
             }
         }
-
-    }, HexToR: function (h) {
-        var obj = this;
-        return parseInt((obj.CutHex(h)).substring(0, 2), 16);
-    }, HexToG: function (h) {
-        var obj = this;
-        return parseInt((obj.CutHex(h)).substring(2, 4), 16);
-    }, HexToB: function (h) {
-        var obj = this;
-        return parseInt((obj.CutHex(h)).substring(4, 6), 16);
-    }, CutHex: function (h) {
-        var obj = this;
-        return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
-    }, HexToRGB: function (hex) {
-        var obj = this;
-        var r = obj.HexToR(hex);
-        var g = obj.HexToG(hex);
-        var b = obj.HexToB(hex);
-        return [r, g, b];
-    },
-    GetCssColors: function () {
-        var obj = this;
-        var colors = [];
-        colors.push(obj.AddToCssColor("76a7fa", "Mqc"));
-        colors.push(obj.AddToCssColor("fbcb43", "Jqc"));
-        colors.push(obj.AddToCssColor("e46f61", "WRa"));
-        colors.push(obj.AddToCssColor("4dbfd9", "Tqc"));
-        colors.push(obj.AddToCssColor("8cc474", "Hqc"));
-        colors.push(obj.AddToCssColor("bc5679", "CVb"));
-        return colors;
-    },
-    AddToCssColor: function (name, cssclass) {
-        var obj = this;
-        var col = obj.HexToRGB(name);
-        var colorData = new Object();
-        colorData.Name = name;
-        colorData.Color = "rgba(" + col[0] + ", " + col[1] + ", " + col[2] + ", 0.5)";
-        colorData.CssClass = cssclass;
-        return colorData;
     }
+
 };

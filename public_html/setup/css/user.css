@@ -8,30 +8,11 @@ table.colorUsers {
 
 table.colorUsers td {
     text-align: center;
+    cursor: pointer;
 }
 
-table.colorUsers td.usrBlue {
-    background-color: #76a7fa;
-}
-
-table.colorUsers td.usrYellow {
-    background-color: #fbcb43;
-}
-
-table.colorUsers td.usrRed {
-    background-color: #e46f61;
-}
-
-table.colorUsers td.usrCyan {
-    background-color: #4dbfd9;
-}
-
-table.colorUsers td.usrGreen {
-    background-color: #8cc474;
-}
-
-table.colorUsers td.usrMagenta {
-    background-color: #bc5679;
+table.colorUsers tr {
+    height: 20px;
 }
 
 .userRemark {
