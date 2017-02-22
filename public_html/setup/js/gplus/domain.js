@@ -15,7 +15,7 @@ var gpoDomainBlock = function (log) {
         Front:"white",
         Text:"Seite besitzt AdBlock-Erkennung",
         Storage:"adblockList",
-        Url:"https://cdn.rawgit.com/magdev/leistungsschutzgelderpresser/master/domains.json"
+        Url:"https://cdn.rawgit.com/OleAlbers/Adblock/master/domains.json"
     };
     this.Custom= {
         Enabled:false,
@@ -23,15 +23,16 @@ var gpoDomainBlock = function (log) {
         Back:"red",
         Front:"white",
         Text: "Favoriten-Link",
-        Storage:"customList"
+        Storage:"CustomUrl"
     };
     this.Log=log;
 };
-
+ 
 gpoDomainBlock.prototype = {
     constructor: gpoDomainBlock,
     Init: function (settings) {
         this.Log.Debug("Domainfilter Init");
+        this.Settings=settings;
         if (settings.MarkLSR) {
             this.EnableObject(this.Lsr, settings.MarkLSRBack, settings.MarkLSRFront, settings.MarkLSRText);
         }
@@ -41,6 +42,7 @@ gpoDomainBlock.prototype = {
         if (settings.MarkCustom) {
             this.EnableObject(this.Custom, settings.MarkCustomBack, settings.MarkCustomFront, settings.MarkCustomText);
         }
+        
     },
     EnableObject:function (obj, back, front, text) {
         obj.Enabled=true;
@@ -75,6 +77,21 @@ gpoDomainBlock.prototype = {
         var obj = this;
         var domainBlacklist = localStorage.getItem(filter.Storage);
         var lastDownload = localStorage.getItem(filter.Storage+"_date");
+        if (!filter.Url) { // custom urls
+            obj.Log.Debug("No URL. Staying local");
+            var values=obj.Settings[filter.Storage];
+            if (values) {
+                var tmpList=filter.List=values.split(",");
+                filter.List=[];
+                tmpList.forEach(function(el) {
+                    if (el && el.length>3) {
+                        filter.List.push(el);
+                    }
+                });
+            }
+            return;
+        };
+
         if (!lastDownload || Date.parse(CleanDate(lastDownload)) < (7).days().ago() || !domainBlacklist) {
             $.getJSON(filter.Url, function (domains) {
                 filter.List = domains;
@@ -93,6 +110,7 @@ gpoDomainBlock.prototype = {
     },
     MarkLinks: function ($ce, filter) {
         if (!filter.List) {
+
             return;
         }
         var obj = this;

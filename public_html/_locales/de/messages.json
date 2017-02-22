@@ -182,6 +182,9 @@
   "Setup_newFilter": {
     "message": "Neuer Filter"
   },
+  "Setup_customUrl": {
+    "message": "Neue URL (ohne http)"
+  },
   "Circles_Public": {
     "message": "Öffentlich"
   },

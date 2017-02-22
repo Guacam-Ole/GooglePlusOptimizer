@@ -136,7 +136,7 @@
     "Version": "2.3",
     "Short": "colorUsers",
     "Title": "Beiträge hervorheben",
-    "Description": " Mit dieser Erweiterung erhältst Du zusätzliche Optionen in den auf den Profilseiten Deiner Kontakte. Du kannst wichtige Kontakte farblich hervorheben und zusätzlich eine Notiz für jeden Kontakt hinterlegen, z.B. vorherige Bezeichnungen, oder auch Charakterbeschreibungen. Diese sind nur für Dich sichtbar.",
+    "Description": " Mit dieser Erweiterung erhältst Du zusätzliche Optionen in den auf den Profilseiten Deiner Kontakte. Du kannst wichtige Kontakte farblich hervorheben.",
     "ShowInWizard": true,
     "Image": "color1.png",
     "Cost": 1
@@ -166,7 +166,7 @@
     "Description": "Enthält ein Beitrag einen Link zu einer Seite, die das Leistungsschutzrecht unterstützt, wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
     "Image": "lsr.png",
-    "Cost": 2
+    "Cost": 1
   },
   {
     "Version": "5.2",
@@ -174,17 +174,17 @@
     "Title": "Seiten mit Adblock-Erkennung hervorheben",
     "Description": "Enthält ein Beitrag einen Link zu einer Seite, die Inhalte ausblendet, wenn ein Adblocker erkannt wird, dann wird ein Sicherheitshinweis eingeblendet.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
-    "Image": "lsr.png",
-    "Cost": 2
+    "Image": "adblock.png",
+    "Cost": 1
   },
   {
     "Version": "5.2",
     "Short": "markCustom",
     "Title": "Individuelle URLs hervorheben",
-    "Description": "Beliebige URLs hervorheben.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "Description": "Beliebige URLs hervorheben.<input class='form-control tags tokensUrl' type='text'> <div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
-    "Image": "lsr.png",
-    "Cost": 2
+    "Image": "customurl.png",
+    "Cost": 1
   },
   {
     "Version": "3.0.2",

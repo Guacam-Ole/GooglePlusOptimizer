@@ -137,7 +137,7 @@
     "Version": "2.3",
     "Short": "colorUsers",
     "Title": "Highlight posts",
-    "Description": "You will get additional features on your contacts' pages. You can hightlight them by color or add additional information. Feel free to enter \"dumbass\" if you want. Noone else but you can see it.",
+    "Description": "You will get additional features on your contacts' pages. You can hightlight them by color.",
     "ShowInWizard": true,
     "Image": "color1.png",
     "Cost": 1
@@ -162,12 +162,30 @@
   },
   {
     "Version": "2.6",
-    "Short": "markLSRPosts",
+    "Short": "markLSR",
     "Title": "LSR",
-    "Description": "Display LSR-Notes.",
+      "Description": "If the target site supports the LSR (LeistungsSchutzRecht), a warning message will be displayed before post or comment.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
     "ShowInWizard": true,
     "Image": "lsr.png",
-    "Cost": 2
+    "Cost": 1
+  },
+   {
+    "Version": "5.2",
+    "Short": "markAdblock",
+    "Title": "Show a note if target URL contains Adblock-detection",
+    "Description": "If the target site contains an adblock-detection, a warning message will be displayed before post or comment.<div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "ShowInWizard": true,
+    "Image": "adblock.png",
+    "Cost": 1
+  },
+  {
+    "Version": "5.2",
+    "Short": "markCustom",
+    "Title": "Individuelle URLs hervorheben",
+      "Description": "Display a message for any custom URL. <div class='loadHtml' data-filename='bs.urlfilter'></div>",
+    "ShowInWizard": true,
+    "Image": "customurl.png",
+    "Cost": 1
   },
   {
     "Version": "2.4",

@@ -50,6 +50,7 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("interval", 500));
         obj.AllSettings.push(new gpoSetting("UserCols"));
         obj.AllSettings.push(new gpoSetting("postillon"));
+        obj.AllSettings.push(new gpoSetting("customUrl"));
     },
     Load: function (ret) {
         var obj = this;

@@ -577,6 +577,13 @@ Setup.prototype = {
                         }
                     }
 
+                    if (featureName==='markCustom') {
+                        if ($('.tokensUrl').length > 0) {
+                            $('.tokensUrl').val(localStorage.getItem("customUrl"));
+                            obj.CustomUrl($('.tokensUrl'));
+                        }
+                    }
+
 
                 });
                 break;
@@ -587,6 +594,19 @@ Setup.prototype = {
                 });
                 break;
         }
+    },
+    CustomUrl: function ($element) {
+        var obj = this;
+        $element.tagsInput({
+            width: 'auto',
+            defaultText: obj.Browser.GetMessageFromSetup('Setup_customUrl'),
+            'onAddTag': function () {
+                obj.SaveSetting("customUrl", $element.val());
+            },
+            'onRemoveTag': function () {
+                obj.SaveSetting("customUrl", $element.val());
+            }
+        });
     },
     CustomText: function ($element) {
         var obj = this;
