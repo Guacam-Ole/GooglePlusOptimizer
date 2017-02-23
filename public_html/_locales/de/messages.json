@@ -161,9 +161,18 @@
   "KeywordFiltered": {
     "message": "Du wirst die nächste Zeit nichts mehr von '_KEYWORD_' hören. Bitte Seite neu laden, um den Filter zu aktivieren."
   },
-  "WARNING": {
-    "message": "ACHTUNG! Enthält LSR-Links!"
+  "Warn_LSR": {
+    "message": "Enthält LSR-Links!"
   },
+  "Warn_Custom": {
+    "message": "Favorit"
+  },
+  "Warn_Adblock": {
+    "message": "Seite besitzt AdBlock-Erkennung"
+  },
+  "dontHighlight": {
+        "message": "Nicht hervorheben"
+    },
   "hasnotrophies": {
     "message": "hat noch keine Trophäen gesammelt. "
   },

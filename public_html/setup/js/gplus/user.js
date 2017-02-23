@@ -35,7 +35,6 @@ gpoUser.prototype = {
         var header="<div class='aPExg'><div class='t1KkGe AipWwc'><div class='xRbTYb'>Google+ - Optimizer Colorbox </div></div></div>";
         var body="<div class='aPExg'><div class='t1KkGe AipWwc'><div>__INFO__<br/></div></div></div>";
 
-        var colorBlock = "<table class=\"colorUsers\"><tbody><tr><td class=\"usrWhite colClick\">✓</td><td class=\"usrBlue colClick\">&nbsp;</td><td class=\"usrYellow colClick\">&nbsp;</td><td class=\"usrRed colClick\">&nbsp;</td><td class=\"usrCyan colClick\">&nbsp;</td><td class=\"usrGreen colClick\">&nbsp;</td><td class=\"usrMagenta colClick\">&nbsp;</td></tr></tbody></table>";
         var colorBlock=obj.PaintTable();
         var userInfo = "<input type=\"text\" class=\"userRemark\" placeholder=\"" + chrome.i18n.getMessage("RemarkPlaceholder") + "\" />";
         body=body.replace("__INFO__",colorBlock + userInfo.replace('__USER__', userName));
@@ -91,7 +90,7 @@ gpoUser.prototype = {
         return "<tr>"+tds+"</tr>";
     },
     PaintTable:function () {
-        return "<table class='colorUsers'><tr><td colspan='36' class='colClickRemove'>Nicht hervorheben</td> </tr>"+this.PaintTr(30)+this.PaintTr(50)+this.PaintTr(85)+"</table>";
+        return "<table class='colorUsers'><tr><td colspan='36' class='colClickRemove'>"+chrome.i18n.getMessage("dontHighlight")+"</td> </tr>"+this.PaintTr(30)+this.PaintTr(50)+this.PaintTr(85)+"</table>";
     },
     CleanForUser:function ($ce) {
         var profile= $ce.find('a[data-profileid="' + this.GetCurrentUserId() + '"]');

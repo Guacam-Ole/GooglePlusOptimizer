@@ -432,9 +432,9 @@ Setup.prototype = {
 
                 } else if (filename=='bs.urlfilter') {
                     var defaultUrlText=[];
-                    defaultUrlText['markLSR']='Seite unterstützt LSR';
-                    defaultUrlText['markAdblock']='Seite besitzt AdBlock-Erkennung';
-                    defaultUrlText['markCustom']='Favoriten-Link';
+                    defaultUrlText['markLSR']= obj.Browser.GetMessageFromSetup('Warn_LSR');
+                    defaultUrlText['markAdblock']=obj.Browser.GetMessageFromSetup('Warn_Adblock');
+                    defaultUrlText['markCustom']=obj.Browser.GetMessageFromSetup('Warn_Custom');;
                     // chrome.i18n.getMessage('WARNING')
 
                     var urlSettingName=$(this).closest('.singleFeature').find('.enableFeature label').data('setting');
@@ -583,8 +583,6 @@ Setup.prototype = {
                             obj.CustomUrl($('.tokensUrl'));
                         }
                     }
-
-
                 });
                 break;
             case "NoFeature":
