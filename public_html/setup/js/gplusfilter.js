@@ -275,7 +275,8 @@ function HideOnContent(parent, element,  log ) {
         if (log) {
             Log.Debug("Filtered: "+log+" ["+element.text()+"]");
         }
-        parent.hide();
+		
+        parent.height(1);
     }
 }
 
@@ -298,7 +299,7 @@ function SingleMeasure(setting, measureTitle, functionName) {
 }
 function HideOnAttr(element, attr, value, log) {
     if (element.attributes[attr].value === value) {
-        $(element).hide();
+        $(element).height(1);
         if (log) {
             Log.Debug("Block removed: "+log);
         }
@@ -554,6 +555,9 @@ function InitObjects() {
     Subs.Clock = InitObject(Subs.Settings.Values.Stoppwatch, gpoClock);
     Subs.Emoticons = InitObject(Subs.Settings.Values.ShowEmoticons, gpoEmoticons);
     Subs.User = InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
+    Subs.Community=InitObject(true,gpoCommunity);
+
+    Subs.Community.Load();
     if (Subs.User !== null) {
         Subs.User.AllUserSettings = Subs.Settings.Values.UserCols;
     }

@@ -101,6 +101,14 @@
     "Cost": 2
   },
   {
+    "Version": "5.3",
+    "Short": "quickCommunities",
+    "Title": "Quick Communities",
+    "Description": "<div class='loadHtml' data-filename='bs.communities'></div>",
+    "Image": "communities.png",
+    "Cost": 1
+  },
+  {
     "Version": "1.2",
     "Short": "filterImages",
     "Title": "Minimize pictures",

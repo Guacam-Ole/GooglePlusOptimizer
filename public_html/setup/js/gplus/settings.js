@@ -51,6 +51,11 @@ gpoSettings.prototype = {
         obj.AllSettings.push(new gpoSetting("UserCols"));
         obj.AllSettings.push(new gpoSetting("postillon"));
         obj.AllSettings.push(new gpoSetting("customUrl"));
+
+        obj.AllSettings.push(new gpoSetting("quickCommunities"));
+        obj.AllSettings.push(new gpoSetting("quickCommunitiesLimit",5));
+        obj.AllSettings.push(new gpoSetting("quickCommunitiesSortByNumber",true));
+        obj.AllSettings.push(new gpoSetting("quickCommunitiesOnlyMine",true));
     },
     Load: function (ret) {
         var obj = this;

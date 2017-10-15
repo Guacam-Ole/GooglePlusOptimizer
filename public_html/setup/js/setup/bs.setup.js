@@ -188,6 +188,30 @@ Setup.prototype = {
             }
         });
 
+        // communities
+
+        $(document).on('click', '#chkCommunityOnlyMine', function () {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("quickCommunitiesOnlyMine", "false");
+            } else {
+                localStorage.setItem("quickCommunitiesOnlyMine", "true");
+            }
+        });
+        $(document).on('click', '#chkCommunitySortByNumber', function () {
+            if ($($(this)[0]).hasClass("active")) {
+                localStorage.setItem("quickCommunitiesSortByNumber", "false");
+            } else {
+                localStorage.setItem("quickCommunitiesSortByNumber", "true");
+            }
+        });
+        $(document).on('change mousemove', '#limitCommunity', function () {
+            var value=$('#limitCommunity').val();
+            $('#rangeDisplay').text(value);
+            localStorage.setItem("quickCommunitiesLimit",value);
+        });
+
+        // wham
+
         $(document).on('click', '#chkWhamText', function () {
             if ($($(this)[0]).hasClass("active")) {
                 localStorage.setItem("WHAMWhamText", "false");
@@ -692,6 +716,19 @@ Setup.prototype = {
         // Minimieren:
         this.SetSingleCheck($('#chkFilterGif'), "filterGifOnly");
         this.SetSingleCheck($('#chkFilterMp4'), "filterMp4Only");
+
+        // Communities
+        this.SetSingleCheck($('#chkCommunityOnlyMine'), "quickCommunitiesOnlyMine");
+        this.SetSingleCheck($('#chkCommunitySortByNumber'), "quickCommunitiesOnlyMine");
+        this.SetSingleSlider($('#limitCommunity'), $("#rangeDisplay"), "quickCommunitiesLimit");
+    },
+    SetSingleSlider:function(slider, text, value) {
+        var obj = this;
+        if (slider !== undefined && slider.length === 1) {
+            storedValue= localStorage.getItem(value);
+            slider.val(storedValue);
+        //    text.text(storedValue);
+        }
     },
     SetSingleCheck: function (button, value) {
         var obj = this;
