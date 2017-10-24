@@ -192,7 +192,7 @@
     "Title": "Quick Communities",
     "Description": "<div class='loadHtml' data-filename='bs.communities'></div>",
     "Image": "communities.png",
-    "Cost": 1
+    "Cost": 0
   },
   {
     "Version": "3.0.2",

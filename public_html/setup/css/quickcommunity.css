@@ -1,0 +1,24 @@
+.qcBigCircle {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.qcCountCircle {
+    border-radius: 50%;
+    background: #0f9d58;
+    left: 20px;
+    position: relative;
+    top: 5px;
+    text-align: center;
+    color: white;
+    width: 32px;
+    height: 20px;
+}
+.qcCountCircle span {
+    vertical-align: initial;
+    position: relative;
+    top: -13px;
+}

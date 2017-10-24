@@ -267,9 +267,6 @@ function CountColumns() {
     }
 }
 
-
-
-
 function HideOnContent(parent, element,  log ) {
     if (element !== undefined && element.length > 0) {
         if (log) {
@@ -277,10 +274,12 @@ function HideOnContent(parent, element,  log ) {
         }
 		
         parent.height(1);
+        var textContent=parent.find('.sLDTkb');
+        if (textContent.length>0) {
+            $(parent.find('.sLDTkb')).css('color','rgb(241, 241, 241)');
+        }
     }
 }
-
-
 
 function SingleMeasureBool(setting, measureTitle, functionName) {
     if (setting === true) {
@@ -555,11 +554,18 @@ function InitObjects() {
     Subs.Clock = InitObject(Subs.Settings.Values.Stoppwatch, gpoClock);
     Subs.Emoticons = InitObject(Subs.Settings.Values.ShowEmoticons, gpoEmoticons);
     Subs.User = InitObject(Subs.Settings.Values.ColorUsers, gpoUser);
-    Subs.Community=InitObject(true,gpoCommunity);
+    Subs.Community=InitObject(Subs.Settings.Values.QuickCommunities,gpoCommunity);
 
-    Subs.Community.Load();
+    
     if (Subs.User !== null) {
         Subs.User.AllUserSettings = Subs.Settings.Values.UserCols;
+    }
+    if (Subs.Community!=null) {
+        
+        Subs.Community.OnlyMine=Subs.Settings.Values.QuickCommunitiesOnlyMine;
+        Subs.Community.SortByNumber=Subs.Settings.Values.QuickCommunitiesSortByNumber;
+        Subs.Community.Limit=Subs.Settings.Values.QuickCommunitiesLimit;
+        Subs.Community.Load();
     }
 
     if ($('.gb_7a').length>0) {
@@ -647,6 +653,9 @@ function FirstStartInit() {
     }
     SingleMeasure(Subs.Bookmarks, "useBookmarks", function () {
         Subs.Bookmarks.PaintFloatingIcon($(document));
+    });
+    SingleMeasure(Subs.Community, "quickCommunity",function() {
+        Subs.Community.Load();
     });
 }
 

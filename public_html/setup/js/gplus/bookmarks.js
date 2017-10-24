@@ -90,16 +90,16 @@ gpoBookmarks.prototype = {
         }
     },
     CalcBookmarkFloat: function () {
-        var maxHeight = $(window).height() - 200;
-        var bookmarkCount = $(".allBookmarks").find(".clickOntoBookmark").length;
-        var singleHeight = 110;
-        var top = $(".miniBookmark").position().top;
-        var totalHeight = singleHeight * bookmarkCount +20;
-        var endPos = totalHeight; // + top;
-        if (endPos > maxHeight) {
-            totalHeight = maxHeight;
-        }
-        $(".BookmarksHover").height(totalHeight);
+        // var maxHeight = $(window).height() - 200;
+        // var bookmarkCount = $(".allBookmarks").find(".clickOntoBookmark").length;
+        // var singleHeight = 110;
+        // var top = $(".miniBookmark").position().top;
+        // var totalHeight = singleHeight * bookmarkCount +20;
+        // var endPos = totalHeight; // + top;
+        // if (endPos > maxHeight) {
+        //     totalHeight = maxHeight;
+        // }
+        // $(".BookmarksHover").height(totalHeight);
     },
     ShowBookmarkFloat: function () {
         $(".BookmarksHover").toggle();
@@ -110,7 +110,7 @@ gpoBookmarks.prototype = {
         var obj = this;
 
         var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
-        var $bmSenderPicElement = $source.find(".URgs7");
+        var $bmSenderPicElement = $source.find(".MqU2J");
         var $bmSenderNameElement = $source.find(".m3JvWd").first();
         var $bmImageElement = $source.find(".JZUAbb");
         var $bmLinkElement = $source.find(".ot-anchor");
@@ -266,10 +266,14 @@ gpoBookmarks.prototype = {
     DisplayBookmarksHover: function () {
         var obj = this;
 
-        var savedBookmarks = obj.NewBookmarkList;
-        var container = '<div class="BookmarksHover"><div class="allBookmarks">__ALLBOOKMARKS__</div></div>';
+        var deleteUrl = chrome.extension.getURL("./setup/images/delete.png");
 
-        var bookmarkDivTemplate = '<div data-target="__URL__" class="clickOntoBookmark" role="button" tabindex="0"><div class="RemoveBookmarkCross" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
+        var savedBookmarks = obj.NewBookmarkList;
+        var header='<header><div class="menu-icon"><span class="entypo-menu"></span></div><h1>Bookmarks</h1></header>';
+        var container = '<div class="BookmarksHover">__HEADER__<section class="messages">__ALLBOOKMARKS__</section></div>';
+        var bookmarkDivTemplate = '<div data-target="__URL__" class="message clickOntoBookmark" role="button" tabindex="0"><img src="__USERPIC__" /><h2>__USERNAME__</h2><div class="machwech RemoveBookmarkCross"><img src="__KILL__"/></div><p>__TEASER__</p><p class="time"><span class="entypo-clock"></span>__DATE__</p></div>';
+        
+        //<div class="RemoveBookmarkCross" rel="button"></div><div class="littleBookmarkImage"><img class="e4a" src="__USERPIC__"/></div><div class="littleBookmarkContent"><span class="bookDate">__DATE__ </span><strong>__USERNAME__</strong></div><div class="littleBookmarkTeaser">__TEASER__</div></div>';
         var bookmarkDivs = '';
 
         savedBookmarks.sort(function (a, b) {
@@ -277,13 +281,10 @@ gpoBookmarks.prototype = {
         });
         $.each(savedBookmarks, function (index, value) {
             var teaser = value.ContentText;
-           // if (teaser.indexOf(" ") > 0) {
-                teaser = teaser.trim();
-            //}
-
-            bookmarkDivs += bookmarkDivTemplate.replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
+            teaser = teaser.trim();
+            bookmarkDivs += bookmarkDivTemplate.replace("__KILL__",deleteUrl).replace("__USERPIC__", this.User.Picture).replace("__USERNAME__", this.User.Name).replace("__TEASER__", teaser).replace("__URL__", this.Origin).replace("__DATE__", (new Date(this.Created)).toString("dd.MM.yyyy HH:mm"));
         });
-        var completeDiv = container.replace("__ALLBOOKMARKS__", bookmarkDivs);
+        var completeDiv = container.replace("__HEADER__",header).replace("__ALLBOOKMARKS__", bookmarkDivs);
         $('.BookmarksHover').remove();
 
             $('body').append($(completeDiv));
