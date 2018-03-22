@@ -47,7 +47,8 @@ gpoUser.prototype = {
             obj.PaintCurrentUserSettings($completeBlock);
         },1000);
 
-        $('.JXv70c').prepend($completeBlock);
+        $('#colorUsersContainer').remove();
+        $('.aPExg:nth-child(2)').prepend($completeBlock);
         $('.colClick').click(function () {
             obj.RemoveSelection();
             $(this).append("✓");
