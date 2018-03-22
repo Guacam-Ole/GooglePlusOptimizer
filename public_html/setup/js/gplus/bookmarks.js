@@ -111,10 +111,10 @@ gpoBookmarks.prototype = {
 
         var $bmDateElement = $source.find('.qXj2He');   // TODO: Derzeit leider kein Datum, sondern "vor xxx Minuten" und so
         var $bmSenderPicElement = $source.find(".MqU2J");
-        var $bmSenderNameElement = $source.find(".m3JvWd").first();
+        var $bmSenderNameElement = $source.find(".sXku1c").first();
         var $bmImageElement = $source.find(".JZUAbb");
-        var $bmLinkElement = $source.find(".ot-anchor");
-        var $bmVisibilityElement = $source.find(".UTObDb");
+        var $bmLinkElement = $source.find(".eZ8gzf");
+        var $bmVisibilityElement = $source.find(".eYSPjc");
         var $bmIdElement = $source.parent();
         var $bmContentElements = $source.find('[jsname="EjRJtf"]'); // collection
         if ($bmContentElements.length==0) {
@@ -123,7 +123,7 @@ gpoBookmarks.prototype = {
         var id =$bmIdElement.data("iid");
 
 
-        var origin = $bmDateElement.attr("href");
+       // var origin = $bmDateElement.attr("href");
         var userPic = $bmSenderPicElement.attr("src");
         var userName = $bmSenderNameElement.text();
         var userUrl = $bmSenderNameElement.attr("href");
@@ -143,6 +143,7 @@ gpoBookmarks.prototype = {
         }
 
 
+        var origin=url;
         var date=Date.now();
 
         var bookmarkContent = {
@@ -310,11 +311,12 @@ gpoBookmarks.prototype = {
         Log.Debug("bookmarks read");
     },
     PaintStars: function () {
+        // tpVlOc mEgM8 iCPjVb hE2QI
         var obj = this;
 
-            $('.dzuq1e:not(:has(.addBookmark))').each(function () {
+            $('.OisWG:not(:has(.addBookmark))').each(function () {
                 AddHeadWrapper($(this));
-                var id = $(this).closest('.dzuq1e').find('.qXj2He').attr('href');
+                var id = $(this).closest('.OisWG').find('.eZ8gzf').attr('href');
 
 
                 var iconHtml = "";
@@ -324,7 +326,7 @@ gpoBookmarks.prototype = {
                 }
                 iconHtml = iconHtml + '<img class="addBookmark" src="' + iconUrl + '" title="Bookmark"/>';
 
-                $(this).find('.InfoUsrTop').append(iconHtml);
+                $(this).find('.tpVlOc ').prepend(iconHtml);
             });
 
     },
