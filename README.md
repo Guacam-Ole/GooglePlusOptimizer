@@ -1,4 +1,4 @@
-** Abandoned for obvious reasons **
+**Abandoned for obvious reasons**
 
 # GooglePlusOptimizer
 Chrome Extension Google+ Optimizer
