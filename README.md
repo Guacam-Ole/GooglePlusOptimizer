@@ -1,3 +1,5 @@
+** Abandoned for obvious reasons **
+
 # GooglePlusOptimizer
 Chrome Extension Google+ Optimizer
 
